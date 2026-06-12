@@ -6,7 +6,7 @@
 <script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
 <title>TCF EE Studio X — Expression Écrite</title>
 <style>
-:root{--bg:#eef1f7;--panel:#fff;--panel2:#f6f8fc;--text:#0f172a;--sub:#64748b;--accent:#1d4ed8;--accent2:#3b82f6;--border:#e2e8f0;--danger:#dc2626;--success:#16a34a;--warn:#d97706;--shadow:0 1px 3px rgba(15,23,42,.07),0 8px 24px rgba(15,23,42,.06);--grad:linear-gradient(135deg,#1d4ed8,#7c3aed)}
+:root{--bg:#eef1f7;--panel:#fff;--panel2:#f6f8fc;--text:#0f172a;--sub:#64748b;--accent:#1d4ed8;--accent2:#3b82f6;--border:#e2e8f0;--danger:#dc2626;--success:#16a34a;--warn:#d97706;--shadow:0 1px 3px rgba(15,23,42,.07),0 8px 24px rgba(15,23,42,.06);--grad:linear-gradient(135deg,#1d4ed8,#7c3aed);--editor-font-size:15px}
 body.dark{--bg:#0b0e14;--panel:#161a23;--panel2:#1f2430;--text:#f1f5f9;--sub:#94a3b8;--border:#2b3242;--shadow:0 1px 3px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.45)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.55;transition:background .3s,color .3s}
@@ -77,7 +77,7 @@ body.dark .combo-badge{background:#1e3a5f;color:#93c5fd;border-color:#1d4ed8}
 .word-counter{font-size:12px;font-weight:800;color:var(--sub)}
 .word-counter.ok{color:var(--success)}.word-counter.warn{color:var(--warn)}.word-counter.over{color:var(--danger)}
 .autosave-label{font-size:11px;color:var(--sub);font-style:italic}
-textarea.editor-area{width:100%;min-height:260px;resize:vertical;background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:14px;color:var(--text);font-size:15px;font-family:inherit;line-height:1.75;outline:none;transition:border .15s}
+textarea.editor-area{width:100%;min-height:260px;resize:vertical;background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:14px;color:var(--text);font-size:var(--editor-font-size);font-family:inherit;line-height:1.75;outline:none;transition:border .15s}
 textarea.editor-area:focus{border-color:var(--accent2)}
 .editor-footer{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .analysis-panel{background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:14px 16px;margin-top:12px;display:none}
@@ -95,6 +95,7 @@ body.dark .errors-panel{background:#2d1e0e;border-color:#7c4a12}
 .accent-dock{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:20;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:8px;box-shadow:var(--shadow);display:none;flex-direction:column;gap:6px}
 .accent-dock.writing-active{display:flex}
 body.exam-active .accent-dock{z-index:70;display:flex}
+body.focus-active .accent-dock{z-index:70;display:flex}
 .accent-page{display:grid;grid-template-columns:repeat(4,34px);gap:5px}
 .accent-nav{display:flex;gap:5px}
 .accent-nav button,.accent-page button{background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--text);cursor:pointer;font:inherit;font-weight:700;min-height:32px;font-size:14px}
@@ -111,6 +112,40 @@ body.exam-active .accent-dock{z-index:70;display:flex}
 .list-item{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:11px;background:var(--panel2);margin-bottom:6px;font-size:12px}
 .list-item-text{flex:1}
 .del-x{color:var(--danger);font-size:16px;line-height:1;cursor:pointer;opacity:.6;flex-shrink:0}.del-x:hover{opacity:1}
+/* Font Size Controls */
+.font-size-group{position:fixed;bottom:20px;left:24px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:12px;box-shadow:var(--shadow);display:none;flex-direction:column;gap:10px;z-index:25;min-width:200px}
+.font-size-group.active{display:flex}
+.font-label{font-size:11px;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+.font-slider-row{display:flex;align-items:center;gap:8px}
+.font-slider{flex:1;accent-color:var(--accent)}
+.font-value{font-size:12px;font-weight:800;color:var(--accent);min-width:40px;text-align:right}
+.preset-sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.preset-btn{padding:7px 10px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:var(--text);transition:.15s}
+.preset-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.preset-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+/* Focus Modal */
+.focus-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
+.focus-modal.active{display:flex}
+.focus-modal-content{background:var(--panel);border-radius:16px;padding:24px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 25px rgba(0,0,0,.15)}
+.focus-modal-title{font-size:18px;font-weight:800;margin-bottom:16px;color:var(--text)}
+.focus-modal-desc{font-size:13px;color:var(--sub);margin-bottom:20px}
+.subject-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.subject-option{padding:14px;border:2px solid var(--border);border-radius:11px;cursor:pointer;transition:.15s;background:var(--panel2)}
+.subject-option:hover{border-color:var(--accent);background:var(--panel)}
+.subject-option.selected{border-color:var(--accent);background:var(--accent);color:#fff}
+.subject-option-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.subject-option-desc{font-size:12px;color:var(--sub)}
+.subject-option.selected .subject-option-desc{color:rgba(255,255,255,.8)}
+.subject-list{background:var(--panel2);border-radius:11px;padding:12px;max-height:250px;overflow-y:auto;margin-bottom:16px}
+.subject-item{padding:8px 10px;cursor:pointer;border-radius:8px;transition:.15s;font-size:13px;color:var(--text)}
+.subject-item:hover{background:var(--border)}
+.subject-item.selected{background:var(--accent);color:#fff}
+.focus-modal-actions{display:flex;gap:10px;margin-top:16px}
+.focus-modal-actions button{flex:1;padding:11px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;transition:.15s}
+.focus-modal-actions .btn-primary{background:var(--accent);color:#fff}
+.focus-modal-actions .btn-primary:hover{background:#1e40af}
+.focus-modal-actions .btn-ghost{background:var(--panel2);color:var(--text);border:1px solid var(--border)}
+.focus-modal-actions .btn-ghost:hover{background:var(--border)}
 .month-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .month-card{background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:12px 14px;cursor:pointer;text-align:center;transition:.15s}
 .month-card:hover{background:var(--accent);color:#fff}
@@ -385,6 +420,18 @@ body.dark .rdg-option.wrong{background:#450a0a!important;color:#fca5a5!important
 .restore-btn{background:var(--panel2);border:1px solid var(--border);border-radius:9px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;color:var(--text);font-family:inherit}
 .restore-btn:hover{background:var(--border)}
 
+/* ChatGPT Prompt Box */
+.gpt-prompt-block{background:#fff9ec;border:1.5px solid #f59e0b;border-radius:13px;padding:13px 15px;margin-top:14px}
+body.dark .gpt-prompt-block{background:#271f09;border-color:#b45309}
+.gpt-prompt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.gpt-prompt-title{font-size:11.5px;font-weight:800;color:#b45309;text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:6px}
+body.dark .gpt-prompt-title{color:#fbbf24}
+.gpt-prompt-label{background:#f59e0b;color:#fff;font-size:10px;font-weight:800;border-radius:20px;padding:2px 8px;letter-spacing:.3px}
+.gpt-prompt-text{font-size:12px;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:11px 13px;line-height:1.7;white-space:pre-wrap;cursor:pointer;user-select:all;font-family:monospace;max-height:220px;overflow-y:auto}
+.gpt-prompt-text::-webkit-scrollbar{width:4px}.gpt-prompt-text::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.gpt-copy-btn{background:#f59e0b;color:#fff;border:none;border-radius:9px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:8px;transition:.15s}
+.gpt-copy-btn:hover{background:#d97706}
+
 </style>
 </head>
 <body>
@@ -512,8 +559,35 @@ body.dark .rdg-option.wrong{background:#450a0a!important;color:#fca5a5!important
   <div class="bank-tools">
    <button class="btn btn-primary" onclick="saveCustomSujet()">➕ Ajouter à la banque</button>
    <button class="btn btn-ghost" style="background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none" onclick="practiceCustomDirect()">🚀 Pratiquer directement</button>
-   <button class="btn btn-ghost" onclick="exportBank()">⬇ Banque JSON</button>
-   <button class="btn btn-ghost" onclick="importBank()">⬆ Import JSON</button>
+   <button class="btn btn-ghost" onclick="exportBank()">⬇ Banque TXT</button>
+   <button class="btn btn-ghost" onclick="importBankTXT()">⬆ Import TXT</button>
+  </div>
+  <div class="gpt-prompt-block">
+   <div class="gpt-prompt-header">
+    <div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">SUJETS TCF</span></div>
+    <span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → remplissez les champs ci-dessus</span>
+   </div>
+   <div id="sujetsPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère 5 combinaisons de sujets TCF Expression Écrite niveau B2 en français.
+Chaque combinaison doit contenir 3 tâches.
+
+Pour chaque combinaison, respecte CE FORMAT EXACT :
+
+### COMBINAISON N°[numéro]
+TITRE : [thème général de la combinaison]
+
+TÂCHE 1 (60-120 mots) :
+[Consigne complète — lettre formelle, courriel, message à un proche, témoignage, invitation…]
+
+TÂCHE 2 (120-150 mots) :
+[Consigne complète — courriel professionnel, article de blog, message sur réseau social, description d'expérience…]
+
+TÂCHE 3 (180 mots max.) — titre :
+DOC 1 : [paragraphe de 3-4 phrases présentant une position sur le sujet]
+DOC 2 : [paragraphe de 3-4 phrases présentant la position opposée ou des nuances]
+
+---
+Génère 5 combinaisons variées avec des thèmes différents (environnement, travail, société, éducation, santé…). Respecte scrupuleusement les limites de mots et le format exact.</div>
+   <button class="gpt-copy-btn" onclick="copyGptPrompt(this,'sujetsPromptBox')">📋 Copier le prompt</button>
   </div>
  </div>
  <div class="month-grid" id="monthGrid"></div>
@@ -554,6 +628,29 @@ body.dark .rdg-option.wrong{background:#450a0a!important;color:#fca5a5!important
     <button class="btn btn-ghost btn-sm" onclick="exportCustomConnsTXT()">⬇ Exporter TXT</button>
     <button class="btn btn-ghost btn-sm" onclick="clearCustomConns()" style="color:var(--danger)">🗑 Effacer importés</button>
    </div>
+   <div class="gpt-prompt-block">
+    <div class="gpt-prompt-header">
+     <div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">CONNECTEURS</span></div>
+     <span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span>
+    </div>
+    <div id="connPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère une liste de connecteurs logiques B1/B2 pour le TCF Expression Écrite en français.
+Format STRICT — une entrée par ligne :
+connecteur — explication courte de son usage
+
+Catégories à couvrir (indique chaque catégorie entre [crochets] sur sa propre ligne) :
+[Addition], [Opposition/Concession], [Cause], [Conséquence], [But], [Temps/Chronologie], [Illustration/Exemple], [Conclusion]
+
+Génère 5 connecteurs par catégorie (40 entrées au total).
+Ne mets aucun titre général, aucun numéro. Seules les catégories entre [] sont autorisées comme titres de section.
+Exemple :
+[Addition]
+de plus — ajoute une information supplémentaire
+en outre — équivalent soutenu de "de plus"
+[Opposition/Concession]
+cependant — introduit une restriction ou nuance
+néanmoins — équivalent formel de "cependant"</div>
+    <button class="gpt-copy-btn" onclick="copyGptPrompt(this,'connPromptBox')">📋 Copier le prompt</button>
+   </div>
   </div>
   <div id="customConnList" style="margin-top:4px"></div>
  </div>
@@ -584,6 +681,31 @@ body.dark .rdg-option.wrong{background:#450a0a!important;color:#fca5a5!important
    </div>
    <input type="file" id="vocabImportFile" accept=".txt" style="display:none" onchange="importVocabTXT(this)">
    <div id="vocabImportResult" class="import-result"></div>
+   <div style="margin-top:12px;background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:12px 14px">
+    <div style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">📋 Format TXT attendu</div>
+    <div style="font-size:12px;color:var(--sub);line-height:1.7;font-family:monospace">
+     mot — définition [Thème]<br>
+     expression — exemple d'usage [Thème]<br>
+     <span style="opacity:.6"># Une entrée par ligne. Thème entre [crochets] optionnel.</span>
+    </div>
+    <div class="gpt-prompt-block">
+     <div class="gpt-prompt-header">
+      <div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">VOCABULAIRE</span></div>
+      <span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span>
+     </div>
+     <div id="vocabPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère une liste de vocabulaire B1/B2 pour le TCF Expression Écrite en français.
+Format STRICT — une entrée par ligne :
+mot ou expression — définition courte ou exemple de phrase [Thème]
+
+Thèmes à couvrir : Environnement, Travail, Éducation, Santé, Société, Technologies, Culture, Économie.
+Génère 10 mots par thème (80 entrées au total).
+Ne mets aucun titre, aucun numéro, aucune ligne vide entre les entrées.
+Exemple :
+se réchauffer — augmenter en température (climat) [Environnement]
+un stage — période de formation en entreprise [Travail]</div>
+     <button class="gpt-copy-btn" onclick="copyGptPrompt(this,'vocabPromptBox')">📋 Copier le prompt</button>
+    </div>
+   </div>
    <div id="vocabList" style="margin-top:10px"></div>
    <div id="vocabThemeBalance" style="margin-top:14px"></div>
   </div>
@@ -644,6 +766,25 @@ body.dark .rdg-option.wrong{background:#450a0a!important;color:#fca5a5!important
   </div>
   <input type="file" id="errImportFile" accept=".txt" style="display:none" onchange="importErrorsTXT(this)">
   <div id="errImportResult" class="import-result"></div>
+  <div class="gpt-prompt-block">
+   <div class="gpt-prompt-header">
+    <div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">ERREURS RECYCLÉES</span></div>
+    <span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span>
+   </div>
+   <div id="errorsPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère une liste d'erreurs courantes en français B1/B2 pour un apprenant du TCF Expression Écrite, avec leur correction.
+Format STRICT — une entrée par ligne :
+erreur — correction correcte
+
+Couvre ces catégories : accord du participe passé, prépositions, articles définis/indéfinis, temps des verbes (imparfait/passé composé/subjonctif), confusion de mots, constructions incorrectes, gallicismes courants.
+Génère 5 erreurs par catégorie (35 entrées au total).
+Ne mets aucun titre, aucun numéro, aucune ligne vide entre les entrées.
+Exemple :
+apprendre le français — apprendre le français ✓ (déjà correct, pas de correction)
+j'ai été fatigué hier soir — j'étais fatigué hier soir
+il faut que tu viens — il faut que tu viennes
+très beaucoup — beaucoup / énormément</div>
+   <button class="gpt-copy-btn" onclick="copyGptPrompt(this,'errorsPromptBox')">📋 Copier le prompt</button>
+  </div>
  </div>
  <div class="err-tabs">
   <button class="err-tab active" id="etab-list" onclick="switchErrTab('list')">📋 Liste des erreurs</button>
@@ -668,6 +809,36 @@ body.dark .rdg-option.wrong{background:#450a0a!important;color:#fca5a5!important
   <div class="btn-row" style="margin-top:10px">
    <button class="btn btn-ghost btn-sm" onclick="exportReadingTXT()">⬇ Exporter TXT</button>
    <button class="btn btn-ghost btn-sm" onclick="clearReadingDocs()" style="color:var(--danger)">🗑 Effacer tout</button>
+  </div>
+  <div class="gpt-prompt-block">
+   <div class="gpt-prompt-header">
+    <div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">LECTURE / ÉCOUTE</span></div>
+    <span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span>
+   </div>
+   <div id="readingPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère 3 exercices de compréhension écrite TCF niveau B1/B2 en français.
+Chaque exercice doit suivre CE FORMAT EXACT :
+
+### [TITRE DU TEXTE] [LECTURE]
+
+TEXTE:
+[Texte de 150-200 mots sur un sujet de société (environnement, travail, santé, éducation, technologies…). Style journalistique, registre neutre à soutenu.]
+
+QUESTIONS:
+Q1: [Question de compréhension globale]
+A) [Option A]  B) [Option B]  C) [Option C]  D) [Option D]
+RÉPONSE: [Lettre correcte]
+
+Q2: [Question sur un détail précis du texte]
+A) [Option A]  B) [Option B]  C) [Option C]  D) [Option D]
+RÉPONSE: [Lettre correcte]
+
+Q3: [Question d'inférence ou sur le ton/intention de l'auteur]
+A) [Option A]  B) [Option B]  C) [Option C]  D) [Option D]
+RÉPONSE: [Lettre correcte]
+
+---
+Génère 3 exercices complets avec des thèmes variés. Respecte scrupuleusement le format (### TITRE [LECTURE], TEXTE:, QUESTIONS:, Qn:, A) B) C) D), RÉPONSE:).</div>
+   <button class="gpt-copy-btn" onclick="copyGptPrompt(this,'readingPromptBox')">📋 Copier le prompt</button>
   </div>
  </div>
 
@@ -1946,7 +2117,7 @@ renderHome();
 <div id="view-history" style="display:none">
  <div class="section-title">🕒 Historique</div>
  <div class="backup-banner">
-  <div><div class="bb-text">💾 Sauvegardez votre historique complet</div><div class="bb-sub">Toutes vos productions, vocab, erreurs, connecteurs SRS — en un seul fichier JSON</div></div>
+  <div><div class="bb-text">💾 Sauvegardez votre historique complet</div><div class="bb-sub">Toutes vos productions, vocab, erreurs, connecteurs SRS — en un seul fichier TXT</div></div>
   <button class="backup-btn" onclick="downloadFullBackup()">⬇ Télécharger la sauvegarde</button>
  </div>
  <div id="histList"></div>
@@ -1988,7 +2159,7 @@ renderHome();
  </div>
  <div class="card">
   <h3 class="h3">💾 Sauvegarde &amp; restauration</h3>
-  <p class="muted" style="margin-bottom:12px">Sauvegardez tout votre historique en un seul fichier JSON (productions, vocabulaire, erreurs, connecteurs, sujets, scores…). Restaurez ce fichier si vous réinitialisez votre navigateur.</p>
+  <p class="muted" style="margin-bottom:12px">Sauvegardez tout votre historique en un seul fichier TXT (productions, vocabulaire, erreurs, connecteurs, sujets, scores…). Restaurez ce fichier si vous réinitialisez votre navigateur.</p>
   <div class="btn-row">
    <button class="btn btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706);border:none" onclick="downloadFullBackup()">💾 Télécharger la sauvegarde complète</button>
    <button class="restore-btn" onclick="restoreFromBackup()">📂 Restaurer depuis un fichier</button>
@@ -2128,6 +2299,7 @@ function todayStr(){return new Date().toISOString().slice(0,10);}
 function LS(k,d){try{return JSON.parse(localStorage.getItem(k))??d;}catch(e){return d;}}
 function SV(k,v){localStorage.setItem(k,JSON.stringify(v));}
 function wcOf(t){return t.trim()?t.trim().split(/\s+/).length:0;}
+function copyGptPrompt(btnEl,boxId){const txt=document.getElementById(boxId).textContent;navigator.clipboard.writeText(txt).then(()=>{const orig=btnEl.textContent;btnEl.textContent='✅ Copié !';btnEl.style.background='#16a34a';setTimeout(()=>{btnEl.textContent=orig;btnEl.style.background='';},2000)}).catch(()=>{alert('Sélectionnez le texte du prompt et copiez manuellement (Ctrl+C).');});}
 
 /* ═══ MONTHS + SUJETS BANK ═══ */
 const allMonths=[
@@ -2300,8 +2472,55 @@ function practiceCustomDirect(){
  showView('studio');
  saveHistory('▶ Sujet perso démarré directement');
 }
-function exportBank(){dl(new Blob([JSON.stringify({version:1,bank:customBank},null,2)],{type:'application/json'}),'TCF_banque.json');}
-function importBank(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=()=>{const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const p=JSON.parse(r.result);const inc=p.bank||p;Object.keys(inc).forEach(s=>{customBank[s]=[...(customBank[s]||[]),...(inc[s]||[])];});SV('tcf_custom_bank',customBank);buildMonthGrid();}catch(e){alert('JSON invalide.');}};r.readAsText(f);};i.click();}
+function exportBank(){
+  let lines=[];
+  Object.entries(customBank).forEach(([month,combos])=>{
+    combos.forEach(c=>{
+      lines.push('MOIS: '+month);
+      lines.push('COMBO: '+(c.num||1));
+      if(c.t1&&c.t1.consigne)lines.push('T1: '+c.t1.consigne);
+      if(c.t2&&c.t2.consigne)lines.push('T2: '+c.t2.consigne);
+      if(c.t3&&c.t3.titre)lines.push('TITRE: '+c.t3.titre);
+      if(c.t3&&c.t3.doc1)lines.push('DOC1: '+c.t3.doc1);
+      if(c.t3&&c.t3.doc2)lines.push('DOC2: '+c.t3.doc2);
+      lines.push('---');
+    });
+  });
+  dl(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),'TCF_banque.txt');
+}
+function importBankTXT(){const i=document.createElement('input');i.type='file';i.accept='.txt';i.onchange=()=>{const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{parseBankTXT(r.result);}catch(e){alert('Erreur de lecture TXT : '+e.message);}};r.readAsText(f);};i.click();}
+function parseBankTXT(raw){
+  /* Expected format — see ChatGPT prompt for exact structure:
+     MOIS: juin-2026
+     COMBO: 1
+     T1: your tâche 1 consigne
+     T2: your tâche 2 consigne
+     TITRE: Title for tâche 3
+     DOC1: document 1 text
+     DOC2: document 2 text
+     ---
+     COMBO: 2
+     ...
+  */
+  let currentMonth='';let currentCombo={};let added=0;
+  const lines=raw.split(/\r?\n/);
+  const flush=()=>{if(currentMonth&&currentCombo.num){customBank[currentMonth]=customBank[currentMonth]||[];customBank[currentMonth].push(currentCombo);added++;}currentCombo={};};
+  for(let l of lines){
+    const trimmed=l.trim();
+    if(!trimmed){continue;}
+    if(trimmed==='---'){flush();continue;}
+    if(/^MOIS\s*:/i.test(trimmed)){flush();currentMonth=trimmed.replace(/^MOIS\s*:\s*/i,'').trim().toLowerCase();continue;}
+    if(/^COMBO\s*:/i.test(trimmed)){flush();currentCombo={num:parseInt(trimmed.replace(/^COMBO\s*:\s*/i,''))||1,t1:{},t2:{},t3:{}};continue;}
+    if(/^T1\s*:/i.test(trimmed)){if(!currentCombo.t1)currentCombo.t1={};currentCombo.t1.consigne=trimmed.replace(/^T1\s*:\s*/i,'');continue;}
+    if(/^T2\s*:/i.test(trimmed)){if(!currentCombo.t2)currentCombo.t2={};currentCombo.t2.consigne=trimmed.replace(/^T2\s*:\s*/i,'');continue;}
+    if(/^TITRE\s*:/i.test(trimmed)){if(!currentCombo.t3)currentCombo.t3={};currentCombo.t3.titre=trimmed.replace(/^TITRE\s*:\s*/i,'');continue;}
+    if(/^DOC1\s*:/i.test(trimmed)){if(!currentCombo.t3)currentCombo.t3={};currentCombo.t3.doc1=trimmed.replace(/^DOC1\s*:\s*/i,'');continue;}
+    if(/^DOC2\s*:/i.test(trimmed)){if(!currentCombo.t3)currentCombo.t3={};currentCombo.t3.doc2=trimmed.replace(/^DOC2\s*:\s*/i,'');continue;}
+  }
+  flush();
+  SV('tcf_custom_bank',customBank);buildMonthGrid();
+  alert(added+' combinaison(s) importée(s) avec succès !');
+}
 
 /* ═══ EDITOR + PER-COMBO-PER-TASK DRAFTS ═══ */
 const editor=document.getElementById('editor');
@@ -2409,7 +2628,16 @@ function saveAsDOC(){
  const doc=new Document({styles:{default:{document:{run:{font:'Arial',size:22}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:1134,right:1134,bottom:1134,left:1134}}},children}]});
  Packer.toBlob(doc).then(blob=>dl(blob,'TCF_EE_C'+combo.num+'.docx'));
 }
-function exportJSON(){dl(new Blob([JSON.stringify({sujet:getCurrentSujet(),reponse:editor.value,date:new Date().toISOString(),productions},null,2)],{type:'application/json'}),'TCF_EE.json');}
+function exportJSON(){
+  const sujet=getCurrentSujet();
+  const reponse=editor.value;
+  const date=new Date().toLocaleString('fr-FR');
+  let out='TCF EE — Export\n';
+  out+='Date : '+date+'\n\n';
+  if(sujet){out+='=== SUJET ===\n'+sujet+'\n\n';}
+  out+='=== RÉPONSE ===\n'+reponse+'\n';
+  dl(new Blob([out],{type:'text/plain;charset=utf-8'}),'TCF_EE.txt');
+}
 
 /* ═══ FOCUS ═══ */
 function setFocus(on){focusMode=!!on&&!!combos.length;document.body.classList.toggle('focus-mode',focusMode);updateFocusBar();}
@@ -3284,15 +3512,15 @@ function downloadFullBackup(){
       catch{backup.data[k]=localStorage.getItem(k);}
     }
   }
-  const fname='TCF_backup_'+new Date().toISOString().slice(0,10)+'.json';
-  dl(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}),fname);
+  const fname='TCF_backup_'+new Date().toISOString().slice(0,10)+'.txt';
+  dl(new Blob([JSON.stringify(backup,null,2)],{type:'text/plain;charset=utf-8'}),fname);
   saveHistory('💾 Sauvegarde complète téléchargée');
   alert('✅ Sauvegarde téléchargée !\nFichier : '+fname+'\n\nGardez ce fichier précieusement — il contient toutes vos données.');
 }
 
 function restoreFromBackup(){
   const inp=document.createElement('input');
-  inp.type='file';inp.accept='.json';
+  inp.type='file';inp.accept='.txt';
   inp.onchange=()=>{
     const f=inp.files[0];if(!f)return;
     const r=new FileReader();
@@ -3310,8 +3538,7 @@ function restoreFromBackup(){
         });
         alert('✅ Restauration réussie !\n'+count+' clés restaurées.\n\nLa page va se recharger.');
         location.reload();
-      }catch(e){alert('❌ Fichier invalide. Assurez-vous d\'utiliser un fichier de sauvegarde TCF Studio.');}
-    };
+      }catch(e){alert('❌ Fichier invalide. Assurez-vous d\'utiliser un fichier de sauvegarde TCF Studio.');}    };
     r.readAsText(f);
   };
   inp.click();
@@ -4068,8 +4295,161 @@ function closeMobileSidebar(){
   document.getElementById('sidebarOverlay').classList.remove('mobile-open');
 }
 
+/* ── FONT SIZE CONTROLS ── */
+function setPresetSize(size){
+  document.documentElement.style.setProperty('--editor-font-size',size+'px');
+  document.getElementById('fontSizeSlider').value=size;
+  document.getElementById('fontSizeValue').textContent=size+'px';
+  updatePresetButtons(size);
+  SV('tcf_editor_font_size',size);
+}
+
+function updatePresetButtons(size){
+  document.querySelectorAll('.preset-btn').forEach(btn=>{
+    btn.classList.remove('active');
+    const btnSize=btn.textContent.includes('Petit')?12:btn.textContent.includes('Grand')?18:15;
+    if(btnSize===parseInt(size)){btn.classList.add('active');}
+  });
+}
+
+function initFontSizeControls(){
+  const slider=document.getElementById('fontSizeSlider');
+  if(slider){
+    slider.addEventListener('input',(e)=>{
+      const size=e.target.value;
+      document.documentElement.style.setProperty('--editor-font-size',size+'px');
+      document.getElementById('fontSizeValue').textContent=size+'px';
+      updatePresetButtons(parseInt(size));
+    });
+  }
+  const saved=LS('tcf_editor_font_size',null);
+  if(saved){setPresetSize(saved);}
+}
+
+function showFontSizeGroup(){
+  const group=document.getElementById('fontSizeGroup');
+  if(group){group.classList.add('active');}
+}
+
+function hideFontSizeGroup(){
+  const group=document.getElementById('fontSizeGroup');
+  if(group){group.classList.remove('active');}
+}
+
+/* ── FOCUS MODE FUNCTIONS ── */
+let focusSubjects=[];
+function openFocusModal(){
+  const modal=document.getElementById('focusModal');
+  if(modal){
+    modal.classList.add('active');
+    renderSubjectOptions();
+  }
+}
+
+function closeFocusModal(){
+  const modal=document.getElementById('focusModal');
+  if(modal){modal.classList.remove('active');}
+}
+
+function renderSubjectOptions(){
+  const container=document.getElementById('subjectOptions');
+  if(!container) return;
+  container.innerHTML=`
+    <div class="subject-option selected" onclick="selectSubjectOption(this,'mine')">
+      <div class="subject-option-title">📝 Mes Sujets</div>
+      <div class="subject-option-desc">Rédiger sur vos sujets sauvegardés</div>
+    </div>
+    <div class="subject-option" onclick="selectSubjectOption(this,'bank')">
+      <div class="subject-option-title">🏦 Choisir depuis la banque</div>
+      <div class="subject-option-desc">Sélectionner des sujets disponibles</div>
+    </div>
+  `;
+}
+
+function selectSubjectOption(el,type){
+  document.querySelectorAll('.subject-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const listContainer=document.getElementById('selectedSubjectsList');
+  if(type==='bank'){
+    if(listContainer) listContainer.style.display='block';
+    renderSubjectBank();
+  }else{
+    if(listContainer) listContainer.style.display='none';
+    focusSubjects=[];
+  }
+}
+
+function renderSubjectBank(){
+  const container=document.getElementById('subjectListContainer');
+  if(!container) return;
+  const bankSubjects=[
+    {id:1,title:'Écrire une lettre formelle'},
+    {id:2,title:'Rédiger un email professionnel'},
+    {id:3,title:'Décrire une expérience personnelle'},
+    {id:4,title:'Argumenter une opinion'},
+    {id:5,title:'Résumer un document'}
+  ];
+  container.innerHTML=bankSubjects.map(s=>`
+    <div class="subject-item" onclick="toggleFocusSubject(${s.id},this)">
+      ✓ ${s.title}
+    </div>
+  `).join('');
+}
+
+function toggleFocusSubject(id,el){
+  el.classList.toggle('selected');
+  if(el.classList.contains('selected')){
+    if(!focusSubjects.includes(id)) focusSubjects.push(id);
+  }else{
+    focusSubjects=focusSubjects.filter(s=>s!==id);
+  }
+}
+
+function startFocusMode(){
+  const selected=document.querySelector('.subject-option.selected');
+  if(!selected) return;
+  const type=selected.querySelector('.subject-option-title').textContent.includes('Mes')?'mine':'bank';
+  if(type==='bank'&&focusSubjects.length===0){
+    alert('Veuillez sélectionner au moins un sujet.');
+    return;
+  }
+  document.body.classList.add('focus-active');
+  closeFocusModal();
+  showFontSizeGroup();
+}
+
+function exitFocusMode(){
+  if(confirm('Quitter le mode concentration ?')){
+    document.body.classList.remove('focus-active');
+    hideFontSizeGroup();
+  }
+}
+
 /* ── ACCENT DOCK: always visible on right-middle ── */
 rebuildCustomConnsSRS();
+// Add auto-backup reminder on load if >100 productions
+if(productions.length>100||history.length>200){
+  setTimeout(()=>{
+    if(!sessionStorage.getItem('backup_reminded')){
+      sessionStorage.setItem('backup_reminded','1');
+      const msg='💡 Vous avez '+productions.length+' production(s) sauvegardée(s) !\n\nPensez à télécharger votre sauvegarde complète depuis le menu latéral (💾 Sauvegarder tout mon historique) pour ne rien perdre.';
+      console.log(msg);
+    }
+  },3000);
+}
+
+// Init font size controls on page load
+document.addEventListener('DOMContentLoaded',()=>{
+  initFontSizeControls();
+});
+
+/* HTML ELEMENTS - Font Size Group */
+(function(){
+  if(!document.getElementById('fontSizeGroup')){
+    const html=`<div class="font-size-group" id="fontSizeGroup"><div class="font-label">Taille de police</div><div class="font-slider-row"><input type="range" class="font-slider" id="fontSizeSlider" min="12" max="24" value="15" step="1"><span class="font-value" id="fontSizeValue">15px</span></div><div class="preset-sizes"><button class="preset-btn" onclick="setPresetSize(12)">Petit</button><button class="preset-btn" onclick="setPresetSize(15)">Normal</button><button class="preset-btn" onclick="setPresetSize(18)">Grand</button></div></div><div class="focus-modal" id="focusModal"><div class="focus-modal-content"><div class="focus-modal-title">🎯 Mode Concentration</div><div class="focus-modal-desc">Choisissez vos sujets pour ce mode de rédaction sans distractions</div><div class="subject-options" id="subjectOptions"></div><div id="selectedSubjectsList" style="display:none;"><div class="font-label">Sujets sélectionnés:</div><div class="subject-list" id="subjectListContainer"></div></div><div class="focus-modal-actions"><button class="btn-ghost" onclick="closeFocusModal()">Annuler</button><button class="btn-primary" onclick="startFocusMode()">Démarrer</button></div></div></div>`;
+    document.body.insertAdjacentHTML('beforeend',html);
+  }
+})();
 // Add auto-backup reminder on load if >100 productions
 if(productions.length>100||history.length>200){
   setTimeout(()=>{
