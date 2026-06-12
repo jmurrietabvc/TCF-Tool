@@ -4,7 +4,7 @@ The most complete free web app to prepare for TCF Canada Expression Écrite (EE)
 
 Practice TCF writing tasks with a real timer, AI-powered analysis, spaced repetition, and exam simulation — all in your browser, no login required.
 
-🔗 Live app: nsingh4368-ui.github.io/nsingh4368-ui
+🔗 Live app: [nsingh4368-ui.github.io/nsingh4368-ui](https://nsingh4368-ui.github.io/TCF-Writing/)
 
 
 ✨ Features
