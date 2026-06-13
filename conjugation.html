@@ -139,6 +139,7 @@ body.dark .log-item.err{background:#450a0a;color:#fca5a5}
       <label class="tense-check on" data-tense="PC"><input type="checkbox" checked> Passé composé</label>
       <label class="tense-check on" data-tense="IMP"><input type="checkbox" checked> Imparfait</label>
       <label class="tense-check on" data-tense="FUT"><input type="checkbox" checked> Futur simple</label>
+      <label class="tense-check on" data-tense="COND"><input type="checkbox" checked> Conditionnel présent</label>
       <label class="tense-check on" data-tense="SUB"><input type="checkbox" checked> Subjonctif présent</label>
     </div>
   </div>
@@ -252,7 +253,9 @@ window.onerror = function(msg, src, line, col, err){
 // pronouns: je/tu/il/elle/on/nous/vous/ils/elles
 // ─────────────────────────────────────────────
 const PRONOUNS = ['je','tu','il','elle','on','nous','vous','ils','elles'];
-const TENSE_LABELS = {PR:'Présent',PC:'Passé composé',IMP:'Imparfait',FUT:'Futur simple',SUB:'Subjonctif présent'};
+const TENSE_LABELS = {PR:'Présent',PC:'Passé composé',IMP:'Imparfait',FUT:'Futur simple',COND:'Conditionnel présent',SUB:'Subjonctif présent'};
+const FUTURE_ENDINGS = ['ai','as','a','a','a','ons','ez','ont','ont'];
+const CONDITIONAL_ENDINGS = ['ais','ais','ait','ait','ait','ions','iez','aient','aient'];
 
 const VERBS = [
 // ──── COMMON (1-50) ────
@@ -1467,7 +1470,7 @@ const VERBS = [
 // ─────────────────────────────────────────────
 let currentLevel = 'common';
 let selectedVerbs = new Set();
-let selectedTenses = new Set(['PR','PC','IMP','FUT','SUB']);
+let selectedTenses = new Set(['PR','PC','IMP','FUT','COND','SUB']);
 let queue = [];
 let qIdx = 0;
 let scoreOk = 0, scoreErr = 0;
@@ -1576,6 +1579,19 @@ function startDrill(){
   updateScoreBar();
 }
 
+function getConjugations(verb, tense){
+  if(tense !== 'COND') return verb[tense];
+  if(Array.isArray(verb.COND)) return verb.COND;
+  if(!Array.isArray(verb.FUT)) return [];
+  return verb.FUT.map((form,i)=>{
+    const futureEnding = FUTURE_ENDINGS[i];
+    const conditionalEnding = CONDITIONAL_ENDINGS[i];
+    if(typeof form !== 'string' || !futureEnding || !conditionalEnding) return form;
+    if(form.endsWith(futureEnding)) return form.slice(0,-futureEnding.length)+conditionalEnding;
+    return form;
+  });
+}
+
 // ─────────────────────────────────────────────
 // DRILL
 // ─────────────────────────────────────────────
@@ -1588,7 +1604,7 @@ function renderCard(){
   document.getElementById('drillProg').textContent = (qIdx+1)+' / '+queue.length;
   document.getElementById('cardFeedback').style.display='none';
 
-  const conjugations = verb[tense];
+  const conjugations = getConjugations(verb, tense);
   const grid = document.getElementById('pronounGrid');
   grid.innerHTML = PRONOUNS.map((pr,i)=>`
     <div class="pronoun-row" id="row-${i}">
@@ -1630,7 +1646,7 @@ function normalize(s){ return s.trim().toLowerCase().replace(/\s+/g,' '); }
 
 function checkAnswers(){
   const {verb, tense} = queue[qIdx];
-  const conjugations = verb[tense];
+  const conjugations = getConjugations(verb, tense);
   let allOk = true;
   let wrongCount = 0;
 
@@ -1690,7 +1706,7 @@ function matchVariant(user, correct){
 let answersRevealed = false;
 function revealAll(){
   const {verb, tense} = queue[qIdx];
-  const conjugations = verb[tense];
+  const conjugations = getConjugations(verb, tense);
   const fb = document.getElementById('cardFeedback');
   if(answersRevealed){
     answersRevealed = false;
