@@ -35,6 +35,9 @@ function updateAccentDockVisibility(){}
 function toggleAccentDock(){}
 setTimeout(()=>renderAccentPage(),100);
 
+let timerTotal=(parseInt(document.getElementById('timerSlider')?.value||'60',10)||60)*60;
+let timerRemain=parseInt(localStorage.getItem('tcf_timer')||String(timerTotal),10)||timerTotal;
+let timerInterval=null;
 function onSlider(){document.getElementById('sliderVal').textContent=document.getElementById('timerSlider').value+' min';}
 function startTimer(){timerTotal=parseInt(document.getElementById('timerSlider').value)*60;timerRemain=timerTotal;clearInterval(timerInterval);unfreezeSession();runTimer();}
 function runTimer(){clearInterval(timerInterval);timerInterval=setInterval(()=>{if(timerRemain>0){timerRemain--;drawTimer();}else{clearInterval(timerInterval);freezeSession();}},1000);}
