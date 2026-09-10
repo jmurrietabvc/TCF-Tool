@@ -15,7 +15,7 @@ let customConns=LS('tcf_custom_conns',[]);
 let readingDocs=LS('tcf_reading_docs',[]);
 let activeReadingDoc=0;
 let combos=[],activeCombIdx=0,activeTask=1,activeMonthSlug='',focusMode=false,pendingProduction=null;
-const views=['welcome','studio','browse','productions','connectors','vocab','errors','reading','listening','reading_mock','conjugation','favorites','revisit','history','stats','profile'];
+const views=['welcome','studio','browse','productions','connectors','vocab','errors','reading','listening','reading_mock','conjugation','ecrivance','favorites','revisit','history','stats','profile'];
 function showView(v){closeMobileSidebar();views.forEach(x=>{const e=document.getElementById('view-'+x);if(e)e.style.display=(x===v?'':'none');const n=document.getElementById('nav-'+x);if(n)n.classList.toggle('active',x===v);});
 const dock=document.querySelector('.accent-dock');if(dock){const examActive=document.body.classList.contains('exam-active');const accentViews=['vocab','errors','productions'];dock.style.display=(focusMode||examActive||accentViews.includes(v))?'flex':'none';}
 if(v==='welcome')buildWelcome();
