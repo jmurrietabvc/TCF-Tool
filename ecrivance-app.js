@@ -407,7 +407,9 @@
                (t.tache1Title && t.tache1Title.toLowerCase().includes(q)) ||
                (t.tache2Title && t.tache2Title.toLowerCase().includes(q)) ||
                (t.tache3Title && t.tache3Title.toLowerCase().includes(q)) ||
-               (t.sourceMonthRaw && t.sourceMonthRaw.toLowerCase().includes(q));
+               (t.sourceMonthRaw && t.sourceMonthRaw.toLowerCase().includes(q)) ||
+               (t.reportLocation && t.reportLocation.toLowerCase().includes(q)) ||
+               (t.reportSource && t.reportSource.toLowerCase().includes(q));
       });
     }
 
@@ -418,6 +420,14 @@
       html += '<div class="theme-card">';
       html += '  <div class="theme-info">';
       html += '    <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-subtle);margin-bottom:3px;">' + (t.sourceMonthRaw ? t.sourceMonthRaw.replace(/-/g, ' ') : 'Examen') + '</div>';
+      if (t.reportDate || t.reportLocation || t.reportConfidence || t.reportSource) {
+        html += '    <div style="display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 7px;font-size:11px;line-height:1.35;color:var(--ink-muted);">';
+        if (t.reportDate) html += '<span style="padding:2px 7px;border:1px solid var(--paper-border);border-radius:999px;">📅 ' + t.reportDate + '</span>';
+        if (t.reportLocation) html += '<span style="padding:2px 7px;border:1px solid var(--paper-border);border-radius:999px;">📍 ' + t.reportLocation + '</span>';
+        if (t.reportConfidence) html += '<span style="padding:2px 7px;background:rgba(22,163,74,.10);color:#166534;border-radius:999px;">✓ ' + t.reportConfidence + '</span>';
+        html += '</div>';
+        if (t.reportSource) html += '<div style="font-size:11.5px;color:var(--ink-subtle);margin:-2px 0 7px;">Fuente: ' + t.reportSource + '</div>';
+      }
       html += '    <h3>' + (t.title || "Sujet d'examen TCF") + '</h3>';
       html += '    <p><strong>T1:</strong> ' + (t.tache1Title || 'Message') + ' · <strong>T2:</strong> ' + (t.tache2Title || 'Récit') + ' · <strong>T3:</strong> ' + (t.tache3Title || 'Débat') + '</p>';
       html += '  </div>';
