@@ -1,283 +1,79 @@
-<!DOCTYPE html>
-<html lang="es" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Écrivance — Cuaderno de Práctica TCF Canadá</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✒️</text></svg>">
-  <link rel="stylesheet" href="ecrivance-ui.css">
-</head>
-<body>
-
-  <!-- Top Navigation Bar -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand" onclick="switchView('practice')">
-        <div class="brand-pen">✒️</div>
-        <div>
-          <span class="brand-title">Écrivance</span>
-          <span class="brand-badge">TCF Canadá</span>
-        </div>
-      </div>
-
-      <nav class="nav-links">
-        <button class="nav-btn active" data-view="practice" onclick="switchView('practice')">
-          <span>✍️</span> Cuaderno
-        </button>
-        <button class="nav-btn" data-view="cadres" onclick="switchView('cadres')">
-          <span>📋</span> Las 10 Plantillas
-        </button>
-        <button class="nav-btn" data-view="themes" onclick="switchView('themes')">
-          <span>📚</span> 216 Temas Reales
-        </button>
-        <button class="nav-btn" data-view="settings" onclick="switchView('settings')">
-          <span>⚙️</span> Clave API
-        </button>
-      </nav>
-
-      <div class="topbar-right">
-        <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleThemeMode()" title="Cambiar tema claro / oscuro">
-          <span>☀️</span> Claro
-        </button>
-        <div id="apiStatusPill" class="api-status-pill missing" onclick="switchView('settings')">
-          <span class="api-dot"></span> Configurar Clave API
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Container -->
-  <main class="app-container">
-
-    <!-- ════════ VIEW 1: PRÁCTICA (LE CAHIER) ════════ -->
-    <section id="view-practice" class="view-section active">
-      <div class="practice-header">
-        <div class="task-selector-row">
-          <div class="task-tabs-group">
-            <button class="task-tab active" data-task="1" onclick="switchTask(1)">
-              <span>Tâche 1</span>
-              <span class="task-tab-badge">60–120 mots</span>
-            </button>
-            <button class="task-tab" data-task="2" onclick="switchTask(2)">
-              <span>Tâche 2</span>
-              <span class="task-tab-badge">120–150 mots</span>
-            </button>
-            <button class="task-tab" data-task="3" onclick="switchTask(3)">
-              <span>Tâche 3</span>
-              <span class="task-tab-badge">120–180 mots</span>
-            </button>
-          </div>
-
-          <div class="practice-controls">
-            <button class="btn-secondary" onclick="randomTheme()">
-              <span>🎲</span> Tema al azar
-            </button>
-            <button class="btn-secondary" onclick="switchView('themes')">
-              <span>🔍</span> Ver todos los temas
-            </button>
-          </div>
-        </div>
-
-        <!-- Consigne Card -->
-        <div class="consigne-card">
-          <div class="consigne-meta">
-            <span id="consigneTag" class="consigne-tag">AVRIL 2025 · COMB 18 · TÂCHE 1</span>
-            <span id="consigneWordGoal" class="consigne-word-goal">🎯 Objetivo: <strong>60–120 palabras</strong> (~15 min)</span>
-          </div>
-
-          <h2 id="consigneTitle" class="consigne-title">Chargement de la consigne...</h2>
-          <div id="consigneText" class="consigne-text">...</div>
-
-          <!-- Tâche 3 Opposing Documents Grid -->
-          <div id="tache3DocsGrid" class="tache3-docs-grid" style="display:none;">
-            <div class="tache3-doc-box">
-              <div class="tache3-doc-header">📄 Document 1 (Point de vue A)</div>
-              <div id="tache3Doc1Content" class="tache3-doc-content"></div>
-            </div>
-            <div class="tache3-doc-box">
-              <div class="tache3-doc-header">📄 Document 2 (Point de vue B)</div>
-              <div id="tache3Doc2Content" class="tache3-doc-content"></div>
-            </div>
-          </div>
-
-          <div class="consigne-actions">
-            <button id="btnRecommendedCadre" class="btn-cadre-peek" onclick="openQuickCadreModal()">
-              📋 Ver Plantilla Recomendada
-            </button>
-            <span style="font-size:12px;color:var(--ink-subtle);">Escribe en francés respetando el registro adecuado.</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- The French School Notebook ("Le Cahier") -->
-      <div class="notebook-container">
-        <div class="notebook-header">
-          <div class="notebook-title">
-            <span>📓 Mon Cahier d'Écriture</span>
-            <span style="font-size:12px;color:var(--ink-subtle);font-weight:400;">(guardado automáticamente)</span>
-          </div>
-          <div class="notebook-timer-box">
-            <span id="notebookTimerDisplay">00:00</span>
-            <button id="timerToggleBtn" class="btn-secondary" style="padding:2px 8px;font-size:11px;" onclick="toggleTimer()">⏱️ Iniciar Minutero</button>
-          </div>
-        </div>
-
-        <div class="notebook-body">
-          <div class="notebook-margin-line"></div>
-          <textarea id="notebookEditor" class="notebook-textarea" placeholder="Rédigez votre réponse ici en français... Cliquez sur « 📋 Ver Plantilla » en caso de duda sobre la estructura."></textarea>
-        </div>
-
-        <!-- French Accents Toolbar -->
-        <div class="accents-toolbar">
-          <span class="accents-label">Acentos rápidos:</span>
-          <button class="accent-key" onclick="insertAccent('é')">é</button>
-          <button class="accent-key" onclick="insertAccent('è')">è</button>
-          <button class="accent-key" onclick="insertAccent('ê')">ê</button>
-          <button class="accent-key" onclick="insertAccent('à')">à</button>
-          <button class="accent-key" onclick="insertAccent('â')">â</button>
-          <button class="accent-key" onclick="insertAccent('î')">î</button>
-          <button class="accent-key" onclick="insertAccent('ï')">ï</button>
-          <button class="accent-key" onclick="insertAccent('ô')">ô</button>
-          <button class="accent-key" onclick="insertAccent('ù')">ù</button>
-          <button class="accent-key" onclick="insertAccent('ç')">ç</button>
-          <button class="accent-key" onclick="insertAccent('œ')">œ</button>
-          <button class="accent-key" onclick="insertAccent('« »')">« »</button>
-        </div>
-
-        <!-- Notebook Footer -->
-        <div class="notebook-footer">
-          <div class="word-count-meter">
-            <span id="wordBadge" class="word-badge under">0 / 60–120</span>
-            <span id="wordStatusText" class="word-status-text">Comienza a escribir tu texto en francés...</span>
-          </div>
-
-          <div class="notebook-actions">
-            <button class="btn-secondary" onclick="clearNotebook()">🗑️ Limpiar</button>
-            <button id="btnAiEvaluate" class="btn-ai-evaluate" onclick="evaluateCurrentWriting()">
-              <span>🤖</span> Evaluar con IA (Gemini)
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Feedback Report Section -->
-      <div id="feedbackReportCard" class="feedback-report-card">
-        <div class="report-hero">
-          <div class="report-nclc-group">
-            <div id="reportNclcBadge" class="report-nclc-badge">NCLC 7</div>
-            <div class="report-nclc-details">
-              <h2>Evaluación Oficial Estimada</h2>
-              <p id="reportNclcSubtitle">Equivalente MCER: B2 · Umbral de oro para Express Entry Canadá</p>
-            </div>
-          </div>
-          <div class="report-score-box">
-            <div id="reportScoreVal" class="report-score-val">11/20</div>
-            <div class="report-score-lbl">Nota Estimada TCF</div>
-          </div>
-        </div>
-
-        <div class="report-content">
-          <!-- Criteria Grid -->
-          <h3 class="criteria-title">📊 Desglose por los 4 Criterios Oficiales</h3>
-          <div id="reportCriteriaGrid" class="criteria-grid"></div>
-
-          <!-- Prioritized Corrections -->
-          <div class="corrections-section">
-            <h3 class="criteria-title">🔍 Correcciones Prioritarias de Gramática y Vocabulario</h3>
-            <div id="reportCorrectionsList" class="corrections-list"></div>
-          </div>
-
-          <!-- C1 Rewrite -->
-          <div class="rewrite-box">
-            <div class="rewrite-header">
-              <span class="rewrite-badge">✨ Réécriture de référence — Niveau C1</span>
-              <span style="font-size:12px;color:var(--ink-muted);">Mismas ideas con vocabulario nativo y conectores elegantes</span>
-            </div>
-            <div id="reportRewriteText" class="rewrite-text"></div>
-          </div>
-
-          <!-- Teacher Handwritten Note -->
-          <div class="teacher-note-card">
-            <div class="teacher-icon">👨‍🏫</div>
-            <div>
-              <div class="teacher-note-title">Consejo del examinador para tu próximo texto</div>
-              <div id="reportTeacherNote" class="teacher-note-text">« Continúa enriqueciendo tus conectores y cuida la concordancia de tiempos. »</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════ VIEW 2: LAS 10 PLANTILLAS OFICIALES ════════ -->
-    <section id="view-cadres" class="view-section">
-      <div class="cadres-view-header">
-        <h1>Las 10 Plantillas Oficiales ("Cadres")</h1>
-        <p>Estructuras maestras probadas para aprobar el TCF Canadá. Memoriza el esqueleto mental y completa los huecos con vocabulario adaptado al tema.</p>
-      </div>
-
-      <div class="cadres-filter-row">
-        <button class="btn-secondary" style="background:var(--ink);color:var(--paper);border-color:var(--ink);" onclick="filterCadres('all', this)">Todas las plantillas (10)</button>
-        <button class="btn-secondary" onclick="filterCadres('1', this)">Tâche 1 — Mensajes (5)</button>
-        <button class="btn-secondary" onclick="filterCadres('2', this)">Tâche 2 — Artículos y Avis (3)</button>
-        <button class="btn-secondary" onclick="filterCadres('3', this)">Tâche 3 — Debate y Opinión (2)</button>
-      </div>
-
-      <div id="cadresListContainer"></div>
-    </section>
-
-    <!-- ════════ VIEW 3: BANCO DE 216 TEMAS ════════ -->
-    <section id="view-themes" class="view-section">
-      <div class="themes-view-header">
-        <h1 style="font-family:var(--font-display);font-size:30px;font-weight:800;margin-bottom:6px;">Banco Completo de 216 Temas Oficiales</h1>
-        <p style="color:var(--ink-muted);font-size:14.5px;">Temas recopilados de exámenes reales (2025–2026). Cada combinación incluye Tâche 1, Tâche 2 y los dos documentos de debate de Tâche 3.</p>
-      </div>
-
-      <div class="themes-search-bar">
-        <input type="text" class="search-input" placeholder="🔍 Buscar por palabra clave (ej. colocation, travail, voyage, ami, santé...)" oninput="onThemeSearchInput(event)">
-      </div>
-
-      <div id="themesListContainer"></div>
-    </section>
-
-    <!-- ════════ VIEW 4: CONFIGURACIÓN CLAVE API ════════ -->
-    <section id="view-settings" class="view-section">
-      <div class="settings-box">
-        <h2>Configuración de la Inteligencia Artificial</h2>
-        <p>Para recibir evaluaciones automáticas con nivel NCLC y correcciones ilimitadas 100% gratuitas, ingresa tu clave API de Google Gemini. Tu clave queda guardada de forma segura únicamente en tu navegador (localStorage).</p>
-
-        <label style="display:block;font-size:12.5px;font-weight:700;margin-bottom:6px;color:var(--ink);">Clave API de Google Gemini (Gratuita)</label>
-        <input type="password" id="apiKeyInput" class="input-field" placeholder="AIzaSy...">
-
-        <div style="display:flex;gap:10px;margin-bottom:14px;">
-          <button class="btn-primary" onclick="saveApiKeyAction()">💾 Guardar Clave</button>
-          <button class="btn-secondary" onclick="testApiKeyAction()">🧪 Probar Conexión</button>
-        </div>
-
-        <div id="apiKeyTestResult" style="font-size:13px;margin-top:12px;"></div>
-
-        <div style="margin-top:24px;padding:14px;background:var(--paper);border-radius:var(--radius-md);border:1px solid var(--paper-border);font-size:13px;line-height:1.5;">
-          <strong>¿Cómo obtener tu clave API en 1 minuto?</strong><br>
-          1. Ingresa a <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#0284c7;font-weight:600;">Google AI Studio (aistudio.google.com)</a>.<br>
-          2. Inicia sesión con tu cuenta de Google.<br>
-          3. Haz clic en <strong>"Create API Key"</strong> y pégala aquí.<br>
-          <em>(El modelo utilizado es <strong>Gemini 3.6 Flash</strong> con cuota gratuita disponible).</em>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Quick Cadre Modal / Drawer -->
-  <div id="quickCadreModal" class="modal-overlay" onclick="if(event.target===this) closeQuickCadreModal();">
-    <div class="modal-sheet">
-      <button class="modal-close-btn" onclick="closeQuickCadreModal()">✕</button>
-      <div id="quickCadreModalContent"></div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="ecrivance-data.js"></script>
-  <script src="app-ai-feedback.js"></script>
-  <script src="ecrivance-app.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://unpkg.com/docx@8.5.0/build/index.js"></script><title>TCF EE Studio X — Expression Écrite</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="ai-feedback-styles.css"></head><body><div style="background:#16200c;color:#fcfaf5;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;font-family:sans-serif;font-size:14px;border-bottom:2px solid #ea6d58;position:sticky;top:0;z-index:99999"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">✒️</span><span style="font-weight:700">Nueva Interfaz Oficial Écrivance (« Le Cahier ») en Español lista para tu práctica personal</span></div><a href="ecrivance.html" style="background:#fcfaf5;color:#16200c;padding:6px 16px;border-radius:9999px;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.3)">👉 Abrir Écrivance (Modo Cuaderno)</a></div><button class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="toggleMobileSidebar()" aria-label="Menu">☰</button><div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div><div class="app"><div class="sidebar"><div class="brand"><div class="brand-icon">✍</div><div><h1>TCF EE Studio X</h1><span class="b-name" id="brandName" style="display:none"></span><span class="b-sub">Expression Écrite</span></div><a href="landing.html" title="Accueil & Guide" style="color:var(--sub);font-size:16px;text-decoration:none;margin-left:auto;margin-right:8px;line-height:1">🏠</a><button onclick="toggleTheme()" style="background:none;border:none;cursor:pointer;font-size:18px;color:var(--sub)">🌓</button></div><div class="streak-strip" id="streakStrip">🔥 Série : 0 jour</div><div class="sidebar-scroll"><div class="nav-label">Pratique</div><div class="nav-item active" onclick="showView('studio')" id="nav-studio"><span class="ni">📝</span> Studio</div><div class="nav-item" onclick="showView('browse')" id="nav-browse"><span class="ni">📚</span> Banque de sujets</div><div class="nav-item" onclick="showView('productions')" id="nav-productions"><span class="ni">📄</span> Productions <span class="nav-badge" id="prod-badge">0</span></div><div class="nav-label">Apprentissage</div><div class="nav-item" onclick="window.location.href='ecrivance-hub.html'" style="color:var(--gold);font-weight:700"><span class="ni">👑</span> Hub Écrivance (216 Sujets)</div><div class="nav-item" onclick="openTemplatesModal()"><span class="ni">📋</span> Modèles Écrivance</div><div class="nav-item" onclick="showView('connectors')" id="nav-connectors"><span class="ni">🔗</span> Connecteurs B1/B2</div><div class="nav-item" onclick="showView('vocab')" id="nav-vocab"><span class="ni">📖</span> Vocabulaire <span class="nav-badge" id="vocab-badge">0</span></div><div class="nav-item" onclick="showView('errors')" id="nav-errors"><span class="ni">♻️</span> Erreurs recyclées <span class="nav-badge" id="err-badge">0</span></div><div class="nav-item" onclick="showView('reading')" id="nav-reading"><span class="ni">📰</span> Lecture/Écoute <span class="nav-badge" id="read-badge">0</span></div><div class="nav-item" onclick="showView('listening')" id="nav-listening"><span class="ni">🎧</span> Écoute — Mock Tests</div><div class="nav-item" onclick="showView('reading_mock')" id="nav-reading_mock"><span class="ni">📖</span> Lecture — Mock Tests</div><div class="nav-item" onclick="showView('conjugation')" id="nav-conjugation"><span class="ni">🔀</span> Conjugaison</div><div class="nav-label">Suivi</div><div class="nav-item" onclick="showView('favorites')" id="nav-favorites"><span class="ni">⭐</span> Favoris <span class="nav-badge" id="fav-badge">0</span></div><div class="nav-item" onclick="showView('revisit')" id="nav-revisit"><span class="ni">🔄</span> À réviser <span class="nav-badge" id="rev-badge">0</span></div><div class="nav-item" onclick="showView('history')" id="nav-history"><span class="ni">🕒</span> Historique <span class="nav-badge" id="hist-badge">0</span></div><div class="nav-item" onclick="showView('stats')" id="nav-stats"><span class="ni">📊</span> Statistiques</div><div class="nav-item" onclick="showView('profile')" id="nav-profile"><span class="ni">👤</span> Profil</div><hr style="border:none;border-top:1px solid var(--border);margin:12px 0"><div class="ctrl-group"><label>Mois</label><select id="monthSel" onchange="onMonthChange()"></select></div><div class="ctrl-group"><label>Tâche active</label><select id="taskActive" onchange="switchTask(parseInt(this.value))"><option value="1">Tâche 1 (60–120 mots)</option><option value="2">Tâche 2 (120–150 mots)</option><option value="3">Tâche 3 (180 mots max.)</option></select></div><button class="btn btn-primary" onclick="loadSujets()">⬇ Charger dans le studio</button><button class="btn btn-ghost" onclick="randomCombo()">🎲 Aléatoire</button><button class="btn btn-ghost" onclick="toggleFocusMode()">🎯 Mode focus</button><button class="btn btn-exam" onclick="launchExamDay()">🎓 Mode Examen</button><hr style="border:none;border-top:1px solid var(--border);margin:12px 0"><div class="ctrl-group"><label>⏱ Minuteur</label><div class="slider-row"><input type="range" id="timerSlider" min="5" max="180" value="60" step="5" oninput="onSlider()"><span class="slider-val" id="sliderVal">60 min</span></div></div><div class="ctrl-group"><label>🔤 Taille de police</label><div class="slider-row"><input type="range" id="fontSlider" min="12" max="24" value="15" step="1" oninput="onFontSlider()"><span class="slider-val" id="fontVal">15px</span></div></div><hr style="border:none;border-top:1px solid var(--border);margin:12px 0"><button class="btn btn-ghost" onclick="addFav()">⭐ Ajouter aux favoris</button><button class="btn btn-ghost" onclick="addRevisit()">🔄 À réviser</button><hr style="border:none;border-top:1px solid var(--border);margin:12px 0"><button class="btn btn-ghost" onclick="downloadFullBackup()" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none">💾 Sauvegarder tout l'historique</button></div></div><div class="main" id="main"><div id="view-welcome" style="animation:fadeIn .4s ease-out"><div class="welcome-hero"><div class="welcome-greeting"><h1 style="font-size:28px;font-weight:800;margin-bottom:6px">Bienvenue, <span id="welcomeName">apprenant</span> ! 👋</h1><p style="color:var(--sub);font-size:14px;margin:0">Améliorez votre expression écrite TCF niveau B2</p></div><div class="welcome-stats"><div class="stat-badge"><span class="stat-number" id="wStatProd">0</span><span class="stat-label">Productions</span></div><div class="stat-badge"><span class="stat-number" id="wStatWords">0</span><span class="stat-label">Mots</span></div><div class="stat-badge"><span class="stat-number" id="wStatStreak">0</span><span class="stat-label">🔥 Série</span></div></div></div><div class="welcome-cta" style="margin-bottom:24px"><button class="btn btn-primary" style="width:100%;font-size:16px;padding:14px" onclick="showView('studio');loadSujets()">🚀 Commencer à pratiquer</button></div><div class="welcome-grid"><div class="welcome-card" onclick="showView('studio');loadSujets()"><div class="wc-icon">📝</div><div class="wc-title">Studio</div><div class="wc-desc">Pratiquez des sujets TCF avec minuteur et analyse</div><div class="wc-meta"><span class="wc-badge" id="wStudioCount">0 sujets</span></div></div><div class="welcome-card" onclick="showView('browse')"><div class="wc-icon">📚</div><div class="wc-title">Banque de sujets</div><div class="wc-desc">Ajoutez vos propres sujets ou importez des TXT</div><div class="wc-meta"><span class="wc-badge" id="wBankCount">0 sujets</span></div></div><div class="welcome-card" onclick="showView('connectors')"><div class="wc-icon">🔗</div><div class="wc-title">Connecteurs B1/B2</div><div class="wc-desc">Révisez 100 connecteurs avec révision espacée</div><div class="wc-meta"><span class="wc-badge">Srs intégré</span></div></div><div class="welcome-card" onclick="showView('vocab')"><div class="wc-icon">📖</div><div class="wc-title">Vocabulaire</div><div class="wc-desc">Construisez votre vocabulaire personnel + exercices</div><div class="wc-meta"><span class="wc-badge" id="wVocabCount">0 mots</span></div></div><div class="welcome-card" onclick="showView('errors')"><div class="wc-icon">♻️</div><div class="wc-title">Erreurs recyclées</div><div class="wc-desc">Capturez vos erreurs et pratiquez avec des quiz</div><div class="wc-meta"><span class="wc-badge" id="wErrorCount">0 erreurs</span></div></div><div class="welcome-card" onclick="showView('productions')"><div class="wc-icon">📄</div><div class="wc-title">Productions</div><div class="wc-desc">Révisez tout ce que vous avez écrit</div><div class="wc-meta"><span class="wc-badge" id="wProdCount">0 productions</span></div></div><div class="welcome-card" onclick="showView('reading')"><div class="wc-icon">📰</div><div class="wc-title">Lecture & Écoute</div><div class="wc-desc">Importez des textes TCF avec questions</div><div class="wc-meta"><span class="wc-badge" id="wReadCount">0 docs</span></div></div><div class="welcome-card" onclick="showView('stats')"><div class="wc-icon">📊</div><div class="wc-title">Statistiques</div><div class="wc-desc">Suivez votre progression et vos tendances</div><div class="wc-meta"><span class="wc-badge">Analyses</span></div></div></div><div class="welcome-footer"><p style="color:var(--sub);font-size:12px;margin-bottom:10px;text-align:center">💡 Conseil : Commencez par <strong>Studio</strong> pour pratiquer directement, ou consultez votre <strong>Profil</strong> pour définir vos objectifs.</p><button class="btn btn-ghost" style="width:100%;margin-bottom:0" onclick="showView('profile')">👤 Voir mon profil étudiant</button></div></div><div id="view-studio"><div id="studioGreeting"></div><div class="errors-panel" id="errorsPanel" style="display:none"><h4>♻️ Mes erreurs recyclées <span style="cursor:pointer;font-size:14px" onclick="showView('errors')">⚙</span></h4><div id="errorsPanelChips"></div></div><div class="card timer-card" id="timerCard"><div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--sub)">Minuteur de séance</div><div class="timer-display" id="timerDisplay">60:00</div><div class="timer-sub" id="timerSub">Prêt · Appuyez sur Démarrer</div><div class="timer-bar-wrap"><div class="timer-bar" id="timerBar" style="width:100%"></div></div><div class="timer-controls"><button class="timer-btn start" onclick="startTimer()">▶ Démarrer</button><button class="timer-btn" onclick="pauseTimer()">⏸ Pause</button><button class="timer-btn" onclick="resumeTimer()">⏵ Reprendre</button><button class="timer-btn" onclick="resetTimer()">⟲ Reset</button></div></div><div class="card" id="sujetCard"><div class="sujet-header"><h3 class="h3" style="margin:0">Sujet du jour</h3><span class="combo-badge" id="comboBadge">—</span></div><div id="sujetEmpty" class="muted" style="padding:6px 0">Sélectionnez un mois puis <strong>Charger dans le studio</strong>. Parcourez les combinaisons librement, puis cliquez <strong>🚀 Commencer</strong> pour lancer le minuteur et le mode focus.</div><div id="sujetContent" style="display:none"><div class="combo-list" id="comboList"></div><div class="task-tabs" id="taskTabs"></div><div class="task-content" id="taskContent"></div><label class="done-row"><input type="checkbox" id="doneToggle" onchange="toggleDone(this.checked)"> Combinaison terminée</label></div></div><div class="card" id="editorCard"><div class="editor-header"><h3 class="h3" style="margin:0">Votre réponse <span class="muted" id="editorTaskLabel">(Tâche 1)</span></h3><div class="editor-meta"><span class="autosave-label" id="autosaveLabel"></span><span class="word-counter" id="wordCounter">0 mots</span></div></div><textarea id="editor" class="editor-area" placeholder="Rédigez votre réponse ici… (chaque tâche garde son propre texte)" oninput="onEditorInput()"></textarea><div class="editor-footer"><button class="btn btn-ghost btn-sm" onclick="runAnalysis()">🔍 Analyser</button><button class="btn btn-sm" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;border:none;box-shadow:0 2px 8px rgba(139,92,246,.3)" onclick="requestAiFeedback()">🤖 Feedback IA</button><button class="btn btn-ghost btn-sm" onclick="openTemplatesModal()" style="border-color:var(--accent2);color:var(--accent2);font-weight:700">📋 Modèles</button><button class="btn btn-primary btn-sm" onclick="finishProduction()">✅ Terminer la production</button><button class="btn btn-ghost btn-sm" onclick="saveAsTXT()">💾 TXT</button><button class="btn btn-ghost btn-sm" onclick="saveAsDOC()">📄 DOC</button><button class="btn btn-ghost btn-sm" onclick="openPDFModal()">🖨 PDF</button></div><div id="editorFooterDoneMsg" style="display:none;margin-top:8px;padding:8px 12px;background:#dcfce7;color:#15803d;border-radius:9px;font-size:12px;font-weight:700;border:1px solid #86efac"></div><div class="analysis-panel" id="analysisPanel"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:14px">Analyse adaptée à la tâche (sans note)</strong><button style="background:none;border:none;cursor:pointer;color:var(--sub);font-size:16px" onclick="document.getElementById('analysisPanel').classList.remove('open')">✕</button></div><div id="analysisContent"></div></div><div id="aiFeedbackPanel" style="display:none;margin-top:12px;"></div></div></div><div id="view-browse" style="display:none"><div class="section-title">📚 Banque de sujets</div><p class="muted" style="margin-bottom:14px">Ajoutez une combinaison complète <strong>ou une seule tâche</strong>. Pour travailler un seul sujet avec un temps personnalisé : chargez le mois, choisissez la combinaison et la tâche, puis ▶ Commencer.</p><div class="card bank-form"><div class="editor-header"><h3 class="h3" style="margin:0">Ajouter un sujet</h3><span class="word-counter" id="bankCount">0 sujets</span></div><div class="form-grid"><select id="bankMonth" class="full"></select><input id="bankNum" type="number" min="1" placeholder="Combinaison n° (optionnel)"><input id="bankTitle" placeholder="Titre tâche 3 / thème"><textarea id="bankT1" class="full" placeholder="Tâche 1 : consigne (optionnel)"></textarea><textarea id="bankT2" class="full" placeholder="Tâche 2 : consigne (optionnel)"></textarea><textarea id="bankDoc1" class="full" placeholder="Tâche 3 — Document 1 (optionnel)"></textarea><textarea id="bankDoc2" class="full" placeholder="Tâche 3 — Document 2 (optionnel)"></textarea></div><div class="bank-tools"><button class="btn btn-primary" onclick="saveCustomSujet()">➕ Ajouter à la banque</button><button class="btn btn-ghost" style="background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none" onclick="practiceCustomDirect()">🚀 Pratiquer directement</button><button class="btn btn-ghost" onclick="exportBank()">⬇ Banque TXT</button><button class="btn btn-ghost" onclick="importBankTXT()">⬆ Import TXT</button></div><div class="gpt-prompt-block"><div class="gpt-prompt-header"><div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">SUJETS TCF</span></div><span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → remplissez les champs ci-dessus</span></div><div id="sujetsPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère 5 combinaisons de sujets TCF Expression Écrite niveau B2 en français.
+Chaque combinaison doit contenir 3 tâches.
+Pour chaque combinaison, respecte CE FORMAT EXACT :
+### COMBINAISON N°[numéro]
+TITRE : [thème général de la combinaison]
+TÂCHE 1 (60-120 mots) :
+[Consigne complète — lettre formelle, courriel, message à un proche, témoignage, invitation…]
+TÂCHE 2 (120-150 mots) :
+[Consigne complète — courriel professionnel, article de blog, message sur réseau social, description d'expérience…]
+TÂCHE 3 (180 mots max.) — titre :
+DOC 1 : [paragraphe de 3-4 phrases présentant une position sur le sujet]
+DOC 2 : [paragraphe de 3-4 phrases présentant la position opposée ou des nuances]
+---
+Génère 5 combinaisons variées avec des thèmes différents (environnement, travail, société, éducation, santé…). Respecte scrupuleusement les limites de mots et le format exact.</div><button class="gpt-copy-btn" onclick="copyGptPrompt(this,'sujetsPromptBox')">📋 Copier le prompt</button></div></div><div class="month-grid" id="monthGrid"></div></div><div id="view-productions" style="display:none"><div class="section-title">📄 Mes productions</div><div class="card"><input class="ipt" id="prodSearch" placeholder="🔎 Rechercher (mot, thème, connecteur…)" oninput="buildProductions()"></div><div class="card"><h3 class="h3">⚖️ Équilibre des thèmes</h3><div id="topicBalance"></div></div><div class="card"><h3 class="h3">😬🙂😎 Confiance</h3><div id="confTable"></div></div><div id="prodList"></div></div><div id="view-connectors" style="display:none"><div class="section-title">🔗 100 connecteurs B1/B2</div><div style="margin-bottom:10px"><button class="btn btn-ghost btn-sm" style="width:auto" onclick="openImportModal('connectors')">📥 Importer connecteurs personnels TXT</button></div><div class="view-tabs"><div class="view-tab active" onclick="switchConnTab('review')" id="ctab-b-review">🧠 Révision espacée</div><div class="view-tab" onclick="switchConnTab('list')" id="ctab-b-list">📋 Liste complète</div><div class="view-tab" onclick="switchConnTab('import')" id="ctab-b-import">⬆ Importer</div></div><div class="tab-pane active" id="ctab-review"><div class="card" id="srsArea"></div></div><div class="tab-pane" id="ctab-list"><div class="card" id="connListArea"></div></div><div class="tab-pane" id="ctab-import"><div class="card"><h3 class="h3">⬆ Importer des connecteurs personnalisés</h3><p class="muted" style="margin-bottom:12px">Importez un fichier TXT. Format : une entrée par ligne — <b>connecteur | guide d'utilisation</b>. Exemple : <i>néanmoins | introduit une restriction</i></p><div class="import-zone" onclick="document.getElementById('connImportFile').click()"><div class="iz-icon">🔗</div><div class="iz-text">Cliquez pour importer un fichier TXT de connecteurs</div><div class="iz-hint">Format : connecteur | explication (une par ligne)</div></div><input type="file" id="connImportFile" accept=".txt" style="display:none" onchange="importConnectorsTXT(this)"><div id="connImportResult" class="import-result"></div><div class="btn-row" style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="exportCustomConnsTXT()">⬇ Exporter TXT</button><button class="btn btn-ghost btn-sm" onclick="clearCustomConns()" style="color:var(--danger)">🗑 Effacer importés</button></div><div class="gpt-prompt-block"><div class="gpt-prompt-header"><div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">CONNECTEURS</span></div><span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span></div><div id="connPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère une liste de connecteurs logiques B1/B2 pour le TCF Expression Écrite en français.
+Format STRICT — une entrée par ligne :
+connecteur — explication courte de son usage
+Catégories à couvrir (indique chaque catégorie entre [crochets] sur sa propre ligne) :
+[Addition], [Opposition/Concession], [Cause], [Conséquence], [But], [Temps/Chronologie], [Illustration/Exemple], [Conclusion]
+Génère 5 connecteurs par catégorie (40 entrées au total).
+Ne mets aucun titre général, aucun numéro. Seules les catégories entre [] sont autorisées comme titres de section.
+Exemple :
+[Addition]
+de plus — ajoute une information supplémentaire
+en outre — équivalent soutenu de "de plus"
+[Opposition/Concession]
+cependant — introduit une restriction ou nuance
+néanmoins — équivalent formel de "cependant"</div><button class="gpt-copy-btn" onclick="copyGptPrompt(this,'connPromptBox')">📋 Copier le prompt</button></div></div><div id="customConnList" style="margin-top:4px"></div></div></div><div id="view-vocab" style="display:none"><div class="section-title">📖 Vocabulaire personnel</div><div class="view-tabs"><div class="view-tab active" onclick="switchVocabTab('list')" id="vtab-b-list">📋 Liste</div><div class="view-tab" onclick="switchVocabTab('flash')" id="vtab-b-flash">🃏 Flashcards</div><div class="view-tab" onclick="switchVocabTab('sent')" id="vtab-b-sent">✍️ Phrases</div><div class="view-tab" onclick="switchVocabTab('b2')" id="vtab-b-b2">🧠 Vocab B2</div><div class="view-tab" onclick="switchVocabTab('exercise')" id="vtab-b-exercise">🎯 Exercices</div><div class="view-tab" onclick="switchVocabTab('presets')" id="vtab-b-presets">📋 Réponses types</div></div><div class="tab-pane active" id="vtab-list"><div class="card"><div class="form-grid"><input id="vocabWord" placeholder="Mot / expression" onkeydown="if(event.key==='Enter')addVocabWord()"><input id="vocabDef" placeholder="Définition / exemple" onkeydown="if(event.key==='Enter')addVocabWord()"><select id="vocabTheme" class="full"></select></div><div class="btn-row" style="margin-top:10px"><button class="btn btn-primary btn-sm" onclick="addVocabWord()">➕ Ajouter</button><button class="btn btn-ghost btn-sm" onclick="exportVocabTXT()">⬇ Exporter TXT</button><button class="btn btn-ghost btn-sm" onclick="document.getElementById('vocabImportFile').click()">⬆ Importer TXT</button></div><input type="file" id="vocabImportFile" accept=".txt" style="display:none" onchange="importVocabTXT(this)"><div id="vocabImportResult" class="import-result"></div><div style="margin-top:12px;background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:12px 14px"><div style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">📋 Format TXT attendu</div><div style="font-size:12px;color:var(--sub);line-height:1.7;font-family:monospace">
+ mot — définition [Thème]<br>
+ expression — exemple d'usage [Thème]<br><span style="opacity:.6"># Une entrée par ligne. Thème entre [crochets] optionnel.</span></div><div class="gpt-prompt-block"><div class="gpt-prompt-header"><div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">VOCABULAIRE</span></div><span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span></div><div id="vocabPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère une liste de vocabulaire B1/B2 pour le TCF Expression Écrite en français.
+Format STRICT — une entrée par ligne :
+mot ou expression — définition courte ou exemple de phrase [Thème]
+Thèmes à couvrir : Environnement, Travail, Éducation, Santé, Société, Technologies, Culture, Économie.
+Génère 10 mots par thème (80 entrées au total).
+Ne mets aucun titre, aucun numéro, aucune ligne vide entre les entrées.
+Exemple :
+se réchauffer — augmenter en température (climat) [Environnement]
+un stage — période de formation en entreprise [Travail]</div><button class="gpt-copy-btn" onclick="copyGptPrompt(this,'vocabPromptBox')">📋 Copier le prompt</button></div></div><div id="vocabList" style="margin-top:10px"></div><div id="vocabThemeBalance" style="margin-top:14px"></div></div></div><div class="tab-pane" id="vtab-flash"><div class="card" id="flashArea"></div></div><div class="tab-pane" id="vtab-sent"><div class="card"><p class="muted" style="margin-bottom:8px">Cliquez un mot puis écrivez une phrase avec :</p><div id="sentenceChips" style="margin-bottom:10px"></div><textarea id="sentenceArea" class="editor-area" style="min-height:80px" placeholder="Écrivez une phrase…"></textarea><div class="btn-row" style="margin-top:8px"><button class="btn btn-primary btn-sm" onclick="saveSentencePractice()">💾 Sauvegarder la phrase</button></div><div id="savedSentences" style="margin-top:10px"></div></div></div><div class="tab-pane" id="vtab-b2"><div class="card" id="srsVArea"></div></div><div class="tab-pane" id="vtab-exercise"><div class="card"><div class="ex-mode-tabs"><button class="ex-mode-tab active" id="vex-gap-tab" onclick="switchVocabExMode('gap')">📝 Lacunes à remplir</button><button class="ex-mode-tab" id="vex-quiz-tab" onclick="switchVocabExMode('quiz')">🧠 Quiz définition</button></div><div id="vocabExArea"></div></div></div><div class="tab-pane" id="vtab-presets"><div class="card"><h3 class="h3">📋 Réponses types (modèles à étudier)</h3><p class="muted" style="margin-bottom:12px">Importez un fichier TXT de réponses modèles. Format : chaque réponse commence par une ligne <b>TÂCHE 1</b> / <b>TÂCHE 2</b> / <b>TÂCHE 3</b> ou un titre libre, suivie du texte. Ou utilisez <b>---</b> pour séparer les réponses.</p><div class="import-zone" onclick="document.getElementById('presetImportFile').click()"><div class="iz-icon">📂</div><div class="iz-text">Cliquez pour importer un fichier TXT de réponses types</div><div class="iz-hint">Format : titres TÂCHE 1 / TÂCHE 2 / TÂCHE 3 ou séparés par ---</div></div><input type="file" id="presetImportFile" accept=".txt" style="display:none" onchange="importPresetAnswers(this)"><div id="presetImportResult" class="import-result"></div><div class="btn-row" style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="exportPresetsTXT()">⬇ Exporter TXT</button><button class="btn btn-ghost btn-sm" onclick="clearPresets()" style="color:var(--danger)">🗑 Effacer tout</button></div></div><div id="presetsList"></div></div></div><div id="view-errors" style="display:none"><div class="section-title">♻️ Erreurs recyclées</div><div class="card"><p class="muted" style="margin-bottom:10px">Ajoutées manuellement OU automatiquement après analyse. Pratiquez le quiz pour les mémoriser !</p><div class="form-grid"><input id="errWrong" placeholder="❌ Erreur (ex : apprendre français)"><input id="errRight" placeholder="✅ Correction (ex : apprendre le français)"></div><div class="btn-row" style="margin-top:10px"><button class="btn btn-primary btn-sm" onclick="addError()">➕ Ajouter</button><button class="btn btn-ghost btn-sm" onclick="document.getElementById('errImportFile').click()">⬆ Importer TXT</button><button class="btn btn-ghost btn-sm" onclick="exportErrorsTXT()">⬇ Exporter TXT</button></div><input type="file" id="errImportFile" accept=".txt" style="display:none" onchange="importErrorsTXT(this)"><div id="errImportResult" class="import-result"></div><div class="gpt-prompt-block"><div class="gpt-prompt-header"><div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">ERREURS RECYCLÉES</span></div><span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span></div><div id="errorsPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère une liste d'erreurs courantes en français B1/B2 pour un apprenant du TCF Expression Écrite, avec leur correction.
+Format STRICT — une entrée par ligne :
+erreur — correction correcte
+Couvre ces catégories : accord du participe passé, prépositions, articles définis/indéfinis, temps des verbes (imparfait/passé composé/subjonctif), confusion de mots, constructions incorrectes, gallicismes courants.
+Génère 5 erreurs par catégorie (35 entrées au total).
+Ne mets aucun titre, aucun numéro, aucune ligne vide entre les entrées.
+Exemple :
+apprendre le français — apprendre le français ✓ (déjà correct, pas de correction)
+j'ai été fatigué hier soir — j'étais fatigué hier soir
+il faut que tu viens — il faut que tu viennes
+très beaucoup — beaucoup / énormément</div><button class="gpt-copy-btn" onclick="copyGptPrompt(this,'errorsPromptBox')">📋 Copier le prompt</button></div></div><div class="err-tabs"><button class="err-tab active" id="etab-list" onclick="switchErrTab('list')">📋 Liste des erreurs</button><button class="err-tab" id="etab-quiz" onclick="switchErrTab('quiz')">🎯 Quiz de correction</button></div><div class="card" id="errListPane"><div id="errorsList"></div></div><div class="card" id="errQuizPane" style="display:none"><div id="errQuizArea"></div></div></div><div id="view-reading" style="display:none"><div class="section-title">📰 Lecture &amp; Écoute TCF — Compréhension</div><div class="card"><p class="muted" style="margin-bottom:12px">Importez un texte de lecture ou de transcription d'écoute TCF avec ses questions/réponses. Format TXT : le texte en haut, puis les Q&amp;R séparées par <b>Q:</b> et <b>R:</b>. Ou utilisez <b>---</b> pour séparer plusieurs exercices.</p><div class="import-zone" onclick="document.getElementById('readImportFile').click()"><div class="iz-icon">📰</div><div class="iz-text">Cliquez pour importer un fichier TXT de lecture/écoute TCF</div><div class="iz-hint">Format : texte, puis Q: question / R: réponse — ou sections séparées par ---</div></div><input type="file" id="readImportFile" accept=".txt" style="display:none" onchange="importReadingTXT(this)"><div id="readImportResult" class="import-result"></div><div class="btn-row" style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="exportReadingTXT()">⬇ Exporter TXT</button><button class="btn btn-ghost btn-sm" onclick="clearReadingDocs()" style="color:var(--danger)">🗑 Effacer tout</button></div><div class="gpt-prompt-block"><div class="gpt-prompt-header"><div class="gpt-prompt-title">💬 Prompt ChatGPT <span class="gpt-prompt-label">LECTURE / ÉCOUTE</span></div><span style="font-size:11px;color:var(--sub)">Copiez → collez dans ChatGPT → importez le résultat ⬆</span></div><div id="readingPromptBox" class="gpt-prompt-text" title="Cliquez pour tout sélectionner">Génère 3 exercices de compréhension écrite TCF niveau B1/B2 en français.
+Chaque exercice doit suivre CE FORMAT EXACT :
+### [TITRE DU TEXTE] [LECTURE]
+TEXTE:
+[Texte de 150-200 mots sur un sujet de société (environnement, travail, santé, éducation, technologies…). Style journalistique, registre neutre à soutenu.]
+QUESTIONS:
+Q1: [Question de compréhension globale]
+A) [Option A] B) [Option B] C) [Option C] D) [Option D]
+RÉPONSE: [Lettre correcte]
+Q2: [Question sur un détail précis du texte]
+A) [Option A] B) [Option B] C) [Option C] D) [Option D]
+RÉPONSE: [Lettre correcte]
+Q3: [Question d'inférence ou sur le ton/intention de l'auteur]
+A) [Option A] B) [Option B] C) [Option C] D) [Option D]
+RÉPONSE: [Lettre correcte]
+---
+Génère 3 exercices complets avec des thèmes variés. Respecte scrupuleusement le format (### TITRE [LECTURE], TEXTE:, QUESTIONS:, Qn:, A) B) C) D), RÉPONSE:).</div><button class="gpt-copy-btn" onclick="copyGptPrompt(this,'readingPromptBox')">📋 Copier le prompt</button></div></div><div id="readingDocsPanel" style="display:none"><div class="comp-tabs" id="readingDocTabs"></div><div id="readingActiveDoc"></div></div><div id="readingEmptyState" class="card"><div class="empty-state">📂 Importez un fichier TXT pour commencer à pratiquer la compréhension.</div></div></div><div id="view-listening" style="display:none"><iframe id="listeningFrame"
+ src="listening.html"
+ style="width:100%;height:calc(100vh - 60px);border:none;border-radius:16px;"
+ sandbox="allow-scripts allow-same-origin"
+ ></iframe></div><div id="view-reading_mock" style="display:none"><iframe id="readingMockFrame"
+ src="reading_mock.html"
+ style="width:100%;height:calc(100vh - 60px);border:none;border-radius:16px;"
+ sandbox="allow-scripts allow-same-origin"
+ ></iframe></div><div id="view-conjugation" style="display:none"><iframe id="conjugationFrame"
+ src="conjugation.html"
+ style="width:100%;height:calc(100vh - 60px);border:none;border-radius:16px;"
+ sandbox="allow-scripts allow-same-origin allow-storage-access-by-user-activation"
+ ></iframe></div><div id="view-favorites" style="display:none"><div class="section-title">⭐ Favoris</div><div id="favList"></div></div><div id="view-revisit" style="display:none"><div class="section-title">🔄 À réviser</div><div id="revList"></div></div><div id="view-history" style="display:none"><div class="section-title">🕒 Historique</div><div class="backup-banner"><div><div class="bb-text">💾 Sauvegardez votre historique complet</div><div class="bb-sub">Toutes vos productions, vocab, erreurs, connecteurs SRS — en un seul fichier TXT</div></div><button class="backup-btn" onclick="downloadFullBackup()">⬇ Télécharger la sauvegarde</button></div><div id="histList"></div></div><div id="view-stats" style="display:none"><div class="section-title">📊 Statistiques</div><div class="stats-grid"><div class="stat-card"><div class="stat-val" id="statProd">0</div><div class="stat-label">📄 Productions</div></div><div class="stat-card"><div class="stat-val" id="statWords">0</div><div class="stat-label">📝 Mots rédigés</div></div><div class="stat-card"><div class="stat-val" id="statStreak">0</div><div class="stat-label">🔥 Série actuelle</div></div><div class="stat-card"><div class="stat-val" id="statBest">0</div><div class="stat-label">🏆 Meilleure série</div></div><div class="stat-card"><div class="stat-val" id="statVocab">0</div><div class="stat-label">📖 Mots vocab</div></div><div class="stat-card"><div class="stat-val" id="statConn">0</div><div class="stat-label">🔗 Connecteurs maîtrisés</div></div><div class="stat-card"><div class="stat-val" id="statFav">0</div><div class="stat-label">⭐ Favoris</div></div><div class="stat-card"><div class="stat-val" id="statHist">0</div><div class="stat-label">🕒 Sessions</div></div></div></div><div id="view-profile" style="display:none"><div class="section-title">👤 Profil étudiant</div><div class="profile-banner" id="profileBanner" style="display:none"><div class="profile-avatar" id="profileAvatar">?</div><div><div class="pb-name" id="pbName"></div><div class="pb-sub" id="pbSub"></div></div></div><div class="card bank-form"><h3 class="h3">Informations (sauvegardées localement, conservées même PC éteint)</h3><div class="form-grid"><input id="profPrenom" placeholder="Prénom"><input id="profNom" placeholder="Nom"><select id="profObjectif"><option value="B1">Objectif B1</option><option value="B2" selected>Objectif B2</option><option value="C1">Objectif C1</option></select><input id="profDate" type="date"></div><button class="btn btn-primary" style="margin-top:10px" onclick="saveProfile()">💾 Enregistrer le profil</button></div><div class="card"><h3 class="h3">📋 Rapport de progression</h3><div id="reportContent"></div><button class="btn btn-ghost" style="margin-top:10px" onclick="exportReport()">⬇ Exporter rapport TXT</button></div><div class="card" id="apiKeyProfileCard"><h3 class="h3">🤖 Clé API Gemini (Feedback IA Gratuit)</h3><p class="muted" style="margin-bottom:12px">Configurez votre clé API Gemini pour obtenir des évaluations instantanées, des niveaux NCLC et des réécritures C1. <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--accent2);font-weight:700">Obtenir une clé gratuite (Google AI Studio) →</a></p><div style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><input type="password" id="profileApiKey" placeholder="Collez votre clé API Gemini ici…" class="ipt" style="flex:1;font-family:monospace"><button onclick="const el=document.getElementById('profileApiKey');el.type=el.type==='password'?'text':'password'" class="btn btn-ghost btn-sm" style="width:auto">👁</button></div><div class="btn-row"><button class="btn btn-primary btn-sm" onclick="saveProfileApiKey()">💾 Enregistrer la clé</button><button class="btn btn-ghost btn-sm" onclick="testProfileApiKey()">🧪 Tester la connexion</button></div><div id="profileApiKeyResult" style="margin-top:8px;font-size:12px;font-weight:700"></div></div><div class="card"><h3 class="h3">💾 Sauvegarde &amp; restauration</h3><p class="muted" style="margin-bottom:12px">Sauvegardez tout votre historique en un seul fichier TXT (productions, vocabulaire, erreurs, connecteurs, sujets, scores…). Restaurez ce fichier si vous réinitialisez votre navigateur.</p><div class="btn-row"><button class="btn btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706);border:none" onclick="downloadFullBackup()">💾 Télécharger la sauvegarde complète</button><button class="restore-btn" onclick="restoreFromBackup()">📂 Restaurer depuis un fichier</button></div></div></div></div><div class="pdf-modal-overlay" id="pdfModal"><div class="pdf-modal"><h2>📄 Exporter en PDF</h2><p class="muted">Que souhaitez-vous exporter ?</p><div class="pdf-opt" onclick="exportPDF('current')"><span class="pdf-opt-icon">📝</span><div class="pdf-opt-text"><b>Tâche active uniquement</b><span>Exporte votre réponse à la tâche en cours</span></div></div><div class="pdf-opt" onclick="exportPDF('all_combined')"><span class="pdf-opt-icon">📋</span><div class="pdf-opt-text"><b>Toutes les tâches — 1 PDF</b><span>Les 3 tâches regroupées dans un seul document</span></div></div><div class="pdf-opt" onclick="exportPDF('all_separate')"><span class="pdf-opt-icon">🗂</span><div class="pdf-opt-text"><b>Toutes les tâches — PDFs séparés</b><span>Un fichier PDF par tâche (3 fenêtres)</span></div></div><button class="pdf-cancel" onclick="closePDFModal()">Annuler</button></div></div></div><div class="import-modal-overlay" id="importModal"><div class="import-modal"><h2 id="importModalTitle">📥 Importer</h2><p class="muted" id="importModalDesc"></p><div class="import-format-box" id="importFormatBox"></div><div class="import-drop-zone" id="importDropZone" onclick="document.getElementById('importFileInput').click()" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleImportDrop(event)"><div class="drop-icon">📂</div><div class="drop-text">Cliquez ou déposez un fichier .txt ici</div><div class="drop-sub">Format UTF-8 · fichier texte uniquement</div></div><input type="file" id="importFileInput" accept=".txt,.csv" style="display:none" onchange="handleImportFile(this.files[0])"><div class="import-preview" id="importPreview"></div><div class="import-result" id="importResult"></div><div class="btn-row"><button class="btn btn-primary btn-sm" id="importConfirmBtn" style="display:none" onclick="confirmImport()">✅ Importer</button><button class="btn btn-ghost btn-sm" onclick="closeImportModal()">Annuler</button></div></div></div><div class="rdg-modal-overlay" id="rdgModal"><div class="rdg-modal"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px"><h2 id="rdgModalTitle" style="margin:0">📖 Pratique Compréhension</h2><button style="background:none;border:none;cursor:pointer;font-size:18px;color:var(--sub)" onclick="closeRdgModal()">✕</button></div><div id="rdgModalContent"></div></div></div><button class="btn btn-primary focus-toggle" id="focusToggle" onclick="toggleFocusMode()">🎯 Focus</button><div class="focus-toolbar" id="focusToolbar"><div class="focus-toolbar-top"><span class="f-timer" id="focusTimer">60:00</span><span class="f-info" id="focusInfo">—</span><div class="focus-task-tabs" id="focusTaskTabs"></div><span class="f-wc" id="focusWC">0 mots</span><button onclick="toggleFocusMode()">Quitter</button></div><div class="focus-tasks" id="focusTopics"></div></div><button class="accent-toggle-btn" id="accentToggleBtn" onclick="toggleAccentDock()" title="Ouvrir le clavier d'accents" style="display:none">é</button><div class="accent-dock" id="accentDock"><div class="accent-dock-header">🔤 Accents français</div><div class="accent-page-label" id="accentPageLabel">Minuscules (1/5)</div><div class="accent-page" id="accentBar"></div><div class="accent-nav"><button onclick="prevAccentPage()">◀ Précédent</button><div class="accent-nav-info" id="accentPageInfo">1/5</div><button onclick="nextAccentPage()">Suivant ▶</button></div></div><div class="exam-overlay" id="examOverlay"><div class="exam-launch" id="examLaunch"><h2 style="font-size:24px;margin-bottom:8px">🎓 Mode Examen</h2><p class="muted" style="margin-bottom:16px">Combinaison aléatoire, 60 minutes. Vous pouvez naviguer entre les 3 tâches : chaque réponse est mémorisée. Le clavier d'accents reste sur le côté. Quitter exige une double confirmation.</p><button class="btn btn-exam" onclick="startExamDay()">🚀 Démarrer l'examen</button><button class="btn btn-ghost" onclick="closeExamLaunch()">Annuler</button></div><div class="exam-shell" id="examShell" style="display:none"><div class="exam-top"><div><div style="font-size:12px;font-weight:800">🎓 MODE EXAMEN</div><div style="font-size:11px;opacity:.85" id="examComboLabel">—</div></div><div class="exam-timer" id="examTimer">60:00</div><button class="exam-leave" onclick="confirmLeaveExam()">🚪 Quitter</button></div><div class="exam-card"><div class="task-tabs" id="examTaskTabs"></div><div class="task-content" id="examTaskContent"></div></div><div class="exam-card" id="examEditorCard"><div class="editor-header"><h3 class="h3" style="margin:0">Réponse — <span id="examTaskName">Tâche 1</span></h3><span class="word-counter" id="examWC">0 mots</span></div><textarea id="examEditor" class="editor-area" style="min-height:300px" placeholder="Rédigez ici… (chaque tâche est mémorisée)" oninput="onExamInput()"></textarea><div class="btn-row" style="margin-top:10px"><button class="btn btn-primary btn-sm" onclick="endExam()">🏁 Terminer l'examen + analyse</button><button class="btn btn-ghost btn-sm" onclick="saveExamTXT()">💾 Tout en TXT</button><button class="btn btn-ghost btn-sm" onclick="saveExamDOC()">📄 Tout en DOC</button></div></div></div></div><div class="freeze-overlay" id="confOverlay"><div class="freeze-card"><h2 style="font-size:20px">Comment vous sentez-vous ?</h2><p class="muted">Évaluez votre confiance sur cette production.</p><div class="conf-pick"><button onclick="setConfidence('😬')">😬</button><button onclick="setConfidence('🙂')">🙂</button><button onclick="setConfidence('😎')">😎</button></div><button onclick="document.getElementById('confOverlay').style.display='none'" style="margin-top:12px;background:none;border:none;color:var(--sub);cursor:pointer;font-size:12px;font-weight:600">Ignorer</button></div></div><div class="freeze-overlay" id="freezeOverlay"><div class="freeze-card"><h2>⏰ Temps écoulé</h2><p class="muted">Sauvegardez votre travail avant de continuer.</p><div class="freeze-actions"><button class="btn btn-primary" onclick="copyCurrentWork()">📋 Copier</button><button class="btn btn-ghost" onclick="saveAsTXT()">⬇ TXT</button><button class="btn btn-ghost" onclick="saveAsDOC()">⬇ DOC</button><button class="btn btn-ghost" onclick="unfreezeSession()">▶ Continuer</button></div></div></div><script src="sujets.js"></script><script src="app-core.js"></script>
+<script src="app-editor.js"></script>
+<script src="app-analysis.js"></script>
+<script src="app-data.js"></script>
+<script src="app-profile-ui.js"></script><script src="app-ai-feedback.js"></script><script src="app-templates.js"></script></body></html>
