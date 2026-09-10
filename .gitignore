@@ -1,0 +1,10 @@
+﻿# Secrets and API keys
+gemini api.txt
+*.key
+.env
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

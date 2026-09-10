@@ -1,0 +1,196 @@
+[
+  {
+    "id": "t1-inviter",
+    "tache": "1",
+    "intention": "Inviter à un événement",
+    "intentionBadge": "INVITATION",
+    "label": "Inviter quelqu'un",
+    "description": "Proposer un événement, une sortie ou une activité à un proche.",
+    "complet": "Bonjour [prénom],\n\nJ'espère que tu vas bien ! Je t'écris parce que [raison / occasion].\n\nJe voudrais t'inviter à [événement ou activité]. Ce sera le [date ou moment] à [lieu]. Ce serait vraiment [super / génial / sympa] de te voir là-bas !\n\nEst-ce que tu es disponible ce jour-là ? Fais-moi signe si tu as des questions ou si tu as besoin de plus de détails.\n\nJ'espère que tu pourras venir !\nÀ bientôt,\n[Votre prénom]",
+    "leger": "Bonjour [prénom],\n\n[Salutation + contexte / pourquoi vous écrivez]\n\n[Invitation + détails : quoi / quand / où]\n\n[Question sur la disponibilité]\n\n[Clôture chaleureuse]\n[Votre prénom]",
+    "connecteurs": [
+      "D'abord,",
+      "De plus,",
+      "Enfin,",
+      "Par contre,",
+      "En tout cas,"
+    ],
+    "conseil": "Soyez chaleureux et précis sur les détails pratiques (date, lieu, heure). Posez une question pour inviter la réponse."
+  },
+  {
+    "id": "t1-demander",
+    "tache": "1",
+    "intention": "Demander un service",
+    "intentionBadge": "DEMANDE",
+    "label": "Demander de l'aide",
+    "description": "Solliciter un service ou une aide concrète à un ami ou un voisin.",
+    "complet": "Bonjour [prénom],\n\nComment vas-tu ? Je t'écris parce que j'aurais besoin d'un petit service.\n\n[Explication de la situation]. Est-ce que tu pourrais [demande précise] ? Je comprends totalement si tu n'es pas disponible, mais ce serait vraiment [adjectif] si tu pouvais m'aider.\n\nEn échange, je serais ravi(e) de [proposition de retour].\n\nMerci d'avance et à très bientôt !\n[Votre prénom]",
+    "leger": "Bonjour [prénom],\n\n[Salutation + contexte]\n\n[Demande précise + explication de la situation]\n\n[Proposition de réciprocité ou remerciement anticipé]\n\n[Clôture + signature]",
+    "connecteurs": [
+      "En fait,",
+      "C'est pourquoi",
+      "Si possible,",
+      "Par ailleurs,",
+      "Je vous serais reconnaissant(e) de"
+    ],
+    "conseil": "Expliquez clairement votre situation avant de formuler la demande. Proposez quelque chose en retour pour équilibrer."
+  },
+  {
+    "id": "t1-remercier",
+    "tache": "1",
+    "intention": "Remercier quelqu'un",
+    "intentionBadge": "REMERCIEMENT",
+    "label": "Exprimer sa gratitude",
+    "description": "Remercier un proche pour un geste, une aide ou un cadeau.",
+    "complet": "Bonjour [prénom],\n\nJe voulais absolument te remercier pour [ce que la personne a fait]. C'était vraiment [adjectif : gentil / généreux / précieux / touchant].\n\nGrâce à toi, [résultat positif concret]. Ça m'a vraiment [touché / soulagé / aidé / rendu service].\n\nJ'espère pouvoir te le rendre un jour. N'hésite pas à me contacter si tu as besoin de quoi que ce soit de mon côté.\n\nEncore un grand merci et à très bientôt,\n[Votre prénom]",
+    "leger": "Bonjour [prénom],\n\n[Remerciement direct + ce pour quoi vous remerciez]\n\n[Impact concret de ce geste sur vous]\n\n[Offre de réciprocité + clôture]\n[Signature]",
+    "connecteurs": [
+      "Grâce à toi,",
+      "En effet,",
+      "De plus,",
+      "C'est pourquoi",
+      "Je tiens à"
+    ],
+    "conseil": "Soyez spécifique : mentionnez ce que la personne a fait et son impact réel. Cela rend le remerciement sincère et personnel."
+  },
+  {
+    "id": "t1-excuser",
+    "tache": "1",
+    "intention": "S'excuser / expliquer un problème",
+    "intentionBadge": "EXCUSE",
+    "label": "S'excuser ou signaler un problème",
+    "description": "Présenter des excuses sincères et proposer une solution.",
+    "complet": "Bonjour [prénom],\n\nJe t'écris pour te parler d'un problème qui vient de se produire. Malheureusement, [description du problème / situation].\n\nJe suis vraiment désolé(e) pour [conséquence pour la personne]. Ce n'était absolument pas mon intention.\n\nPour arranger les choses, je te propose de [solution concrète]. Est-ce que ça te convient ?\n\nJ'espère que tu comprendras. À bientôt,\n[Votre prénom]",
+    "leger": "Bonjour [prénom],\n\n[Description du problème / situation]\n\n[Expression des excuses + impact pour l'autre]\n\n[Solution proposée + question]\n\n[Clôture ouverte + signature]",
+    "connecteurs": [
+      "Malheureusement,",
+      "C'est pourquoi",
+      "Cependant,",
+      "Pour cette raison,",
+      "Malgré tout,"
+    ],
+    "conseil": "Ne vous justifiez pas trop longtemps. Allez rapidement à la solution proposée. L'authenticité prime sur la longueur."
+  },
+  {
+    "id": "t1-annuler",
+    "tache": "1",
+    "intention": "Annuler ou reporter un rendez-vous",
+    "intentionBadge": "ANNULATION",
+    "label": "Annuler / reporter",
+    "description": "Prévenir un proche d'un changement de plans et proposer une alternative.",
+    "complet": "Bonjour [prénom],\n\nJe t'écris parce que, malheureusement, je dois annuler / reporter notre [rendez-vous / réunion / sortie] prévu(e) le [date].\n\nLa raison est que [explication brève et honnête]. Je suis vraiment désolé(e) pour ce changement de dernière minute.\n\nEst-ce que tu serais disponible le [nouvelle date] ou le [autre date] ? Je reste totalement flexible.\n\nEncore toutes mes excuses. J'espère qu'on pourra se retrouver bientôt !\n[Votre prénom]",
+    "leger": "Bonjour [prénom],\n\n[Annonce de l'annulation + événement concerné]\n\n[Raison brève + excuses]\n\n[Proposition d'une alternative / nouvelle date]\n\n[Clôture + signature]",
+    "connecteurs": [
+      "Malheureusement,",
+      "C'est pourquoi",
+      "Cependant,",
+      "En revanche,",
+      "D'un autre côté,"
+    ],
+    "conseil": "Soyez direct dès la première phrase. Proposez toujours une alternative pour montrer votre bonne volonté."
+  },
+  {
+    "id": "t2-article",
+    "tache": "2",
+    "intention": "Article de journal ou de blog",
+    "intentionBadge": "ARTICLE",
+    "label": "Article de presse / blog",
+    "description": "Rédiger un article informatif et bien structuré pour un journal ou blog.",
+    "complet": "[Titre accrocheur]\n\nDe nos jours, [phrase d'introduction sur le sujet et son actualité]. C'est une question qui touche de nombreux Canadiens, car [contextualisation].\n\nD'abord, [premier argument ou fait principal]. En effet, [développement + exemple ou chiffre concret].\n\nEnsuite, [deuxième aspect ou argument]. Par exemple, [illustration concrète ou témoignage].\n\nCependant, [nuance, limite ou point de vue opposé si pertinent].\n\nEn conclusion, [résumé de la position principale]. Il est important que [recommandation ou réflexion finale pour le lecteur].",
+    "leger": "[Titre]\n\n[Introduction : contexte + pourquoi c'est important aujourd'hui]\n\n[Argument 1 + exemple]\n\n[Argument 2 + exemple]\n\n[Conclusion + message fort ou recommandation]",
+    "connecteurs": [
+      "D'abord,",
+      "Ensuite,",
+      "De plus,",
+      "Cependant,",
+      "En conclusion,",
+      "En effet,",
+      "Par exemple,",
+      "Ainsi,"
+    ],
+    "conseil": "Un bon article commence par une question ou un constat fort. Utilisez des faits ou exemples concrets. Concluez avec une invitation à réfléchir."
+  },
+  {
+    "id": "t2-courriel",
+    "tache": "2",
+    "intention": "Courriel ou lettre formelle",
+    "intentionBadge": "COURRIEL FORMEL",
+    "label": "Courriel ou lettre officielle",
+    "description": "Rédiger un message formel à une organisation, une entreprise ou une institution.",
+    "complet": "Objet : [Sujet clair et précis]\n\nMadame, Monsieur,\n\nJe me permets de vous contacter au sujet de [contexte / situation précise]. Je suis [votre rôle] et je souhaiterais [objectif principal du message].\n\nEn effet, [explication détaillée du problème ou de la demande]. Cette situation [impact concret].\n\nJe vous serais reconnaissant(e) de bien vouloir [action souhaitée] dans les meilleurs délais.\n\nDans l'attente de votre retour,\n\nCordialement,\n[Prénom Nom]",
+    "leger": "Objet : [...]\n\nMadame, Monsieur,\n\n[Présentation + raison du contact]\n\n[Détails de la demande / situation]\n\n[Action souhaitée + délai]\n\n[Formule de politesse]\n[Signature]",
+    "connecteurs": [
+      "En effet,",
+      "C'est pourquoi",
+      "Par conséquent,",
+      "Je vous prie de",
+      "Dans l'attente de",
+      "Je reste à votre disposition"
+    ],
+    "conseil": "Commencez toujours par l'objet et la formule d'appel. Soyez précis et professionnel. Évitez les tournures trop familières."
+  },
+  {
+    "id": "t2-avis",
+    "tache": "2",
+    "intention": "Avis ou témoignage publié",
+    "intentionBadge": "TÉMOIGNAGE",
+    "label": "Avis / témoignage en ligne",
+    "description": "Partager une expérience personnelle sur une plateforme ou un site communautaire.",
+    "complet": "[Titre : résumé de votre expérience en une phrase]\n\nJ'ai récemment [vécu / visité / essayé] [sujet de l'avis] et je voulais partager mon expérience.\n\nCe qui m'a le plus [impressionné / déçu / surpris], c'est [point principal]. En effet, [explication détaillée + exemple concret].\n\nD'un autre côté, [nuance ou second point]. Personnellement, je pense que [votre opinion claire].\n\nEn résumé, je [recommanderais / ne recommanderais pas] [sujet] parce que [raison principale].",
+    "leger": "[Titre résumant l'expérience]\n\n[Contexte de votre expérience]\n\n[Point fort ou faible principal + exemple]\n\n[Nuance ou second point]\n\n[Recommandation finale + conseil]",
+    "connecteurs": [
+      "En effet,",
+      "D'un autre côté,",
+      "Par exemple,",
+      "Personnellement,",
+      "En résumé,",
+      "Je dirais que"
+    ],
+    "conseil": "Un avis efficace est spécifique et équilibré. Évitez les généralités — donnez des détails qui prouvent que vous avez vécu l'expérience."
+  },
+  {
+    "id": "t3-synthese-opinion",
+    "tache": "3",
+    "intention": "Synthèse + opinion personnelle",
+    "intentionBadge": "ESSAI",
+    "label": "Synthèse et prise de position",
+    "description": "Résumer les documents et défendre clairement votre point de vue.",
+    "complet": "[Reformulation de la question centrale sous forme d'affirmation]\n\nPartie 1 – Ce que les documents présentent\nLes documents abordent la question de [thème principal]. Le premier document met en avant [idée principale du doc 1]. Le deuxième souligne, quant à lui, [idée principale du doc 2]. Ces deux sources montrent que [lien commun ou tension entre les deux].\n\nPartie 2 – Mon opinion\nÀ mon avis, [votre position clairement affirmée].\n\nTout d'abord, [premier argument personnel] + [exemple ou explication concrète].\n\nEnsuite, [deuxième argument] + [développement / illustration].\n\nEn conclusion, [réaffirmation de votre position]. Il me semble essentiel que [recommandation ou ouverture sur l'avenir].",
+    "leger": "[Reformulation du sujet]\n\nPartie 1 : Ce que les documents disent\n[Synthèse des 2 documents — idées principales + lien entre eux]\n\nPartie 2 : Mon opinion\n[Position claire] + [Argument 1 + exemple] + [Argument 2 + exemple]\n\n[Conclusion — réaffirmation + recommandation]",
+    "connecteurs": [
+      "Tout d'abord,",
+      "Ensuite,",
+      "De plus,",
+      "En revanche,",
+      "Cependant,",
+      "En conclusion,",
+      "À mon avis,",
+      "Il me semble que",
+      "Par conséquent,",
+      "En effet,"
+    ],
+    "conseil": "Séparez clairement la synthèse (ce que disent les documents) de votre opinion (ce que vous pensez). Ne mélangez pas les deux parties."
+  },
+  {
+    "id": "t3-pour-contre",
+    "tache": "3",
+    "intention": "Argumentation pour ou contre",
+    "intentionBadge": "DÉBAT",
+    "label": "Défendre une position : pour ou contre",
+    "description": "Prendre position sur une controverse et argumenter de façon structurée.",
+    "complet": "[Reformulation du sujet]\n\nPartie 1 – Ce que disent les documents\nLes documents présentent différentes perspectives sur [thème]. D'un côté, [argument/fait du premier doc]. De l'autre, [argument/fait du deuxième doc].\n\nPartie 2 – Ma position\nPersonnellement, je suis [pour / contre / mitigé(e)] sur cette question.\n\nPremièrement, [argument fort + exemple ou statistique].\n\nDeuxièmement, [argument complémentaire + illustration].\n\nBien sûr, certains pourraient dire que [contre-argument]. Cependant, [votre réfutation].\n\nPour conclure, je maintiens que [réaffirmation de votre position].",
+    "leger": "[Reformulation du sujet]\n\nPartie 1 : Les documents (résumé des 2 points de vue)\n[Idée doc 1] / [Idée doc 2]\n\nPartie 2 : Ma position\n[Pour/contre + Argument 1] + [Argument 2] + [Contre-argument + réfutation]\n\n[Conclusion ferme]",
+    "connecteurs": [
+      "Premièrement,",
+      "Deuxièmement,",
+      "De surcroît,",
+      "Bien sûr,",
+      "Cependant,",
+      "Néanmoins,",
+      "Pour conclure,",
+      "En définitive,",
+      "Il convient de noter que"
+    ],
+    "conseil": "Adoptez une position claire dès le début. Anticipez les contre-arguments et réfutez-les — cela montre la maîtrise du sujet."
+  }
+]
