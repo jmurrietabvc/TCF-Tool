@@ -54,6 +54,29 @@
       reportSource: 'Fil communautaire Reddit TCF Canada ; candidat ayant passé l’examen',
       reportType: 'firsthand',
       createdAt: '2026-09-09T00:00:00.000Z'
+    },
+    {
+      id: 'tcf-ca-ee-2026-09-12-gb-centre',
+      month: 9,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Sortie entre amis, habitudes alimentaires et sieste au travail',
+      tache1Title: 'Lettre : projet de sortie entre amis le week-end',
+      tache1Prompt: 'Vous prévoyez de sortir avec vos amis le week-end. Écrivez-leur une lettre pour décrire le programme prévu.',
+      tache2Title: 'Changer ses habitudes alimentaires',
+      tache2Prompt: 'Rédigez un texte sur le changement des habitudes alimentaires.',
+      tache3Title: 'La sieste au travail : pour ou contre ?',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat sur la sieste au travail, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'septembre-2026-12-gb-centre',
+      reportDate: '12 septembre 2026',
+      reportLocation: 'GB Centre (ville non précisée)',
+      reportConfidence: 'Élevée — récit de première main',
+      reportSource: 'Fil communautaire Reddit TCF Canada ; candidat ayant passé l’examen',
+      reportType: 'firsthand',
+      createdAt: '2026-09-14T00:00:00.000Z'
     }
   ];
 
