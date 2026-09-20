@@ -10,6 +10,29 @@
 (function () {
   var septemberReports = [
     {
+      id: 'tcf-ca-ee-2026-09-06-gblc-north-york',
+      month: 9,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Sport entre amis, changement alimentaire et sieste au travail',
+      tache1Title: 'Planifier une activité sportive avec un ami le week-end',
+      tache1Prompt: 'Vous prévoyez de faire du sport avec un ami pendant le week-end. Écrivez-lui pour présenter les activités, la date et l’heure.',
+      tache2Title: 'Un changement important dans vos habitudes alimentaires',
+      tache2Prompt: 'Rédigez un texte pour présenter un changement important que vous avez fait dans vos habitudes alimentaires et son effet sur vous.',
+      tache3Title: 'Les pauses-sieste au travail : pour ou contre ?',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat sur les pauses-sieste au travail, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'septembre-2026-06-gblc-north-york',
+      reportDate: '6 septembre 2026',
+      reportLocation: 'GB Language Centre, North York',
+      reportConfidence: 'Élevée — récit de première main',
+      reportSource: 'Commentaire direct d’un candidat dans le fil communautaire Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-09-20T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-09-07-concordia-montreal',
       month: 9,
       year: 2026,
