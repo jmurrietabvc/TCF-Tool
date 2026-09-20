@@ -77,6 +77,29 @@
       reportSource: 'Fil communautaire Reddit TCF Canada ; candidat ayant passé l’examen',
       reportType: 'firsthand',
       createdAt: '2026-09-14T00:00:00.000Z'
+    },
+    {
+      id: 'tcf-ca-ee-2026-09-12-gblc-north-york-b',
+      month: 9,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Recherche d’appartement, accueil francophone et vie rurale ou urbaine',
+      tache1Title: 'Demander de l’aide à un ami pour trouver un appartement',
+      tache1Prompt: 'Vous cherchez un appartement. Écrivez à votre ami pour lui demander de l’aide dans votre recherche.',
+      tache2Title: 'Courriel sur une séance d’accueil pour nouveaux étudiants francophones',
+      tache2Prompt: 'Rédigez un courriel destiné aux nouveaux étudiants francophones au sujet de la séance d’accueil et du programme de la journée.',
+      tache3Title: 'Vie à la campagne ou vie en ville',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat entre la vie à la campagne et la vie en ville, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'septembre-2026-12-gblc-north-york-session-b',
+      reportDate: '12 septembre 2026',
+      reportLocation: 'GB Language Centre, North York',
+      reportConfidence: 'Élevée — récit de première main',
+      reportSource: 'Commentaire direct d’un candidat dans le fil communautaire Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-09-19T00:00:00.000Z'
     }
   ];
 
