@@ -10,6 +10,29 @@
 (function () {
   var septemberReports = [
     {
+      id: 'tcf-ca-ee-2026-09-18-alliance-francaise-san-francisco',
+      month: 9,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Visite du pays, émission télévisée et égalité femmes-hommes au travail',
+      tache1Title: 'Recommander des lieux à visiter dans votre pays',
+      tache1Prompt: 'Un ami visite votre pays. Recommandez-lui des lieux à découvrir.',
+      tache2Title: 'Article de blog : assister à une émission de télévision',
+      tache2Prompt: 'Vous avez assisté à une émission de télévision. Rédigez un article de blog pour raconter votre expérience, présenter l’émission, les personnes rencontrées et vos activités.',
+      tache3Title: 'Inégalités femmes-hommes au travail et quotas',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat sur les inégalités entre femmes et hommes sur le marché du travail et sur les quotas d’embauche, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'septembre-2026-18-alliance-francaise-san-francisco',
+      reportDate: '18 septembre 2026',
+      reportLocation: 'Alliance Française San Francisco',
+      reportConfidence: 'Élevée — récit de première main ; formulation partiellement approximative',
+      reportSource: 'Compte rendu direct d’un candidat sur Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-09-26T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-09-06-gblc-north-york',
       month: 9,
       year: 2026,
