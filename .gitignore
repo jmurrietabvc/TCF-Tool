@@ -9,11 +9,10 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Flight Trainer audio files - 490 MB of MP3s, not tracked in git
-# Copy manually from TCF_Flight_Trainer_B1_B2_C1.zip -> extract audios/ here
-audios/
-
 # Large bundles
 main_bundle.js
 node_modules/
+
+# Temp test audio files
+audios/test_*.mp3
 
