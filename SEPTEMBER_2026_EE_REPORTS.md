@@ -27,6 +27,7 @@ reposts. No cambies los temas históricos para añadir un reporte nuevo.
 | 6 septiembre 2026 | GB Language Centre, North York | `firsthand` | Elevada | Comentario directo del candidato que rindió esa sesión en Reddit TCF Canada |
 | 7 septiembre 2026 | Concordia, Montréal | `firsthand` | Elevada | Hilo comunitario Reddit TCF Canada; relato del candidato |
 | 8 septiembre 2026 | Alliance Française Ottawa | `firsthand` | Elevada | Hilo comunitario Reddit TCF Canada; relato del candidato |
+| 12 septiembre 2026 | Concordia, Montréal | `firsthand` | Elevada | Comentario directo del candidato en Reddit TCF Canada |
 | 12 septiembre 2026 | GB Centre (ciudad no indicada) | `firsthand` | Elevada | Hilo comunitario Reddit TCF Canada; relato del candidato |
 | 12 septiembre 2026 | GB Language Centre, North York (sesión distinta) | `firsthand` | Elevada | Comentario directo de candidato en el hilo comunitario Reddit TCF Canada |
 | 18 septiembre 2026 | Alliance Française San Francisco | `firsthand` | Elevada (formulación parcialmente aproximada) | Relato directo del candidato en Reddit TCF Canada |

@@ -10,6 +10,29 @@
 (function () {
   var septemberReports = [
     {
+      id: 'tcf-ca-ee-2026-09-12-concordia-montreal',
+      month: 9,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Installation en ville, personne admirée et vie seul ou en colocation',
+      tache1Title: 'Guider un ami qui déménage dans votre ville',
+      tache1Prompt: 'Votre ami a décidé de déménager dans votre ville. Écrivez-lui pour le guider sur les transports en commun.',
+      tache2Title: 'Une personne que vous admirez',
+      tache2Prompt: 'Rédigez un texte sur une personne que vous admirez : racontez une expérience ou un événement de sa vie qui vous a inspiré.',
+      tache3Title: 'Vivre seul ou vivre en colocation',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat entre vivre seul et vivre en colocation, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'septembre-2026-12-concordia-montreal',
+      reportDate: '12 septembre 2026',
+      reportLocation: 'Concordia, Montréal',
+      reportConfidence: 'Élevée — récit de première main',
+      reportSource: 'Commentaire direct d’un candidat dans le fil communautaire Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-09-29T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-09-18-alliance-francaise-san-francisco',
       month: 9,
       year: 2026,
