@@ -15,8 +15,8 @@ let customConns=LS('tcf_custom_conns',[]);
 let readingDocs=LS('tcf_reading_docs',[]);
 let activeReadingDoc=0;
 let combos=[],activeCombIdx=0,activeTask=1,activeMonthSlug='',focusMode=false,pendingProduction=null;
-const views=['welcome','studio','browse','productions','connectors','vocab','errors','reading','listening','reading_mock','conjugation','ecrivance','favorites','revisit','history','stats','profile'];
-function showView(v){closeMobileSidebar();views.forEach(x=>{const e=document.getElementById('view-'+x);if(e)e.style.display=(x===v?'':'none');const n=document.getElementById('nav-'+x);if(n)n.classList.toggle('active',x===v);});
+const views=['flight_trainer','welcome','studio','browse','productions','connectors','vocab','errors','reading','listening','reading_mock','conjugation','ecrivance','favorites','revisit','history','stats','profile'];
+function showView(v){if(v==='flight_trainer'){const f=document.getElementById('flightTrainerFrame');if(f&&!f.src)f.src=f.getAttribute('data-src');}closeMobileSidebar();views.forEach(x=>{const e=document.getElementById('view-'+x);if(e)e.style.display=(x===v?'':'none');const n=document.getElementById('nav-'+x);if(n)n.classList.toggle('active',x===v);});
 const dock=document.querySelector('.accent-dock');if(dock){const examActive=document.body.classList.contains('exam-active');const accentViews=['vocab','errors','productions'];dock.style.display=(focusMode||examActive||accentViews.includes(v))?'flex':'none';}
 if(v==='welcome')buildWelcome();
 if(v==='browse')buildMonthGrid();if(v==='productions')buildProductions();
