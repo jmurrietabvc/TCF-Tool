@@ -1138,6 +1138,14 @@
         </div>
 
         <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
+          
+          <button class="tab-btn" style="font-size:0.72rem; padding:0.3rem 0.6rem; background:rgba(59,130,246,0.2); color:#60a5fa; border:1px solid rgba(59,130,246,0.4);" onclick="exportProgress()">
+            ?? Exportar Progreso
+          </button>
+          <button class="tab-btn" style="font-size:0.72rem; padding:0.3rem 0.6rem; background:rgba(168,85,247,0.2); color:#c084fc; border:1px solid rgba(168,85,247,0.4);" onclick="importProgress()">
+            ?? Importar Progreso
+          </button>
+
           <button class="tab-btn" style="font-size:0.72rem; padding:0.3rem 0.6rem;" onclick="resetDiagnosticStats()">
             🔄 Reiniciar Score Diagnóstico a 0%
           </button>
@@ -1834,6 +1842,102 @@
       updateLevelPillsUI();
       updateScoreTrackerUI();
     }
+
+    
+    // --- SYNC FUNCTIONS ---
+    function exportProgress() {
+      const data = {
+        stats: stats,
+        savedUuids: [...savedUuids],
+        knownUuids: [...knownUuids],
+        seenUuids: [...seenUuids]
+      };
+      const jsonStr = JSON.stringify(data);
+      const b64 = btoa(jsonStr);
+      
+      const copyDiv = document.createElement('div');
+      copyDiv.style.position = 'fixed';
+      copyDiv.style.top = '0'; copyDiv.style.left = '0';
+      copyDiv.style.width = '100vw'; copyDiv.style.height = '100vh';
+      copyDiv.style.background = 'rgba(0,0,0,0.9)';
+      copyDiv.style.zIndex = '9999';
+      copyDiv.style.display = 'flex';
+      copyDiv.style.flexDirection = 'column';
+      copyDiv.style.alignItems = 'center';
+      copyDiv.style.justifyContent = 'center';
+      copyDiv.style.padding = '20px';
+      
+      const text = document.createElement('textarea');
+      text.value = b64;
+      text.style.width = '100%';
+      text.style.height = '150px';
+      text.style.marginBottom = '20px';
+      text.style.fontFamily = 'monospace';
+      text.style.fontSize = '12px';
+      text.style.background = '#1a1a2e';
+      text.style.color = '#fff';
+      text.style.border = '1px solid #3b82f6';
+      
+      const btnGroup = document.createElement('div');
+      btnGroup.style.display = 'flex'; btnGroup.style.gap = '10px';
+      
+      const copyBtn = document.createElement('button');
+      copyBtn.textContent = '?? Copiar Cdigo';
+      copyBtn.className = 'btn-action';
+      copyBtn.onclick = () => {
+        text.select();
+        document.execCommand('copy');
+        copyBtn.textContent = '? Copiado!';
+        setTimeout(() => copyBtn.textContent = '?? Copiar Cdigo', 2000);
+      };
+      
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = '? Cerrar';
+      closeBtn.className = 'btn-action';
+      closeBtn.onclick = () => document.body.removeChild(copyDiv);
+      
+      btnGroup.appendChild(copyBtn);
+      btnGroup.appendChild(closeBtn);
+      
+      const title = document.createElement('h3');
+      title.textContent = 'Cdigo de Exportacin';
+      title.style.marginBottom = '10px';
+      
+      const help = document.createElement('p');
+      help.textContent = 'Copia este cdigo, envatelo a tu otro dispositivo y pgalo all en el botn Importar.';
+      help.style.fontSize = '0.85rem'; help.style.marginBottom = '15px'; help.style.textAlign = 'center'; help.style.color = '#9ca3af';
+      
+      copyDiv.appendChild(title);
+      copyDiv.appendChild(help);
+      copyDiv.appendChild(text);
+      copyDiv.appendChild(btnGroup);
+      document.body.appendChild(copyDiv);
+    }
+
+    function importProgress() {
+      const b64 = prompt('Pega aqu tu cdigo de sincronizacin (base64):\n\n? ADVERTENCIA: Esto reemplazar tu progreso local en este dispositivo.');
+      if (!b64 || b64.trim() === '') return;
+      
+      try {
+        const jsonStr = atob(b64.trim());
+        const data = JSON.parse(jsonStr);
+        
+        if (!data.stats || !data.seenUuids) {
+          throw new Error('Formato de datos invlido');
+        }
+        
+        localStorage.setItem('tcf_flight_stats_v2', JSON.stringify(data.stats));
+        localStorage.setItem('tcf_flight_saved_v2', JSON.stringify(data.savedUuids));
+        localStorage.setItem('tcf_flight_known_v2', JSON.stringify(data.knownUuids));
+        localStorage.setItem('tcf_flight_seen_v2', JSON.stringify(data.seenUuids));
+        
+        alert('? Progreso importado con xito! La pgina se recargar.');
+        window.location.reload();
+      } catch (err) {
+        alert('? Error al importar. Asegrate de haber copiado el cdigo completo sin espacios adicionales.\n\n' + err.message);
+      }
+    }
+    // --- END SYNC FUNCTIONS ---
 
     function resetSeenHistory() {
       if (confirm('¿Deseas reiniciar el registro de audios vistos (seen) para volver a hacer una ronda completa de "Nouveaux Seulement"? (Tus audios guardados con estrella y tus errores no se borrarán)')) {
