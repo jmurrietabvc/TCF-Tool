@@ -2029,7 +2029,50 @@
       renderDrillContent();
     }
 
+
+    // --- SESSION PERSISTENCE ---
+    function saveFlightSession() {
+      if (!currentDeck || currentDeck.length === 0) return;
+      const sessionData = {
+        filter: currentLevelFilter,
+        deckUuids: currentDeck.map(q => q.uuid),
+        index: currentIndex
+      };
+      try { localStorage.setItem('tcf_flight_session_v2', JSON.stringify(sessionData)); } catch(e) {}
+    }
+
+    function restoreFlightSession() {
+      const raw = localStorage.getItem('tcf_flight_session_v2');
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          if (data && data.deckUuids && data.deckUuids.length > 0) {
+            currentLevelFilter = data.filter || 'MIX';
+            const restoredDeck = [];
+            data.deckUuids.forEach(uid => {
+              const match = allQuestions.find(q => q.uuid === uid);
+              if (match) restoredDeck.push(match);
+            });
+            if (restoredDeck.length > 0) {
+              currentDeck = restoredDeck;
+              currentIndex = data.index || 0;
+              if (currentIndex >= currentDeck.length) currentIndex = 0;
+              
+              // Update UI Buttons
+              document.querySelectorAll('.btn-level-pill').forEach(b => b.classList.remove('active'));
+              let btnId = 'btn-lvl-' + currentLevelFilter.toLowerCase();
+              if (currentLevelFilter === 'FLIGHT') btnId = 'btn-lvl-flight';
+              const lvlBtn = document.getElementById(btnId);
+              if (lvlBtn) lvlBtn.classList.add('active');
+            }
+          }
+        } catch(e) { console.error('Error restoring flight session', e); }
+      }
+    }
+    // ---------------------------
+
     function init() {
+      restoreFlightSession();
       setupAudioListeners();
       updateAudioBoostUI();
       renderQuestion();
@@ -2222,7 +2265,7 @@
             </div>
           </div>
         `;
-        updateNavButtonsState();
+        updateNavButtonsState(); saveFlightSession();
         return;
       }
 
@@ -2371,7 +2414,7 @@
         </div>
       `;
 
-      updateNavButtonsState();
+      updateNavButtonsState(); saveFlightSession();
     }
 
     function renderDecodeModeHtml(q) {
