@@ -72,7 +72,7 @@ const TCF_FEEDBACK_SCHEMA = {
     },
     corrections: {
       type: 'array',
-      description: 'Prioritized list of corrections (max 8, most important first)',
+      description: 'Prioritized list of corrections. DO NOT include missing accents (max 8, most important first)',
       items: {
         type: 'object',
         properties: {
@@ -183,12 +183,13 @@ function buildEvaluationPrompt(taskNumber, consigne, studentText) {
     '- NCLC 7 (B2) = 10-11/20 : texte bien développé, respect de la consigne, connecteurs variés, argumentation ou récit clair, quelques erreurs grammaticales tolérées.\n' +
     '- NCLC 8 (C1) = 12-13/20 : texte fluide, vocabulaire riche, bonne maîtrise syntaxique.\n' +
     '- NCLC 9-10+ (C1/C2) = 14-20/20 : style remarquable, nuances subtiles, aisance quasi-native.\n\n' +
-    'INSTRUCTIONS PARTICULIÈRES :\n' +
-    '1. Attribue un score de 1 à 5 pour chaque critère avec commentaire explicatif en ESPAGNOL.\n' +
-    '2. Donne une liste de corrections prioritaires (max 6) : concentre-toi sur les vraies erreurs de structure, de sens ou de grammaire impactantes, PAS sur les petits accents manquants ou de simples virgules. Explications en ESPAGNOL.\n' +
-    '3. Réécriture de référence C1 en FRANÇAIS élégant.\n' +
-    '4. Conseil bienveillant et actionnable (next_step) et 2-3 points forts (strengths) en ESPAGNOL.\n' +
-    'IMPORTANT: Toutes les explications d\'erreurs, commentaires et conseils d\'amélioration doivent être rédigés en ESPAGNOL afin d\'aider l\'étudiant hispanophone. La réécriture C1 reste en FRANÇAIS.';
+    'INSTRUCTIONS PARTICULIA^RES :\n' +
+    '1. Attribue un score de 1 A 5 pour chaque critA"re avec commentaire explicatif.\n' +
+    '2. Donne une liste de corrections prioritaires (max 6) : concentre-toi sur les vraies erreurs de structure, de sens ou de grammaire impactantes.\n' +
+    '3. RA^GLE ABSOLUE ET STRICTE : EXCLURE TOTALEMENT LES ERREURS D\'ACCENTS. Ne les mentionne PAS dans les corrections, et NE RETIRE AUCUN POINT (0 point) dans le score global ou grammatical pour l\'absence d\'accents. L\'examen autorise l\'absence d\'accents sur claviers QWERTY.\n' +
+    '4. RAcAccriture de rAcfAcrence C1 en FRANAAIS AclAcgant.\n' +
+    '5. Conseil bienveillant et actionnable (next_step) et 2-3 points forts (strengths).\n' +
+    'IMPORTANT: Toutes les explications d\'erreurs, commentaires et conseils d\'amAclioration doivent Atre rAcdigAcs en ESPAGNOL afin d\'aider l\'Actudiant hispanophone. La rAcAccriture C1 reste en FRANAAIS.';
 }
 
 // ─── Call Gemini API ─────────────────────────────────────────
