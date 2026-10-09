@@ -145,9 +145,9 @@ function buildEvaluationPrompt(taskNumber, consigne, studentText) {
   var wordCount = studentText.trim().split(/\s+/).filter(function(w) { return w; }).length;
 
   var taskDescriptions = {
-    1: 'Tache 1 — Message / Courriel (60 a 120 mots, environ 15 minutes)',
-    2: 'Tache 2 — Recit d\'experience / Compte-rendu (120 a 150 mots, environ 20 minutes)',
-    3: 'Tache 3 — Comparaison d\'opinions et prise de position argumentee (120 a 180 mots, environ 25 minutes)'
+    1: 'Tache 1 - Message / Courriel (60 a 120 mots, environ 15 minutes)',
+    2: 'Tache 2 - Recit d\'experience / Compte-rendu (120 a 150 mots, environ 20 minutes)',
+    3: 'Tache 3 - Comparaison d\'opinions et prise de position argumentee (120 a 180 mots, environ 25 minutes)'
   };
 
   var wordRanges = {
@@ -158,38 +158,39 @@ function buildEvaluationPrompt(taskNumber, consigne, studentText) {
 
   var range = wordRanges[taskNumber] || wordRanges[1];
 
-  return 'Tu es un évaluateur officiel et bienveillant du TCF Canada (Expression Écrite), formé selon les critères réels et le guide d\'évaluation officiel de France Éducation International (FEI).\n\n' +
+  return 'Tu es un évaluateur officiel et TRES BIENVEILLANT du TCF Canada (Expression écrite), formé selon les critères réels de France Éducation International (FEI).\n\n' +
     'PHILOSOPHIE D\'ÉVALUATION DES EXAMINATEURS OFFICIELS DU TCF :\n' +
-    '- Les examinateurs réels évaluent la compétence globale de communication et ce que l\'apprenant RÉUSSIT À TRANSMETTRE, et non pas chaque détail négatif.\n' +
-    '- TOLÉRANCE RÉELLE AUX ACCENTS ET À LA PONCTUATION : Le TCF se passe sur ordinateur avec des claviers variés (QWERTY, etc.). Les oublis d\'accents occasionnels (ex. "deja", "evenement", "a" pour "à"), les coquilles de frappe ou les erreurs légères de ponctuation NE DOIVENT PAS pénaliser le niveau NCLC si le sens est parfaitement compréhensible. Ne retire JAMAIS de points pour de simples accents manquants.\n' +
-    '- Le niveau B2 (NCLC 7) N\'EXIGE PAS la perfection ! Un candidat B2 fait régulièrement des erreurs de genre, d\'accords ou de temps complexes, mais il sait raconter, expliquer, structurer avec des connecteurs et se faire comprendre sans ambiguïté.\n' +
-    '- Si le texte respecte la consigne, a une organisation logique claire et un volume de mots adéquat, le niveau visé de NCLC 7 (B2) est légitime même avec des imperfections.\n\n' +
+    '- Les examinateurs réels évaluent la compétence globale de communication. Si le message passe clairement, le candidat a réussi.\n' +
+    '- VALORISATION DE LA PRISE DE RISQUE : Si le candidat tente d\'utiliser des structures complexes (conditionnel, subjonctif) et que le message est compris, IL FAUT LE RÉCOMPENSER avec un NCLC 7 (10/20) au minimum, même s\'il fait des erreurs basiques (accords, genre, infinitifs). Un candidat B2 a le droit de faire des erreurs de base !\n' +
+    '- Pour la Tâche 1 (courriel court) : Si l\'objectif communicatif est atteint (inviter, demander, informer), donne au minimum un NCLC 7 (10-11/20).\n' +
+    '- TOLÉRANCE RÉELLE AUX ACCENTS ET A LA PONCTUATION : Le TCF se passe sur ordinateur avec des claviers variés (QWERTY). Les oublis d\'accents occasionnels ou les coquilles de frappe NE DOIVENT JAMAIS pénaliser.\n' +
+    '- Le niveau B2 (NCLC 7) N\'EXIGE PAS la perfection ! Il exige juste de savoir se faire comprendre et d\'utiliser quelques connecteurs.\n\n' +
     'CONTEXTE DE L\'ÉVALUATION :\n' +
     '- ' + (taskDescriptions[taskNumber] || taskDescriptions[1]) + '\n' +
-    '- Nombre de mots attendu : ' + range.min + '–' + range.max + ' mots\n' +
+    '- Nombre de mots attendu : ' + range.min + '-' + range.max + ' mots\n' +
     '- Nombre de mots du texte soumis : ' + wordCount + ' mots\n\n' +
     'CONSIGNE / SUJET :\n' +
-    (consigne || '(Pas de consigne fournie — évalue le texte selon le type de tâche)') + '\n\n' +
+    (consigne || '(Pas de consigne fournie - évalue le texte selon le type de tâche)') + '\n\n' +
     'TEXTE DE L\'APPRENANT :\n' +
     studentText + '\n\n' +
     'GRILLE D\'ÉVALUATION OFFICIELLE (4 CRITÈRES FEI) :\n' +
-    '1. Pertinence et adéquation : respect de la consigne, adéquation au type de texte (lettre amicale, réclamation, synthèse), respect du registre (tu vs vous).\n' +
-    '2. Cohérence et cohésion : présence de paragraphes, progression des idées, emploi de connecteurs logiques (d\'abord, ensuite, cependant, en effet, etc.).\n' +
-    '3. Compétence lexicale : vocabulaire adapté au thème, variété des mots. Tolère les approximations tant que le message passe.\n' +
-    '4. Compétence grammaticale : structures de phrases, temps verbaux usuels. Ne pénalise pas les accents manquants comme des fautes graves de grammaire.\n\n' +
-    'BARÈME NCLC RÉALISTE (comme un vrai examinateur) :\n' +
-    '- NCLC 4 (A2) = 4-5/20 : phrases isolées très simples, incompréhension fréquente ou hors-sujet complet.\n' +
-    '- NCLC 5-6 (B1) = 6-9/20 : message compréhensible mais phrases courtes, vocabulaire basique, peu de connecteurs.\n' +
-    '- NCLC 7 (B2) = 10-11/20 : texte bien développé, respect de la consigne, connecteurs variés, argumentation ou récit clair, quelques erreurs grammaticales tolérées.\n' +
-    '- NCLC 8 (C1) = 12-13/20 : texte fluide, vocabulaire riche, bonne maîtrise syntaxique.\n' +
-    '- NCLC 9-10+ (C1/C2) = 14-20/20 : style remarquable, nuances subtiles, aisance quasi-native.\n\n' +
-    'INSTRUCTIONS PARTICULIA^RES :\n' +
-    '1. Attribue un score de 1 A 5 pour chaque critA"re avec commentaire explicatif.\n' +
-    '2. Donne une liste de corrections prioritaires (max 6) : concentre-toi sur les vraies erreurs de structure, de sens ou de grammaire impactantes.\n' +
-    '3. RA^GLE ABSOLUE ET STRICTE : EXCLURE TOTALEMENT LES ERREURS D\'ACCENTS. Ne les mentionne PAS dans les corrections, et NE RETIRE AUCUN POINT (0 point) dans le score global ou grammatical pour l\'absence d\'accents. L\'examen autorise l\'absence d\'accents sur claviers QWERTY.\n' +
-    '4. RAcAccriture de rAcfAcrence C1 en FRANAAIS AclAcgant.\n' +
+    '1. Pertinence et adéquation : respect de la consigne et du registre.\n' +
+    '2. Cohérence et cohésion : présence de paragraphes, connecteurs logiques.\n' +
+    '3. Compétence lexicale : vocabulaire. Tolère les approximations (ex: utiliser un mot espagnol ou anglais francisé).\n' +
+    '4. Compétence grammaticale : Ne pénalise JAMAIS l\'absence d\'accents.\n\n' +
+    'BARÈME NCLC RÉALISTE (EXTRÊMEMENT BIENVEILLANT) :\n' +
+    '- NCLC 4 (A2) = 4-5/20 : incompréhension totale ou hors-sujet complet.\n' +
+    '- NCLC 5-6 (B1) = 6-9/20 : message à peine compréhensible, phrases très courtes sans aucun connecteur.\n' +
+    '- NCLC 7 (B2) = 10-11/20 : texte compréhensible, respect de la consigne, utilisation de quelques connecteurs ou temps complexes (conditionnel), MÊME SI parsemé d\'erreurs de genre, de conjugaison ou d\'orthographe.\n' +
+    '- NCLC 8 (C1) = 12-13/20 : texte fluide, bonne argumentation.\n' +
+    '- NCLC 9-10+ (C1/C2) = 14-20/20 : aisance quasi-native.\n\n' +
+    'INSTRUCTIONS PARTICULIÈRES :\n' +
+    '1. Attribue un score de 1 à 5 pour chaque critère avec commentaire explicatif.\n' +
+    '2. Donne une liste de corrections prioritaires (max 6) : PAS SUR LES ACCENTS. Concentre-toi sur le sens.\n' +
+    '3. RÈGLE ABSOLUE ET STRICTE : EXCLURE TOTALEMENT LES ERREURS D\'ACCENTS. Ne les mentionne PAS dans les corrections, et NE RETIRE AUCUN POINT.\n' +
+    '4. Réécriture de référence C1 en FRANÇAIS élégant.\n' +
     '5. Conseil bienveillant et actionnable (next_step) et 2-3 points forts (strengths).\n' +
-    'IMPORTANT: Toutes les explications d\'erreurs, commentaires et conseils d\'amAclioration doivent Atre rAcdigAcs en ESPAGNOL afin d\'aider l\'Actudiant hispanophone. La rAcAccriture C1 reste en FRANAAIS.';
+    'IMPORTANT: Toutes les explications d\'erreurs, commentaires et conseils d\'amélioration doivent être rédigés en ESPAGNOL. La réécriture C1 reste en FRANÇAIS.';
 }
 
 // ─── Call Gemini API ─────────────────────────────────────────
