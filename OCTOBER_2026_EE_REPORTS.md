@@ -23,3 +23,4 @@ reposts. No cambies los temas históricos para añadir un reporte nuevo.
 | Fecha | Sede | Tipo | Confianza | Fuente |
 | --- | --- | --- | --- | --- |
 | 5 octubre 2026 | Alliance Française Vancouver | `firsthand` | Elevada (formulación abreviada) | [Relato directo del candidato en Reddit TCF Canada](https://www.reddit.com/r/Frenchlearningforpr/comments/1wymwf1/exam_on_october_5/) |
+| 5 octubre 2026 | Alliance Française Vancouver (sesión distinta) | `firsthand` | Elevada (formulación abreviada) | [Comentario directo de otro candidato en el hilo de esa sesión](https://www.reddit.com/r/Frenchlearningforpr/comments/1wymwf1/exam_on_october_5/) |

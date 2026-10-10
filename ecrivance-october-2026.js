@@ -5,6 +5,29 @@
 (function () {
   var octoberReports = [
     {
+      id: 'tcf-ca-ee-2026-10-05-alliance-francaise-vancouver-b',
+      month: 10,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Salle de sport, cours suivi et produits faits maison ou achetés',
+      tache1Title: 'Donner des renseignements sur votre salle de sport',
+      tache1Prompt: 'Votre ami souhaite s’inscrire dans votre salle de sport. Écrivez-lui pour lui donner des renseignements sur cette salle.',
+      tache2Title: 'Article de blog : un cours que vous avez suivi',
+      tache2Prompt: 'Rédigez un article de blog pour raconter un cours que vous avez suivi.',
+      tache3Title: 'Produits faits maison ou achetés en magasin',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat entre les produits faits maison et les produits achetés en magasin, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'octobre-2026-05-alliance-francaise-vancouver-session-b',
+      reportDate: '5 octobre 2026',
+      reportLocation: 'Alliance Française Vancouver',
+      reportConfidence: 'Élevée — récit de première main ; formulation abrégée du candidat',
+      reportSource: 'Commentaire direct d’un candidat dans le fil Reddit de la même séance',
+      reportType: 'firsthand',
+      createdAt: '2026-10-10T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-10-05-alliance-francaise-vancouver',
       month: 10,
       year: 2026,
