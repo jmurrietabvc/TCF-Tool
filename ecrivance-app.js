@@ -66,18 +66,10 @@
   function initThemesAndCadres() {
     
     var themes = window.ECRIVANCE_THEMES || [];
-    // Shuffle array for randomness on reload
+    // Pick a random starter theme on reload, WITHOUT shuffling the global array
+    // so the "Ver tous les thèmes" drawer keeps its chronological order!
     if (themes.length > 0) {
-      for (var i = themes.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = themes[i];
-        themes[i] = themes[j];
-        themes[j] = temp;
-      }
-    }
-
-    if (themes.length > 0) {
-      var starterIndex = 0;
+      var starterIndex = Math.floor(Math.random() * themes.length);
       state.currentThemeIndex = starterIndex;
       state.currentTheme = themes[starterIndex];
     } else {
