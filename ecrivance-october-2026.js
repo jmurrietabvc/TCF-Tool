@@ -5,6 +5,29 @@
 (function () {
   var octoberReports = [
     {
+      id: 'tcf-ca-ee-2026-10-11-gb-centre',
+      month: 10,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Festival de musique, expérience au restaurant et voyage seul ou en groupe',
+      tache1Title: 'Inviter un ami à un festival de musique',
+      tache1Prompt: 'Écrivez à un ami pour l’inviter à un festival de musique organisé dans votre ville et indiquez les détails nécessaires.',
+      tache2Title: 'Article de blog : une expérience au restaurant',
+      tache2Prompt: 'Rédigez un article de blog pour raconter votre expérience dans un restaurant.',
+      tache3Title: 'Voyager seul ou en groupe',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat entre voyager seul et voyager en groupe, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'octobre-2026-11-gb-centre',
+      reportDate: '11 octobre 2026',
+      reportLocation: 'GB Centre (ville non précisée)',
+      reportConfidence: 'Élevée — récit de première main ; ville non précisée',
+      reportSource: 'Commentaire direct d’un candidat dans le fil communautaire Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-10-12T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-10-05-alliance-francaise-vancouver-b',
       month: 10,
       year: 2026,
