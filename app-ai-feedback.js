@@ -6,8 +6,8 @@
 // ─── Configuration ───────────────────────────────────────────
 const AI_CONFIG = {
   API_URL: 'https://generativelanguage.googleapis.com/v1beta/interactions',
-  MODEL: 'gemini-2.5-flash-lite',
-  MODELS: ['gemini-2.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.1-flash-lite'],
+  MODEL: 'gemini-3.5-flash',
+  MODELS: ['gemini-3.5-flash', 'gemini-flash-lite-latest', 'gemini-3.5-flash-lite'],
   MAX_RETRIES: 2,
   DEFAULT_API_KEY: '',
   STORAGE_KEY_API: 'tcf_gemini_api_key',
