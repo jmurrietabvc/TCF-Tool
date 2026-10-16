@@ -1589,6 +1589,38 @@
     let knownUuids = new Set(JSON.parse(localStorage.getItem('tcf_flight_known_v2') || '[]'));
     let seenUuids = new Set(JSON.parse(localStorage.getItem('tcf_flight_seen_v2') || '[]'));
 
+    // Auto-purge any corrected questions from known ('ya me las sé') and error sets so they can be re-trained fresh
+    const PURGE_CORRECTED_UUIDS = [
+      'd81749b6-caa9-4ae4-9714-1f57791dc5da',
+      '1ec2fc0e-83ef-4a80-97b8-4fb5a99ff4c9',
+      '1d85e972-8233-4afc-a064-3ac88d4aa8d8',
+      'ec6ec30f-72c5-46ce-ba6a-88ce9ab6ba4e',
+      '7a5462dc-8e63-4fb5-a33e-bebb2f164065',
+      '6b0ed523-0ddf-40f1-a6bf-054be1558227',
+      'b1478563-b826-4da0-bb55-42bc0a53d008',
+      'f2a0f71a-3b58-4a2d-a08f-b6b598592adc',
+      'f18a51c6-7f79-4eec-8671-36dcfa373c62',
+      '0b7be925-2f89-4cd4-b017-391ae8fb7226'
+    ];
+    let knownModified = false;
+    PURGE_CORRECTED_UUIDS.forEach(u => {
+      if (knownUuids.has(u)) {
+        knownUuids.delete(u);
+        knownModified = true;
+      }
+      if (seenUuids.has(u)) {
+        seenUuids.delete(u);
+      }
+      if (stats && stats.errorUuids && stats.errorUuids[u]) {
+        delete stats.errorUuids[u];
+      }
+    });
+    if (knownModified) {
+      try { localStorage.setItem('tcf_flight_known_v2', JSON.stringify([...knownUuids])); } catch(e){}
+      try { localStorage.setItem('tcf_flight_seen_v2', JSON.stringify([...seenUuids])); } catch(e){}
+      try { localStorage.setItem('tcf_flight_stats_v2', JSON.stringify(stats)); } catch(e){}
+    }
+
     // Podcast Loop state
     let isPodcastMode = false;
     let podcastType = 'blind'; // 'blind' | 'decode'
