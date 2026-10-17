@@ -13,6 +13,8 @@
     currentThemeIndex: 0,
     currentTheme: null,
     drafts: { 1: '', 2: '', 3: '' },
+    weekDrafts: {},
+    weekDay: null,
     wordRanges: {
       1: { min: 60, max: 120, time: 15 },
       2: { min: 120, max: 150, time: 20 },
@@ -90,17 +92,39 @@
     try {
       var saved = localStorage.getItem('ecrivance_drafts');
       if (saved) {
-        state.drafts = JSON.parse(saved);
+        var savedDrafts = JSON.parse(saved);
+        if (savedDrafts && typeof savedDrafts === 'object' && !Array.isArray(savedDrafts)) state.drafts = savedDrafts;
       }
+      var weekSaved = JSON.parse(localStorage.getItem('ecrivance_week_drafts_v1') || '{}');
+      if (weekSaved && typeof weekSaved === 'object' && !Array.isArray(weekSaved)) state.weekDrafts = weekSaved;
     } catch (e) {
       console.warn('Error loading drafts', e);
     }
+    var editor = document.getElementById('notebookEditor');
+    if (editor) editor.value = state.drafts[state.currentTask] || '';
   }
 
   function saveDrafts() {
     try {
       localStorage.setItem('ecrivance_drafts', JSON.stringify(state.drafts));
+      localStorage.setItem('ecrivance_week_drafts_v1', JSON.stringify(state.weekDrafts));
     } catch (e) {}
+  }
+
+  function rememberCurrentDraft() {
+    var editor = document.getElementById('notebookEditor');
+    if (!editor) return;
+    if (state.weekDay) state.weekDrafts[state.weekDay + ':' + state.currentTask] = editor.value;
+    else state.drafts[state.currentTask] = editor.value;
+    saveDrafts();
+  }
+
+  function resetPracticeTimer() {
+    clearInterval(state.timerInterval);
+    state.timerRunning = false;
+    state.timerSeconds = 0;
+    document.getElementById('notebookTimerDisplay').textContent = '00:00';
+    document.getElementById('timerToggleBtn').textContent = '⏱️ Iniciar Minutero';
   }
 
   function checkApiStatus() {
@@ -125,16 +149,15 @@
     document.querySelectorAll('.view-section').forEach(function(sec) {
       sec.classList.toggle('active', sec.id === 'view-' + viewName);
     });
+    var route = viewName === 'practice' && state.weekDay ? 'week/ee/' + state.weekDay + '/' + state.currentTask : viewName;
+    if (window.location.hash !== '#' + route) history.replaceState(null, '', '#' + route);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // ─── Cambio de Tarea (Tâche 1, 2, 3) ────────────────────────
   window.switchTask = function(taskNum) {
     var editor = document.getElementById('notebookEditor');
-    if (editor) {
-      state.drafts[state.currentTask] = editor.value;
-      saveDrafts();
-    }
+    rememberCurrentDraft();
 
     state.currentTask = taskNum;
 
@@ -145,7 +168,7 @@
     renderConsigne();
 
     if (editor) {
-      editor.value = state.drafts[taskNum] || '';
+      editor.value = state.weekDay ? state.weekDrafts[state.weekDay + ':' + taskNum] || '' : state.drafts[taskNum] || '';
       updateWordCount();
     }
 
@@ -153,7 +176,37 @@
     if (report) report.style.display = 'none';
 
     updateRecommendedCadreBtn();
+    if (state.weekDay && typeof window.updateWeekPracticeBar === 'function') {
+      resetPracticeTimer();
+      window.updateWeekPracticeBar(state.weekDay, taskNum);
+      if (state.activeView === 'practice') history.replaceState(null, '', '#week/ee/' + state.weekDay + '/' + taskNum);
+    }
   };
+
+  window.openEcrivanceWeek = function(theme, day, taskNum) {
+    rememberCurrentDraft();
+    state.currentTheme = theme;
+    state.currentThemeIndex = (window.ECRIVANCE_THEMES || []).indexOf(theme);
+    state.weekDay = day;
+    // Switch without saving the previous editor into this day's new draft slot.
+    var editor = document.getElementById('notebookEditor');
+    editor.value = state.weekDrafts[day + ':' + state.currentTask] || '';
+    switchTask(taskNum);
+    resetPracticeTimer();
+    switchView('practice');
+  };
+
+  function leaveWeekPractice() {
+    rememberCurrentDraft();
+    var wasWeekly = state.weekDay !== null;
+    state.weekDay = null;
+    document.getElementById('weekPracticeBar').hidden = true;
+    if (wasWeekly) {
+      document.getElementById('notebookEditor').value = state.drafts[state.currentTask] || '';
+      resetPracticeTimer();
+      updateWordCount();
+    }
+  }
 
   // ─── Renderizado de la Consigna / Tema Oficial ──────────────
   function renderConsigne() {
@@ -185,7 +238,9 @@
       if (t3Docs) t3Docs.style.display = 'none';
     } else if (taskNum === 3) {
       if (titleEl) titleEl.textContent = t.tache3Title || 'Prise de position argumentée';
-      if (textEl) textEl.textContent = 'Consigne officielle : Vous devez comparer les deux opinions suivantes et exprimer clairement votre point de vue personnel argumenté (120 à 180 mots).';
+      if (textEl) textEl.textContent = state.weekDay
+        ? 'Rédigez un texte de 120 à 180 mots : dans une première partie (40 à 60 mots), présentez les deux points de vue avec vos propres mots ; dans une deuxième partie (80 à 120 mots), exprimez votre opinion argumentée sur le sujet.'
+        : 'Consigne de pratique : Vous devez comparer les deux opinions suivantes et exprimer clairement votre point de vue personnel argumenté (120 à 180 mots).';
       if (t3Docs) {
         t3Docs.style.display = 'grid';
         var d1 = document.getElementById('tache3Doc1Content');
@@ -213,8 +268,7 @@
     if (!editor) return;
     var text = editor.value.trim();
     var words = text ? text.split(/\s+/).filter(function(w) { return w; }).length : 0;
-    state.drafts[state.currentTask] = editor.value;
-    saveDrafts();
+    rememberCurrentDraft();
 
     var range = state.wordRanges[state.currentTask];
     var badge = document.getElementById('wordBadge');
@@ -265,9 +319,11 @@
     var themes = window.ECRIVANCE_THEMES || [];
     if (themes.length === 0) return;
     var rand = Math.floor(Math.random() * themes.length);
+    leaveWeekPractice();
     state.currentThemeIndex = rand;
     state.currentTheme = themes[rand];
     renderConsigne();
+    switchView('practice');
     showToast('🎲 Tema cambiado: ' + (state.currentTheme.title || 'Nuevo examen'));
   };
 
@@ -451,6 +507,7 @@
   window.selectThemeFromLibrary = function(index) {
     var themes = window.ECRIVANCE_THEMES || [];
     if (!themes[index]) return;
+    leaveWeekPractice();
     state.currentThemeIndex = index;
     state.currentTheme = themes[index];
     switchView('practice');
@@ -641,8 +698,6 @@
       var editor = document.getElementById('notebookEditor');
       if (editor) {
         editor.value = '';
-        state.drafts[state.currentTask] = '';
-        saveDrafts();
         updateWordCount();
       }
       var report = document.getElementById('feedbackReportCard');

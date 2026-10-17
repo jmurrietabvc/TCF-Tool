@@ -1,0 +1,51 @@
+/* Uses the notebook's existing dark/light theme tokens. */
+[hidden] { display: none !important; }
+.week-hero { padding: 24px 0; max-width: 780px; }
+.week-kicker { display: block; color: var(--wash-teal-text); font-size: 11px; font-weight: 700; letter-spacing: .1em; margin-bottom: 8px; }
+.week-hero h1 { font: 800 clamp(30px, 5vw, 44px)/1.15 var(--font-display); margin-bottom: 14px; }
+.week-hero p, .week-help, .week-footnote { color: var(--ink-muted); line-height: 1.7; }
+.week-summary { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 20px; font-size: 12px; }
+.week-summary strong { color: var(--wash-mint-text); }
+.week-summary span { color: var(--ink-muted); }
+.week-competences { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 18px; }
+.week-help { font-size: 13px; margin-bottom: 18px; }
+.week-pack, .week-oral-card, .week-review { background: var(--paper-card); border: 1px solid var(--paper-border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 18px; }
+.week-pack h2, .week-oral-group h2, .week-review h2 { font-family: var(--font-display); font-size: 20px; margin-bottom: 6px; }
+.week-source { color: var(--wash-teal-text); font-size: 12px; text-underline-offset: 3px; }
+.week-task-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+.week-task { display: flex; flex-direction: column; align-items: flex-start; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-md); padding: 16px; }
+.week-task-label { color: var(--ink-muted); font-size: 11px; font-weight: 600; }
+.week-task h3 { font: 600 16px/1.5 var(--font-display); margin: 8px 0 18px; flex: 1; }
+.week-task .btn-secondary { text-decoration: none; }
+.week-done { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; margin-top: 14px; cursor: pointer; }
+.week-done input, .week-practice-bar input { width: 18px; height: 18px; accent-color: var(--wash-teal-text); }
+.week-oral-group { margin: 24px 0; }
+.week-oral-group > h2 { margin-bottom: 16px; }
+.week-oral-card h3 { font: 700 18px/1.5 var(--font-display); margin-bottom: 5px; }
+.week-oral-prompt { background: var(--paper); border-left: 3px solid var(--wash-teal-border); padding: 16px; margin: 16px 0; line-height: 1.8; white-space: pre-wrap; }
+.week-notes { margin-top: 18px; }
+.week-notes summary { cursor: pointer; font-size: 13px; }
+.week-notes label { display: block; font-size: 12px; margin: 12px 0 6px; color: var(--ink-muted); }
+.week-notes textarea { width: 100%; resize: vertical; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 12px; font: 14px/1.7 var(--font-body); }
+.week-review { background: var(--wash-teal); border-color: var(--wash-teal-border); }
+.week-review p { font-size: 13px; line-height: 1.7; }
+.week-footnote { font-size: 12px; margin: 24px 0; }
+.week-practice-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; margin-bottom: 20px; background: var(--wash-teal); border: 1px solid var(--wash-teal-border); border-radius: var(--radius-md); font-size: 13px; }
+.week-practice-bar a { color: var(--wash-teal-text); font-weight: 600; text-underline-offset: 3px; }
+.week-practice-bar label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+#view-week a:focus-visible, #view-week button:focus-visible, #view-week summary:focus-visible, #view-week textarea:focus-visible { outline: 2px solid var(--wash-teal-text); outline-offset: 4px; }
+@media (max-width: 1100px) {
+  .topbar-inner { height: auto; min-height: 68px; flex-wrap: wrap; padding: 12px 0; }
+  .nav-links { order: 3; width: 100%; overflow-x: auto; border-radius: var(--radius-md); }
+  .nav-btn { white-space: nowrap; flex-shrink: 0; }
+}
+@media (max-width: 680px) {
+  .topbar { padding: 0 12px; }
+  .topbar-right { margin-left: auto; }
+  .api-status-pill { font-size: 10px; padding: 6px 8px; }
+  .brand-badge { display: none; }
+  .week-task-grid { grid-template-columns: 1fr; }
+  .week-pack, .week-oral-card, .week-review { padding: 18px; }
+  .week-task h3 { margin-bottom: 12px; }
+  .week-practice-bar > span { order: 3; flex-basis: 100%; }
+}

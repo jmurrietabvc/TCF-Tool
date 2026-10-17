@@ -1072,7 +1072,7 @@
       <button class="btn-level-pill" id="btn-lvl-c1" onclick="setLevelFilter('C1')" title="🔥 C1: 100 audios de alta exigencia (Vitesse, Accent, Reformulation)">🔥 C1 (100)</button>
       <button class="btn-level-pill" id="btn-lvl-c2" onclick="setLevelFilter('C2')" title="⚡ C2: 50 audios de nivel superior de la radio francófona">⚡ C2 (50)</button>
       <button class="btn-level-pill" id="btn-lvl-c1c2" onclick="setLevelFilter('C1C2')" title="🎯 Bloque C1+C2: 150 audios avanzados combinados (2 C1 / 1 C2)">🎯 C1+C2 (150)</button>
-      <button class="btn-level-pill" id="btn-lvl-flight" onclick="setLevelFilter('FLIGHT')" title="✈️ Flight 3H: Sesión intensiva de vuelo (60 audios balanceados B1/B2/C1)">✈️ Flight 3H</button>
+      <button class="btn-level-pill" id="btn-lvl-flight" onclick="setLevelFilter('FLIGHT')" title="✈️ Porter YYC ➔ YOW: 90 audios (25 B1 + 40 B2 + 20 C1 + 5 C2) calibrados para el vuelo nonstop de 3h50">✈️ Porter YYC ➔ YOW (90)</button>
       <button class="btn-level-pill" id="btn-lvl-known" onclick="setLevelFilter('KNOWN')" title="Audios reconocidos: entrenamiento intensivo de Shadowing y Decode">🧠 Déjà Connus (<span id="count-known">0</span>)</button>
       <button class="btn-level-pill" id="btn-shuffle" style="flex:0 0 auto; padding:0.35rem 0.65rem;" onclick="shuffleCurrentDeck()" title="Mezclar aleatoriamente">🔀 Mezclar</button>
     </div>
@@ -1438,8 +1438,6 @@
       return deck;
     }
 
-    // Helper: Build balanced Flight 3H deck (20 B1 + 25 B2 + 15 C1 = 60 items)
-    
     // Helper: Build interleaved C1+C2 deck (2 C1 then 1 C2)
     function buildC1C2Deck() {
       const shuffledC1 = shuffleArray(ALL_C1);
@@ -1456,17 +1454,22 @@
       }
       return deck;
     }
+    // Helper: Build balanced Porter Flight deck (YYC -> YOW nonstop 3h50: 5 legs x 18 items = 90 audios: 25 B1 + 40 B2 + 20 C1 + 5 C2)
     function buildFlight3HDeck() {
-      const b1s = shuffleArray(ALL_B1).slice(0, 20);
-      const b2s = shuffleArray(ALL_B2).slice(0, 25);
-      const c1s = shuffleArray(ALL_C1).slice(0, 15);
+      const b1s = shuffleArray(ALL_B1).slice(0, 25);
+      const b2s = shuffleArray(ALL_B2).slice(0, 40);
+      const c1s = shuffleArray(ALL_C1).slice(0, 20);
+      const c2s = shuffleArray(ALL_C2).slice(0, 5);
       const deck = [];
-      let i = 0, j = 0, k = 0;
-      while (i < b1s.length || j < b2s.length || k < c1s.length) {
-        if (i < b1s.length) deck.push(b1s[i++]);
-        if (j < b2s.length) deck.push(b2s[j++]);
-        if (j < b2s.length) deck.push(b2s[j++]);
-        if (k < c1s.length) deck.push(c1s[k++]);
+      for (let leg = 0; leg < 5; leg++) {
+        const legB1 = b1s.slice(leg * 5, (leg + 1) * 5);
+        const legB2 = b2s.slice(leg * 8, (leg + 1) * 8);
+        const legC1 = c1s.slice(leg * 4, (leg + 1) * 4);
+        const legC2 = c2s.slice(leg * 1, (leg + 1) * 1);
+        deck.push(legB1[0], legB2[0], legB2[1], legC1[0]);
+        deck.push(legB1[1], legB2[2], legB2[3], legC1[1]);
+        deck.push(legB1[2], legB2[4], legB2[5], legC1[2]);
+        deck.push(legB1[3], legB2[6], legB1[4], legB2[7], legC1[3], legC2[0]);
       }
       return deck;
     }
@@ -1884,7 +1887,7 @@
         showNotice(`🎯 Bloque C1+C2: ${currentDeck.length} audios combinados (2 C1 por cada 1 C2)`);
       } else if (lvl === 'FLIGHT') {
         currentDeck = buildFlight3HDeck();
-        showNotice('✈️ Mazo Flight 3H: 60 audios balanceados de vuelo (20 B1 + 25 B2 + 15 C1)');
+        showNotice('✈️ Porter YYC ➔ YOW: 90 audios balanceados (25 B1 + 40 B2 + 20 C1 + 5 C2) calibrados para 3h50 nonstop');
       } else if (lvl === 'NEW') {
         const unseenB1 = ALL_B1.filter(q => !seenUuids.has(q.uuid) && !knownUuids.has(q.uuid));
         const unseenB2 = ALL_B2.filter(q => !seenUuids.has(q.uuid) && !knownUuids.has(q.uuid));

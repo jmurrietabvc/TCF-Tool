@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Écrivance — Cuaderno de Práctica TCF Canadá</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✒️</text></svg>">
-  <link rel="stylesheet" href="ecrivance-ui.css">
+  <link rel="stylesheet" href="ecrivance-ui.css?v=week-1">
+  <link rel="stylesheet" href="ecrivance-week.css?v=1">
 </head>
 <body>
 
@@ -21,6 +22,9 @@
       </div>
 
       <nav class="nav-links">
+        <button class="nav-btn" data-view="week" onclick="switchView('week')">
+          <span>🎯</span> Última semana
+        </button>
         <button class="nav-btn active" data-view="practice" onclick="switchView('practice')">
           <span>✍️</span> Cuaderno
         </button>
@@ -49,8 +53,37 @@
   <!-- Main Container -->
   <main class="app-container">
 
+    <section id="view-week" class="view-section" aria-labelledby="weekTitle">
+      <header class="week-hero">
+        <span class="week-kicker">TU SELECCIÓN PARA 7 DÍAS</span>
+        <h1 id="weekTitle">Última semana</h1>
+        <p>Seis combinaciones de expresión escrita y las consignas de oral seleccionadas. Un día, una combinación; el séptimo, repaso y corrección.</p>
+        <div class="week-summary"><strong id="weekProgress" aria-live="polite">0 de 25 ejercicios practicados</strong><span>El progreso y tus borradores se guardan en este navegador.</span></div>
+      </header>
+      <div class="week-competences" role="group" aria-label="Elegir competencia">
+        <button type="button" class="btn-primary" id="weekEeTab" aria-pressed="true">EE · Expression écrite</button>
+        <button type="button" class="btn-secondary" id="weekEoTab" aria-pressed="false">EO · Expression orale</button>
+      </div>
+      <div id="weekEePanel">
+        <p class="week-help">Días 1–6: una combinación en 60 minutos y después corrige. Abre cada tâche para escribir en el cuaderno con su propio borrador.</p>
+        <div id="weekWritingList"></div>
+        <aside class="week-review"><h2>Día 7 · Consolidar</h2><p>Reescribe los dos textos que más te costaron, aplica sus correcciones y haz una simulación oral completa. Marca «Practicado» al terminar cada ejercicio.</p></aside>
+      </div>
+      <div id="weekEoPanel" hidden>
+        <p class="week-help">Cada día alterna una situación de la tâche 2 y una opinión de la tâche 3. Habla en voz alta; utiliza las notas para registrar lo que necesitas mejorar.</p>
+        <div id="weekOralList"></div>
+      </div>
+      <p class="week-footnote">Selección de práctica basada en los bancos consultados. La aparición de estos temas el día del examen no está garantizada.</p>
+      <noscript>Activa JavaScript para abrir los ejercicios y guardar tus borradores.</noscript>
+    </section>
+
     <!-- ════════ VIEW 1: PRÁCTICA (LE CAHIER) ════════ -->
     <section id="view-practice" class="view-section active">
+      <div id="weekPracticeBar" class="week-practice-bar" hidden>
+        <a href="#week">← Última semana</a>
+        <span id="weekPracticeLabel"></span>
+        <label><input id="weekPracticeDone" type="checkbox"> Practicado</label>
+      </div>
       <div class="practice-header">
         <div class="task-selector-row">
           <div class="task-tabs-group">
@@ -280,6 +313,7 @@
   <script src="ecrivance-september-2026.js"></script>
   <script src="ecrivance-october-2026.js"></script>
   <script src="app-ai-feedback.js"></script>
-  <script src="ecrivance-app.js"></script>
+  <script src="ecrivance-app.js?v=week-1"></script>
+  <script src="ecrivance-week.js?v=1"></script>
 </body>
 </html>
