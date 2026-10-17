@@ -16,3 +16,6 @@ node_modules/
 # Temp test audio files
 audios/test_*.mp3
 
+
+audios_original_backup/
+audios_remaster_temp/
