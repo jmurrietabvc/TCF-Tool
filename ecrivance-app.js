@@ -544,12 +544,19 @@
 
     var consigneText = '';
     var t = state.currentTheme;
+    var evaluatedTask = state.currentTask;
+    var previousReport = document.getElementById('feedbackReportCard');
+    if (previousReport) previousReport.style.display = 'none';
     if (state.currentTask === 1) consigneText = (t.tache1Title || '') + ': ' + (t.tache1Prompt || '');
     if (state.currentTask === 2) consigneText = (t.tache2Title || '') + ': ' + (t.tache2Prompt || '');
     if (state.currentTask === 3) consigneText = (t.tache3Title || '') + '\nDoc 1: ' + (t.tache3Doc1 || '') + '\nDoc 2: ' + (t.tache3Doc2 || '');
 
     try {
       var feedback = await callGeminiForFeedback(state.currentTask, consigneText, text);
+      if (state.currentTheme !== t || state.currentTask !== evaluatedTask || editor.value.trim() !== text) {
+        showToast('El texto o la tarea cambió durante la evaluación. Solicita una evaluación del texto actual.');
+        return;
+      }
       renderFeedbackReport(feedback);
       showToast('🎉 ¡Evaluación completada con éxito!');
     } catch (err) {
@@ -571,10 +578,20 @@
     var scoreVal = document.getElementById('reportScoreVal');
     var subtitle = document.getElementById('reportNclcSubtitle');
 
-    if (nclcBadge) nclcBadge.textContent = fb.nclc_level || 'NCLC 7';
-    if (scoreVal) scoreVal.textContent = (fb.score_sur_20 || 11) + '/20';
+    var hasScore = Number.isInteger(fb.score_sur_20) && fb.score_sur_20 >= 0 && fb.score_sur_20 <= 20;
+    if (nclcBadge) nclcBadge.textContent = hasScore ? fb.nclc_level || 'Sin equivalencia' : 'Sin estimación';
+    if (scoreVal) scoreVal.textContent = hasScore ? fb.score_sur_20 + '/20' : '—';
     if (subtitle) {
-      subtitle.textContent = 'Equivalente MCER: ' + (fb.cefr_level || 'B2') + ' · Objetivo Express Entry Canadá';
+      subtitle.textContent = hasScore ? 'MCER orientativo: ' + (fb.cefr_level || 'No disponible') + ' · Solo esta tâche; no es la nota global de EE.' : 'Revisa el cumplimiento de la consigna y las observaciones. No se asignó una nota por defecto.';
+    }
+    var rationale = document.getElementById('reportAssessmentRationale');
+    if (rationale) rationale.textContent = fb.assessment_rationale || 'No se recibió una justificación suficiente.';
+    var orthography = document.getElementById('reportOrthographyComment');
+    if (orthography) orthography.textContent = fb.orthography_comment || 'No se recibió un análisis de ortografía.';
+    var warnings = document.getElementById('reportAssessmentWarnings');
+    if (warnings) {
+      warnings.textContent = fb.assessment_meta ? fb.assessment_meta.warnings.join(' ') : '';
+      warnings.hidden = !warnings.textContent;
     }
 
     var grid = document.getElementById('reportCriteriaGrid');
@@ -584,7 +601,7 @@
         pertinence: '🎯 Pertinencia y Consigna',
         coherence: '🔗 Coherencia y Estructura',
         lexique: '📖 Riqueza de Vocabulario',
-        grammaire: '✍️ Gramática y Sintaxis'
+        grammaire: '✍️ Gramática y Ortografía'
       };
       for (var key in fb.criteria) {
         var c = fb.criteria[key];
@@ -615,7 +632,7 @@
           listHtml += '</div>';
         });
       } else {
-        listHtml = '<div style="color:var(--wash-mint-text);font-weight:600;padding:12px;">✨ ¡Excelente! No se detectaron errores graves en esta producción.</div>';
+        listHtml = '<div style="color:var(--ink-muted);padding:12px;">No se priorizaron correcciones concretas. Esto no garantiza que el texto esté libre de errores.</div>';
       }
       corrList.innerHTML = listHtml;
     }

@@ -197,21 +197,27 @@
       <div id="feedbackReportCard" class="feedback-report-card">
         <div class="report-hero">
           <div class="report-nclc-group">
-            <div id="reportNclcBadge" class="report-nclc-badge">NCLC 7</div>
+            <div id="reportNclcBadge" class="report-nclc-badge">Sin estimación</div>
             <div class="report-nclc-details">
-              <h2>Evaluación Oficial Estimada</h2>
-              <p id="reportNclcSubtitle">Equivalente MCER: B2 · Umbral de oro para Express Entry Canadá</p>
+              <h2>Evaluación orientativa de esta tâche</h2>
+              <p id="reportNclcSubtitle">La nota global de EE requiere las tres tareas y la corrección oficial.</p>
             </div>
           </div>
           <div class="report-score-box">
-            <div id="reportScoreVal" class="report-score-val">11/20</div>
-            <div class="report-score-lbl">Nota Estimada TCF</div>
+            <div id="reportScoreVal" class="report-score-val">—</div>
+            <div class="report-score-lbl">Estimación de práctica</div>
           </div>
         </div>
 
         <div class="report-content">
+          <p style="color:var(--ink-muted);font-size:13px;margin-bottom:18px;">Criterios públicos FEI y CECR: valoración global, con tolerancia a errores ocasionales según el nivel. Sin descuento fijo por falta. La equivalencia con correctores TCF no está validada.</p>
+          <p id="reportAssessmentWarnings" hidden style="padding:14px;background:var(--wash-yellow);color:var(--wash-yellow-text);border:1px solid var(--wash-yellow-border);border-radius:var(--radius-md);margin-bottom:18px;"></p>
+          <h3 class="criteria-title">Por qué se estima este nivel</h3>
+          <p id="reportAssessmentRationale" style="white-space:pre-wrap;margin-bottom:18px;"></p>
+          <h3 class="criteria-title">Ortografía: frecuencia e impacto</h3>
+          <p id="reportOrthographyComment" style="white-space:pre-wrap;margin-bottom:18px;"></p>
           <!-- Criteria Grid -->
-          <h3 class="criteria-title">📊 Desglose por los 4 Criterios Oficiales</h3>
+          <h3 class="criteria-title">📊 Diagnóstico pedagógico · /5 por área, sin suma oficial</h3>
           <div id="reportCriteriaGrid" class="criteria-grid"></div>
 
           <!-- Prioritized Corrections -->
@@ -233,7 +239,7 @@
           <div class="teacher-note-card">
             <div class="teacher-icon">👨‍🏫</div>
             <div>
-              <div class="teacher-note-title">Consejo del examinador para tu próximo texto</div>
+              <div class="teacher-note-title">Siguiente paso para tu próximo texto</div>
               <div id="reportTeacherNote" class="teacher-note-text">« Continúa enriqueciendo tus conectores y cuida la concordancia de tiempos. »</div>
             </div>
           </div>
@@ -312,8 +318,8 @@
   <script src="ecrivance-data.js"></script>
   <script src="ecrivance-september-2026.js"></script>
   <script src="ecrivance-october-2026.js"></script>
-  <script src="app-ai-feedback.js"></script>
-  <script src="ecrivance-app.js?v=week-1"></script>
+  <script src="app-ai-feedback.js?v=tcf-20261017"></script>
+  <script src="ecrivance-app.js?v=tcf-20261017"></script>
   <script src="ecrivance-week.js?v=1"></script>
 </body>
 </html>
