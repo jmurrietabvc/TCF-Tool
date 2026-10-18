@@ -5,6 +5,29 @@
 (function () {
   var octoberReports = [
     {
+      id: 'tcf-ca-ee-2026-10-16-alliance-francaise-mississauga',
+      month: 10,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Transports publics, personne admirée et vie seul ou en colocation',
+      tache1Title: 'Conseiller les transports publics à un ami',
+      tache1Prompt: 'Écrivez à un ami pour lui expliquer et lui recommander les transports publics à utiliser.',
+      tache2Title: 'Une personne que vous admirez',
+      tache2Prompt: 'Rédigez un texte sur une personne que vous admirez et racontez un événement de courage ou de gentillesse qui vous a marqué.',
+      tache3Title: 'Vivre seul ou vivre en colocation',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat entre vivre seul et vivre en colocation, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'octobre-2026-16-alliance-francaise-mississauga',
+      reportDate: '16 octobre 2026',
+      reportLocation: 'Alliance Française Mississauga',
+      reportConfidence: 'Élevée — récit de première main ; formulation abrégée du candidat',
+      reportSource: 'Compte rendu direct d’un candidat sur Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-10-18T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-10-11-gb-centre',
       month: 10,
       year: 2026,
