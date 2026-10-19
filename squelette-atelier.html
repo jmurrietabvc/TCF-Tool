@@ -47,13 +47,11 @@
         radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.06) 0px, transparent 50%);
     }
 
-    /* Scrollbar cleanup */
+    /* Scrollbars */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #334155; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
     /* Top Navigation */
     header {
@@ -135,6 +133,7 @@
       align-items: center;
       gap: 6px;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .nav-btn-link:hover {
@@ -146,8 +145,8 @@
     /* Main Container */
     .app-main {
       max-width: 1380px;
-      margin: 20px auto;
-      padding: 0 24px;
+      margin: 18px auto;
+      padding: 0 20px;
     }
 
     /* Strategy Banner: 9 -> 13 Roadmap */
@@ -157,7 +156,7 @@
       border-left: 4px solid var(--primary);
       border-radius: 12px;
       padding: 14px 20px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -169,6 +168,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      flex: 1;
     }
 
     .strat-badge {
@@ -182,92 +182,198 @@
     }
 
     .strat-text {
-      font-size: 13px;
-      color: var(--text);
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
     }
 
     .strat-text strong {
-      color: var(--primary);
+      color: #ffffff;
     }
 
     .strat-pills {
       display: flex;
-      gap: 8px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn-diff-toggle {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 5px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
+    .btn-strat-action {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
     }
 
-    .btn-diff-toggle:hover, .btn-diff-toggle.active {
-      background: rgba(245, 158, 11, 0.15);
-      border-color: var(--primary);
-      color: var(--primary);
+    .btn-strat-action:hover {
+      background: rgba(245, 158, 11, 0.25);
+      transform: translateY(-1px);
     }
 
-    /* Control Bar: Tasks & Modes */
+    /* ════════ INTERACTIVE ONBOARDING GUIDE ════════ */
+    .guide-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .guide-header {
+      padding: 12px 18px;
+      background: rgba(30, 41, 59, 0.4);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .guide-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+
+    .guide-toggle-icon {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .guide-content {
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .guide-step {
+      background: rgba(13, 19, 32, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      border-radius: 10px;
+      padding: 14px;
+      position: relative;
+    }
+
+    .guide-step-num {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.15);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .guide-step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .guide-step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .guide-step-desc strong {
+      color: #e2e8f0;
+    }
+
+    .guide-panel.collapsed .guide-content {
+      display: none;
+    }
+
+    .guide-panel.collapsed .guide-toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    /* ════════ CONTROL DECK (TASKS + MODES) ════════ */
     .control-deck {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 18px;
+      gap: 14px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
     .task-nav {
       display: flex;
       background: var(--surface);
-      border: 1px solid var(--border);
       padding: 4px;
       border-radius: 10px;
+      border: 1px solid var(--border);
       gap: 4px;
+      flex-wrap: wrap;
     }
 
     .task-tab {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 8px 16px;
-      border-radius: 7px;
+      font-family: var(--font-ui);
       font-size: 13px;
       font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
     .task-tab:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .task-tab.active {
-      background: var(--primary);
-      color: #0b0f17;
+      background: var(--card);
+      color: #ffffff;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .task-tab-badge {
+      font-size: 10.5px;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--primary);
+      font-weight: 700;
     }
 
     .mode-nav {
       display: flex;
       background: var(--surface);
-      border: 1px solid var(--border);
       padding: 4px;
       border-radius: 10px;
+      border: 1px solid var(--border);
       gap: 4px;
     }
 
@@ -275,61 +381,67 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 8px 16px;
-      border-radius: 7px;
+      font-family: var(--font-ui);
       font-size: 13px;
       font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .mode-tab:hover {
+      color: #ffffff;
     }
 
     .mode-tab.active {
-      background: var(--accent-blue);
-      color: #0b0f17;
+      background: linear-gradient(135deg, var(--accent-blue), #0284c7);
+      color: #ffffff;
       font-weight: 700;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.25);
     }
 
-    /* Mega-Themes Carousel */
+    /* ════════ PRESETS BAR ════════ */
     .presets-bar {
-      background: var(--surface);
+      background: rgba(18, 25, 41, 0.6);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 10px 16px;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 10px;
-      overflow-x: auto;
+      flex-wrap: wrap;
     }
 
-    .presets-title {
-      font-size: 11px;
+    .presets-label {
+      font-size: 12px;
       font-weight: 800;
-      color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      white-space: nowrap;
+      color: var(--primary);
       display: flex;
       align-items: center;
       gap: 6px;
-      padding-right: 6px;
-      border-right: 1px solid var(--border);
+      white-space: nowrap;
     }
 
     .preset-pill {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text-muted);
+      color: #cbd5e1;
       padding: 5px 12px;
-      border-radius: 20px;
+      border-radius: 6px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .preset-pill:hover {
@@ -339,16 +451,21 @@
       transform: translateY(-1px);
     }
 
-    /* ════════ WORKSPACE GRID ════════ */
+    .preset-pill.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    /* ════════ MAIN WORKSPACE GRID ════════ */
     .workspace-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 22px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       align-items: start;
     }
 
-    /* Left: Mad-Libs Interactive Card */
-    .editor-section {
+    .editor-section, .preview-section {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -356,7 +473,11 @@
       display: flex;
       flex-direction: column;
       gap: 18px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .preview-section {
+      position: sticky;
+      top: 76px;
     }
 
     .card-header {
@@ -369,7 +490,7 @@
 
     .card-header h2 {
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -377,22 +498,24 @@
     }
 
     .badge-words-target {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
-      padding: 3px 9px;
+      color: var(--primary);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 3px 10px;
       border-radius: 6px;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    /* Grouped Paragraph Cards */
+    /* Paragraph Box Layout */
     .para-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px 18px;
-      position: relative;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .para-box.gold-accent {
@@ -404,24 +527,18 @@
     }
 
     .para-tag {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--primary);
-      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     .para-tag.blue {
       color: var(--accent-blue);
-    }
-
-    .para-flow {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
     }
 
     .slot-row {
@@ -430,18 +547,36 @@
       gap: 6px;
     }
 
+    .slot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .slot-label {
       font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-weight: 700;
+      color: #cbd5e1;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .slot-label em {
-      font-style: normal;
+    .slot-scaffold-hint {
+      font-size: 11.5px;
+      color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px dashed rgba(56, 189, 248, 0.25);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    .slot-scaffold-hint strong {
       color: var(--primary);
+      font-style: normal;
       font-weight: 700;
     }
 
@@ -481,46 +616,12 @@
     }
 
     .slot-field:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15);
+      border-color: var(--accent-blue);
+      background: #111a2c;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
     }
 
-    /* Right: Preview & Score Radar */
-    .preview-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: sticky;
-      top: 80px;
-    }
-
-    .live-essay-box {
-      background: #080d16;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 22px;
-      font-family: var(--font-serif);
-      font-size: 15.5px;
-      line-height: 1.7;
-      color: #e2e8f0;
-      min-height: 240px;
-      white-space: pre-wrap;
-      user-select: all;
-    }
-
-    .live-essay-box mark {
-      background: rgba(245, 158, 11, 0.2);
-      color: #fde68a;
-      border-radius: 3px;
-      padding: 0 3px;
-      font-weight: 600;
-    }
-
-    /* Meter & Status */
+    /* ════════ PREVIEW METERS & OUTPUT ════════ */
     .meter-cluster {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -538,10 +639,9 @@
     }
 
     .meter-number {
+      font-family: var(--font-mono);
       font-size: 26px;
       font-weight: 800;
-      color: #ffffff;
-      font-family: var(--font-mono);
       line-height: 1;
     }
 
@@ -550,19 +650,36 @@
     .meter-number.danger { color: var(--danger); }
 
     .meter-info-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      color: var(--text-dim);
     }
 
     .meter-info-sub {
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
+      color: #ffffff;
     }
 
-    /* 9 -> 13 Radar Checklist */
+    .live-essay-box {
+      background: #090e17;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: var(--font-serif);
+      font-size: 16px;
+      line-height: 1.85;
+      color: #f8fafc;
+      white-space: pre-wrap;
+      min-height: 240px;
+      max-height: 420px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    /* Radar Checklist */
     .radar-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -577,31 +694,35 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 7px 10px;
+      padding: 6px 10px;
       border-radius: 6px;
-      background: #0d1320;
-      border: 1px solid transparent;
-      font-size: 12px;
+      background: rgba(13, 19, 32, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      transition: all 0.2s;
     }
 
     .radar-item.valid {
+      background: rgba(16, 185, 129, 0.08);
       border-color: rgba(16, 185, 129, 0.25);
-      background: rgba(16, 185, 129, 0.05);
+      color: #ffffff;
     }
 
     .radar-name {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: var(--text);
+      font-weight: 600;
     }
 
     .radar-tag-point {
-      font-size: 10px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
       font-weight: 700;
       padding: 2px 6px;
       border-radius: 4px;
-      background: rgba(245, 158, 11, 0.2);
+      background: rgba(245, 158, 11, 0.15);
       color: var(--primary);
     }
 
@@ -610,7 +731,7 @@
       color: var(--success);
     }
 
-    /* Action Buttons */
+    /* Actions Panel */
     .action-panel {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -781,18 +902,25 @@
     .diff-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
       margin-bottom: 20px;
+      font-size: 13px;
     }
 
     .diff-table th, .diff-table td {
       padding: 12px 14px;
       border: 1px solid var(--border);
       text-align: left;
+      vertical-align: top;
     }
 
-    .diff-table th { background: var(--card); color: var(--primary); font-weight: 700; }
-    .diff-table tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+    .diff-table th {
+      background: var(--card);
+      font-weight: 800;
+    }
+
+    .diff-table td {
+      line-height: 1.5;
+    }
 
     /* Toast */
     #toast {
@@ -819,7 +947,13 @@
       .workspace-grid { grid-template-columns: 1fr; }
       .preview-section { position: static; }
       .control-deck { flex-direction: column; align-items: stretch; }
-      .task-nav, .mode-nav { overflow-x: auto; }
+      .guide-content { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .guide-content { grid-template-columns: 1fr; }
+      header { padding: 10px 16px; }
+      .header-links { display: none; }
     }
   </style>
 </head>
@@ -848,28 +982,73 @@
       <div class="strat-content">
         <span class="strat-badge">Objectif 12-13</span>
         <div class="strat-text">
-          Tu as obtenu <strong>9/20</strong> ? Tu as le vocabulaire mais il te manque les <strong>3 verrous C1</strong> : la synthèse en 2 paragraphes, le connecteur d'opposition et le subjonctif de compromis.
+          ¿Obtuviste <strong>9/20</strong>? Tienes el vocabulario pero te faltan los <strong>cerrojos C1 de evaluador</strong>: estructura canónica por tarea, conectores de oposición/concesión y el subjuntivo obligatorio de cierre.
         </div>
       </div>
       <div class="strat-pills">
-        <button class="btn-diff-toggle" onclick="openDiffModal()">🔍 Pourquoi 9 et pas 13 ?</button>
+        <button class="btn-strat-action" onclick="toggleGuide()"><span>💡</span> ¿Cómo usarla? (Guía)</button>
+        <button class="btn-strat-action" onclick="openDiffModal()"><span>🔍</span> ¿Por qué 9 y cómo sacar 13?</button>
       </div>
     </div>
 
-    <!-- CONTROL DECK -->
+    <!-- ════════ ONBOARDING GUIDE ACCORDION ════════ -->
+    <div class="guide-panel" id="user-guide-panel">
+      <div class="guide-header" onclick="toggleGuide()">
+        <span class="guide-title">
+          <span>💡</span> <strong>Guía Rápida: ¿Cómo usar esta herramienta para subir tu nota a 12–13?</strong>
+        </span>
+        <span class="guide-toggle-icon" id="guide-arrow">▼</span>
+      </div>
+      <div class="guide-content">
+        <div class="guide-step">
+          <span class="guide-step-num">01</span>
+          <div class="guide-step-title"><span>🎯</span> Elige tu Tâche</div>
+          <div class="guide-step-desc">
+            Sigue el orden del examen: <strong>Tâche 1</strong> (Amical o Formel, 60–120m), <strong>Tâche 2</strong> (Récit, 120–150m) o <strong>Tâche 3</strong> (Débat, 120–180m).
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="guide-step-num">02</span>
+          <div class="guide-step-title"><span>⚡</span> Carga un ejemplo</div>
+          <div class="guide-step-desc">
+            Haz clic en cualquiera de los <strong>botones de temas reales 2026</strong>. Verás cómo el esqueleto ya tiene el 60% pre-escrito en nivel C1.
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="guide-step-num">03</span>
+          <div class="guide-step-title"><span>🛠️</span> Completa las variables</div>
+          <div class="guide-step-desc">
+            En la izquierda, escribe los datos específicos de tu tema. La vista previa de la derecha ensambla el texto final y el <strong>Radar 12–13</strong> audita tu gramática.
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="guide-step-num">04</span>
+          <div class="guide-step-title"><span>🧠</span> Modo Flash-Cloze</div>
+          <div class="guide-step-desc">
+            Pasa a la pestaña de memoria para tapar los conectores y el subjuntivo. Escríbelos a ciegas hasta sacar <strong>100%</strong> para que salgan solos en el examen.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROL DECK: TASKS IN NATURAL ORDER 1 -> 2 -> 3 -->
     <div class="control-deck">
       <div class="task-nav">
-        <button class="task-tab active" onclick="setTask('t3')">
-          <span>⚖️</span> Tâche 3 : Synthèse & Prise de position
-        </button>
-        <button class="task-tab" onclick="setTask('t2')">
-          <span>✍️</span> Tâche 2 : Récit / Blog
-        </button>
-        <button class="task-tab" onclick="setTask('t1_amical')">
+        <button class="task-tab active" id="tab-t1_amical" onclick="setTask('t1_amical')">
           <span>💬</span> Tâche 1 : Message Amical
+          <span class="task-tab-badge">60–120m</span>
         </button>
-        <button class="task-tab" onclick="setTask('t1_formel')">
+        <button class="task-tab" id="tab-t1_formel" onclick="setTask('t1_formel')">
           <span>✉️</span> Tâche 1 : Courriel Formel
+          <span class="task-tab-badge">60–120m</span>
+        </button>
+        <button class="task-tab" id="tab-t2" onclick="setTask('t2')">
+          <span>✍️</span> Tâche 2 : Récit / Blog
+          <span class="task-tab-badge">120–150m</span>
+        </button>
+        <button class="task-tab" id="tab-t3" onclick="setTask('t3')">
+          <span>⚖️</span> Tâche 3 : Synthèse & Prise de position
+          <span class="task-tab-badge">120–180m</span>
         </button>
       </div>
 
@@ -883,21 +1062,18 @@
       </div>
     </div>
 
-    <!-- PRESETS BAR (TÂCHE 3 MEGA-THEMES) -->
+    <!-- PRESETS BAR (DYNAMIC PER TASK) -->
     <div class="presets-bar" id="presets-container">
-      <span class="presets-title">⚡ Charger un Sujet 2026 :</span>
-      <button class="preset-pill" onclick="loadPreset('tech_ecole')">📱 IA & Écrans à l'école</button>
-      <button class="preset-pill" onclick="loadPreset('transports_gratuits')">🌿 Transports publics gratuits</button>
-      <button class="preset-pill" onclick="loadPreset('teletravail')">💼 Télétravail & Semaine 4j</button>
-      <button class="preset-pill" onclick="loadPreset('ecoles_privees')">🎓 Écoles privées vs Publique</button>
-      <button class="preset-pill" onclick="loadPreset('fast_food')">🍔 Restauration rapide</button>
-      <button class="preset-pill" onclick="loadPreset('voyage_solo')">🎒 Voyage en solitaire</button>
+      <span class="presets-label">⚡ Charger un Sujet d'Examen :</span>
+      <div id="preset-pills-list" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <!-- Injected dynamically by JS according to task -->
+      </div>
     </div>
 
     <!-- ════════ BUILDER VIEW ════════ -->
     <div id="view-build" class="workspace-grid">
       
-      <!-- LEFT: FORM SLOTS ORGANIZED IN 2 CLEAN PARAGRAPHS -->
+      <!-- LEFT: FORM SLOTS WITH VISIBLE SCAFFOLDS -->
       <div class="editor-section" id="slots-deck">
         <!-- Rendered by JS -->
       </div>
@@ -905,8 +1081,8 @@
       <!-- RIGHT: LIVE ESSAY PREVIEW & SCORE RADAR -->
       <div class="preview-section">
         <div class="card-header">
-          <h2><span>📄</span> Rendu Immédiat</h2>
-          <span class="badge-words-target" id="words-target-display">120 – 180 mots</span>
+          <h2><span>📄</span> Rendu Immédiat (Votre Copie)</h2>
+          <span class="badge-words-target" id="words-target-display">60 – 120 mots</span>
         </div>
 
         <!-- Metric Cards -->
@@ -914,7 +1090,7 @@
           <div class="meter-card">
             <span class="meter-number success" id="live-word-count">0</span>
             <div>
-              <div class="meter-info-title">Décompte</div>
+              <div class="meter-info-title">Décompte Mots</div>
               <div class="meter-info-sub" id="live-meter-status">Conforme</div>
             </div>
           </div>
@@ -927,12 +1103,12 @@
           </div>
         </div>
 
-        <!-- Live Essay -->
+        <!-- Live Essay Box -->
         <div class="live-essay-box" id="live-essay-output">
           <!-- Text generated dynamically -->
         </div>
 
-        <!-- 9 -> 13 Radar (Checklist B2/C1) -->
+        <!-- Task-Specific Radar -->
         <div class="radar-card">
           <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;">
             Vérification des leviers de note (Objectif 12-13)
@@ -945,17 +1121,17 @@
         <!-- Action Buttons -->
         <div class="action-panel">
           <button class="btn-act copy" onclick="copyText()">
-            <span>📋</span> Copier
+            <span>📋</span> Copier le texte
           </button>
           <button class="btn-act launch" onclick="transferToEcrivance()">
-            <span>✍️</span> Évaluer dans Écrivance
+            <span>✍️</span> Écrire dans le Cahier
           </button>
         </div>
       </div>
 
     </div>
 
-    <!-- ════════ CLOZE ACTIVE RECALL VIEW ════════ -->
+    <!-- ════════ FLASH-CLOZE VIEW (MEMORY DRILL) ════════ -->
     <div id="view-cloze" class="cloze-section" style="display:none;">
       <div class="cloze-banner">
         <h2><span>🧠</span> Mémorisation Active : Le Squelette à Trous</h2>
@@ -999,14 +1175,14 @@
         </thead>
         <tbody>
           <tr>
-            <td><b>Structure Tâche 3</b></td>
+            <td><b>Structure Globale</b></td>
             <td>Un seul bloc informe, ou commence directement par donner son avis personnel sans analyser les documents.</td>
-            <td><b>2 paragraphes stricts :</b> Synthèse neutre des 2 textes (45m) + Prise de position nuancée avec compromis (105m).</td>
+            <td><b>Structure canónica rígida :</b> Párrafos separados con propósitos delimitados (saludo/consigna/cierre o síntesis/opinión).</td>
           </tr>
           <tr>
             <td><b>Connecteurs logiques</b></td>
             <td>Abus de connecteurs scolaires simples : <i>mais, parce que, alors, donc, et, aussi</i>.</td>
-            <td><b>Articulateurs de débat C1 :</b> <i>Tandis que, en revanche, néanmoins, force est de constater, à mon sens</i>.</td>
+            <td><b>Articulateurs C1 :</b> <i>Tandis que, en revanche, néanmoins, force est de constater, à cet égard, à mon sens</i>.</td>
           </tr>
           <tr>
             <td><b>Subjonctif</b></td>
@@ -1027,7 +1203,7 @@
       </table>
 
       <div style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:12px 16px; font-size:12.5px; color:#fde68a;">
-        💡 <b>Règle d'or :</b> Dans cet atelier, chaque squelette est pré-armé avec ces 5 leviers. En t'entraînant à remplir les cases, tu injectes ces automatismes sans avoir à y réfléchir pendant le stress de l'examen.
+        💡 <b>Règle d'or :</b> En el examen real no tienes tiempo de inventar estructuras poéticas. Con este taller memorizas el armazón de alta puntuación y sólo inyectas los sustantivos del tema.
       </div>
     </div>
   </div>
@@ -1039,19 +1215,369 @@
     // STATE & DATA
     // ══════════════════════════════════════════════════════════════════════
     const appState = {
-      task: 't3',
+      task: 't1_amical',
       mode: 'build',
+      activePreset: null,
       slots: {}
     };
 
     const SKELETON_DATABASE = {
       // ─────────────────────────────────────────────────────────────────
-      // TÂCHE 3 : 2 PARAGRAPHES (SYNTHÈSE + ESSAI NUANCÉ)
+      // 1. TÂCHE 1 AMICALE (60-120 MOTS)
+      // ─────────────────────────────────────────────────────────────────
+      t1_amical: {
+        name: "Tâche 1 : Message Amical",
+        min: 60,
+        max: 120,
+        radarCriteria: [
+          { name: "Salutation & formule d'appel familière", test: text => /(salut|bonjour mon cher|cher|chère)/i.test(text), points: "+1.0 pt" },
+          { name: "Objet / motif explicite de la lettre", test: text => /(je t'écris|je te contacte|je voulais te|j'espère que tu vas bien)/i.test(text), points: "+1.0 pt" },
+          { name: "Subjonctif Présent actif (but / invitation)", test: text => /(afin que nous puissions|pour que tu puisses|que nous ayons|que tu viennes|que l'on puisse)/i.test(text), points: "+1.5 pt" },
+          { name: "Formule finale chaleureuse", test: text => /(à très vite|à bientôt|fais-moi signe|tiens-moi au courant|grosses bises)/i.test(text), points: "+1.0 pt" }
+        ],
+        groups: [
+          {
+            title: "En-tête & Amorce Amicale",
+            accent: "gold",
+            fields: [
+              {
+                id: 'friend_name',
+                label: 'Prénom de l\'ami(e)',
+                type: 'input',
+                scaffold: 'Salut <strong>[Prénom]</strong>,',
+                placeholder: "Julien",
+                default: "Julien"
+              },
+              {
+                id: 'hook',
+                label: 'Accroche et motif du message',
+                type: 'input',
+                scaffold: 'J\'espère que tu vas bien ! Je t\'écris pour <strong>[Motif du message]</strong>.',
+                placeholder: "te parler de mon emménagement dans mon nouvel appartement samedi prochain",
+                default: "te parler de mon emménagement dans mon nouvel appartement samedi prochain"
+              }
+            ]
+          },
+          {
+            title: "Corps du Message & Subjonctif de But",
+            accent: "blue",
+            fields: [
+              {
+                id: 'details',
+                label: 'Détails pratiques indispensables (Lieu, heure, programme)',
+                type: 'input',
+                scaffold: 'Le logement est situé <strong>[Lieu]</strong>. Nous débuterons vers <strong>[Heure & Activité]</strong>.',
+                placeholder: "au 12 rue des Lilas, près du métro. Nous débuterons vers 10h par le chargement des cartons avant de monter les meubles",
+                default: "au 12 rue des Lilas, près du métro. Nous débuterons vers 10h par le chargement des cartons avant de monter les meubles"
+              },
+              {
+                id: 'proposal_sub',
+                label: 'Proposition / Invitation avec subjonctif de but (+1.5 pt)',
+                type: 'input',
+                scaffold: 'Fais-moi savoir si tu es libre <strong>afin que nous [Verbe Subjonctif]</strong>.',
+                placeholder: "afin que nous puissions nous organiser sereinement",
+                default: "afin que nous puissions nous organiser sereinement"
+              },
+              {
+                id: 'closing_amical',
+                label: 'Clôture et signature',
+                type: 'select',
+                options: [
+                  "À très vite,",
+                  "Fais-moi signe dès que possible,",
+                  "Tiens-moi au courant, amitiés,",
+                  "À bientôt,"
+                ],
+                default: "À très vite,"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          return "Salut " + (s.friend_name || 'mon ami') + " !\n\nJ'espère que tu vas bien ! Je t'écris pour " + (s.hook || '...') + ". Le logement est situé " + (s.details || '...') + ".\n\nFais-moi savoir si tu es libre " + (s.proposal_sub || 'afin que nous puissions nous organiser') + ". J'ai prévu un délicieux repas pour te remercier !\n\n" + (s.closing_amical || 'À très vite,') + "\nNabil";
+        },
+        clozeData: [
+          { t: "Salut Thomas !\n\nJ'espère que tu vas bien ! Je t'écris " },
+          { a: "afin de", h: "connecteur de but" },
+          { t: " te proposer une sortie ce week-end. Si tu as du temps libre, " },
+          { a: "on pourrait", h: "conditionnel de suggestion" },
+          { t: " se retrouver à 15h " },
+          { a: "afin que nous", h: "locution de but (+ subjonctif)" },
+          { t: " " },
+          { a: "puissions", h: "pouvoir au subjonctif" },
+          { t: " visiter l'exposition ensemble. Fais-moi signe dès que possible.\n\nÀ " },
+          { a: "très vite", h: "clôture amicale" },
+          { t: " !" }
+        ],
+        presets: {
+          demenagement: {
+            title: "📦 Coup de main déménagement",
+            slots: {
+              friend_name: "Julien",
+              hook: "te demander un petit coup de main pour mon emménagement samedi prochain",
+              details: "en plein centre-ville, juste à côté de la gare. Nous commencerons vers 10h par le chargement des cartons avant de monter les meubles",
+              proposal_sub: "afin que nous puissions nous organiser sereinement et partager un bon déjeuner",
+              closing_amical: "À très vite,"
+            }
+          },
+          chalet: {
+            title: "🏔️ Week-end au chalet",
+            slots: {
+              friend_name: "Sophie",
+              hook: "t'inviter à passer le week-end prochain dans le chalet familial à la montagne",
+              details: "dans un cadre magnifique au pied des pistes. Au programme : randonnées en forêt, feux de camp et moments de pure détente",
+              proposal_sub: "afin que nous puissions réserver le covoiturage et préparer les repas à l'avance",
+              closing_amical: "Fais-moi signe dès que possible,"
+            }
+          },
+          anniversaire: {
+            title: "🎂 Fête surprise anniversaire",
+            slots: {
+              friend_name: "Marc",
+              hook: "t'associer à l'organisation de la fête d'anniversaire surprise pour Lucas",
+              details: "chez moi vendredi dès 19h. Chacun apporte un plat salé ou sucré et nous cacherons le cadeau dans le salon",
+              proposal_sub: "afin que nous puissions coordonner la liste des invités dans le plus grand secret",
+              closing_amical: "Tiens-moi au courant, amitiés,"
+            }
+          }
+        }
+      },
+
+      // ─────────────────────────────────────────────────────────────────
+      // 2. TÂCHE 1 FORMELLE (60-120 MOTS)
+      // ─────────────────────────────────────────────────────────────────
+      t1_formel: {
+        name: "Tâche 1 : Courriel Formel",
+        min: 60,
+        max: 120,
+        radarCriteria: [
+          { name: "Formule d'appel formelle (Madame, Monsieur,)", test: text => /(madame, monsieur|monsieur le directeur|chère madame)/i.test(text), points: "+1.0 pt" },
+          { name: "Conditionnel de politesse", test: text => /(souhaiterais|voudrais|permettrais|pourriez-vous)/i.test(text), points: "+1.5 pt" },
+          { name: "Connecteur professionnel (afin de, à cet effet)", test: text => /(afin de|dans le but de|à cet effet|par ailleurs)/i.test(text), points: "+1.0 pt" },
+          { name: "Formule de salutation distinguée", test: text => /(salutations distinguées|entière disposition|cordialement|veuillez agréer)/i.test(text), points: "+1.0 pt" }
+        ],
+        groups: [
+          {
+            title: "En-tête Formel & Objet",
+            accent: "blue",
+            fields: [
+              {
+                id: 'object',
+                label: 'Objet précis du message',
+                type: 'input',
+                scaffold: 'Objet : <strong>[Objet clair et synthétique]</strong>',
+                placeholder: "Demande de renseignements concernant la formation professionnelle en gestion",
+                default: "Demande de renseignements concernant la formation professionnelle en gestion"
+              },
+              {
+                id: 'recipient',
+                label: 'Formule d\'appel',
+                type: 'select',
+                options: [
+                  "Madame, Monsieur,",
+                  "Monsieur le Directeur,",
+                  "Chère Madame Dupont,"
+                ],
+                default: "Madame, Monsieur,"
+              }
+            ]
+          },
+          {
+            title: "Corps du Courriel & Formule de Politesse",
+            accent: "gold",
+            fields: [
+              {
+                id: 'body',
+                label: 'Motif et demandes précises (Conditionnel de politesse)',
+                type: 'input',
+                scaffold: 'Je me permets de vous contacter afin de <strong>[Demande]</strong>. Étant salarié, je souhaiterais connaître <strong>[Questions]</strong>.',
+                placeholder: "solliciter des informations complémentaires sur votre cursus. Étant salarié, je souhaiterais connaître les créneaux des cours du soir, les tarifs ainsi que les modalités d'inscription",
+                default: "solliciter des informations complémentaires sur votre cursus. Étant salarié, je souhaiterais connaître les créneaux des cours du soir, les tarifs ainsi que les modalités d'inscription"
+              },
+              {
+                id: 'closing',
+                label: 'Formule de politesse professionnelle finale',
+                type: 'select',
+                options: [
+                  "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,",
+                  "En vous remerciant par avance pour l'attention accordée à ma demande, je vous prie d'agréer mes salutations distinguées.",
+                  "Dans l'attente de votre retour, je vous prie d'agréer, Madame, Monsieur, l'expression de mes sentiments distingués."
+                ],
+                default: "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          return "Objet : " + (s.object || 'Demande d\'information') + "\n\n" + (s.recipient || 'Madame, Monsieur,') + "\n\nJe me permets de vous contacter afin de " + (s.body || '...') + ".\n\n" + (s.closing || 'Cordialement,') + "\n\nNabil Mansouri";
+        },
+        clozeData: [
+          { t: "Objet : Demande de renseignements\n\n" },
+          { a: "Madame, Monsieur,", h: "salutation professionnelle" },
+          { t: "\n\nJe me " },
+          { a: "permets de", h: "verbe de courtoisie" },
+          { t: " vous contacter afin d'obtenir des précisions sur votre programme. Je " },
+          { a: "souhaiterais", h: "conditionnel de politesse" },
+          { t: " savoir s'il est possible de suivre cette formation à distance. Je " },
+          { a: "reste à votre entière disposition", h: "formule de disponibilité" },
+          { t: " pour tout échange.\n\n" },
+          { a: "Cordialement", h: "salutation courtoise" },
+          { t: "," }
+        ],
+        presets: {
+          formation: {
+            title: "🎓 Renseignements formation",
+            slots: {
+              object: "Demande d'informations — Cours du soir en gestion de projet",
+              recipient: "Madame, Monsieur,",
+              body: "solliciter des précisions relatives au cursus de gestion de projet. Étant actuellement salarié, je souhaiterais connaître les modalités d'inscription, les possibilités de financement et le volume horaire hebdomadaire",
+              closing: "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,"
+            }
+          },
+          benevole: {
+            title: "🤝 Candidature bénévole association",
+            slots: {
+              object: "Proposition d'engagement bénévole — Aide aux devoirs",
+              recipient: "Madame, Monsieur,",
+              body: "proposer ma contribution bénévole aux ateliers périscolaires de votre association. Fort d'une expérience en soutien scolaire, je souhaiterais savoir quelles démarches effectuer pour rejoindre votre équipe dès la rentrée",
+              closing: "En vous remerciant par avance pour l'attention accordée à ma demande, je vous prie d'agréer mes salutations distinguées."
+            }
+          },
+          reclamation: {
+            title: "📦 Réclamation service client",
+            slots: {
+              object: "Signalement concernant la commande n° 84920 — Colis incomplet",
+              recipient: "Madame, Monsieur,",
+              body: "vous signaler un incident lors de la livraison effectuée hier. Deux articles manquent à l'appel. Je souhaiterais ainsi obtenir le renvoi rapide des produits concernés ou, à défaut, le remboursement de la différence",
+              closing: "Dans l'attente de votre retour, je vous prie d'agréer, Madame, Monsieur, l'expression de mes sentiments distingués."
+            }
+          }
+        }
+      },
+
+      // ─────────────────────────────────────────────────────────────────
+      // 3. TÂCHE 2 : RÉCIT D'EXPÉRIENCE OU BLOG (120-150 MOTS)
+      // ─────────────────────────────────────────────────────────────────
+      t2: {
+        name: "Tâche 2 : Récit d'expérience / Blog",
+        min: 120,
+        max: 150,
+        radarCriteria: [
+          { name: "Titre percutant avec ponctuation forte", test: text => /^[^\n]+[!?:—]/m.test(text), points: "+1.0 pt" },
+          { name: "Alternance Imparfait / Passé Composé", test: text => /(était|étaient|faisait|avait|se déroulait)/i.test(text) && /(j'ai|nous avons|a été|ont permis|m'a marqué)/i.test(text), points: "+1.5 pt" },
+          { name: "Connecteur de concession / nuance (Bien que / Certes)", test: text => /(bien que|certes|pour ma part|néanmoins|toutefois)/i.test(text), points: "+1.0 pt" },
+          { name: "Recommandation universelle appuyée", test: text => /(recommande vivement|que l'on soit|conseille à tous|permet de)/i.test(text), points: "+1.0 pt" }
+        ],
+        groups: [
+          {
+            title: "Titre d'Accroche & Contexte Initial (Imparfait)",
+            accent: "gold",
+            fields: [
+              {
+                id: 'title',
+                label: 'Titre de l\'article (Accrocheur avec ponctuation)',
+                type: 'input',
+                scaffold: 'Titre : <strong>[Titre vivant avec point d\'exclamation ou deux-points]</strong>',
+                placeholder: "Mon séjour d'études au Canada : une expérience inoubliable !",
+                default: "Mon séjour d'études au Canada : une expérience inoubliable !"
+              },
+              {
+                id: 'context',
+                label: 'Contexte et objectif initial (Imparfait / Objectif)',
+                type: 'input',
+                scaffold: 'L\'année dernière, j\'ai eu l\'occasion de <strong>[Événement vécu]</strong> dans le but de <strong>[Objectif d\'apprentissage]</strong>.',
+                placeholder: "participer à un stage linguistique à Montréal dans le but de perfectionner mon niveau de langue et de découvrir la culture québécoise",
+                default: "participer à un stage linguistique à Montréal dans le but de perfectionner mon niveau de langue et de découvrir la culture québécoise"
+              }
+            ]
+          },
+          {
+            title: "Péripéties (Passé Composé) & Recommandation Universelle",
+            accent: "blue",
+            fields: [
+              {
+                id: 'story',
+                label: 'Récit vivant (Alternance Imparfait / Passé Composé + Concession)',
+                type: 'input',
+                scaffold: 'Pour ma part, cette expérience s\'est révélée très formatrice. <strong>[Faits, émotions et concession]</strong>.',
+                placeholder: "Les cours étaient particulièrement stimulants et l'ambiance au sein de l'équipe était chaleureuse. J'ai surmonté mes appréhensions initiales et j'ai noué de précieuses amitiés. Bien que le rythme fût exigeant, chaque journée m'a apporté son lot de découvertes",
+                default: "Les cours étaient particulièrement stimulants et l'ambiance au sein de l'équipe était chaleureuse. J'ai surmonté mes appréhensions initiales et j'ai noué de précieuses amitiés. Bien que le rythme fût exigeant, chaque journée m'a apporté son lot de découvertes"
+              },
+              {
+                id: 'recommendation',
+                label: 'Recommandation finale universelle (Obligatoire)',
+                type: 'input',
+                scaffold: 'Je recommande vivement cette aventure à tous ceux qui <strong>[Public visé]</strong>. Que l\'on soit <strong>[Profil]</strong>, cela permet de <strong>[Bénéfice durable]</strong>.',
+                placeholder: "souhaitent sortir de leur zone de confort. Que l'on soit novice ou expérimenté, cela permet de développer une précieuse autonomie et de créer des souvenirs mémorables",
+                default: "souhaitent sortir de leur zone de confort. Que l'on soit novice ou expérimenté, cela permet de développer une précieuse autonomie et de créer des souvenirs mémorables"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          return (s.title || 'Mon expérience') + "\n\nL'année dernière, j'ai eu l'occasion de " + (s.context || '...') + ".\n\nPour ma part, cette expérience s'est révélée très formatrice. " + (s.story || '...') + ".\n\nJe recommande vivement cette aventure à tous ceux qui " + (s.recommendation || '...') + ".";
+        },
+        clozeData: [
+          { t: "Une expérience inoubliable !\n\nL'été dernier, j'ai eu " },
+          { a: "l'occasion", h: "nom (opportunité)" },
+          { t: " de participer à un projet associatif. L'ambiance " },
+          { a: "était", h: "être à l'imparfait" },
+          { t: " particulièrement chaleureuse.\n\n" },
+          { a: "Pour ma part", h: "amorce personnelle" },
+          { t: ", cet événement m'a profondément marqué. J'ai " },
+          { a: "découvert", h: "participe de découvrir" },
+          { t: " des initiatives formidables. " },
+          { a: "Bien que", h: "conjonction (+ subjonctif)" },
+          { t: " le travail fût intense, j'ai " },
+          { a: "passé", h: "passer au passé composé" },
+          { t: " des moments précieux.\n\nJe " },
+          { a: "recommande vivement", h: "verbe de conseil appuyé" },
+          { t: " cette démarche à tous ceux qui souhaitent s'investir utilement." }
+        ],
+        presets: {
+          linguistique: {
+            title: "🇨🇦 Séjour linguistique Montréal",
+            slots: {
+              title: "Mon immersion linguistique à Montréal : un virage déterminant !",
+              context: "participer à un programme d'échange universitaire à Montréal dans le but d'enrichir mon vocabulaire et d'expérimenter la francophonie nord-américaine",
+              story: "Les ateliers étaient très vivants et les intervenants encourageaient sans cesse la prise de parole. J'ai rapidement surmonté ma timidité face aux locaux. Bien que les premiers jours fussent déroutants, j'ai gagné une confiance durable",
+              recommendation: "souhaitent progresser à pas de géant. Que l'on voyage seul ou en binôme, cette immersion offre une ouverture interculturelle incomparable"
+            }
+          },
+          benevolat_vert: {
+            title: "🌿 Journée citoyenne nettoyage",
+            slots: {
+              title: "Nettoyage des berges du fleuve : une mobilisation citoyenne exemplaire !",
+              context: "rejoindre une brigade citoyenne de nettoyage le long du fleuve dans le but d'agir concrètement pour la préservation de notre écosystème",
+              story: "Le soleil était au rendez-vous et les bénévoles faisaient preuve d'une formidable solidarité. En quelques heures seulement, nous avons collecté des dizaines de sacs de plastique. Bien que l'effort physique fût soutenu, la fierté d'accomplir une tâche utile a prévalu",
+              recommendation: "veulent concilier action écologique et convivialité. Que l'on soit jeune ou retraité, s'impliquer collectivement transforme le regard que l'on porte sur son environnement"
+            }
+          },
+          velo_nature: {
+            title: "🚴 Périple à vélo & Nature",
+            slots: {
+              title: "Traversée des parcs à vélo : une aventure ressourçante !",
+              context: "accomplir un itinéraire de 300 kilomètres à bicyclette dans le but de me reconnecter à la nature et de tester mon endurance personnelle",
+              story: "Les paysages étaient à couper le souffle et le sentiment de liberté grandissait à chaque étape. J'ai affronté plusieurs dénivelés ardus avec persévérance. Bien que la météo fût capricieuse certains matins, le calme des grands espaces a tout effacé",
+              recommendation: "recherchent une évasion saine loin des écrans. Que l'on soit cycliste aguerri ou amateur, une telle aventure revitalise l'esprit et développe une réelle résilience"
+            }
+          }
+        }
+      },
+
+      // ─────────────────────────────────────────────────────────────────
+      // 4. TÂCHE 3 : SYNTHÈSE DE 2 DOCUMENTS & ESSAI NUANCÉ (120-180 MOTS)
       // ─────────────────────────────────────────────────────────────────
       t3: {
         name: "Tâche 3 : Synthèse & Prise de position",
         min: 120,
         max: 180,
+        radarCriteria: [
+          { name: "Synthèse comparative des 2 documents", test: text => /(document 1|premier texte|le premier extrait)/i.test(text) && /(document 2|second texte|second document|à l'inverse|en revanche)/i.test(text), points: "+1.5 pt" },
+          { name: "Connecteur d'opposition C1", test: text => /(à l'inverse|en revanche|néanmoins|toutefois|à l'opposé)/i.test(text), points: "+1.0 pt" },
+          { name: "Formule de nuance / juste milieu", test: text => /(aspects contrastés|juste milieu|juste équilibre|plutôt que d'|concilier|au détriment de)/i.test(text), points: "+1.0 pt" },
+          { name: "Subjonctif Présent actif de compromis", test: text => /(puisse|puissions|soit|soient|fassions|prenne|comprenne|ait)/i.test(text), points: "+1.5 pt" }
+        ],
         groups: [
           {
             title: "Paragraphe 1 : Synthèse Comparative Neutre (40–50 mots)",
@@ -1061,13 +1587,13 @@
                 id: 'theme',
                 label: 'Thème central du débat',
                 type: 'input',
-                scaffold: 'Dans le débat sur <strong>[Thème]</strong>,',
+                scaffold: 'Dans le débat sur <strong>[Thème du débat]</strong>,',
                 placeholder: "l'utilisation des nouvelles technologies dans les écoles",
                 default: "l'utilisation des nouvelles technologies dans les écoles"
               },
               {
                 id: 'intro_conn',
-                label: 'Amorce d\'affrontement',
+                label: 'Amorce d\'affrontement objectif',
                 type: 'select',
                 options: [
                   "deux visions s'affrontent.",
@@ -1087,7 +1613,7 @@
               },
               {
                 id: 'trans_conn',
-                label: 'Connecteur d\'opposition',
+                label: 'Connecteur d\'opposition C1',
                 type: 'select',
                 options: [
                   "À l'inverse,",
@@ -1108,7 +1634,7 @@
             ]
           },
           {
-            title: "Paragraphe 2 : Prise de Position Personnelle & Matiz (100–120 mots)",
+            title: "Paragraphe 2 : Prise de Position Personnelle & Compromis (100–120 mots)",
             accent: "gold",
             fields: [
               {
@@ -1133,9 +1659,9 @@
               },
               {
                 id: 'solution_compromise',
-                label: 'Formule de compromis / Nuance C1 (Subjonctif)',
+                label: 'Formule de compromis C1 avec subjonctif (+1.5 pt)',
                 type: 'input',
-                scaffold: 'Plutôt que d\'adopter une posture radicale, il est essentiel de <strong>[Mesure de compromis]</strong> afin que <strong>[Subjonctif]</strong>.',
+                scaffold: 'Plutôt que d\'adopter une posture radicale, il est essentiel de <strong>[Mesure équilibrée]</strong> afin que <strong>[Subjonctif]</strong>.',
                 placeholder: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé",
                 default: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé"
               }
@@ -1143,8 +1669,8 @@
           }
         ],
         assemble: (s) => {
-          const p1 = `Dans le débat sur ${s.theme || '...'}, ${s.intro_conn} Le Document 1 met en avant ${s.doc1_arg || '...'}. ${s.trans_conn} le Document 2 souligne ${s.doc2_arg || '...'}.`;
-          const p2 = `${s.opinion_lead} cette question présente des aspects contrastés. Certes, ${s.stance_core || '...'}. Plutôt que d'adopter une posture radicale, il est essentiel de ${s.solution_compromise || '...'}.`;
+          const p1 = "Dans le débat sur " + (s.theme || '...') + ", " + s.intro_conn + " Le Document 1 met en avant " + (s.doc1_arg || '...') + ". " + s.trans_conn + " le Document 2 souligne " + (s.doc2_arg || '...') + ".";
+          const p2 = s.opinion_lead + " cette question présente des aspects contrastés. Certes, " + (s.stance_core || '...') + ". Plutôt que d'adopter une posture radicale, il est essentiel de " + (s.solution_compromise || '...') + ".";
           return p1 + "\n\n" + p2;
         },
         clozeData: [
@@ -1165,293 +1691,86 @@
           { t: " tous les usagers " },
           { a: "puissent", h: "pouvoir au subjonctif" },
           { t: " en bénéficier durablement." }
-        ]
-      },
-
-      // ─────────────────────────────────────────────────────────────────
-      // TÂCHE 2 : RÉCIT D'EXPÉRIENCE OU BLOG
-      // ─────────────────────────────────────────────────────────────────
-      t2: {
-        name: "Tâche 2 : Récit d'expérience / Blog",
-        min: 120,
-        max: 150,
-        groups: [
-          {
-            title: "Structure de l'Article (Titre + Contexte + Déroulement + Conseil)",
-            accent: "gold",
-            fields: [
-              {
-                id: 'title',
-                label: 'Titre accrocheur',
-                type: 'input',
-                scaffold: 'Titre : <strong>[Titre avec ponctuation forte]</strong>',
-                placeholder: "Mon séjour d'études au Canada : une expérience inoubliable !",
-                default: "Mon séjour d'études au Canada : une expérience inoubliable !"
-              },
-              {
-                id: 'context',
-                label: 'Contexte et objectif initial',
-                type: 'input',
-                scaffold: 'L\'année dernière, j\'ai eu l\'occasion de <strong>[Événement]</strong> dans le but de <strong>[Objectif]</strong>.',
-                placeholder: "participer à un stage linguistique à Montréal dans le but de perfectionner mon niveau de langue et de découvrir la culture québécoise",
-                default: "participer à un stage linguistique à Montréal dans le but de perfectionner mon niveau de langue et de découvrir la culture québécoise"
-              },
-              {
-                id: 'story',
-                label: 'Récit vivant (Imparfait + Passé Composé)',
-                type: 'input',
-                scaffold: 'Pour ma part, cette expérience s\'est révélée très formatrice. <strong>[Faits et impressions]</strong>.',
-                placeholder: "Les cours étaient particulièrement stimulants et l'ambiance au sein de l'équipe était chaleureuse. J'ai surmonté mes appréhensions initiales et j'ai noué de précieuses amitiés. Bien que le rythme fût exigeant, chaque journée m'a apporté son lot de découvertes",
-                default: "Les cours étaient particulièrement stimulants et l'ambiance au sein de l'équipe était chaleureuse. J'ai surmonté mes appréhensions initiales et j'ai noué de précieuses amitiés. Bien que le rythme fût exigeant, chaque journée m'a apporté son lot de découvertes"
-              },
-              {
-                id: 'recommendation',
-                label: 'Recommandation universelle finale (Obligatoire)',
-                type: 'input',
-                scaffold: 'Je recommande vivement cette aventure à tous ceux qui <strong>[Public]</strong>. Que l\'on soit <strong>[Profil]</strong>, cela permet de <strong>[Bénéfice]</strong>.',
-                placeholder: "souhaitent sortir de leur zone de confort. Que l'on soit novice ou expérimenté, cela permet de développer une précieuse autonomie et de créer des souvenirs mémorables",
-                default: "souhaitent sortir de leur zone de confort. Que l'on soit novice ou expérimenté, cela permet de développer une précieuse autonomie et de créer des souvenirs mémorables"
-              }
-            ]
-          }
         ],
-        assemble: (s) => {
-          return `${s.title || 'Mon expérience'}\n\nL'année dernière, j'ai eu l'occasion de ${s.context || '...'}.\n\nPour ma part, cette expérience s'est révélée très formatrice. ${s.story || '...'}.\n\nJe recommande vivement cette aventure à tous ceux qui ${s.recommendation || '...'}.`;
-        },
-        clozeData: [
-          { t: "Une expérience inoubliable !\n\nLa semaine dernière, j'ai eu " },
-          { a: "l'occasion", h: "nom (opportunité)" },
-          { t: " de participer à un projet associatif. L'ambiance " },
-          { a: "était", h: "être à l'imparfait" },
-          { t: " particulièrement chaleureuse.\n\n" },
-          { a: "Pour ma part", h: "amorce personnelle" },
-          { t: ", cet événement m'a profondément marqué. J'ai " },
-          { a: "découvert", h: "participe de découvrir" },
-          { t: " des initiatives formidables et les intervenants " },
-          { a: "expliquaient", h: "expliquer à l'imparfait" },
-          { t: " leurs actions avec clarté. " },
-          { a: "Bien que", h: "conjonction (+ subjonctif)" },
-          { t: " le travail fût intense, j'ai " },
-          { a: "passé", h: "passer au passé composé" },
-          { t: " des moments précieux.\n\nJe " },
-          { a: "recommande vivement", h: "verbe de conseil appuyé" },
-          { t: " cette démarche à tous ceux qui souhaitent s'investir utilement." }
-        ]
-      },
-
-      // ─────────────────────────────────────────────────────────────────
-      // TÂCHE 1 AMICALE (60-120 MOTS)
-      // ─────────────────────────────────────────────────────────────────
-      t1_amical: {
-        name: "Tâche 1 : Message Amical",
-        min: 60,
-        max: 120,
-        groups: [
-          {
-            title: "Structure du Message Familier (Salut + 3 Détails + Subjonctif)",
-            accent: "gold",
-            fields: [
-              {
-                id: 'friend_name',
-                label: 'Prénom de l\'ami(e)',
-                type: 'input',
-                scaffold: 'Salut <strong>[Prénom]</strong>,',
-                placeholder: "Julien",
-                default: "Julien"
-              },
-              {
-                id: 'hook',
-                label: 'Accroche et motif',
-                type: 'input',
-                scaffold: 'J\'espère que tu vas bien ! Je t\'écris pour te parler de <strong>[Sujet]</strong>.',
-                placeholder: "mon déménagement dans mon nouvel appartement samedi prochain",
-                default: "mon déménagement dans mon nouvel appartement samedi prochain"
-              },
-              {
-                id: 'details',
-                label: 'Détails indispensables (Lieu, heure, organisation)',
-                type: 'input',
-                scaffold: 'Le logement est situé <strong>[Lieu]</strong>. Nous débuterons vers <strong>[Heure]</strong> par <strong>[Activités]</strong>.',
-                placeholder: "au 12 rue des Lilas, près du métro. Nous débuterons vers 10h par le chargement des cartons, avant de monter les meubles",
-                default: "au 12 rue des Lilas, près du métro. Nous débuterons vers 10h par le chargement des cartons, avant de monter les meubles"
-              },
-              {
-                id: 'proposal_sub',
-                label: 'Invitation avec subjonctif de but',
-                type: 'input',
-                scaffold: 'Fais-moi savoir si tu es disponible <strong>afin que nous [Verbe Subjonctif]</strong>.',
-                placeholder: "afin que nous puissions nous organiser sereinement",
-                default: "afin que nous puissions nous organiser sereinement"
-              }
-            ]
+        presets: {
+          tech_ecole: {
+            title: "📱 IA & Écrans à l'école",
+            slots: {
+              theme: "l'utilisation des nouvelles technologies dans les écoles",
+              intro_conn: "deux visions s'affrontent.",
+              doc1_arg: "l'enrichissement des apprentissages et l'autonomie accrue offerte aux élèves",
+              trans_conn: "À l'inverse,",
+              doc2_arg: "les risques majeurs de dépendance aux écrans et le recul des interactions humaines",
+              opinion_lead: "À mon sens,",
+              stance_core: "l'outil numérique modernise indéniablement la pédagogie. Cependant, il ne faut pas sous-estimer la fatigue cognitive qu'une exposition excessive engendre",
+              solution_compromise: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé"
+            }
+          },
+          transports_gratuits: {
+            title: "🌿 Transports publics gratuits",
+            slots: {
+              theme: "la gratuité des transports en commun dans les métropoles",
+              intro_conn: "deux points de vue s'opposent.",
+              doc1_arg: "la diminution sensible du trafic automobile, la baisse de la pollution et le soutien au commerce local",
+              trans_conn: "En revanche,",
+              doc2_arg: "le coût financier considérable pour les villes et les limites liées à l'inégalité de desserte",
+              opinion_lead: "À mon avis,",
+              stance_core: "rendre les bus et métros gratuits stimule l'écologie urbaine. Toutefois, la gratuité ne doit pas se faire au détriment de la qualité ni de la sécurité du réseau",
+              solution_compromise: "adopter une tarification solidaire et progressive plutôt qu'une gratuité totale, afin que les transports publics demeurent fiables et bien entretenus"
+            }
+          },
+          teletravail: {
+            title: "💼 Télétravail & Semaine 4j",
+            slots: {
+              theme: "la généralisation du télétravail et la semaine de 4 jours",
+              intro_conn: "les avis sont particulièrement partagés.",
+              doc1_arg: "l'optimisation de l'équilibre personnel et le gain de temps précieux sur les déplacements",
+              trans_conn: "À l'opposé,",
+              doc2_arg: "le risque d'isolement social et la difficulté à préserver une frontière nette entre vie pro et perso",
+              opinion_lead: "De mon point de vue,",
+              stance_core: "le travail à distance procure une souplesse précieuse très appréciée des salariés. Néanmoins, l'absence de contact physique peut affaiblir la dynamique d'équipe",
+              solution_compromise: "privilégier une formule hybride de deux à trois jours par semaine afin que l'on concilie flexibilité individuelle et cohésion collective"
+            }
+          },
+          ecoles_privees: {
+            title: "🎓 Écoles privées vs Publique",
+            slots: {
+              theme: "le choix entre établissements privés et enseignement public",
+              intro_conn: "deux visions s'affrontent.",
+              doc1_arg: "la réputation d'excellence, l'encadrement rigoureux et la discipline rassurante pour les parents",
+              trans_conn: "À l'inverse,",
+              doc2_arg: "l'accentuation des disparités sociales et le manque de mixité au sein des classes",
+              opinion_lead: "À mon sens,",
+              stance_core: "l'école privée répond aux attentes légitimes de certaines familles. Cependant, l'éducation doit avant tout demeurer un vecteur universel d'égalité des chances",
+              solution_compromise: "renforcer les moyens de l'école publique tout en valorisant la mixité sociale, afin que chaque jeune reçoive une formation de qualité sans distinction de classe"
+            }
+          },
+          fast_food: {
+            title: "🍔 Restauration rapide",
+            slots: {
+              theme: "la fréquentation de la restauration rapide au quotidien",
+              intro_conn: "les opinions divergent profondément.",
+              doc1_arg: "la rapidité de service, des prix accessibles et la liberté de choix des consommateurs",
+              trans_conn: "En revanche,",
+              doc2_arg: "la qualité nutritionnelle insuffisante et les risques avérés pour la santé publique",
+              opinion_lead: "Selon moi,",
+              stance_core: "les fast-foods répondent aux exigences d'un rythme de vie urbain effréné. Néanmoins, en faire la base de son alimentation entraîne des déséquilibres sanitaires sévères",
+              solution_compromise: "adopter un usage strictement ponctuel tout en développant des alternatives saines, afin que l'on préserve son bien-être sans renoncer à la convivialité"
+            }
+          },
+          voyage_solo: {
+            title: "🎒 Voyage en solitaire",
+            slots: {
+              theme: "l'engouement pour le voyage en solitaire",
+              intro_conn: "deux approches s'opposent.",
+              doc1_arg: "la liberté absolue d'itinéraire, le développement de l'autonomie et la facilité des rencontres locales",
+              trans_conn: "À l'inverse,",
+              doc2_arg: "le sentiment de solitude face aux imprévus et les questions de sécurité dans les régions reculées",
+              opinion_lead: "À mon sens,",
+              stance_core: "partir seul représente une formidable école de vie qui forge le caractère. Malgré tout, l'impossibilité de partager ses émotions sur le moment peut parfois peser",
+              solution_compromise: "alterner entre escapades individuelles et séjours en groupe, afin que chaque voyageur vive une expérience riche adaptée à ses aspirations du moment"
+            }
           }
-        ],
-        assemble: (s) => {
-          return `Salut ${s.friend_name || 'mon ami'} !\n\nJ'espère que tu vas bien ! Je t'écris pour te parler de ${s.hook || '...'}. Le logement est situé ${s.details || '...'}.\n\nFais-moi savoir si tu es disponible ${s.proposal_sub || 'afin que nous puissions nous organiser'}. J'ai prévu un délicieux repas pour te remercier !\n\nÀ très vite,\nNabil`;
-        },
-        clozeData: [
-          { t: "Salut Thomas !\n\nJ'espère que tu vas bien ! Je t'écris " },
-          { a: "afin de", h: "connecteur de but" },
-          { t: " te proposer une sortie ce week-end. Si tu as du temps libre, " },
-          { a: "on pourrait", h: "conditionnel de suggestion" },
-          { t: " se retrouver à 15h " },
-          { a: "afin que nous", h: "locution de finalité" },
-          { t: " " },
-          { a: "puissions", h: "pouvoir au subjonctif" },
-          { t: " visiter l'exposition ensemble. Dis-moi vite si cela te convient. À " },
-          { a: "très bientôt", h: "clôture familière" },
-          { t: " !" }
-        ]
-      },
-
-      // ─────────────────────────────────────────────────────────────────
-      // TÂCHE 1 FORMELLE (60-120 MOTS)
-      // ─────────────────────────────────────────────────────────────────
-      t1_formel: {
-        name: "Tâche 1 : Courriel Formel",
-        min: 60,
-        max: 120,
-        groups: [
-          {
-            title: "Structure du Courriel Professionnel (Objet + Formule d'appel + Demande + Salutation)",
-            accent: "blue",
-            fields: [
-              {
-                id: 'object',
-                label: 'Objet du message',
-                type: 'input',
-                scaffold: 'Objet : <strong>[Objet clair]</strong>',
-                placeholder: "Demande de renseignements concernant la formation en gestion",
-                default: "Demande de renseignements concernant la formation en gestion"
-              },
-              {
-                id: 'recipient',
-                label: 'Formule d\'appel professionnelle',
-                type: 'select',
-                options: [
-                  "Madame, Monsieur,",
-                  "Monsieur le Directeur,",
-                  "Chère Madame Dupont,"
-                ],
-                default: "Madame, Monsieur,"
-              },
-              {
-                id: 'body',
-                label: 'Motif et questions précises',
-                type: 'input',
-                scaffold: 'Je me permets de vous contacter afin de <strong>[Demande]</strong>. Étant salarié, je souhaiterais connaître <strong>[Questions]</strong>.',
-                placeholder: "solliciter des informations complémentaires sur votre cursus. Étant salarié, je souhaiterais connaître les créneaux des cours du soir, les tarifs ainsi que les conditions d'admission",
-                default: "solliciter des informations complémentaires sur votre cursus. Étant salarié, je souhaiterais connaître les créneaux des cours du soir, les tarifs ainsi que les conditions d'admission"
-              },
-              {
-                id: 'closing',
-                label: 'Formule de politesse formelle',
-                type: 'select',
-                options: [
-                  "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,",
-                  "En vous remerciant par avance pour l'attention accordée à ma demande, je vous prie d'agréer mes salutations distinguées."
-                ],
-                default: "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,"
-              }
-            ]
-          }
-        ],
-        assemble: (s) => {
-          return `Objet : ${s.object || 'Demande d\'information'}\n\n${s.recipient}\n\nJe me permets de vous contacter afin de ${s.body || '...'}.\n\n${s.closing}\n\nNabil Mansouri`;
-        },
-        clozeData: [
-          { t: "Objet : Demande de renseignements\n\n" },
-          { a: "Madame, Monsieur,", h: "salutation professionnelle" },
-          { t: "\n\nJe me " },
-          { a: "permets de", h: "verbe de courtoisie" },
-          { t: " vous contacter pour obtenir des détails sur le programme. Je " },
-          { a: "souhaiterais", h: "conditionnel de politesse" },
-          { t: " savoir s'il est possible de s'inscrire en ligne. Je " },
-          { a: "reste à votre entière disposition", h: "formule de disponibilité" },
-          { t: " pour tout échange.\n\n" },
-          { a: "Cordialement", h: "salutation courtoise" },
-          { t: "," }
-        ]
-      }
-    };
-
-    const PRESET_TOPICS = {
-      tech_ecole: {
-        task: 't3',
-        slots: {
-          theme: "l'utilisation des nouvelles technologies dans les écoles",
-          intro_conn: "deux visions s'affrontent.",
-          doc1_arg: "l'enrichissement des apprentissages et l'autonomie accrue offerte aux élèves",
-          trans_conn: "À l'inverse,",
-          doc2_arg: "les risques majeurs de dépendance aux écrans et le recul des interactions humaines",
-          opinion_lead: "À mon sens,",
-          stance_core: "l'outil numérique modernise indéniablement la pédagogie. Cependant, il ne faut pas sous-estimer la fatigue cognitive qu'une exposition excessive engendre",
-          solution_compromise: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé"
-        }
-      },
-      transports_gratuits: {
-        task: 't3',
-        slots: {
-          theme: "la gratuité des transports en commun dans les métropoles",
-          intro_conn: "deux points de vue s'opposent.",
-          doc1_arg: "la diminution sensible du trafic automobile, la baisse de la pollution et le soutien au commerce local",
-          trans_conn: "En revanche,",
-          doc2_arg: "le coût financier considérable pour les villes et les limites liées à l'inégalité de desserte",
-          opinion_lead: "À mon avis,",
-          stance_core: "rendre les bus et métros gratuits stimule l'écologie urbaine. Toutefois, la gratuité ne doit pas se faire au détriment de la qualité ni de la sécurité du réseau",
-          solution_compromise: "adopter une tarification solidaire et progressive plutôt qu'une gratuité totale, afin que les transports publics demeurent fiables et bien entretenus"
-        }
-      },
-      teletravail: {
-        task: 't3',
-        slots: {
-          theme: "la généralisation du télétravail et la semaine de 4 jours",
-          intro_conn: "les avis sont particulièrement partagés.",
-          doc1_arg: "l'optimisation de l'équilibre personnel et le gain de temps précieux sur les déplacements",
-          trans_conn: "À l'opposé,",
-          doc2_arg: "le risque d'isolement social et la difficulté à préserver une frontière nette entre vie pro et perso",
-          opinion_lead: "De mon point de vue,",
-          stance_core: "le travail à distance procure une souplesse précieuse très appréciée des salariés. Néanmoins, l'absence de contact physique peut affaiblir la dynamique d'équipe",
-          solution_compromise: "privilégier une formule hybride de deux à trois jours par semaine afin que l'on concilie flexibilité individuelle et cohésion collective"
-        }
-      },
-      ecoles_privees: {
-        task: 't3',
-        slots: {
-          theme: "le choix entre établissements privés et enseignement public",
-          intro_conn: "deux visions s'affrontent.",
-          doc1_arg: "la réputation d'excellence, l'encadrement rigoureux et la discipline rassurante pour les parents",
-          trans_conn: "À l'inverse,",
-          doc2_arg: "l'accentuation des disparités sociales et le manque de mixité au sein des classes",
-          opinion_lead: "À mon sens,",
-          stance_core: "l'école privée répond aux attentes légitimes de certaines familles. Cependant, l'éducation doit avant tout demeurer un vecteur universel d'égalité des chances",
-          solution_compromise: "renforcer les moyens de l'école publique tout en valorisant la mixité sociale, afin que chaque jeune reçoive une formation de qualité sans distinction de classe"
-        }
-      },
-      fast_food: {
-        task: 't3',
-        slots: {
-          theme: "la fréquentation de la restauration rapide au quotidien",
-          intro_conn: "les opinions divergent profondément.",
-          doc1_arg: "la rapidité de service, des prix accessibles et la liberté de choix des consommateurs",
-          trans_conn: "En revanche,",
-          doc2_arg: "la qualité nutritionnelle insuffisante et les risques avérés pour la santé publique",
-          opinion_lead: "Selon moi,",
-          stance_core: "les fast-foods répondent aux exigences d'un rythme de vie urbain effréné. Néanmoins, en faire la base de son alimentation entraîne des déséquilibres sanitaires sévères",
-          solution_compromise: "adopter un usage strictement ponctuel tout en développant des alternatives saines, afin que l'on préserve son bien-être sans renoncer à la convivialité"
-        }
-      },
-      voyage_solo: {
-        task: 't3',
-        slots: {
-          theme: "l'engouement pour le voyage en solitaire",
-          intro_conn: "deux approches s'opposent.",
-          doc1_arg: "la liberté absolue d'itinéraire, le développement de l'autonomie et la facilité des rencontres locales",
-          trans_conn: "À l'inverse,",
-          doc2_arg: "le sentiment de solitude face aux imprévus et les questions de sécurité dans les régions reculées",
-          opinion_lead: "À mon sens,",
-          stance_core: "partir seul représente une formidable école de vie qui forge le caractère. Malgré tout, l'impossibilité de partager ses émotions sur le moment peut parfois peser",
-          solution_compromise: "alterner entre escapades individuelles et séjours en groupe, afin que chaque voyageur vive une expérience riche adaptée à ses aspirations du moment"
         }
       }
     };
@@ -1461,11 +1780,14 @@
     // ══════════════════════════════════════════════════════════════════════
     function setTask(taskKey) {
       appState.task = taskKey;
-      document.querySelectorAll('.task-tab').forEach(b => {
-        b.classList.toggle('active', b.getAttribute('onclick').includes(taskKey));
-      });
+      appState.activePreset = null;
 
-      document.getElementById('presets-container').style.display = (taskKey === 't3') ? 'flex' : 'none';
+      // Update task tabs active state
+      document.querySelectorAll('.task-tab').forEach(b => {
+        b.classList.remove('active');
+      });
+      const activeBtn = document.getElementById('tab-' + taskKey);
+      if (activeBtn) activeBtn.classList.add('active');
 
       const skel = SKELETON_DATABASE[taskKey];
       appState.slots = {};
@@ -1475,9 +1797,40 @@
         });
       });
 
+      renderPresetPills();
       renderSlotsDeck();
       renderLivePreview();
       renderClozeDrill();
+    }
+
+    function renderPresetPills() {
+      const skel = SKELETON_DATABASE[appState.task];
+      const container = document.getElementById('preset-pills-list');
+      if (!skel.presets) {
+        container.innerHTML = '<span style="color:var(--text-dim);font-size:12px;">Aucun exemple prédéfini</span>';
+        return;
+      }
+
+      let html = '';
+      for (const [key, p] of Object.entries(skel.presets)) {
+        const isActive = appState.activePreset === key ? 'active' : '';
+        html += '<button class="preset-pill ' + isActive + '" onclick="loadPreset(\'' + key + '\')">' + p.title + '</button>';
+      }
+      container.innerHTML = html;
+    }
+
+    function loadPreset(key) {
+      const skel = SKELETON_DATABASE[appState.task];
+      if (!skel.presets || !skel.presets[key]) return;
+
+      appState.activePreset = key;
+      const p = skel.presets[key];
+      appState.slots = { ...p.slots };
+
+      renderPresetPills();
+      renderSlotsDeck();
+      renderLivePreview();
+      showToast('⚡ Thème « ' + p.title + ' » chargé !');
     }
 
     function setMode(modeKey) {
@@ -1486,6 +1839,11 @@
       document.getElementById('btn-mode-cloze').classList.toggle('active', modeKey === 'cloze');
       document.getElementById('view-build').style.display = (modeKey === 'build') ? 'grid' : 'none';
       document.getElementById('view-cloze').style.display = (modeKey === 'cloze') ? 'block' : 'none';
+    }
+
+    function toggleGuide() {
+      const panel = document.getElementById('user-guide-panel');
+      panel.classList.toggle('collapsed');
     }
 
     function renderSlotsDeck() {
@@ -1503,12 +1861,20 @@
         html += `
           <div class="para-box ${g.accent === 'gold' ? 'gold-accent' : 'blue-accent'}">
             <div class="para-tag ${g.accent === 'blue' ? 'blue' : ''}">${g.title}</div>
-            <div class="para-flow">
+            <div style="display:flex; flex-direction:column; gap:14px;">
         `;
 
         g.fields.forEach(f => {
           html += `<div class="slot-row">`;
-          html += `<div class="slot-label"><span>${f.label}</span></div>`;
+          html += `
+            <div class="slot-header">
+              <span class="slot-label">${f.label}</span>
+            </div>
+          `;
+
+          if (f.scaffold) {
+            html += `<div class="slot-scaffold-hint">Modèle de phrase : ${f.scaffold}</div>`;
+          }
 
           if (f.type === 'select') {
             html += `
@@ -1567,51 +1933,22 @@
     }
 
     function runRadarAudit(text) {
-      const lower = text.toLowerCase();
+      const skel = SKELETON_DATABASE[appState.task];
       const container = document.getElementById('radar-checklist-items');
+      if (!skel.radarCriteria) return;
 
-      const items = [
-        {
-          name: "Subjonctif Présent actif",
-          pass: /(puisse|puissions|soit|soient|fassions|prenne|comprenne|ait)/i.test(text),
-          points: "+1.5 pt"
-        },
-        {
-          name: "Connecteurs de transition / opposition",
-          pass: /(en revanche|à l'inverse|néanmoins|toutefois|tandis que|à l'opposé)/i.test(lower),
-          points: "+1.0 pt"
-        },
-        {
-          name: "Formule de nuance & compromis (C1)",
-          pass: /(juste milieu|juste équilibre|plutôt que d'|concilier|au détriment de|aspects contrastés)/i.test(lower),
-          points: "+1.5 pt"
-        },
-        {
-          name: "Récit : alternance Imparfait / Passé Composé",
-          pass: appState.task !== 't2' || (/(était|étaient|faisait|aimais)/i.test(lower) && /(j'ai|nous avons|a été|ont marqué)/i.test(lower)),
-          points: "+1.0 pt"
-        }
-      ];
-
-      container.innerHTML = items.map(it => `
-        <div class="radar-item ${it.pass ? 'valid' : ''}">
-          <span class="radar-name">
-            <span>${it.pass ? '✅' : '⚪'}</span>
-            <span>${it.name}</span>
-          </span>
-          <span class="radar-tag-point">${it.pass ? it.points + ' Validé' : it.points}</span>
-        </div>
-      `).join('');
-    }
-
-    function loadPreset(key) {
-      const p = PRESET_TOPICS[key];
-      if (!p) return;
-      setTask(p.task);
-      appState.slots = { ...p.slots };
-      renderSlotsDeck();
-      renderLivePreview();
-      showToast(`⚡ Thème officiel 2026 chargé !`);
+      container.innerHTML = skel.radarCriteria.map(it => {
+        const pass = it.test(text);
+        return `
+          <div class="radar-item ${pass ? 'valid' : ''}">
+            <span class="radar-name">
+              <span>${pass ? '✅' : '⚪'}</span>
+              <span>${it.name}</span>
+            </span>
+            <span class="radar-tag-point">${pass ? it.points + ' Validé' : it.points}</span>
+          </div>
+        `;
+      }).join('');
     }
 
     // ══════════════════════════════════════════════════════════════════════
@@ -1691,9 +2028,10 @@
 
     function transferToEcrivance() {
       const text = document.getElementById('live-essay-output').textContent;
-      let taskNum = 3;
-      if (appState.task === 't2') taskNum = 2;
-      else if (appState.task.startsWith('t1')) taskNum = 1;
+      let taskNum = 1;
+      if (appState.task === 't3') taskNum = 3;
+      else if (appState.task === 't2') taskNum = 2;
+      else taskNum = 1;
 
       try {
         const drafts = JSON.parse(localStorage.getItem('ecrivance_drafts') || '{}');
@@ -1715,7 +2053,8 @@
     }
 
     window.onload = () => {
-      setTask('t3');
+      // Start in natural exam order: Tâche 1 Amical
+      setTask('t1_amical');
     };
   </script>
 </body>
