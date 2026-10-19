@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atelier Squelettes Modulaires · TCF Canada (Objectif 12-13 / NCLC 8)</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080c14;
+      --bg-subtle: #0d1320;
+      --surface: #121929;
+      --surface-hover: #192338;
+      --card: #151e32;
+      --border: #23304c;
+      --border-focus: #3b82f6;
+      --primary: #f59e0b;
+      --primary-glow: rgba(245, 158, 11, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #06b6d4;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.2);
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --font-ui: "Plus Jakarta Sans", -apple-system, sans-serif;
+      --font-serif: "Newsreader", Georgia, serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      line-height: 1.5;
+      padding-bottom: 80px;
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.06) 0px, transparent 50%);
+    }
+
+    /* Scrollbar cleanup */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Top Navigation */
+    header {
+      background: rgba(18, 25, 41, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-btn-link {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-link:hover {
+      background: var(--surface-hover);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    /* Main Container */
+    .app-main {
+      max-width: 1380px;
+      margin: 20px auto;
+      padding: 0 24px;
+    }
+
+    /* Strategy Banner: 9 -> 13 Roadmap */
+    .strategy-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .strat-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .strat-badge {
+      background: var(--primary);
+      color: #000;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .strat-text {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .strat-text strong {
+      color: var(--primary);
+    }
+
+    .strat-pills {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-diff-toggle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-diff-toggle:hover, .btn-diff-toggle.active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Control Bar: Tasks & Modes */
+    .control-deck {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .task-nav {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+    }
+
+    .task-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .task-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .task-tab.active {
+      background: var(--primary);
+      color: #0b0f17;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
+    }
+
+    .mode-nav {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+    }
+
+    .mode-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab.active {
+      background: var(--accent-blue);
+      color: #0b0f17;
+      font-weight: 700;
+    }
+
+    /* Mega-Themes Carousel */
+    .presets-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+    }
+
+    .presets-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-right: 6px;
+      border-right: 1px solid var(--border);
+    }
+
+    .preset-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .preset-pill:hover {
+      background: var(--surface-hover);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+
+    /* ════════ WORKSPACE GRID ════════ */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    /* Left: Mad-Libs Interactive Card */
+    .editor-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .card-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-words-target {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Grouped Paragraph Cards */
+    .para-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      position: relative;
+    }
+
+    .para-box.gold-accent {
+      border-left: 3px solid var(--primary);
+    }
+
+    .para-box.blue-accent {
+      border-left: 3px solid var(--accent-blue);
+    }
+
+    .para-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .para-tag.blue {
+      color: var(--accent-blue);
+    }
+
+    .para-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .slot-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slot-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slot-label em {
+      font-style: normal;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .connector-dropdown {
+      background: #0d1320;
+      border: 1px solid var(--border);
+      color: var(--accent-blue);
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .connector-dropdown:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+    }
+
+    .slot-field {
+      width: 100%;
+      background: #0d1320;
+      border: 1px solid var(--border);
+      color: #ffffff;
+      font-family: var(--font-ui);
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 10px 14px;
+      border-radius: 8px;
+      outline: none;
+      resize: vertical;
+      min-height: 52px;
+      transition: all 0.2s;
+    }
+
+    .slot-field:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Right: Preview & Score Radar */
+    .preview-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: sticky;
+      top: 80px;
+    }
+
+    .live-essay-box {
+      background: #080d16;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      font-family: var(--font-serif);
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: #e2e8f0;
+      min-height: 240px;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
+    .live-essay-box mark {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fde68a;
+      border-radius: 3px;
+      padding: 0 3px;
+      font-weight: 600;
+    }
+
+    /* Meter & Status */
+    .meter-cluster {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .meter-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .meter-number {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+
+    .meter-number.success { color: var(--success); }
+    .meter-number.warning { color: var(--warning); }
+    .meter-number.danger { color: var(--danger); }
+
+    .meter-info-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meter-info-sub {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* 9 -> 13 Radar Checklist */
+    .radar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .radar-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: #0d1320;
+      border: 1px solid transparent;
+      font-size: 12px;
+    }
+
+    .radar-item.valid {
+      border-color: rgba(16, 185, 129, 0.25);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .radar-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+
+    .radar-tag-point {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--primary);
+    }
+
+    .radar-item.valid .radar-tag-point {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+
+    /* Action Buttons */
+    .action-panel {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 10px;
+    }
+
+    .btn-act {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-act.copy {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: #ffffff;
+    }
+
+    .btn-act.copy:hover {
+      background: var(--surface-hover);
+      border-color: var(--accent-blue);
+    }
+
+    .btn-act.launch {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0b0f17;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+    }
+
+    .btn-act.launch:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    /* ════════ CLOZE MEMORY DRILL ════════ */
+    .cloze-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .cloze-banner {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .cloze-banner h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cloze-banner p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    .cloze-paper {
+      background: #080d16;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      font-family: var(--font-serif);
+      font-size: 17px;
+      line-height: 2.3;
+      color: #f1f5f9;
+    }
+
+    .cloze-gap {
+      background: #1e293b;
+      border: 1.5px solid var(--border);
+      color: #ffffff;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-align: center;
+      min-width: 130px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .cloze-gap:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .cloze-gap.correct {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--success);
+      color: #34d399;
+    }
+
+    .cloze-gap.wrong {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+      color: #f87171;
+    }
+
+    .cloze-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    .cloze-score {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--font-mono);
+    }
+
+    /* Modal 9 vs 13 Comparison */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+
+    .modal-backdrop.show { display: flex; }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+
+    .modal-head h3 { font-size: 18px; font-weight: 800; color: #fff; }
+
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .diff-table th, .diff-table td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .diff-table th { background: var(--card); color: var(--primary); font-weight: 700; }
+    .diff-table tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--surface);
+      color: #fff;
+      border: 1px solid var(--primary);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 999;
+    }
+
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .workspace-grid { grid-template-columns: 1fr; }
+      .preview-section { position: static; }
+      .control-deck { flex-direction: column; align-items: stretch; }
+      .task-nav, .mode-nav { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-logo">⚡</div>
+      <div class="brand-text">
+        <h1>Atelier du Squelette Modulaire <span class="brand-tag">NCLC 8 · 12–13 / 20</span></h1>
+        <div class="brand-sub">Générateur d'automatismes & élévateur de note TCF Canada</div>
+      </div>
+    </div>
+    <div class="header-links">
+      <button class="nav-btn-link" onclick="openDiffModal()"><span>📊</span> Comparer 9 vs 13</button>
+      <a href="ecrivance.html" class="nav-btn-link"><span>✍️</span> Cahier Écrivance</a>
+      <a href="index.html" class="nav-btn-link"><span>🏠</span> Hub</a>
+    </div>
+  </header>
+
+  <div class="app-main">
+
+    <!-- STRATEGY ROADMAP BANNER -->
+    <div class="strategy-banner">
+      <div class="strat-content">
+        <span class="strat-badge">Objectif 12-13</span>
+        <div class="strat-text">
+          Tu as obtenu <strong>9/20</strong> ? Tu as le vocabulaire mais il te manque les <strong>3 verrous C1</strong> : la synthèse en 2 paragraphes, le connecteur d'opposition et le subjonctif de compromis.
+        </div>
+      </div>
+      <div class="strat-pills">
+        <button class="btn-diff-toggle" onclick="openDiffModal()">🔍 Pourquoi 9 et pas 13 ?</button>
+      </div>
+    </div>
+
+    <!-- CONTROL DECK -->
+    <div class="control-deck">
+      <div class="task-nav">
+        <button class="task-tab active" onclick="setTask('t3')">
+          <span>⚖️</span> Tâche 3 : Synthèse & Prise de position
+        </button>
+        <button class="task-tab" onclick="setTask('t2')">
+          <span>✍️</span> Tâche 2 : Récit / Blog
+        </button>
+        <button class="task-tab" onclick="setTask('t1_amical')">
+          <span>💬</span> Tâche 1 : Message Amical
+        </button>
+        <button class="task-tab" onclick="setTask('t1_formel')">
+          <span>✉️</span> Tâche 1 : Courriel Formel
+        </button>
+      </div>
+
+      <div class="mode-nav">
+        <button class="mode-tab active" id="btn-mode-build" onclick="setMode('build')">
+          <span>🛠️</span> Constructeur
+        </button>
+        <button class="mode-tab" id="btn-mode-cloze" onclick="setMode('cloze')">
+          <span>🧠</span> Flash-Cloze (Mémoire)
+        </button>
+      </div>
+    </div>
+
+    <!-- PRESETS BAR (TÂCHE 3 MEGA-THEMES) -->
+    <div class="presets-bar" id="presets-container">
+      <span class="presets-title">⚡ Charger un Sujet 2026 :</span>
+      <button class="preset-pill" onclick="loadPreset('tech_ecole')">📱 IA & Écrans à l'école</button>
+      <button class="preset-pill" onclick="loadPreset('transports_gratuits')">🌿 Transports publics gratuits</button>
+      <button class="preset-pill" onclick="loadPreset('teletravail')">💼 Télétravail & Semaine 4j</button>
+      <button class="preset-pill" onclick="loadPreset('ecoles_privees')">🎓 Écoles privées vs Publique</button>
+      <button class="preset-pill" onclick="loadPreset('fast_food')">🍔 Restauration rapide</button>
+      <button class="preset-pill" onclick="loadPreset('voyage_solo')">🎒 Voyage en solitaire</button>
+    </div>
+
+    <!-- ════════ BUILDER VIEW ════════ -->
+    <div id="view-build" class="workspace-grid">
+      
+      <!-- LEFT: FORM SLOTS ORGANIZED IN 2 CLEAN PARAGRAPHS -->
+      <div class="editor-section" id="slots-deck">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- RIGHT: LIVE ESSAY PREVIEW & SCORE RADAR -->
+      <div class="preview-section">
+        <div class="card-header">
+          <h2><span>📄</span> Rendu Immédiat</h2>
+          <span class="badge-words-target" id="words-target-display">120 – 180 mots</span>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="meter-cluster">
+          <div class="meter-card">
+            <span class="meter-number success" id="live-word-count">0</span>
+            <div>
+              <div class="meter-info-title">Décompte</div>
+              <div class="meter-info-sub" id="live-meter-status">Conforme</div>
+            </div>
+          </div>
+          <div class="meter-card">
+            <span class="meter-number" style="color:var(--primary);" id="live-score-est">12-13</span>
+            <div>
+              <div class="meter-info-title">Niveau Estimé</div>
+              <div class="meter-info-sub">NCLC 8 (B2+)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Essay -->
+        <div class="live-essay-box" id="live-essay-output">
+          <!-- Text generated dynamically -->
+        </div>
+
+        <!-- 9 -> 13 Radar (Checklist B2/C1) -->
+        <div class="radar-card">
+          <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;">
+            Vérification des leviers de note (Objectif 12-13)
+          </div>
+          <div id="radar-checklist-items" style="display:flex; flex-direction:column; gap:6px;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-panel">
+          <button class="btn-act copy" onclick="copyText()">
+            <span>📋</span> Copier
+          </button>
+          <button class="btn-act launch" onclick="transferToEcrivance()">
+            <span>✍️</span> Évaluer dans Écrivance
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ════════ CLOZE ACTIVE RECALL VIEW ════════ -->
+    <div id="view-cloze" class="cloze-section" style="display:none;">
+      <div class="cloze-banner">
+        <h2><span>🧠</span> Mémorisation Active : Le Squelette à Trous</h2>
+        <p>Pour dépasser le 9/20, tes doigts doivent taper les connecteurs de transition et le subjonctif sans hésitation. Remplis les trous de mémoire et appuie sur Entrée.</p>
+      </div>
+
+      <div class="cloze-paper" id="cloze-board">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="cloze-bottom">
+        <div class="cloze-score" id="cloze-score-display">Score : 0 / 0</div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-act copy" style="width:auto; padding:10px 18px;" onclick="resetClozeGaps()">
+            🔄 Recommencer
+          </button>
+          <button class="btn-act launch" style="width:auto; padding:10px 24px;" onclick="evaluateClozeGaps()">
+            ✅ Vérifier mes réponses
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL: COMPARATIF 9 vs 13 -->
+  <div class="modal-backdrop" id="diffModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>🔍 Anatomie d'une copie : Pourquoi 9 et comment atteindre 13 ?</h3>
+        <button onclick="closeDiffModal()" style="background:none; border:none; font-size:22px; color:var(--text-muted); cursor:pointer;">✕</button>
+      </div>
+
+      <table class="diff-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Élément évalué</th>
+            <th style="width: 37.5%; color:#f87171;">Ce qui donne 9/20 (NCLC 6 - B1)</th>
+            <th style="width: 37.5%; color:#34d399;">Ce qui débloque 12-13/20 (NCLC 8 - B2+)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Structure Tâche 3</b></td>
+            <td>Un seul bloc informe, ou commence directement par donner son avis personnel sans analyser les documents.</td>
+            <td><b>2 paragraphes stricts :</b> Synthèse neutre des 2 textes (45m) + Prise de position nuancée avec compromis (105m).</td>
+          </tr>
+          <tr>
+            <td><b>Connecteurs logiques</b></td>
+            <td>Abus de connecteurs scolaires simples : <i>mais, parce que, alors, donc, et, aussi</i>.</td>
+            <td><b>Articulateurs de débat C1 :</b> <i>Tandis que, en revanche, néanmoins, force est de constater, à mon sens</i>.</td>
+          </tr>
+          <tr>
+            <td><b>Subjonctif</b></td>
+            <td>Absent ou uniquement dans <i>« il faut que je fasse »</i>.</td>
+            <td><b>Subjonctif de but ou concession :</b> <i>« afin que nous puissions », « bien que cette mesure présente »</i>.</td>
+          </tr>
+          <tr>
+            <td><b>Choix des verbes</b></td>
+            <td>Verbes basiques répétés : <i>avoir, faire, être, voir, trouver</i>.</td>
+            <td><b>Verbes précis :</b> <i>engendrer, susciter, constituer, préconiser, nuancer, compromettre</i>.</td>
+          </tr>
+          <tr>
+            <td><b>Nuance & Prise de position</b></td>
+            <td>Binaire et catégorique : <i>« Je suis 100% contre la technologie »</i> (sanctionné).</td>
+            <td><b>Équilibre dialectique :</b> <i>« Plutôt que d'adopter une posture radicale, il convient de trouver un juste milieu... »</i>.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:12px 16px; font-size:12.5px; color:#fde68a;">
+        💡 <b>Règle d'or :</b> Dans cet atelier, chaque squelette est pré-armé avec ces 5 leviers. En t'entraînant à remplir les cases, tu injectes ces automatismes sans avoir à y réfléchir pendant le stress de l'examen.
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">Message</div>
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════════
+    // STATE & DATA
+    // ══════════════════════════════════════════════════════════════════════
+    const appState = {
+      task: 't3',
+      mode: 'build',
+      slots: {}
+    };
+
+    const SKELETON_DATABASE = {
+      // ─────────────────────────────────────────────────────────────────
+      // TÂCHE 3 : 2 PARAGRAPHES (SYNTHÈSE + ESSAI NUANCÉ)
+      // ─────────────────────────────────────────────────────────────────
+      t3: {
+        name: "Tâche 3 : Synthèse & Prise de position",
+        min: 120,
+        max: 180,
+        groups: [
+          {
+            title: "Paragraphe 1 : Synthèse Comparative Neutre (40–50 mots)",
+            accent: "blue",
+            fields: [
+              {
+                id: 'theme',
+                label: 'Thème central du débat',
+                type: 'input',
+                scaffold: 'Dans le débat sur <strong>[Thème]</strong>,',
+                placeholder: "l'utilisation des nouvelles technologies dans les écoles",
+                default: "l'utilisation des nouvelles technologies dans les écoles"
+              },
+              {
+                id: 'intro_conn',
+                label: 'Amorce d\'affrontement',
+                type: 'select',
+                options: [
+                  "deux visions s'affrontent.",
+                  "deux points de vue s'opposent.",
+                  "les avis sont particulièrement partagés.",
+                  "les opinions divergent profondément."
+                ],
+                default: "deux visions s'affrontent."
+              },
+              {
+                id: 'doc1_arg',
+                label: 'Synthèse objective Document 1',
+                type: 'input',
+                scaffold: 'Le Document 1 met en avant <strong>[Argument Doc 1]</strong>.',
+                placeholder: "l'enrichissement des apprentissages et l'autonomie accrue offerte aux élèves",
+                default: "l'enrichissement des apprentissages et l'autonomie accrue offerte aux élèves"
+              },
+              {
+                id: 'trans_conn',
+                label: 'Connecteur d\'opposition',
+                type: 'select',
+                options: [
+                  "À l'inverse,",
+                  "En revanche,",
+                  "À l'opposé,",
+                  "Toutefois,"
+                ],
+                default: "À l'inverse,"
+              },
+              {
+                id: 'doc2_arg',
+                label: 'Synthèse objective Document 2',
+                type: 'input',
+                scaffold: 'le Document 2 souligne <strong>[Argument Doc 2]</strong>.',
+                placeholder: "les risques majeurs de dépendance aux écrans et le recul des interactions humaines",
+                default: "les risques majeurs de dépendance aux écrans et le recul des interactions humaines"
+              }
+            ]
+          },
+          {
+            title: "Paragraphe 2 : Prise de Position Personnelle & Matiz (100–120 mots)",
+            accent: "gold",
+            fields: [
+              {
+                id: 'opinion_lead',
+                label: 'Amorce d\'opinion formelle',
+                type: 'select',
+                options: [
+                  "À mon sens,",
+                  "De mon point de vue,",
+                  "À mon avis,",
+                  "Selon moi,"
+                ],
+                default: "À mon sens,"
+              },
+              {
+                id: 'stance_core',
+                label: 'Votre analyse balancée (Certes... Cependant...)',
+                type: 'input',
+                scaffold: 'cette question présente des aspects contrastés. Certes, <strong>[Concession]</strong>. Cependant, <strong>[Limite]</strong>.',
+                placeholder: "l'outil numérique modernise indéniablement la pédagogie. Cependant, il ne faut pas sous-estimer la fatigue cognitive qu'une exposition excessive engendre",
+                default: "l'outil numérique modernise indéniablement la pédagogie. Cependant, il ne faut pas sous-estimer la fatigue cognitive qu'une exposition excessive engendre"
+              },
+              {
+                id: 'solution_compromise',
+                label: 'Formule de compromis / Nuance C1 (Subjonctif)',
+                type: 'input',
+                scaffold: 'Plutôt que d\'adopter une posture radicale, il est essentiel de <strong>[Mesure de compromis]</strong> afin que <strong>[Subjonctif]</strong>.',
+                placeholder: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé",
+                default: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          const p1 = `Dans le débat sur ${s.theme || '...'}, ${s.intro_conn} Le Document 1 met en avant ${s.doc1_arg || '...'}. ${s.trans_conn} le Document 2 souligne ${s.doc2_arg || '...'}.`;
+          const p2 = `${s.opinion_lead} cette question présente des aspects contrastés. Certes, ${s.stance_core || '...'}. Plutôt que d'adopter une posture radicale, il est essentiel de ${s.solution_compromise || '...'}.`;
+          return p1 + "\n\n" + p2;
+        },
+        clozeData: [
+          { t: "Dans le débat sur la transition écologique, deux visions " },
+          { a: "s'affrontent", h: "verbe s'affronter" },
+          { t: ". Le Document 1 met en avant les bénéfices du transport public gratuit. " },
+          { a: "En revanche", h: "connecteur d'opposition" },
+          { t: ", le Document 2 souligne les contraintes financières des municipalités.\n\n" },
+          { a: "À mon sens", h: "amorce d'opinion formelle" },
+          { t: ", cette initiative représente une avancée majeure. " },
+          { a: "Certes", h: "connecteur de concession" },
+          { t: ", elle favorise la baisse de la pollution. " },
+          { a: "Cependant", h: "connecteur de restriction" },
+          { t: ", le coût budgétaire demeure élevé. " },
+          { a: "Plutôt que d'", h: "expression de compromis" },
+          { t: "appliquer une mesure uniforme, il convient de trouver un juste équilibre " },
+          { a: "afin que", h: "conjonction de but" },
+          { t: " tous les usagers " },
+          { a: "puissent", h: "pouvoir au subjonctif" },
+          { t: " en bénéficier durablement." }
+        ]
+      },
+
+      // ─────────────────────────────────────────────────────────────────
+      // TÂCHE 2 : RÉCIT D'EXPÉRIENCE OU BLOG
+      // ─────────────────────────────────────────────────────────────────
+      t2: {
+        name: "Tâche 2 : Récit d'expérience / Blog",
+        min: 120,
+        max: 150,
+        groups: [
+          {
+            title: "Structure de l'Article (Titre + Contexte + Déroulement + Conseil)",
+            accent: "gold",
+            fields: [
+              {
+                id: 'title',
+                label: 'Titre accrocheur',
+                type: 'input',
+                scaffold: 'Titre : <strong>[Titre avec ponctuation forte]</strong>',
+                placeholder: "Mon séjour d'études au Canada : une expérience inoubliable !",
+                default: "Mon séjour d'études au Canada : une expérience inoubliable !"
+              },
+              {
+                id: 'context',
+                label: 'Contexte et objectif initial',
+                type: 'input',
+                scaffold: 'L\'année dernière, j\'ai eu l\'occasion de <strong>[Événement]</strong> dans le but de <strong>[Objectif]</strong>.',
+                placeholder: "participer à un stage linguistique à Montréal dans le but de perfectionner mon niveau de langue et de découvrir la culture québécoise",
+                default: "participer à un stage linguistique à Montréal dans le but de perfectionner mon niveau de langue et de découvrir la culture québécoise"
+              },
+              {
+                id: 'story',
+                label: 'Récit vivant (Imparfait + Passé Composé)',
+                type: 'input',
+                scaffold: 'Pour ma part, cette expérience s\'est révélée très formatrice. <strong>[Faits et impressions]</strong>.',
+                placeholder: "Les cours étaient particulièrement stimulants et l'ambiance au sein de l'équipe était chaleureuse. J'ai surmonté mes appréhensions initiales et j'ai noué de précieuses amitiés. Bien que le rythme fût exigeant, chaque journée m'a apporté son lot de découvertes",
+                default: "Les cours étaient particulièrement stimulants et l'ambiance au sein de l'équipe était chaleureuse. J'ai surmonté mes appréhensions initiales et j'ai noué de précieuses amitiés. Bien que le rythme fût exigeant, chaque journée m'a apporté son lot de découvertes"
+              },
+              {
+                id: 'recommendation',
+                label: 'Recommandation universelle finale (Obligatoire)',
+                type: 'input',
+                scaffold: 'Je recommande vivement cette aventure à tous ceux qui <strong>[Public]</strong>. Que l\'on soit <strong>[Profil]</strong>, cela permet de <strong>[Bénéfice]</strong>.',
+                placeholder: "souhaitent sortir de leur zone de confort. Que l'on soit novice ou expérimenté, cela permet de développer une précieuse autonomie et de créer des souvenirs mémorables",
+                default: "souhaitent sortir de leur zone de confort. Que l'on soit novice ou expérimenté, cela permet de développer une précieuse autonomie et de créer des souvenirs mémorables"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          return `${s.title || 'Mon expérience'}\n\nL'année dernière, j'ai eu l'occasion de ${s.context || '...'}.\n\nPour ma part, cette expérience s'est révélée très formatrice. ${s.story || '...'}.\n\nJe recommande vivement cette aventure à tous ceux qui ${s.recommendation || '...'}.`;
+        },
+        clozeData: [
+          { t: "Une expérience inoubliable !\n\nLa semaine dernière, j'ai eu " },
+          { a: "l'occasion", h: "nom (opportunité)" },
+          { t: " de participer à un projet associatif. L'ambiance " },
+          { a: "était", h: "être à l'imparfait" },
+          { t: " particulièrement chaleureuse.\n\n" },
+          { a: "Pour ma part", h: "amorce personnelle" },
+          { t: ", cet événement m'a profondément marqué. J'ai " },
+          { a: "découvert", h: "participe de découvrir" },
+          { t: " des initiatives formidables et les intervenants " },
+          { a: "expliquaient", h: "expliquer à l'imparfait" },
+          { t: " leurs actions avec clarté. " },
+          { a: "Bien que", h: "conjonction (+ subjonctif)" },
+          { t: " le travail fût intense, j'ai " },
+          { a: "passé", h: "passer au passé composé" },
+          { t: " des moments précieux.\n\nJe " },
+          { a: "recommande vivement", h: "verbe de conseil appuyé" },
+          { t: " cette démarche à tous ceux qui souhaitent s'investir utilement." }
+        ]
+      },
+
+      // ─────────────────────────────────────────────────────────────────
+      // TÂCHE 1 AMICALE (60-120 MOTS)
+      // ─────────────────────────────────────────────────────────────────
+      t1_amical: {
+        name: "Tâche 1 : Message Amical",
+        min: 60,
+        max: 120,
+        groups: [
+          {
+            title: "Structure du Message Familier (Salut + 3 Détails + Subjonctif)",
+            accent: "gold",
+            fields: [
+              {
+                id: 'friend_name',
+                label: 'Prénom de l\'ami(e)',
+                type: 'input',
+                scaffold: 'Salut <strong>[Prénom]</strong>,',
+                placeholder: "Julien",
+                default: "Julien"
+              },
+              {
+                id: 'hook',
+                label: 'Accroche et motif',
+                type: 'input',
+                scaffold: 'J\'espère que tu vas bien ! Je t\'écris pour te parler de <strong>[Sujet]</strong>.',
+                placeholder: "mon déménagement dans mon nouvel appartement samedi prochain",
+                default: "mon déménagement dans mon nouvel appartement samedi prochain"
+              },
+              {
+                id: 'details',
+                label: 'Détails indispensables (Lieu, heure, organisation)',
+                type: 'input',
+                scaffold: 'Le logement est situé <strong>[Lieu]</strong>. Nous débuterons vers <strong>[Heure]</strong> par <strong>[Activités]</strong>.',
+                placeholder: "au 12 rue des Lilas, près du métro. Nous débuterons vers 10h par le chargement des cartons, avant de monter les meubles",
+                default: "au 12 rue des Lilas, près du métro. Nous débuterons vers 10h par le chargement des cartons, avant de monter les meubles"
+              },
+              {
+                id: 'proposal_sub',
+                label: 'Invitation avec subjonctif de but',
+                type: 'input',
+                scaffold: 'Fais-moi savoir si tu es disponible <strong>afin que nous [Verbe Subjonctif]</strong>.',
+                placeholder: "afin que nous puissions nous organiser sereinement",
+                default: "afin que nous puissions nous organiser sereinement"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          return `Salut ${s.friend_name || 'mon ami'} !\n\nJ'espère que tu vas bien ! Je t'écris pour te parler de ${s.hook || '...'}. Le logement est situé ${s.details || '...'}.\n\nFais-moi savoir si tu es disponible ${s.proposal_sub || 'afin que nous puissions nous organiser'}. J'ai prévu un délicieux repas pour te remercier !\n\nÀ très vite,\nNabil`;
+        },
+        clozeData: [
+          { t: "Salut Thomas !\n\nJ'espère que tu vas bien ! Je t'écris " },
+          { a: "afin de", h: "connecteur de but" },
+          { t: " te proposer une sortie ce week-end. Si tu as du temps libre, " },
+          { a: "on pourrait", h: "conditionnel de suggestion" },
+          { t: " se retrouver à 15h " },
+          { a: "afin que nous", h: "locution de finalité" },
+          { t: " " },
+          { a: "puissions", h: "pouvoir au subjonctif" },
+          { t: " visiter l'exposition ensemble. Dis-moi vite si cela te convient. À " },
+          { a: "très bientôt", h: "clôture familière" },
+          { t: " !" }
+        ]
+      },
+
+      // ─────────────────────────────────────────────────────────────────
+      // TÂCHE 1 FORMELLE (60-120 MOTS)
+      // ─────────────────────────────────────────────────────────────────
+      t1_formel: {
+        name: "Tâche 1 : Courriel Formel",
+        min: 60,
+        max: 120,
+        groups: [
+          {
+            title: "Structure du Courriel Professionnel (Objet + Formule d'appel + Demande + Salutation)",
+            accent: "blue",
+            fields: [
+              {
+                id: 'object',
+                label: 'Objet du message',
+                type: 'input',
+                scaffold: 'Objet : <strong>[Objet clair]</strong>',
+                placeholder: "Demande de renseignements concernant la formation en gestion",
+                default: "Demande de renseignements concernant la formation en gestion"
+              },
+              {
+                id: 'recipient',
+                label: 'Formule d\'appel professionnelle',
+                type: 'select',
+                options: [
+                  "Madame, Monsieur,",
+                  "Monsieur le Directeur,",
+                  "Chère Madame Dupont,"
+                ],
+                default: "Madame, Monsieur,"
+              },
+              {
+                id: 'body',
+                label: 'Motif et questions précises',
+                type: 'input',
+                scaffold: 'Je me permets de vous contacter afin de <strong>[Demande]</strong>. Étant salarié, je souhaiterais connaître <strong>[Questions]</strong>.',
+                placeholder: "solliciter des informations complémentaires sur votre cursus. Étant salarié, je souhaiterais connaître les créneaux des cours du soir, les tarifs ainsi que les conditions d'admission",
+                default: "solliciter des informations complémentaires sur votre cursus. Étant salarié, je souhaiterais connaître les créneaux des cours du soir, les tarifs ainsi que les conditions d'admission"
+              },
+              {
+                id: 'closing',
+                label: 'Formule de politesse formelle',
+                type: 'select',
+                options: [
+                  "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,",
+                  "En vous remerciant par avance pour l'attention accordée à ma demande, je vous prie d'agréer mes salutations distinguées."
+                ],
+                default: "Je reste à votre entière disposition pour tout renseignement complémentaire et vous remercie par avance. Cordialement,"
+              }
+            ]
+          }
+        ],
+        assemble: (s) => {
+          return `Objet : ${s.object || 'Demande d\'information'}\n\n${s.recipient}\n\nJe me permets de vous contacter afin de ${s.body || '...'}.\n\n${s.closing}\n\nNabil Mansouri`;
+        },
+        clozeData: [
+          { t: "Objet : Demande de renseignements\n\n" },
+          { a: "Madame, Monsieur,", h: "salutation professionnelle" },
+          { t: "\n\nJe me " },
+          { a: "permets de", h: "verbe de courtoisie" },
+          { t: " vous contacter pour obtenir des détails sur le programme. Je " },
+          { a: "souhaiterais", h: "conditionnel de politesse" },
+          { t: " savoir s'il est possible de s'inscrire en ligne. Je " },
+          { a: "reste à votre entière disposition", h: "formule de disponibilité" },
+          { t: " pour tout échange.\n\n" },
+          { a: "Cordialement", h: "salutation courtoise" },
+          { t: "," }
+        ]
+      }
+    };
+
+    const PRESET_TOPICS = {
+      tech_ecole: {
+        task: 't3',
+        slots: {
+          theme: "l'utilisation des nouvelles technologies dans les écoles",
+          intro_conn: "deux visions s'affrontent.",
+          doc1_arg: "l'enrichissement des apprentissages et l'autonomie accrue offerte aux élèves",
+          trans_conn: "À l'inverse,",
+          doc2_arg: "les risques majeurs de dépendance aux écrans et le recul des interactions humaines",
+          opinion_lead: "À mon sens,",
+          stance_core: "l'outil numérique modernise indéniablement la pédagogie. Cependant, il ne faut pas sous-estimer la fatigue cognitive qu'une exposition excessive engendre",
+          solution_compromise: "trouver un juste milieu en encadrant le temps d'écran afin que les enfants puissent s'épanouir sans compromettre leur santé"
+        }
+      },
+      transports_gratuits: {
+        task: 't3',
+        slots: {
+          theme: "la gratuité des transports en commun dans les métropoles",
+          intro_conn: "deux points de vue s'opposent.",
+          doc1_arg: "la diminution sensible du trafic automobile, la baisse de la pollution et le soutien au commerce local",
+          trans_conn: "En revanche,",
+          doc2_arg: "le coût financier considérable pour les villes et les limites liées à l'inégalité de desserte",
+          opinion_lead: "À mon avis,",
+          stance_core: "rendre les bus et métros gratuits stimule l'écologie urbaine. Toutefois, la gratuité ne doit pas se faire au détriment de la qualité ni de la sécurité du réseau",
+          solution_compromise: "adopter une tarification solidaire et progressive plutôt qu'une gratuité totale, afin que les transports publics demeurent fiables et bien entretenus"
+        }
+      },
+      teletravail: {
+        task: 't3',
+        slots: {
+          theme: "la généralisation du télétravail et la semaine de 4 jours",
+          intro_conn: "les avis sont particulièrement partagés.",
+          doc1_arg: "l'optimisation de l'équilibre personnel et le gain de temps précieux sur les déplacements",
+          trans_conn: "À l'opposé,",
+          doc2_arg: "le risque d'isolement social et la difficulté à préserver une frontière nette entre vie pro et perso",
+          opinion_lead: "De mon point de vue,",
+          stance_core: "le travail à distance procure une souplesse précieuse très appréciée des salariés. Néanmoins, l'absence de contact physique peut affaiblir la dynamique d'équipe",
+          solution_compromise: "privilégier une formule hybride de deux à trois jours par semaine afin que l'on concilie flexibilité individuelle et cohésion collective"
+        }
+      },
+      ecoles_privees: {
+        task: 't3',
+        slots: {
+          theme: "le choix entre établissements privés et enseignement public",
+          intro_conn: "deux visions s'affrontent.",
+          doc1_arg: "la réputation d'excellence, l'encadrement rigoureux et la discipline rassurante pour les parents",
+          trans_conn: "À l'inverse,",
+          doc2_arg: "l'accentuation des disparités sociales et le manque de mixité au sein des classes",
+          opinion_lead: "À mon sens,",
+          stance_core: "l'école privée répond aux attentes légitimes de certaines familles. Cependant, l'éducation doit avant tout demeurer un vecteur universel d'égalité des chances",
+          solution_compromise: "renforcer les moyens de l'école publique tout en valorisant la mixité sociale, afin que chaque jeune reçoive une formation de qualité sans distinction de classe"
+        }
+      },
+      fast_food: {
+        task: 't3',
+        slots: {
+          theme: "la fréquentation de la restauration rapide au quotidien",
+          intro_conn: "les opinions divergent profondément.",
+          doc1_arg: "la rapidité de service, des prix accessibles et la liberté de choix des consommateurs",
+          trans_conn: "En revanche,",
+          doc2_arg: "la qualité nutritionnelle insuffisante et les risques avérés pour la santé publique",
+          opinion_lead: "Selon moi,",
+          stance_core: "les fast-foods répondent aux exigences d'un rythme de vie urbain effréné. Néanmoins, en faire la base de son alimentation entraîne des déséquilibres sanitaires sévères",
+          solution_compromise: "adopter un usage strictement ponctuel tout en développant des alternatives saines, afin que l'on préserve son bien-être sans renoncer à la convivialité"
+        }
+      },
+      voyage_solo: {
+        task: 't3',
+        slots: {
+          theme: "l'engouement pour le voyage en solitaire",
+          intro_conn: "deux approches s'opposent.",
+          doc1_arg: "la liberté absolue d'itinéraire, le développement de l'autonomie et la facilité des rencontres locales",
+          trans_conn: "À l'inverse,",
+          doc2_arg: "le sentiment de solitude face aux imprévus et les questions de sécurité dans les régions reculées",
+          opinion_lead: "À mon sens,",
+          stance_core: "partir seul représente une formidable école de vie qui forge le caractère. Malgré tout, l'impossibilité de partager ses émotions sur le moment peut parfois peser",
+          solution_compromise: "alterner entre escapades individuelles et séjours en groupe, afin que chaque voyageur vive une expérience riche adaptée à ses aspirations du moment"
+        }
+      }
+    };
+
+    // ══════════════════════════════════════════════════════════════════════
+    // INITIALIZATION & LOGIC
+    // ══════════════════════════════════════════════════════════════════════
+    function setTask(taskKey) {
+      appState.task = taskKey;
+      document.querySelectorAll('.task-tab').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('onclick').includes(taskKey));
+      });
+
+      document.getElementById('presets-container').style.display = (taskKey === 't3') ? 'flex' : 'none';
+
+      const skel = SKELETON_DATABASE[taskKey];
+      appState.slots = {};
+      skel.groups.forEach(g => {
+        g.fields.forEach(f => {
+          appState.slots[f.id] = f.default || '';
+        });
+      });
+
+      renderSlotsDeck();
+      renderLivePreview();
+      renderClozeDrill();
+    }
+
+    function setMode(modeKey) {
+      appState.mode = modeKey;
+      document.getElementById('btn-mode-build').classList.toggle('active', modeKey === 'build');
+      document.getElementById('btn-mode-cloze').classList.toggle('active', modeKey === 'cloze');
+      document.getElementById('view-build').style.display = (modeKey === 'build') ? 'grid' : 'none';
+      document.getElementById('view-cloze').style.display = (modeKey === 'cloze') ? 'block' : 'none';
+    }
+
+    function renderSlotsDeck() {
+      const skel = SKELETON_DATABASE[appState.task];
+      const container = document.getElementById('slots-deck');
+
+      let html = `
+        <div class="card-header">
+          <h2><span>🛠️</span> Les Composants du Squelette Modulaire</h2>
+          <span class="badge-words-target">${skel.name}</span>
+        </div>
+      `;
+
+      skel.groups.forEach(g => {
+        html += `
+          <div class="para-box ${g.accent === 'gold' ? 'gold-accent' : 'blue-accent'}">
+            <div class="para-tag ${g.accent === 'blue' ? 'blue' : ''}">${g.title}</div>
+            <div class="para-flow">
+        `;
+
+        g.fields.forEach(f => {
+          html += `<div class="slot-row">`;
+          html += `<div class="slot-label"><span>${f.label}</span></div>`;
+
+          if (f.type === 'select') {
+            html += `
+              <select class="connector-dropdown" onchange="onSlotChange('${f.id}', this.value)">
+                ${f.options.map(opt => `<option value="${opt}" ${appState.slots[f.id] === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+              </select>
+            `;
+          } else {
+            html += `
+              <textarea class="slot-field" rows="2" placeholder="${f.placeholder}" oninput="onSlotChange('${f.id}', this.value)">${appState.slots[f.id] || ''}</textarea>
+            `;
+          }
+          html += `</div>`;
+        });
+
+        html += `</div></div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function onSlotChange(id, val) {
+      appState.slots[id] = val;
+      renderLivePreview();
+    }
+
+    function renderLivePreview() {
+      const skel = SKELETON_DATABASE[appState.task];
+      const text = skel.assemble(appState.slots);
+
+      document.getElementById('live-essay-output').textContent = text;
+
+      // Word count
+      const words = text.trim() ? text.trim().split(/\s+/).filter(w => w.length > 0).length : 0;
+      const countEl = document.getElementById('live-word-count');
+      const statusEl = document.getElementById('live-meter-status');
+      countEl.textContent = words;
+
+      document.getElementById('words-target-display').textContent = `${skel.min} – ${skel.max} mots`;
+
+      if (words >= skel.min && words <= skel.max) {
+        countEl.className = 'meter-number success';
+        statusEl.textContent = 'Parfaitement dans la cible';
+        statusEl.style.color = 'var(--success)';
+      } else if (words < skel.min) {
+        countEl.className = 'meter-number warning';
+        statusEl.textContent = `Trop court (-${skel.min - words}m)`;
+        statusEl.style.color = 'var(--warning)';
+      } else {
+        countEl.className = 'meter-number danger';
+        statusEl.textContent = `Trop long (+${words - skel.max}m)`;
+        statusEl.style.color = 'var(--danger)';
+      }
+
+      runRadarAudit(text);
+    }
+
+    function runRadarAudit(text) {
+      const lower = text.toLowerCase();
+      const container = document.getElementById('radar-checklist-items');
+
+      const items = [
+        {
+          name: "Subjonctif Présent actif",
+          pass: /(puisse|puissions|soit|soient|fassions|prenne|comprenne|ait)/i.test(text),
+          points: "+1.5 pt"
+        },
+        {
+          name: "Connecteurs de transition / opposition",
+          pass: /(en revanche|à l'inverse|néanmoins|toutefois|tandis que|à l'opposé)/i.test(lower),
+          points: "+1.0 pt"
+        },
+        {
+          name: "Formule de nuance & compromis (C1)",
+          pass: /(juste milieu|juste équilibre|plutôt que d'|concilier|au détriment de|aspects contrastés)/i.test(lower),
+          points: "+1.5 pt"
+        },
+        {
+          name: "Récit : alternance Imparfait / Passé Composé",
+          pass: appState.task !== 't2' || (/(était|étaient|faisait|aimais)/i.test(lower) && /(j'ai|nous avons|a été|ont marqué)/i.test(lower)),
+          points: "+1.0 pt"
+        }
+      ];
+
+      container.innerHTML = items.map(it => `
+        <div class="radar-item ${it.pass ? 'valid' : ''}">
+          <span class="radar-name">
+            <span>${it.pass ? '✅' : '⚪'}</span>
+            <span>${it.name}</span>
+          </span>
+          <span class="radar-tag-point">${it.pass ? it.points + ' Validé' : it.points}</span>
+        </div>
+      `).join('');
+    }
+
+    function loadPreset(key) {
+      const p = PRESET_TOPICS[key];
+      if (!p) return;
+      setTask(p.task);
+      appState.slots = { ...p.slots };
+      renderSlotsDeck();
+      renderLivePreview();
+      showToast(`⚡ Thème officiel 2026 chargé !`);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // CLOZE DRILL
+    // ══════════════════════════════════════════════════════════════════════
+    function renderClozeDrill() {
+      const skel = SKELETON_DATABASE[appState.task];
+      const board = document.getElementById('cloze-board');
+
+      let html = '';
+      let i = 0;
+      skel.clozeData.forEach(chunk => {
+        if (chunk.t) html += chunk.t.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+        if (chunk.a) {
+          html += `<input type="text" class="cloze-gap" data-ans="${chunk.a}" data-idx="${i++}" placeholder="${chunk.h || '?'}" onkeydown="if(event.key==='Enter') evaluateClozeGaps()">`;
+        }
+      });
+
+      board.innerHTML = html;
+      document.getElementById('cloze-score-display').textContent = `Score : 0 / ${i}`;
+    }
+
+    function evaluateClozeGaps() {
+      const gaps = document.querySelectorAll('.cloze-gap');
+      let score = 0;
+
+      gaps.forEach(g => {
+        const exp = g.getAttribute('data-ans').trim().toLowerCase();
+        const act = g.value.trim().toLowerCase();
+
+        const nExp = exp.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const nAct = act.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+        if (nAct === nExp && nAct.length > 0) {
+          g.className = 'cloze-gap correct';
+          score++;
+        } else {
+          g.className = 'cloze-gap wrong';
+          g.title = `Réponse attendue : ${g.getAttribute('data-ans')}`;
+        }
+      });
+
+      document.getElementById('cloze-score-display').textContent = `Score : ${score} / ${gaps.length}`;
+      if (score === gaps.length) {
+        showToast("🎉 100% de réussite ! Les automatismes C1 sont ancrés !");
+      } else {
+        showToast(`💡 ${score}/${gaps.length} réussis. Survole les cases rouges pour voir la réponse.`);
+      }
+    }
+
+    function resetClozeGaps() {
+      document.querySelectorAll('.cloze-gap').forEach(g => {
+        g.value = '';
+        g.className = 'cloze-gap';
+      });
+      const total = document.querySelectorAll('.cloze-gap').length;
+      document.getElementById('cloze-score-display').textContent = `Score : 0 / ${total}`;
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    // MODAL & ACTIONS
+    // ══════════════════════════════════════════════════════════════════════
+    function openDiffModal() {
+      document.getElementById('diffModal').classList.add('show');
+    }
+
+    function closeDiffModal() {
+      document.getElementById('diffModal').classList.remove('show');
+    }
+
+    function copyText() {
+      const text = document.getElementById('live-essay-output').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("📋 Texte copié !");
+      });
+    }
+
+    function transferToEcrivance() {
+      const text = document.getElementById('live-essay-output').textContent;
+      let taskNum = 3;
+      if (appState.task === 't2') taskNum = 2;
+      else if (appState.task.startsWith('t1')) taskNum = 1;
+
+      try {
+        const drafts = JSON.parse(localStorage.getItem('ecrivance_drafts') || '{}');
+        drafts[taskNum] = text;
+        localStorage.setItem('ecrivance_drafts', JSON.stringify(drafts));
+      } catch(e) {}
+
+      showToast("✍️ Transfert vers le Cahier Écrivance...");
+      setTimeout(() => {
+        window.location.href = 'ecrivance.html#practice';
+      }, 700);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+
+    window.onload = () => {
+      setTask('t3');
+    };
+  </script>
+</body>
+</html>
