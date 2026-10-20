@@ -571,10 +571,11 @@
   <!-- Clean Controls (Single Dropdown + Error Toggle, zero side-scrolling) -->
   <div class="controls-deck">
     <select id="categorySelect" class="dropdown-select" onchange="onCategoryChange(this.value)">
-      <option value="all">🌟 Mix Total (132 items)</option>
+      <option value="all">🌟 Mix Total (148 items)</option>
+      <option value="indicatif_pluriel">👥 Plurales de Indicativo: ils/vous (font, peuvent, doivent...)</option>
       <option value="genre">♂️♀️ Género: Falsos amigos (un / une)</option>
       <option value="accents">🎯 Acentos & Cedillas (é, è, ê, à, ç, û...)</option>
-      <option value="conj">🔀 Conjugación Clave: Subjuntivo, Condicional & Acuerdos (32)</option>
+      <option value="conj">🔀 Subjuntivo, Condicional & Acuerdos (32)</option>
       <option value="contractions">🔗 Contracciones en Contexto: au, du, aux, des...</option>
       <option value="demonstratif">👉 Demostrativos: Ce / Cet / Cette / Ces</option>
       <option value="accords">🎭 Frases completas: un/une + palabra + descripción</option>
@@ -589,7 +590,7 @@
   <div class="flashcard">
     <div class="card-top" id="cardTop">
       <span class="badge-cat" id="badgeCat">GENRE</span>
-      <span id="counterProgress">1 / 132</span>
+      <span id="counterProgress">1 / 148</span>
     </div>
 
     <!-- Active Card Content -->
@@ -888,7 +889,7 @@
       { id:"ar1", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CREAR PROBLEMAS", sub:"En vez de 'faire des problèmes', traduce el verbo 'crear': [ ... ] des problèmes", ans:["créer","engendrer","créer des problèmes","engendrer des problèmes","poser problème"], rule:"💡 <strong>créer des problèmes / engendrer :</strong> Mucho más limpio y natural en el examen que 'faire des problèmes'." },
       { id:"ar2", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"PERJUDICAR / DAÑAR A", sub:"En vez de 'faire du mal à', traduce el verbo 'perjudicar' (empieza con n...):", ans:["nuire","nuire à"], rule:"💡 <strong>nuire à :</strong> Verbo clave B2: <em>nuire au bien-être / à la santé</em>." },
       { id:"ar3", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"EL TEXTO DICE QUE...", sub:"Traduce 'subraya' o 'destaca' (en vez de 'dit que'): le texte [ ... ] que", ans:["souligne","indique","précise","évoque"], rule:"💡 <strong>souligne / indique / précise :</strong> Para resumir documentos en la Tâche 3 sin repetir 'dit'." },
-      { id:"ar4", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CREAR LAZOS / HACER AMIGOS", sub:"En vez de 'faire des amigos', traduce el verbo 'tejer lazos': [ ... ] des liens", ans:["tisser","nouer","tisser des liens","nouer des liens"], rule:"💡 <strong>tisser / nouer des liens :</strong> Frase hecha clave en cartas y relatos de convivencia." },
+      { id:"ar4", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CREAR LAZOS / HACER AMIGOS", sub:"En vez de 'faire des amis', traduce el verbo 'tejer lazos': [ ... ] des liens", ans:["tisser","nouer","tisser des liens","nouer des liens"], rule:"💡 <strong>tisser / nouer des liens :</strong> Frase hecha clave en cartas y relatos de convivencia." },
       { id:"ar5", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"RECARGAR ENERGÍAS / DESCANSAR", sub:"Traduce el verbo 'recargarse' en francés (se ...):", ans:["se ressourcer","ressourcer","se détendre","détendre"], rule:"💡 <strong>se ressourcer :</strong> Expresión perfecta de B2 para la Tâche 2 (relato de vacaciones)." },
       { id:"ar6", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"UN RETO / UN DESAFÍO MAYOR", sub:"En vez de 'un gros problème', traduce 'un reto / desafío': un [ ... ] majeur", ans:["enjeu","défi","un enjeu","un défi"], rule:"💡 <strong>un enjeu / un défi majeur :</strong> Sustituye de forma elegante y sobria a 'un gros problème'." },
       { id:"ar7", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"BENEFICIOSO / FAVORABLE", sub:"En vez de 'très bon', traduce 'beneficioso': un impact [ ... ]", ans:["bénéfique","favorable","positif","avantageux"], rule:"💡 <strong>bénéfique / favorable :</strong> Adjetivo sobrio de B2 para defender ventajas en ensayos." },
@@ -896,7 +897,25 @@
       { id:"ar9", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"ESENCIAL / INDISPENSABLE (femenino)", sub:"En vez de 'très importante', traduce 'esencial' (femenino): une mesure [ ... ]", ans:["essentielle","indispensable","primordiale"], rule:"💡 <strong>essentielle / primordiale :</strong> Ideal para valorar medidas y soluciones propuestas." },
       { id:"ar10", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"ADOPTAR / APROBAR UNA REGLA", sub:"En vez de 'mettre une règle', traduce el verbo 'adoptar': [ ... ] une règle", ans:["adopter","instaurer","mettre en place"], rule:"💡 <strong>adopter / instaurer une règle :</strong> Estilo institucional limpio para propuestas y recomendaciones." },
       { id:"ar11", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"TENER UN IMPACTO POSITIVO", sub:"En vez de 'avoir des bons effets', traduce 'impacto': avoir un [ ... ] positif", ans:["impact","un impact"], rule:"💡 <strong>avoir un impact positif :</strong> Mucho más profesional que 'avoir des bons effets'." },
-      { id:"ar12", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CONCIENTIZAR / SENSIBILIZAR AL PÚBLICO", sub:"Traduce el verbo 'sensibilizar / concientizar': [ ... ] le public", ans:["sensibiliser"], rule:"💡 <strong>sensibiliser le public :</strong> El verbo clásico de conclusión y propuestas en el TCF." }
+      { id:"ar12", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CONCIENTIZAR / SENSIBILIZAR AL PÚBLICO", sub:"Traduce el verbo 'sensibilizar / concientizar': [ ... ] le public", ans:["sensibiliser"], rule:"💡 <strong>sensibiliser le public :</strong> El verbo clásico de conclusión y propuestas en el TCF." },
+
+      // 8. INDICATIF AU PLURIEL (ils / elles / vous) - Trampas frecuentes de examen
+      { id:"ip1", cat:"indicatif_pluriel", badge:"Indicatif", target:"POUVOIR  (ils / les citoyens)", sub:"Traduce en presente 'ellos pueden': les citoyens [ ... ] (pueden)", ans:["peuvent"], rule:"💡 <strong>peuvent :</strong> Se escribe <em>ils peuvent</em>. Cero 'peuvents' ni 'pouvont'." },
+      { id:"ip2", cat:"indicatif_pluriel", badge:"Indicatif", target:"DEVOIR  (ils / les autorités)", sub:"Traduce en presente 'ellos deben': les autorités [ ... ] (deben)", ans:["doivent"], rule:"💡 <strong>doivent :</strong> Termina en <em>-ent</em>: <em>elles doivent</em> (nunca 'doive')." },
+      { id:"ip3", cat:"indicatif_pluriel", badge:"Indicatif", target:"VOULOIR  (ils / les jeunes)", sub:"Traduce en presente 'ellos quieren': les jeunes [ ... ] s'exprimer (quieren)", ans:["veulent"], rule:"💡 <strong>veulent :</strong> <em>ils veulent</em> (nunca 'voulent')." },
+      { id:"ip4", cat:"indicatif_pluriel", badge:"Indicatif", target:"FAIRE  (ils / les gouvernements)", sub:"Traduce en presente 'ellos hacen': ils [ ... ] face aux défis (hacen)", ans:["font"], rule:"💡 <strong>font :</strong> <em>ils font</em>. ¡Cuidado: 'ils faissent' no existe en francés!" },
+      { id:"ip5", cat:"indicatif_pluriel", badge:"Indicatif", target:"PRENDRE  (ils)", sub:"Traduce en presente 'ellos toman': ils [ ... ] des initiatives (toman)", ans:["prennent"], rule:"💡 <strong>prennent :</strong> Con doble 'n': <em>ils prennent</em>." },
+      { id:"ip6", cat:"indicatif_pluriel", badge:"Indicatif", target:"METTRE  (ils)", sub:"Traduce en presente 'ellos ponen': ils [ ... ] en place des règles (ponen)", ans:["mettent"], rule:"💡 <strong>mettent :</strong> Con doble 't': <em>ils mettent</em>." },
+      { id:"ip7", cat:"indicatif_pluriel", badge:"Indicatif", target:"FAIRE  (vous)", sub:"Traduce en presente 'ustedes hacen / usted hace': que [ ... ]-vous ? (hacen)", ans:["faites"], rule:"💡 <strong>faites :</strong> <em>vous faites</em>. ¡Cuidado: 'vous faisez' no existe!" },
+      { id:"ip8", cat:"indicatif_pluriel", badge:"Indicatif", target:"DIRE  (vous)", sub:"Traduce en presente 'ustedes dicen / usted dice': comme vous le [ ... ] (dicen)", ans:["dites"], rule:"💡 <strong>dites :</strong> <em>vous dites</em>. ¡Cuidado: 'vous disez' no existe!" },
+      { id:"ip9", cat:"indicatif_pluriel", badge:"Indicatif", target:"VENIR  (ils)", sub:"Traduce en presente 'ellos vienen': ils [ ... ] de terminer (vienen)", ans:["viennent"], rule:"💡 <strong>viennent :</strong> Con doble 'n': <em>ils viennent</em>." },
+      { id:"ip10", cat:"indicatif_pluriel", badge:"Indicatif", target:"CHOISIR  (ils / les gens)", sub:"Traduce en presente 'ellos eligen': ils [ ... ] cette option (eligen)", ans:["choisissent"], rule:"💡 <strong>choisissent :</strong> Verbos en -ir llevan <em>-issent</em>: <em>ils choisissent</em>." },
+      { id:"ip11", cat:"indicatif_pluriel", badge:"Indicatif", target:"RECEVOIR  (ils)", sub:"Traduce en presente 'ellos reciben': ils [ ... ] des aides (reciben)", ans:["reçoivent"], rule:"💡 <strong>reçoivent :</strong> Lleva cedilla 'ç' y <em>-oivent</em>: <em>ils reçoivent</em>." },
+      { id:"ip12", cat:"indicatif_pluriel", badge:"Indicatif", target:"CONNAÎTRE  (ils)", sub:"Traduce en presente 'ellos conocen': ils [ ... ] la réalité (conocen)", ans:["connaissent"], rule:"💡 <strong>connaissent :</strong> Doble 's': <em>ils connaissent</em>." },
+      { id:"ip13", cat:"indicatif_pluriel", badge:"Indicatif", target:"VIVRE  (ils)", sub:"Traduce en presente 'ellos viven': ils [ ... ] en communauté (viven)", ans:["vivent"], rule:"💡 <strong>vivent :</strong> <em>ils vivent</em> (termina en -ent)." },
+      { id:"ip14", cat:"indicatif_pluriel", badge:"Indicatif", target:"CRAINDRE  (ils / les résidents)", sub:"Traduce en presente 'ellos temen': ils [ ... ] le pire (temen)", ans:["craignent"], rule:"💡 <strong>craignent :</strong> Con <em>-gnent</em>: <em>ils craignent</em>." },
+      { id:"ip15", cat:"indicatif_pluriel", badge:"Indicatif", target:"DIRE  (ils / les experts)", sub:"Traduce en presente 'ellos dicen': les experts [ ... ] la vérité (dicen)", ans:["disent"], rule:"💡 <strong>disent :</strong> <em>ils disent</em>." },
+      { id:"ip16", cat:"indicatif_pluriel", badge:"Indicatif", target:"ÉCRIRE  (ils)", sub:"Traduce en presente 'ellos escriben': ils [ ... ] des lettres (escriben)", ans:["écrivent"], rule:"💡 <strong>écrivent :</strong> <em>ils écrivent</em> (termina en -ent)." }
     ];
 
     const STORAGE_KEY = 'tcf_ee_flash_v4';
