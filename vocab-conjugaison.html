@@ -3,1899 +3,1474 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TCF EE — Flash Drill Mot par Mot & Grammaire 10+</title>
+  <title>Flash Drill TCF — Entraîneur Minimaliste 10+</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07090e;
-      --surface: #0f1420;
-      --card: #151c2c;
-      --card-hover: #1c253a;
-      --border: #232e44;
-      --border-focus: #38bdf8;
-      --text: #f1f5f9;
+      --bg: #090d16;
+      --card: #111726;
+      --border: #1e293b;
+      --text: #f8fafc;
       --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --gold: #f59e0b;
-      --gold-glow: rgba(245, 158, 11, 0.18);
       --cyan: #38bdf8;
-      --cyan-glow: rgba(56, 189, 248, 0.15);
+      --gold: #f59e0b;
       --green: #10b981;
-      --green-glow: rgba(16, 185, 129, 0.2);
       --red: #ef4444;
-      --red-glow: rgba(239, 68, 68, 0.2);
-      --purple: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       min-height: 100vh;
-      line-height: 1.5;
-      padding-bottom: 70px;
-      -webkit-font-smoothing: antialiased;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.07) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.06) 0px, transparent 50%);
-    }
-
-    /* Top Navigation */
-    header {
-      background: rgba(15, 20, 32, 0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #fff;
-    }
-    .brand-icon {
-      font-size: 20px;
-      background: var(--cyan-glow);
-      border: 1px solid var(--cyan);
-      padding: 4px 8px;
-      border-radius: 8px;
-    }
-    .brand-text h1 {
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
-    .brand-text h1 span { color: var(--gold); }
-    .brand-tag {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--green);
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid var(--green);
-      padding: 2px 7px;
-      border-radius: 999px;
-      margin-left: 6px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-nav {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .btn-nav:hover {
-      background: var(--card);
-      color: #fff;
-      border-color: var(--gold);
-    }
-
-    /* Main Container */
-    .app-main {
-      max-width: 860px;
-      margin: 24px auto;
-      padding: 0 18px;
-    }
-
-    /* Stats Banner */
-    .top-stats-strip {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 18px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .stats-group {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .stat-badge {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .stat-badge strong {
-      font-family: 'JetBrains Mono', monospace;
-      color: #fff;
-      font-size: 15px;
-    }
-    .stat-badge.errors {
-      color: #f87171;
-      cursor: pointer;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      padding: 4px 10px;
-      border-radius: 999px;
-      transition: all 0.2s;
-    }
-    .stat-badge.errors:hover {
-      background: rgba(239, 68, 68, 0.2);
-    }
-
-    /* Category Pill Selector */
-    .categories-bar {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-    }
-    .cat-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: inherit;
-      font-size: 12.5px;
-      font-weight: 700;
-      padding: 7px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-    .cat-btn:hover {
-      border-color: rgba(255, 255, 255, 0.25);
-      color: #fff;
-    }
-    .cat-btn.active {
-      background: var(--cyan-glow);
-      border-color: var(--cyan);
-      color: var(--cyan);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
-    }
-    .cat-btn.color-error {
-      border-color: rgba(239, 68, 68, 0.35);
-      color: #fca5a5;
-    }
-    .cat-btn.color-error.active {
-      background: rgba(239, 68, 68, 0.15);
-      border-color: var(--red);
-      color: #f87171;
-    }
-
-    /* The Flash Drill Arena */
-    .drill-arena {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 32px 28px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Card Header Meta */
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .meta-badge {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--cyan);
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-    .progress-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-dim);
-      font-weight: 700;
-    }
-
-    /* Big Target Box (No long sentence!) */
-    .target-box {
-      text-align: center;
-      margin-bottom: 24px;
-      padding: 24px 16px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-    }
-    .target-word {
-      font-size: 30px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .target-word span.highlight {
-      color: var(--gold);
-    }
-    .target-instruction {
-      font-size: 14px;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    /* Typing Input Area */
-    .input-zone {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .input-row {
-      display: flex;
-      gap: 10px;
-    }
-    .flash-input {
-      flex: 1;
-      background: #090d15;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .flash-input:focus {
-      border-color: var(--border-focus);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-    }
-    .flash-input.correct {
-      border-color: var(--green);
-      background: rgba(16, 185, 129, 0.08);
-      color: #34d399;
-    }
-    .flash-input.wrong {
-      border-color: var(--red);
-      background: rgba(239, 68, 68, 0.08);
-      color: #f87171;
+      align-items: center;
+      padding: 16px;
     }
 
-    .btn-submit {
-      background: var(--cyan);
-      color: #0b0f19;
-      border: none;
-      border-radius: 12px;
-      padding: 0 24px;
-      font-family: inherit;
+    /* Minimal Topbar */
+    .topbar {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
       font-size: 15px;
       font-weight: 800;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-submit:hover {
-      background: #7dd3fc;
-      transform: translateY(-1px);
-    }
-
-    /* Accents Bar */
-    .accents-dock {
+      color: #fff;
       display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .brand span { color: var(--cyan); }
+    .nav-actions {
+      display: flex;
+      gap: 12px;
       align-items: center;
     }
-    .accent-label {
-      font-size: 11px;
-      color: var(--text-dim);
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12.5px;
       font-weight: 600;
-      margin-right: 4px;
+      transition: color 0.2s;
     }
-    .accent-key {
+    .nav-link:hover { color: #fff; }
+
+    /* Clean Categories Filter (No side scroll) */
+    .filter-wrap {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
       background: var(--card);
       border: 1px solid var(--border);
-      color: #cbd5e1;
+      color: var(--text-muted);
       font-family: inherit;
+      font-size: 12px;
       font-weight: 700;
-      font-size: 13px;
-      padding: 5px 11px;
-      border-radius: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.15s;
     }
-    .accent-key:hover {
-      border-color: var(--cyan);
+    .filter-btn:hover {
       color: #fff;
-      background: var(--card-hover);
+      border-color: #334155;
+    }
+    .filter-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .filter-btn.err-btn {
+      color: #fca5a5;
+    }
+    .filter-btn.err-btn.active {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--red);
+      color: var(--red);
     }
 
-    /* Feedback Display */
-    .feedback-box {
-      margin-top: 20px;
-      border-radius: 12px;
-      padding: 16px 18px;
-      display: none;
-      animation: fadeIn 0.2s ease;
-    }
-    .feedback-box.show { display: block; }
-    .feedback-box.correct {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    .feedback-box.wrong {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+    /* Minimalist Flashcard Container */
+    .flashcard {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
     }
 
-    .fb-title {
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 8px;
+    .card-top {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      margin-bottom: 28px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
     }
-    .fb-diagnosis {
-      margin: 8px 0;
+    .badge-cat {
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Prominent Target */
+    .target-word {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .target-sub {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    /* Input & Button */
+    .input-box {
+      display: flex;
+      gap: 8px;
+      max-width: 440px;
+      margin: 0 auto 16px;
+    }
+    .user-input {
+      flex: 1;
+      background: #090d16;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      outline: none;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .user-input:focus {
+      border-color: var(--cyan);
+    }
+    .user-input.correct {
+      border-color: var(--green);
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+    }
+    .user-input.wrong {
+      border-color: var(--red);
+      background: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+    }
+
+    .btn-check {
+      background: var(--cyan);
+      color: #090d16;
+      border: none;
+      border-radius: 10px;
+      padding: 0 20px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-check:hover { opacity: 0.9; }
+
+    /* Minimal Accents */
+    .accents {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .acc-key {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .acc-key:hover {
+      color: #fff;
+      border-color: var(--cyan);
+    }
+
+    /* Clean Inline Feedback */
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: left;
       font-size: 13.5px;
       line-height: 1.5;
+      animation: fadeIn 0.2s ease;
+    }
+    .feedback.show { display: block; }
+    .feedback.correct {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .feedback.wrong {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+    .fb-status {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .fb-detail {
+      color: #e2e8f0;
+      margin-bottom: 8px;
     }
     .fb-rule {
-      font-size: 13px;
-      color: #cbd5e1;
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-    .fb-example {
-      font-size: 12.5px;
       color: var(--text-muted);
-      font-style: italic;
-      margin-top: 8px;
+      font-size: 12.5px;
       border-top: 1px solid rgba(255,255,255,0.06);
       padding-top: 8px;
     }
 
-    .fb-actions {
+    .next-row {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-      flex-wrap: wrap;
-      gap: 10px;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
     }
     .btn-next {
-      background: #ffffff;
-      color: #0b0f19;
+      background: #fff;
+      color: #090d16;
       border: none;
-      padding: 9px 20px;
+      padding: 8px 18px;
       border-radius: 8px;
-      font-size: 13.5px;
+      font-family: inherit;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.15s;
     }
-    .btn-next:hover {
-      background: #e2e8f0;
-      transform: translateY(-1px);
-    }
-    .btn-resolve {
-      background: rgba(16, 185, 129, 0.15);
+    .btn-remove-err {
+      background: transparent;
       border: 1px solid var(--green);
       color: var(--green);
-      padding: 8px 14px;
+      padding: 7px 12px;
       border-radius: 8px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
     }
 
-    /* Empty state */
-    .empty-state {
-      text-align: center;
-      padding: 40px 20px;
-      display: none;
+    /* Score Bar */
+    .score-row {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      font-size: 12.5px;
+      color: var(--text-muted);
     }
-    .empty-icon { font-size: 48px; margin-bottom: 12px; }
-    .empty-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-    .empty-desc { font-size: 13px; color: var(--text-muted); max-width: 440px; margin: 0 auto 16px; }
+    .score-row strong { color: #fff; }
+
+    /* Empty state */
+    .empty-box {
+      display: none;
+      padding: 40px 10px;
+      text-align: center;
+    }
+    .empty-box h3 { font-size: 18px; margin-bottom: 6px; }
+    .empty-box p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @media (max-width: 640px) {
-      .drill-arena { padding: 20px 16px; }
-      .target-word { font-size: 22px; }
-      .input-row { flex-direction: column; }
-      .btn-submit { padding: 12px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
-  <header>
-    <a href="index.html" class="brand-wrap">
-      <div class="brand-icon">⚡</div>
-      <div class="brand-text">
-        <h1>Flash Drill <span>10+</span> Mot par Mot <span class="brand-tag">Écriture Directe</span></h1>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="fiches-10plus.html" class="btn-nav">📑 Fiches Mémorisation</a>
-      <a href="squelette-atelier.html" class="btn-nav">🦴 Squelette Atelier</a>
-      <a href="index.html" class="btn-nav">🏠 Hub</a>
+  <!-- Minimal Topbar -->
+  <header class="topbar">
+    <a href="index.html" class="brand">⚡ Flash <span>TCF</span></a>
+    <div class="nav-actions">
+      <a href="fiches-10plus.html" class="nav-link">📑 Fiches</a>
+      <a href="squelette-atelier.html" class="nav-link">🦴 Squelette</a>
+      <a href="index.html" class="nav-link">🏠 Hub</a>
     </div>
   </header>
 
-  <div class="app-main">
+  <!-- Clean Categories Filter (Wraps naturally, ZERO side-scroll) -->
+  <div class="filter-wrap">
+    <button class="filter-btn active" onclick="setCategory('all')">🌟 Mix Total</button>
+    <button class="filter-btn" onclick="setCategory('genre')">♂️♀️ Genre (un/une)</button>
+    <button class="filter-btn" onclick="setCategory('demonstratif')">👉 Ce / Cet / Cette</button>
+    <button class="filter-btn" onclick="setCategory('accords')">🎭 Accords Complets</button>
+    <button class="filter-btn" onclick="setCategory('conj')">🔀 Subjonctif & Passé</button>
+    <button class="filter-btn" onclick="setCategory('contractions')">🔗 Contractions</button>
+    <button class="filter-btn" onclick="setCategory('antirepetition')">🚀 C1 Anti-Répétition</button>
+    <button class="filter-btn" onclick="setCategory('accents')">🎯 Accents (é, è, ê, à, ç)</button>
+    <button class="filter-btn err-btn" onclick="setCategory('errors')">🚨 Erreurs (<span id="errCountBadge">0</span>)</button>
+  </div>
 
-    <!-- Top Counter Strip -->
-    <div class="top-stats-strip">
-      <div class="stats-group">
-        <div class="stat-badge">Réussites: <strong id="stat-score">0</strong></div>
-        <div class="stat-badge">Série: <strong id="stat-streak">0 🔥</strong></div>
+  <!-- The Minimal Flashcard -->
+  <div class="flashcard" id="cardContainer">
+    <div class="card-top" id="cardTop">
+      <span class="badge-cat" id="badgeCat">GENRE</span>
+      <span id="counterProgress">1 / 105</span>
+    </div>
+
+    <!-- Target Word -->
+    <div id="activeContent">
+      <div class="target-word" id="targetDisplay">PROBLÈME</div>
+      <div class="target-sub" id="targetSub">¿Es masculino o femenino? Escribe "un" o "une"</div>
+
+      <!-- Input Row -->
+      <div class="input-box">
+        <input type="text" id="answerInput" class="user-input" placeholder="Tu respuesta..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="onKey(event)">
+        <button class="btn-check" onclick="checkAnswer()">Valider</button>
       </div>
-      <div class="stats-group">
-        <div class="stat-badge errors" onclick="switchCategory('errors')" title="Cliquer pour réviser uniquement les erreurs">
-          🚨 Banque d'erreurs: <strong id="stat-errors-count">0</strong>
-        </div>
+
+      <!-- Accents -->
+      <div class="accents">
+        <button class="acc-key" onclick="addAccent('é')">é</button>
+        <button class="acc-key" onclick="addAccent('è')">è</button>
+        <button class="acc-key" onclick="addAccent('ê')">ê</button>
+        <button class="acc-key" onclick="addAccent('à')">à</button>
+        <button class="acc-key" onclick="addAccent('â')">â</button>
+        <button class="acc-key" onclick="addAccent('ç')">ç</button>
+        <button class="acc-key" onclick="addAccent('ù')">ù</button>
+        <button class="acc-key" onclick="addAccent('î')">î</button>
+        <button class="acc-key" onclick="addAccent('ï')">ï</button>
+        <button class="acc-key" onclick="addAccent('ô')">ô</button>
+        <button class="acc-key" onclick="addAccent('û')">û</button>
+        <button class="acc-key" onclick="addAccent('œ')">œ</button>
       </div>
     </div>
 
-    <!-- Category Selector Tabs -->
-    <div class="categories-bar">
-      <button class="cat-btn active" onclick="switchCategory('all')">🌟 Tout (Mix Rapide)</button>
-      <button class="cat-btn" onclick="switchCategory('genre')">♂️♀️ Genre (Un / Une · Le / La)</button>
-      <button class="cat-btn" onclick="switchCategory('demonstratif')">👉 Ce / Cet / Cette / Ces</button>
-      <button class="cat-btn" onclick="switchCategory('accords')">🎭 Féminins & Pluriels</button>
-      <button class="cat-btn" onclick="switchCategory('conj')">🔀 Conjugaisons 10+ (Subjonctif...)</button>
-      <button class="cat-btn" onclick="switchCategory('contractions')">🔗 Contractions (au, du, aux...)</button>
-      <button class="cat-btn" onclick="switchCategory('antirepetition')">🚀 Vocab C1 Anti-Répétition</button>
-      <button class="cat-btn color-error" onclick="switchCategory('errors')">🚨 Banque d'erreurs (<span id="tab-err-badge">0</span>)</button>
+    <!-- Inline Feedback -->
+    <div class="feedback" id="feedbackBox">
+      <div class="fb-status" id="fbStatus"></div>
+      <div class="fb-detail" id="fbDetail"></div>
+      <div class="fb-rule" id="fbRule"></div>
+      <div class="next-row">
+        <button class="btn-remove-err" id="btnRemoveErr" style="display:none;" onclick="resolveCurrentError()">✅ Marquer assimilée</button>
+        <button class="btn-next" onclick="nextCard()">Suivant ➔ (Entrée)</button>
+      </div>
     </div>
 
-    <!-- The Drill Card Arena -->
-    <div class="drill-arena" id="arenaBox">
-
-      <!-- Card Meta Header -->
-      <div class="card-meta">
-        <span class="meta-badge" id="cardBadge">Genre du Nom · Faux ami</span>
-        <span class="progress-pill" id="cardProgress">Item 1 / 66</span>
-      </div>
-
-      <!-- The Big Isolated Target (No sentences!) -->
-      <div class="target-box" id="targetBox">
-        <div class="target-word" id="targetWord">PROBLÈME</div>
-        <div class="target-instruction" id="targetInstruction">🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')</div>
-      </div>
-
-      <!-- Typing Input -->
-      <div class="input-zone" id="inputZone">
-        <div class="input-row">
-          <input type="text" id="drillInput" class="flash-input" placeholder="Écris la réponse exacte..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="handleKey(event)">
-          <button class="btn-submit" onclick="submitFlashAnswer()">Valider</button>
-        </div>
-
-        <!-- French Accents Quick Bar -->
-        <div class="accents-dock">
-          <span class="accent-label">Accents :</span>
-          <button class="accent-key" onclick="insertAccent('é')">é</button>
-          <button class="accent-key" onclick="insertAccent('è')">è</button>
-          <button class="accent-key" onclick="insertAccent('ê')">ê</button>
-          <button class="accent-key" onclick="insertAccent('à')">à</button>
-          <button class="accent-key" onclick="insertAccent('â')">â</button>
-          <button class="accent-key" onclick="insertAccent('ç')">ç</button>
-          <button class="accent-key" onclick="insertAccent('ù')">ù</button>
-          <button class="accent-key" onclick="insertAccent('î')">î</button>
-          <button class="accent-key" onclick="insertAccent('ï')">ï</button>
-          <button class="accent-key" onclick="insertAccent('ô')">ô</button>
-          <button class="accent-key" onclick="insertAccent('û')">û</button>
-          <button class="accent-key" onclick="insertAccent('œ')">œ</button>
-        </div>
-      </div>
-
-      <!-- Feedback Panel -->
-      <div class="feedback-box" id="feedbackPanel">
-        <div class="fb-title" id="fbTitle"></div>
-        <div class="fb-diagnosis" id="fbDiagnosis"></div>
-        <div class="fb-rule" id="fbRule"></div>
-        <div class="fb-example" id="fbExample"></div>
-
-        <div class="fb-actions">
-          <div id="resolveBtnWrap" style="display:none;">
-            <button class="btn-resolve" onclick="markAssimilated()">✅ Marquer comme assimilée</button>
-          </div>
-          <button class="btn-next" onclick="nextItem()">Suivant ➔ (Entrée)</button>
-        </div>
-      </div>
-
-      <!-- Empty State for Errors -->
-      <div class="empty-state" id="emptyState">
-        <div class="empty-icon">🎉</div>
-        <div class="empty-title">Banque d'erreurs vide !</div>
-        <div class="empty-desc">Toutes les notions ont été assimilées avec succès. Choisis une autre catégorie pour continuer à t'entraîner.</div>
-        <button class="btn-nav" onclick="switchCategory('all')" style="display:inline-block;">🌟 Retour au mode général</button>
-      </div>
-
+    <!-- Empty State -->
+    <div class="empty-box" id="emptyBox">
+      <h3>🎉 Banque d'erreurs vide !</h3>
+      <p>Todas tus dudas registradas han sido asimiladas. ¡Gran trabajo!</p>
+      <button class="btn-check" onclick="setCategory('all')" style="padding:10px 18px;">🌟 Volver al Mix General</button>
     </div>
+  </div>
 
+  <!-- Score & Streak Row -->
+  <div class="score-row">
+    <div>Réussites : <strong id="scoreVal">0</strong></div>
+    <div>Série : <strong id="streakVal">0 🔥</strong></div>
   </div>
 
   <script>
-    const FLASH_ITEMS = [
+    // DATASET WITH ZERO SPOILERS
+    const ITEMS = [
   {
-    "id": "g_pb",
+    "id": "g1",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "PROBLÈME",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE problème (Masculin) :</strong> Todos los nombres terminados en <em>-ème</em> de origen griego son MASCULINOS en francés: <em>un problème complexe</em> (jamais <em>une problème</em>).",
-    "example": "un véritable problème sociétal"
+    "rule": "💡 <strong>MASCULINO:</strong> Todos los nombres en <em>-ème</em> son masculinos en francés: <em>un problème</em>."
   },
   {
-    "id": "g_sys",
+    "id": "g2",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "SYSTÈME",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE système (Masculin) :</strong> Termina en <em>-ème</em>, por lo que es masculino: <em>un système éducatif efficace</em>.",
-    "example": "le système actuel"
+    "rule": "💡 <strong>MASCULINO:</strong> Termina en <em>-ème</em>: <em>un système</em>."
   },
   {
-    "id": "g_theme",
+    "id": "g3",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "THÈME",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE thème (Masculin) :</strong> Termina en <em>-ème</em>, masculino: <em>un thème récurrent</em>.",
-    "example": "aborder un thème délicat"
+    "rule": "💡 <strong>MASCULINO:</strong> Termina en <em>-ème</em>: <em>un thème</em>."
   },
   {
-    "id": "g_prog",
+    "id": "g4",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "PROGRAMME",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE programme (Masculin) :</strong> Termina en <em>-amme</em>, siempre masculino: <em>un programme novateur</em>.",
-    "example": "ce programme de formation"
+    "rule": "💡 <strong>MASCULINO:</strong> Termina en <em>-amme</em>: <em>un programme</em>."
   },
   {
-    "id": "g_role",
+    "id": "g5",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "RÔLE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE rôle (Masculin) :</strong> Es masculino: <em>jouer un rôle primordial</em>.",
-    "example": "jouer un rôle déterminant"
+    "rule": "💡 <strong>MASCULINO:</strong> En francés es: <em>un rôle / le rôle</em>."
   },
   {
-    "id": "g_manque",
+    "id": "g6",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "MANQUE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE manque (Masculin) :</strong> En francés es masculino: <em>un manque de clarté</em>.",
-    "example": "je déplore un manque d'organisation"
+    "rule": "💡 <strong>MASCULINO:</strong> En español es 'la falta', pero en francés es: <em>un manque</em>."
   },
   {
-    "id": "g_domaine",
+    "id": "g7",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "DOMAINE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE domaine (Masculin) :</strong> Es masculino: <em>dans un domaine spécifique</em>.",
-    "example": "dans le domaine de la santé"
+    "rule": "💡 <strong>MASCULINO:</strong> Es: <em>un domaine</em>."
   },
   {
-    "id": "g_groupe",
+    "id": "g8",
     "cat": "genre",
-    "badge": "Genre du Nom · Faux ami",
+    "badge": "Genre",
     "target": "GROUPE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE groupe (Masculin) :</strong> Es masculino: <em>un groupe de travail</em>.",
-    "example": "au sein d'un groupe uni"
+    "rule": "💡 <strong>MASCULINO:</strong> Es: <em>un groupe</em>."
   },
   {
-    "id": "g_sejour",
+    "id": "g9",
     "cat": "genre",
-    "badge": "Genre du Nom · Tâche 2",
+    "badge": "Genre",
     "target": "SÉJOUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "un",
       "le"
     ],
-    "rule": "💡 <strong>LE séjour (Masculin) :</strong> Es masculino: <em>un séjour inoubliable</em>.",
-    "example": "ce séjour à la montagne"
+    "rule": "💡 <strong>MASCULINO:</strong> En español decimos 'la estancia', pero en francés es: <em>un séjour</em>."
   },
   {
-    "id": "g_sol",
+    "id": "g10",
     "cat": "genre",
-    "badge": "Genre du Nom · Règle -tion",
+    "badge": "Genre",
+    "target": "AVANTAGE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>MASCULINO:</strong> En español decimos 'la ventaja', pero en francés termina en <em>-age</em> (masculino): <em>un avantage</em>."
+  },
+  {
+    "id": "g11",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "DOUTE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>MASCULINO:</strong> En español decimos 'la duda', pero en francés es: <em>un doute</em>."
+  },
+  {
+    "id": "g12",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "SOURIRE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>MASCULINO:</strong> En español decimos 'la sonrisa', en francés es: <em>un sourire</em>."
+  },
+  {
+    "id": "g13",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "SANG",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>MASCULINO:</strong> En español decimos 'la sangre', en francés es: <em>le sang</em>."
+  },
+  {
+    "id": "g14",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "ARRÊT (de bus)",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "un",
+      "l'",
+      "le"
+    ],
+    "rule": "💡 <strong>MASCULINO:</strong> En español decimos 'la parada', en francés es: <em>un arrêt</em>."
+  },
+  {
+    "id": "g15",
+    "cat": "genre",
+    "badge": "Genre",
     "target": "SOLUTION",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "une",
       "la"
     ],
-    "rule": "💡 <strong>LA solution (Féminin) :</strong> Todos los nombres terminados en <em>-tion</em> son FEMENINOS: <em>une solution adéquate</em>.",
-    "example": "trouver une solution durable"
+    "rule": "💡 <strong>FEMENINO:</strong> Todas las palabras en <em>-tion</em> son femeninas: <em>une solution</em>."
   },
   {
-    "id": "g_sit",
+    "id": "g16",
     "cat": "genre",
-    "badge": "Genre du Nom · Règle -tion",
+    "badge": "Genre",
     "target": "SITUATION",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "une",
       "la"
     ],
-    "rule": "💡 <strong>LA situation (Féminin) :</strong> Termina en <em>-tion</em>, siempre femenino: <em>une situation complexe</em>.",
-    "example": "face à cette situation"
+    "rule": "💡 <strong>FEMENINO:</strong> Termina en <em>-tion</em>: <em>une situation</em>."
   },
   {
-    "id": "g_dec",
+    "id": "g17",
     "cat": "genre",
-    "badge": "Genre du Nom · Règle -sion",
+    "badge": "Genre",
     "target": "DÉCISION",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "une",
       "la"
     ],
-    "rule": "💡 <strong>LA décision (Féminin) :</strong> Termina en <em>-sion</em>, femenino: <em>une sage décision</em>.",
-    "example": "prendre une décision éclairée"
+    "rule": "💡 <strong>FEMENINO:</strong> Termina en <em>-sion</em>: <em>une décision</em>."
   },
   {
-    "id": "g_act",
+    "id": "g18",
     "cat": "genre",
-    "badge": "Genre du Nom · Règle -té",
+    "badge": "Genre",
     "target": "ACTIVITÉ",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "une",
+      "l'",
       "la"
     ],
-    "rule": "💡 <strong>L'activité (Féminin) :</strong> La inmensa mayoría de nombres en <em>-té</em> son femeninos: <em>une activité enrichissante</em>.",
-    "example": "participer à cette activité"
+    "rule": "💡 <strong>FEMENINO:</strong> Palabras en <em>-té</em> son femeninas: <em>une activité</em>."
   },
   {
-    "id": "g_soc",
+    "id": "g19",
     "cat": "genre",
-    "badge": "Genre du Nom · Règle -té",
+    "badge": "Genre",
     "target": "SOCIÉTÉ",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "une",
       "la"
     ],
-    "rule": "💡 <strong>LA société (Féminin) :</strong> Termina en <em>-té</em>, femenino: <em>au sein d'une société moderne</em>.",
-    "example": "l'évolution de notre société"
+    "rule": "💡 <strong>FEMENINO:</strong> Termina en <em>-té</em>: <em>une société</em>."
   },
   {
-    "id": "g_exp",
+    "id": "g20",
     "cat": "genre",
-    "badge": "Genre du Nom · Tâche 2",
+    "badge": "Genre",
     "target": "EXPÉRIENCE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "l'",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> Es: <em>une expérience</em>."
+  },
+  {
+    "id": "g21",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "COULEUR",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
     "ans": [
       "une",
       "la"
     ],
-    "rule": "💡 <strong>UNE expérience (Féminin) :</strong> Femenino: <em>une expérience inoubliable</em>.",
-    "example": "je recommande vivement cette expérience"
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el color', pero en francés termina en <em>-eur</em> (femenino): <em>une couleur</em>."
   },
   {
-    "id": "d_ev",
+    "id": "g22",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "ERREUR",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "l'",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el error', en francés termina en <em>-eur</em>: <em>une erreur</em>."
+  },
+  {
+    "id": "g23",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "VALEUR",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el valor', en francés termina en <em>-eur</em>: <em>une valeur</em>."
+  },
+  {
+    "id": "g24",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "PEUR",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el miedo', en francés termina en <em>-eur</em>: <em>la peur</em>."
+  },
+  {
+    "id": "g25",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "FIN",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el fin', en francés es: <em>la fin</em>."
+  },
+  {
+    "id": "g26",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "PLANÈTE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el planeta', en francés es femenino: <em>la planète</em>."
+  },
+  {
+    "id": "g27",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "MÉTHODE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el método', en francés es femenino: <em>une méthode</em>."
+  },
+  {
+    "id": "g28",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "ÉQUIPE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "l'",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el equipo', en francés es femenino: <em>une équipe</em>."
+  },
+  {
+    "id": "g29",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "VOITURE",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el coche', en francés es femenino: <em>une voiture</em>."
+  },
+  {
+    "id": "g30",
+    "cat": "genre",
+    "badge": "Genre",
+    "target": "MER",
+    "sub": "¿Masculino o femenino? Escribe \"un\" o \"une\"",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>FEMENINO:</strong> En español es 'el mar', en francés es femenino: <em>la mer</em>."
+  },
+  {
+    "id": "d1",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Devant voyelle",
+    "badge": "Démonstratif",
     "target": "[ ... ] ÉVÉNEMENT",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este evento)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cet"
     ],
-    "rule": "💡 <strong>CET devant voyelle :</strong> 'Événement' es masculino singular que empieza por vocal (é). Para evitar el choque de vocales (hiato), se usa <strong>cet</strong>.",
-    "example": "cet événement musical"
+    "rule": "💡 <strong>CET devant voyelle :</strong> 'Événement' es masculino y empieza por vocal: <em>cet événement</em>."
   },
   {
-    "id": "d_av",
+    "id": "d2",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Devant voyelle",
+    "badge": "Démonstratif",
     "target": "[ ... ] AVIS",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta opinión / parecer)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cet"
     ],
-    "rule": "💡 <strong>CET devant voyelle :</strong> 'Avis' es masculino singular y empieza por vocal (a): <strong>cet avis</strong>.",
-    "example": "je partage pleinement cet avis"
+    "rule": "💡 <strong>CET devant voyelle :</strong> 'Avis' empieza por vocal: <em>cet avis</em>."
   },
   {
-    "id": "d_out",
+    "id": "d3",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Devant voyelle",
+    "badge": "Démonstratif",
     "target": "[ ... ] OUTIL",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta herramienta)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cet"
     ],
-    "rule": "💡 <strong>CET outil :</strong> 'Outil' es masculino y empieza por vocal (o): <strong>cet outil</strong> (jamás <em>cette outil</em>).",
-    "example": "utiliser cet outil au quotidien"
+    "rule": "💡 <strong>CET devant voyelle :</strong> 'Outil' es masculino y empieza por vocal: <em>cet outil</em>."
   },
   {
-    "id": "d_hom",
+    "id": "d4",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Devant H muet",
+    "badge": "Démonstratif",
     "target": "[ ... ] HOMME",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este hombre)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cet"
     ],
-    "rule": "💡 <strong>CET devant H mudo :</strong> 'Homme' es masculino singular con H muda: <strong>cet homme</strong>.",
-    "example": "l'engagement de cet homme"
+    "rule": "💡 <strong>CET devant H muet :</strong> 'Homme' es masculino con H muda: <em>cet homme</em>."
   },
   {
-    "id": "d_pb",
+    "id": "d5",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Masculin consonne",
+    "badge": "Démonstratif",
     "target": "[ ... ] PROBLÈME",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este problema)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "ce"
     ],
-    "rule": "💡 <strong>CE devant consonne masculine :</strong> 'Problème' es masculino singular con consonante (p): <strong>ce problème</strong> (¡nunca <em>cette problème</em>!).",
-    "example": "pour résoudre ce problème"
+    "rule": "💡 <strong>CE devant consonne :</strong> 'Problème' es masculino singular con consonante: <em>ce problème</em>."
   },
   {
-    "id": "d_proj",
+    "id": "d6",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Masculin consonne",
+    "badge": "Démonstratif",
     "target": "[ ... ] PROJET",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este proyecto)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "ce"
     ],
-    "rule": "💡 <strong>CE projet :</strong> Masculino con consonante: <strong>ce projet</strong>.",
-    "example": "mener à bien ce projet"
+    "rule": "💡 <strong>CE projet :</strong> Masculino singular con consonante: <em>ce projet</em>."
   },
   {
-    "id": "d_id",
+    "id": "d7",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Féminin",
+    "badge": "Démonstratif",
     "target": "[ ... ] IDÉE",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta idea)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cette"
     ],
-    "rule": "💡 <strong>CETTE idée :</strong> 'Idée' es femenino singular. Para cualquier femenino singular siempre se usa <strong>cette</strong>.",
-    "example": "je suis favorable à cette idée"
+    "rule": "💡 <strong>CETTE :</strong> 'Idée' es femenino singular: <em>cette idée</em>."
   },
   {
-    "id": "d_exp",
+    "id": "d8",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Féminin",
+    "badge": "Démonstratif",
     "target": "[ ... ] EXPÉRIENCE",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta experiencia)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cette"
     ],
-    "rule": "💡 <strong>CETTE expérience :</strong> Femenino singular: <strong>cette expérience</strong>.",
-    "example": "je recommande cette expérience"
+    "rule": "💡 <strong>CETTE :</strong> Femenino singular: <em>cette expérience</em>."
   },
   {
-    "id": "d_mes",
+    "id": "d9",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Féminin",
+    "badge": "Démonstratif",
     "target": "[ ... ] MESURE",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta medida)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "cette"
     ],
-    "rule": "💡 <strong>CETTE mesure :</strong> Femenino singular: <strong>cette mesure</strong>.",
-    "example": "l'application de cette mesure"
+    "rule": "💡 <strong>CETTE :</strong> Femenino singular: <em>cette mesure</em>."
   },
   {
-    "id": "d_sol_pl",
+    "id": "d10",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Pluriel",
+    "badge": "Démonstratif",
     "target": "[ ... ] SOLUTIONS",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (estas soluciones)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "ces"
     ],
-    "rule": "💡 <strong>CES soluciones (Pluriel) :</strong> En plural (sea masculino o femenino) siempre se usa <strong>ces</strong>.",
-    "example": "combiner ces solutions"
+    "rule": "💡 <strong>CES en plural :</strong> Para cualquier plural (masculino o femenino): <em>ces solutions</em>."
   },
   {
-    "id": "d_pb_pl",
+    "id": "d11",
     "cat": "demonstratif",
-    "badge": "Démonstratifs · Pluriel",
+    "badge": "Démonstratif",
     "target": "[ ... ] PROBLÈMES",
-    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (estos problemas)",
+    "sub": "Démonstratif : ce, cet, cette ou ces ?",
     "ans": [
       "ces"
     ],
-    "rule": "💡 <strong>CES problèmes :</strong> Plural: <strong>ces problèmes</strong> (cuidado de no escribir <em>ses</em> con 's' posesivo).",
-    "example": "surmonter ces problèmes"
+    "rule": "💡 <strong>CES en plural :</strong> <em>ces problèmes</em> (ojo: nunca escribir <em>ses</em>)."
   },
   {
-    "id": "f_enr",
+    "id": "ac1",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "ENRICHISSANT  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (enriquecedora)",
+    "badge": "Accord Complet",
+    "target": "PROBLÈME  +  (complexe)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "enrichissante"
+      "un problème complexe"
     ],
-    "rule": "💡 <strong>Féminin régulier en -e :</strong> <em>enrichissant</em> + <strong>e</strong> = <strong>enrichissante</strong> (ej. <em>une sortie enrichissante</em>).",
-    "example": "une expérience enrichissante"
+    "rule": "💡 <strong>un problème complexe :</strong> 'Problème' es masculino (-ème): <em>un problème complexe</em>."
   },
   {
-    "id": "f_chal",
+    "id": "ac2",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "CHALEUREUX  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (cálida / hospitalaria)",
+    "badge": "Accord Complet",
+    "target": "AVANTAGE  +  (majeur)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "chaleureuse"
+      "un avantage majeur"
     ],
-    "rule": "💡 <strong>Féminin en -eux ➔ -euse :</strong> Los adjetivos terminados en <em>-eux</em> cambian a <strong>-euse</strong>: <strong>chaleureuse</strong>.",
-    "example": "une ambiance chaleureuse"
+    "rule": "💡 <strong>un avantage majeur :</strong> 'Avantage' es masculino (-age): <em>un avantage majeur</em>."
   },
   {
-    "id": "f_dep",
+    "id": "ac3",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "DÉPAYSANT  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (desconectadora / fuera de rutina)",
+    "badge": "Accord Complet",
+    "target": "EXPÉRIENCE  +  (enrichissant)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "dépaysante"
+      "une expérience enrichissante"
     ],
-    "rule": "💡 <strong>Féminin régulier :</strong> <em>dépaysant</em> + <strong>e</strong> = <strong>dépaysante</strong>.",
-    "example": "une parenthèse dépaysante"
+    "rule": "💡 <strong>une expérience enrichissante :</strong> 'Expérience' es femenino: <em>enrichissante</em> lleva '-e'."
   },
   {
-    "id": "f_fest",
+    "id": "ac4",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "FESTIF  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (festiva)",
+    "badge": "Accord Complet",
+    "target": "ERREUR  +  (grave)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "festive"
+      "une erreur grave",
+      "une grave erreur"
     ],
-    "rule": "💡 <strong>Féminin en -if ➔ -ive :</strong> Los adjetivos en <em>-if</em> cambian a <strong>-ive</strong>: <strong>festive</strong>.",
-    "example": "une atmosphère festive"
+    "rule": "💡 <strong>une erreur grave :</strong> 'Erreur' es femenino en francés: <em>une erreur grave</em>."
   },
   {
-    "id": "f_dec",
+    "id": "ac5",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "DÉCEVANT  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (decepcionante)",
+    "badge": "Accord Complet",
+    "target": "MÉTHODE  +  (efficace)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "décevante"
+      "une méthode efficace"
     ],
-    "rule": "💡 <strong>Féminin régulier :</strong> <em>décevant</em> + <strong>e</strong> = <strong>décevante</strong>.",
-    "example": "une prestation décevante"
+    "rule": "💡 <strong>une méthode efficace :</strong> 'Méthode' es femenino en francés: <em>une méthode efficace</em>."
   },
   {
-    "id": "f_cp",
+    "id": "ac6",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "CONTRE-PRODUCTIF  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (contraproducente)",
+    "badge": "Accord Complet",
+    "target": "IDÉE  +  (novateur)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "contre-productive"
+      "une idée novatrice"
     ],
-    "rule": "💡 <strong>Féminin en -if ➔ -ive :</strong> <em>contre-productif</em> ➔ <strong>contre-productive</strong>.",
-    "example": "une mesure contre-productive"
+    "rule": "💡 <strong>une idée novatrice :</strong> 'Idée' es femenino. 'Novateur' cambia a <em>novatrice</em>."
   },
   {
-    "id": "f_prim",
+    "id": "ac7",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "PRIMORDIAL  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (primordial / vital)",
+    "badge": "Accord Complet",
+    "target": "DÉCISION  +  (important)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "primordiale"
+      "une décision importante"
     ],
-    "rule": "💡 <strong>Féminin régulier :</strong> <em>primordial</em> + <strong>e</strong> = <strong>primordiale</strong>.",
-    "example": "une fonction primordiale"
+    "rule": "💡 <strong>une décision importante :</strong> 'Décision' es femenino: <em>importante</em> con '-e'."
   },
   {
-    "id": "f_nov",
+    "id": "ac8",
     "cat": "accords",
-    "badge": "Féminin de l'adjectif",
-    "target": "NOVATEUR  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe la forma femenina singular (innovadora)",
+    "badge": "Accord Complet",
+    "target": "SÉJOUR  +  (dépaysant)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "novatrice"
+      "un séjour dépaysant"
     ],
-    "rule": "💡 <strong>Féminin en -teur ➔ -trice :</strong> <em>novateur</em> se transforma en <strong>novatrice</strong>.",
-    "example": "une initiative novatrice"
+    "rule": "💡 <strong>un séjour dépaysant :</strong> 'Séjour' es masculino: <em>un séjour dépaysant</em>."
   },
   {
-    "id": "f_ut_pass",
+    "id": "ac9",
     "cat": "accords",
-    "badge": "Voix passive · Participe passé",
-    "target": "ÊTRE (utiliser)  ➔  Féminin singulier",
-    "prompt_es": "🇪🇸 Escribe el participio femenino (la télévision doit être...)",
+    "badge": "Accord Complet",
+    "target": "VOITURE  +  (électrique)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "utilisée"
+      "une voiture électrique"
     ],
-    "rule": "💡 <strong>Participe passé avec ÊTRE :</strong> Con el auxiliar o infinitivo <em>être</em>, el participio concuerda con el sujeto femenino: <strong>utilisée</strong>.",
-    "example": "à condition d'être utilisée avec modération"
+    "rule": "💡 <strong>une voiture électrique :</strong> 'Voiture' es femenino en francés: <em>une voiture électrique</em>."
   },
   {
-    "id": "p_ben",
+    "id": "ac10",
     "cat": "accords",
-    "badge": "Pluriel de l'adjectif",
-    "target": "BÉNÉFIQUE  ➔  Pluriel",
-    "prompt_es": "🇪🇸 Escribe la forma en plural (des effets...)",
+    "badge": "Accord Complet",
+    "target": "ENJEU  +  (crucial)",
+    "sub": "Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
     "ans": [
-      "bénéfiques"
+      "un enjeu crucial"
     ],
-    "rule": "💡 <strong>Pluriel régulier en -s :</strong> Añade <strong>-s</strong> al adjetivo: <strong>bénéfiques</strong>.",
-    "example": "des retombées bénéfiques"
+    "rule": "💡 <strong>un enjeu crucial :</strong> 'Enjeu' es masculino: <em>un enjeu crucial</em>."
   },
   {
-    "id": "p_nef",
-    "cat": "accords",
-    "badge": "Pluriel de l'adjectif",
-    "target": "NÉFASTE  ➔  Pluriel",
-    "prompt_es": "🇪🇸 Escribe la forma en plural (des conséquences...)",
-    "ans": [
-      "néfastes"
-    ],
-    "rule": "💡 <strong>Pluriel régulier :</strong> <em>néfaste</em> + <strong>s</strong> = <strong>néfastes</strong>.",
-    "example": "des effets néfastes"
-  },
-  {
-    "id": "p_inn",
-    "cat": "accords",
-    "badge": "Pluriel de l'adjectif",
-    "target": "INNOVANT  ➔  Masculin pluriel",
-    "prompt_es": "🇪🇸 Escribe la forma masculino plural (des projets...)",
-    "ans": [
-      "innovants"
-    ],
-    "rule": "💡 <strong>Pluriel masculin :</strong> <em>innovant</em> + <strong>s</strong> = <strong>innovants</strong>.",
-    "example": "des projets innovants"
-  },
-  {
-    "id": "p_soc",
-    "cat": "accords",
-    "badge": "Pluriel irrégulier",
-    "target": "SOCIAL  ➔  Masculin pluriel",
-    "prompt_es": "🇪🇸 Escribe la forma masculino plural (des liens...)",
-    "ans": [
-      "sociaux"
-    ],
-    "rule": "💡 <strong>Pluriel en -al ➔ -aux :</strong> La mayoría de adjetivos en <em>-al</em> hacen su plural masculino en <strong>-aux</strong>: <strong>sociaux</strong>.",
-    "example": "tisser des liens sociaux"
-  },
-  {
-    "id": "c_pouvoir_nous",
+    "id": "c1",
     "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #2",
+    "badge": "Subjonctif",
     "target": "POUVOIR  (nous)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (afin que nous...)",
+    "sub": "Subjonctif présent (afin que nous...)",
     "ans": [
       "puissions"
     ],
-    "rule": "💡 <strong>POUVOIR au subjonctif (nous) :</strong> <em>afin que nous</em> <strong>puissions</strong>. Clave absoluta para la Tâche 1.",
-    "example": "afin que nous puissions organiser le séjour"
+    "rule": "💡 <strong>puissions :</strong> <em>afin que nous</em> <strong>puissions</strong>. Indispensable en Tâche 1."
   },
   {
-    "id": "c_pouvoir_vous",
+    "id": "c2",
     "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #4",
+    "badge": "Subjonctif",
     "target": "POUVOIR  (vous)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que vous...)",
+    "sub": "Subjonctif présent (pour que vous...)",
     "ans": [
       "puissiez"
     ],
-    "rule": "💡 <strong>POUVOIR au subjonctif (vous) :</strong> <em>pour que vous</em> <strong>puissiez</strong>.",
-    "example": "pour que vous puissiez vérifier l'état"
+    "rule": "💡 <strong>puissiez :</strong> <em>pour que vous</em> <strong>puissiez</strong>."
   },
   {
-    "id": "c_pouvoir_je",
+    "id": "c3",
     "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #16",
+    "badge": "Subjonctif",
     "target": "POUVOIR  (je)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que je...)",
+    "sub": "Subjonctif présent (pour que je...)",
     "ans": [
       "puisse"
     ],
-    "rule": "💡 <strong>POUVOIR au subjonctif (je) :</strong> <em>pour que je</em> <strong>puisse</strong>.",
-    "example": "pour que je puisse tout préparer"
+    "rule": "💡 <strong>puisse :</strong> <em>pour que je</em> <strong>puisse</strong>."
   },
   {
-    "id": "c_pouvoir_ils",
+    "id": "c4",
     "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #29",
-    "target": "POUVOIR  (ils / elles)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (bien que les caméras...)",
+    "badge": "Subjonctif",
+    "target": "POUVOIR  (ils)",
+    "sub": "Subjonctif présent (bien qu'ils...)",
     "ans": [
       "puissent"
     ],
-    "rule": "💡 <strong>POUVOIR au subjonctif (ils) :</strong> <em>bien qu'ils</em> <strong>puissent</strong>.",
-    "example": "bien que ces mesures puissent aider"
+    "rule": "💡 <strong>puissent :</strong> <em>bien qu'ils</em> <strong>puissent</strong>."
   },
   {
-    "id": "c_etre_il",
+    "id": "c5",
     "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #3",
-    "target": "ÊTRE  (il / elle / cette mesure)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que cette mesure...)",
+    "badge": "Subjonctif",
+    "target": "ÊTRE  (il / cette mesure)",
+    "sub": "Subjonctif présent (pour que cette mesure...)",
     "ans": [
       "soit"
     ],
-    "rule": "💡 <strong>ÊTRE au subjonctif (3ª sing.) :</strong> <em>pour que cette mesure</em> <strong>soit</strong>.",
-    "example": "pour que cette mesure soit efficace"
+    "rule": "💡 <strong>soit :</strong> <em>pour que cette mesure</em> <strong>soit</strong> efficace."
   },
   {
-    "id": "c_etre_ils",
+    "id": "c6",
     "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #71",
-    "target": "ÊTRE  (ils / elles / les portes)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (veille à ce que les portes...)",
+    "badge": "Subjonctif",
+    "target": "ÊTRE  (ils / les portes)",
+    "sub": "Subjonctif présent (veille à ce que les portes...)",
     "ans": [
       "soient"
     ],
-    "rule": "💡 <strong>ÊTRE au subjonctif (3ª plur.) :</strong> <em>pour qu'elles</em> <strong>soient</strong>.",
-    "example": "veille à ce que les portes soient fermées"
+    "rule": "💡 <strong>soient :</strong> <em>pour qu'elles</em> <strong>soient</strong>."
   },
   {
-    "id": "c_avoir_nous",
+    "id": "c7",
     "cat": "conj",
-    "badge": "Subjonctif Présent · C1",
-    "target": "AVOIR  (nous)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (afin que nous...)",
-    "ans": [
-      "ayons"
-    ],
-    "rule": "💡 <strong>AVOIR au subjonctif (nous) :</strong> <em>afin que nous</em> <strong>ayons</strong>.",
-    "example": "afin que nous ayons le temps"
-  },
-  {
-    "id": "c_faire_il",
-    "cat": "conj",
-    "badge": "Subjonctif Présent · C1",
-    "target": "FAIRE  (il / elle)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (bien qu'il...)",
-    "ans": [
-      "fasse"
-    ],
-    "rule": "💡 <strong>FAIRE au subjonctif (il) :</strong> <em>bien qu'il</em> <strong>fasse</strong>.",
-    "example": "bien qu'il fasse des efforts"
-  },
-  {
-    "id": "c_voir_tu",
-    "cat": "conj",
-    "badge": "Subjonctif Présent · Sujet #1",
+    "badge": "Subjonctif",
     "target": "VOIR  (tu)",
-    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que tu...)",
+    "sub": "Subjonctif présent (pour que tu...)",
     "ans": [
       "voies"
     ],
-    "rule": "💡 <strong>VOIR au subjonctif (tu) :</strong> <em>pour que tu</em> <strong>voies</strong> (con -es final).",
-    "example": "pour que tu voies le gymnase"
+    "rule": "💡 <strong>voies :</strong> Con 'tu' en subjuntivo lleva '-es': <em>pour que tu</em> <strong>voies</strong>."
   },
   {
-    "id": "c_souhaiter_je",
+    "id": "c8",
     "cat": "conj",
-    "badge": "Conditionnel de Politesse · T1",
+    "badge": "Conditionnel",
     "target": "SOUHAITER  (je)",
-    "prompt_es": "🇪🇸 Escribe el condicional de cortesía (desearía / me gustaría)",
+    "sub": "Conditionnel de politesse (je...)",
     "ans": [
       "souhaiterais"
     ],
-    "rule": "💡 <strong>Conditionnel de politesse :</strong> En Tâche 1 formal, usa <strong>je souhaiterais</strong> (con -ais). Nunca digas <em>je veux</em>.",
-    "example": "je souhaiterais obtenir des informations"
+    "rule": "💡 <strong>souhaiterais :</strong> En cartas formales de Tâche 1: <em>je souhaiterais</em>."
   },
   {
-    "id": "c_etre_imp",
+    "id": "c9",
     "cat": "conj",
-    "badge": "Imparfait de Description · T2",
-    "target": "ÊTRE  (l'ambiance / 3ª sing.)",
-    "prompt_es": "🇪🇸 Escribe el imparfait para describir el ambiente en el pasado (el ambiente era...)",
+    "badge": "Imparfait",
+    "target": "ÊTRE  (l'ambiance)",
+    "sub": "Imparfait de décor (l'ambiance...)",
     "ans": [
       "était"
     ],
-    "rule": "💡 <strong>Imparfait de décor :</strong> Para describir cómo era un lugar o evento en T2 se usa imparfait: <em>l'ambiance</em> <strong>était</strong>.",
-    "example": "l'organisation était irréprochable"
+    "rule": "💡 <strong>était :</strong> Para describir ambiente en Tâche 2: <em>l'ambiance était</em>."
   },
   {
-    "id": "c_laisser_imp",
+    "id": "c10",
     "cat": "conj",
-    "badge": "Imparfait de Critique · T2",
-    "target": "LAISSER  (l'organisation / 3ª sing.)",
-    "prompt_es": "🇪🇸 Escribe el imparfait en la locución 'dejaba que desear'",
+    "badge": "Imparfait",
+    "target": "LAISSER  (l'organisation)",
+    "sub": "Imparfait de critique (l'organisation... à désirer)",
     "ans": [
       "laissait"
     ],
-    "rule": "💡 <strong>Laisser à désirer :</strong> En pasado para críticas: <em>la propreté</em> <strong>laissait</strong> <em>à désirer</em>.",
-    "example": "le service laissait à désirer"
+    "rule": "💡 <strong>laissait à désirer :</strong> Expresión de crítica en Tâche 2: <em>laissait à désirer</em>."
   },
   {
-    "id": "c_permis_pc",
+    "id": "c11",
     "cat": "conj",
-    "badge": "Passé Composé · Participe passé",
-    "target": "PERMETTRE  (participe passé)",
-    "prompt_es": "🇪🇸 Escribe el participio de permettre (esta experiencia me ha permitido...)",
+    "badge": "Passé Composé",
+    "target": "PERMETTRE  (participe)",
+    "sub": "Participe passé (cette expérience m'a...)",
     "ans": [
       "permis"
     ],
-    "rule": "💡 <strong>Participe passé de PERMETTRE :</strong> <em>cette expérience m'a</em> <strong>permis</strong> (con -s final invariable). Aparece 27 veces en el PDF.",
-    "example": "m'a permis d'apprendre"
+    "rule": "💡 <strong>permis :</strong> <em>m'a permis de</em> (con '-s' invariable)."
   },
   {
-    "id": "ct_a_le",
+    "id": "c12",
+    "cat": "conj",
+    "badge": "Voix Passive",
+    "target": "ÊTRE (utiliser) · fém.",
+    "sub": "Participe passé (la télévision doit être...)",
+    "ans": [
+      "utilisée"
+    ],
+    "rule": "💡 <strong>utilisée :</strong> Voz pasiva con <em>être</em> concuerda con 'la télévision' (femenino): <em>utilisée</em>."
+  },
+  {
+    "id": "ct1",
     "cat": "contractions",
-    "badge": "Contraction obligatoire",
+    "badge": "Contraction",
     "target": "À  +  LE",
-    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "sub": "Contraction obligatoire :",
     "ans": [
       "au"
     ],
-    "rule": "💡 <strong>À + LE ➔ AU :</strong> En francés es obligatorio contraer: <em>au cinéma, au travail, au détriment de</em> (jamás <em>à le</em>).",
-    "example": "participer au débat"
+    "rule": "💡 <strong>AU :</strong> <em>À + LE = AU</em> (ej. <em>au détriment de</em>)."
   },
   {
-    "id": "ct_a_les",
+    "id": "ct2",
     "cat": "contractions",
-    "badge": "Contraction obligatoire",
+    "badge": "Contraction",
     "target": "À  +  LES",
-    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "sub": "Contraction obligatoire :",
     "ans": [
       "aux"
     ],
-    "rule": "💡 <strong>À + LES ➔ AUX :</strong> Contracción en plural: <strong>aux</strong> (ej. <em>aux citoyens, grâce aux efforts</em>).",
-    "example": "grâce aux nouvelles technologies"
+    "rule": "💡 <strong>AUX :</strong> <em>À + LES = AUX</em> (ej. <em>grâce aux efforts</em>)."
   },
   {
-    "id": "ct_de_le",
+    "id": "ct3",
     "cat": "contractions",
-    "badge": "Contraction obligatoire",
+    "badge": "Contraction",
     "target": "DE  +  LE",
-    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "sub": "Contraction obligatoire :",
     "ans": [
       "du"
     ],
-    "rule": "💡 <strong>DE + LE ➔ DU :</strong> Contracción obligatoria: <em>au détriment</em> <strong>du</strong> <em>bien-être</em> (jamás <em>de le</em>).",
-    "example": "au détriment du repos"
+    "rule": "💡 <strong>DU :</strong> <em>DE + LE = DU</em> (ej. <em>au détriment du bien-être</em>)."
   },
   {
-    "id": "ct_de_les",
+    "id": "ct4",
     "cat": "contractions",
-    "badge": "Contraction obligatoire",
+    "badge": "Contraction",
     "target": "DE  +  LES",
-    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "sub": "Contraction obligatoire :",
     "ans": [
       "des"
     ],
-    "rule": "💡 <strong>DE + LES ➔ DES :</strong> Contracción en plural: <em>la majorité</em> <strong>des</strong> <em>gens</em> (jamás <em>de les</em>).",
-    "example": "le quotidien des personnes"
+    "rule": "💡 <strong>DES :</strong> <em>DE + LES = DES</em> (ej. <em>la majorité des personnes</em>)."
   },
   {
-    "id": "ar_eng",
+    "id": "ar1",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'faire'",
-    "target": "FAIRE DES TENSIONS / CONFLITS",
-    "prompt_es": "🇪🇸 Escribe el verbo C1 en infinitivo para 'provocar / engendrar'",
+    "badge": "C1 Vocab",
+    "target": "FAIRE DES PROBLÈMES",
+    "sub": "Verbe C1 équivalent (infinitif) :",
     "ans": [
       "engendrer"
     ],
-    "rule": "💡 <strong>ENGENDRER (C1) :</strong> Sustituye a <em>faire des problèmes</em>. Significa provocar o causar consecuencias negativas.",
-    "example": "engendrer des tensions sociales"
+    "rule": "💡 <strong>engendrer :</strong> Sustituye al básico <em>faire des problèmes</em>: <em>engendrer des tensions</em>."
   },
   {
-    "id": "ar_nuire",
+    "id": "ar2",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'faire du mal'",
+    "badge": "C1 Vocab",
     "target": "FAIRE DU MAL À",
-    "prompt_es": "🇪🇸 Escribe el verbo C1 en infinitivo para 'perjudicar / dañar'",
+    "sub": "Verbe C1 équivalent (infinitif) :",
     "ans": [
       "nuire"
     ],
-    "rule": "💡 <strong>NUIRE À (C1) :</strong> Sustituye a <em>faire du mal</em>: <em>cela risque de</em> <strong>nuire</strong> <em>à la santé</em>.",
-    "example": "nuire au bien-être des enfants"
+    "rule": "💡 <strong>nuire à :</strong> Sustituye a <em>faire du mal</em>: <em>nuire au bien-être</em>."
   },
   {
-    "id": "ar_souligner",
+    "id": "ar3",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'dire'",
+    "badge": "C1 Vocab",
     "target": "LE DOCUMENT DIT QUE",
-    "prompt_es": "🇪🇸 Escribe el verbo C1 en presente (3ª sing.) para 'destacar / subrayar'",
+    "sub": "Verbe C1 (3ª sing. présent) :",
     "ans": [
       "souligne"
     ],
-    "rule": "💡 <strong>SOULIGNE (C1) :</strong> ¡Aparece 74 veces en el PDF! Nunca digas <em>le texte dit</em>, di <em>le document</em> <strong>souligne</strong>.",
-    "example": "le premier document souligne"
+    "rule": "💡 <strong>souligne :</strong> ¡Aparece 74 veces en el PDF! En vez de <em>le texte dit</em>, usa <em>le document souligne</em>."
   },
   {
-    "id": "ar_tisser",
+    "id": "ar4",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'se faire des amis'",
+    "badge": "C1 Vocab",
     "target": "SE FAIRE DES AMIS",
-    "prompt_es": "🇪🇸 Escribe el verbo C1 en infinitivo para 'tejer' lazos",
+    "sub": "Verbe C1 (infinitif) :",
     "ans": [
       "tisser"
     ],
-    "rule": "💡 <strong>TISSER des liens (C1) :</strong> Sustituye a la expresión infantil <em>se faire des amis</em> en Tâche 2.",
-    "example": "tisser des liens durables"
+    "rule": "💡 <strong>tisser des liens :</strong> Sustituye a la expresión infantil <em>se faire des amis</em>."
   },
   {
-    "id": "ar_ressourcer",
+    "id": "ar5",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'se reposer'",
-    "target": "SE REPOSER LOIN DE LA VILLE",
-    "prompt_es": "🇪🇸 Escribe el infinitivo para 'recargar energías / renovarse'",
+    "badge": "C1 Vocab",
+    "target": "SE REPOSER LOIN",
+    "sub": "Verbe C1 (infinitif) :",
     "ans": [
       "ressourcer",
       "se ressourcer"
     ],
-    "rule": "💡 <strong>SE RESSOURCER (C1) :</strong> El verbo ideal para relatos de viajes o naturaleza en la Tâche 2.",
-    "example": "un endroit idéal pour se ressourcer"
+    "rule": "💡 <strong>se ressourcer :</strong> Verbo culto para recargar energías en la Tâche 2."
   },
   {
-    "id": "ar_preconiser",
+    "id": "ar6",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'donner une idée'",
-    "target": "JE PENSE QU'IL FAUT / JE CONSEILLE",
-    "prompt_es": "🇪🇸 Escribe el verbo formal en presente (1ª sing.) para 'recomiendo / preconizo'",
-    "ans": [
-      "préconise"
-    ],
-    "rule": "💡 <strong>JE PRÉCONISE (C1) :</strong> Verbo culto de recomendación formal para ganar puntos en Tâche 3.",
-    "example": "je préconise de trouver un équilibre"
-  },
-  {
-    "id": "ar_enjeu",
-    "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'gros problème'",
-    "target": "UN GROS PROBLÈME",
-    "prompt_es": "🇪🇸 Escribe el sustantivo C1 masculino para 'reto / desafío crucial' (un ... majeur)",
+    "badge": "C1 Vocab",
+    "target": "EST UN GROS PROBLÈME",
+    "sub": "Nom C1 masculin (un ... majeur) :",
     "ans": [
       "enjeu"
     ],
-    "rule": "💡 <strong>UN ENJEU MAJEUR (C1) :</strong> Sustituye a <em>un gros problème</em>. En francés: <em>constitue un</em> <strong>enjeu</strong> <em>majeur</em>.",
-    "example": "constitue un véritable enjeu"
+    "rule": "💡 <strong>un enjeu majeur :</strong> Reemplaza a <em>un gros problème</em>."
   },
   {
-    "id": "ar_benefique",
+    "id": "ar7",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'très bon'",
-    "target": "TRÈS BON POUR LA SANTÉ",
-    "prompt_es": "🇪🇸 Escribe el adjetivo C1 para 'beneficioso / provechoso'",
+    "badge": "C1 Vocab",
+    "target": "TRÈS BON POUR",
+    "sub": "Adjectif C1 équivalent :",
     "ans": [
       "bénéfique"
     ],
-    "rule": "💡 <strong>BÉNÉFIQUE (C1) :</strong> Adjetivo elegante para contrastar en debates de la Tâche 3.",
-    "example": "s'avère très bénéfique"
+    "rule": "💡 <strong>bénéfique :</strong> Sustituye a <em>très bon</em> en ensayos de opinión."
   },
   {
-    "id": "ar_nefaste",
+    "id": "ar8",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'mauvais'",
+    "badge": "C1 Vocab",
     "target": "TRÈS MAUVAIS POUR",
-    "prompt_es": "🇪🇸 Escribe el adjetivo C1 para 'dañino / nefasto'",
+    "sub": "Adjectif C1 équivalent :",
     "ans": [
       "néfaste"
     ],
-    "rule": "💡 <strong>NÉFASTE (C1) :</strong> Opuesto culto de <em>bénéfique</em>: <em>des retombées</em> <strong>néfastes</strong>.",
-    "example": "des conséquences néfastes"
+    "rule": "💡 <strong>néfaste :</strong> Opuesto de <em>bénéfique</em>: <em>des retombées néfastes</em>."
   },
   {
-    "id": "ar_primordial",
+    "id": "ar9",
     "cat": "antirepetition",
-    "badge": "Anti-Répétition C1 · Remplacer 'très important'",
-    "target": "TRÈS IMPORTANT",
-    "prompt_es": "🇪🇸 Escribe el adjetivo C1 masculino para 'vital / de primer orden'",
+    "badge": "C1 Vocab",
+    "target": "TRÈS IMPORTANT (fém.)",
+    "sub": "Adjectif C1 au féminin :",
     "ans": [
-      "primordial"
+      "primordiale"
     ],
-    "rule": "💡 <strong>PRIMORDIAL (C1) :</strong> Sustituye a <em>très important</em>: <em>un rôle</em> <strong>primordial</strong>.",
-    "example": "il est primordial de souligner"
+    "rule": "💡 <strong>primordiale :</strong> Sustituye a <em>très importante</em>: <em>une place primordiale</em>."
   },
   {
-    "id": "gs_avantage",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "AVANTAGE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_deja",
+    "cat": "accents",
+    "badge": "Accents · é & à",
+    "target": "DEJA",
+    "sub": "Escribe la palabra con sus acentos correctos (ya)",
     "ans": [
-      "un",
-      "le"
+      "déjà"
     ],
-    "rule": "💡 <strong>UN avantage (Masculin) :</strong> En español decimos <em>la ventaja</em> (femenino), pero en francés termina en <em>-age</em>, que siempre es MASCULINO: <em>un avantage indéniable</em>.",
-    "example": "le premier document souligne un avantage majeur"
+    "rule": "💡 <strong>déjà :</strong> Lleva acento agudo en la primera 'e' (é) y acento grave en la 'a' (à): <strong>déjà</strong>."
   },
   {
-    "id": "gs_doute",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "DOUTE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_tres",
+    "cat": "accents",
+    "badge": "Accents · Acento grave (è)",
+    "target": "TRES",
+    "sub": "Escribe con el acento correcto (muy)",
     "ans": [
-      "un",
-      "le"
+      "très"
     ],
-    "rule": "💡 <strong>UN doute (Masculin) :</strong> En español decimos <em>la duda</em>, pero en francés es masculino: <em>sans aucun doute</em> (jamás <em>sans aucune doute</em>).",
-    "example": "cela ne fait aucun doute"
+    "rule": "💡 <strong>très :</strong> Siempre lleva acento grave hacia la izquierda (è): <strong>très</strong> (ej. <em>très enrichissant</em>)."
   },
   {
-    "id": "gs_manque",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "MANQUE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_apres",
+    "cat": "accents",
+    "badge": "Accents · Acento grave (è)",
+    "target": "APRES",
+    "sub": "Escribe con el acento correcto (después)",
     "ans": [
-      "un",
-      "le"
+      "après"
     ],
-    "rule": "💡 <strong>UN manque (Masculin) :</strong> En español decimos <em>la falta</em>, pero en francés es masculino: <em>un manque de transparence</em>.",
-    "example": "je déplore un manque flagrant d'organisation"
+    "rule": "💡 <strong>après :</strong> Lleva acento grave (è): <strong>après</strong> (ej. <em>après avoir réfléchi</em>)."
   },
   {
-    "id": "gs_sejour",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "SÉJOUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_bientot",
+    "cat": "accents",
+    "badge": "Accents · Circonflexe (ô)",
+    "target": "BIENTOT",
+    "sub": "Escribe con el acento correcto (pronto)",
     "ans": [
-      "un",
-      "le"
+      "bientôt"
     ],
-    "rule": "💡 <strong>UN séjour (Masculin) :</strong> En español decimos <em>la estancia</em>, pero en francés es masculino: <em>un séjour inoubliable</em>.",
-    "example": "ce séjour à la montagne fut très enrichissant"
+    "rule": "💡 <strong>bientôt :</strong> Lleva acento circunflejo sobre la 'o': <strong>bientôt</strong> (ej. <em>à très bientôt</em>)."
   },
   {
-    "id": "gs_partage",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "PARTAGE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_interet",
+    "cat": "accents",
+    "badge": "Accents · é & ê",
+    "target": "INTERET",
+    "sub": "Escribe con sus dos acentos (interés)",
     "ans": [
-      "un",
-      "le"
+      "intérêt"
     ],
-    "rule": "💡 <strong>UN partage (Masculin) :</strong> Termina en <em>-age</em>, masculino: <em>un partage équitable</em>.",
-    "example": "favoriser un partage des tâches"
+    "rule": "💡 <strong>intérêt :</strong> Acento agudo en la primera 'e' (é) y circunflejo en la segunda (ê): <strong>intérêt</strong>."
   },
   {
-    "id": "gs_apprentissage",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "APPRENTISSAGE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_evenement",
+    "cat": "accents",
+    "badge": "Accents · é & é",
+    "target": "EVENEMENT",
+    "sub": "Escribe con sus acentos correctos (evento)",
     "ans": [
-      "un",
-      "l'",
-      "le"
+      "événement",
+      "évènement"
     ],
-    "rule": "💡 <strong>UN apprentissage (Masculin) :</strong> Todas las palabras en <em>-age</em> son MASCULINAS: <em>un apprentissage continu</em>.",
-    "example": "favoriser l'apprentissage des langues"
+    "rule": "💡 <strong>événement :</strong> Lleva acento agudo en las dos primeras 'e': <strong>événement</strong>."
   },
   {
-    "id": "gs_sourire",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "SOURIRE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_francais",
+    "cat": "accents",
+    "badge": "Accents · Cédille (ç)",
+    "target": "FRANCAIS",
+    "sub": "Escribe con la cedilla (francés)",
     "ans": [
-      "un",
-      "le"
+      "français"
     ],
-    "rule": "💡 <strong>UN sourire (Masculin) :</strong> En español decimos <em>la sonrisa</em>, pero en francés es masculino: <em>un accueil avec un grand sourire</em>.",
-    "example": "les hôtes nous ont accueillis avec un sourire chaleureux"
+    "rule": "💡 <strong>français :</strong> La cedilla 'ç' es obligatoria para que la 'c' suene como 's' suave antes de 'a': <strong>français</strong>."
   },
   {
-    "id": "gs_sang",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "SANG",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_facon",
+    "cat": "accents",
+    "badge": "Accents · Cédille (ç)",
+    "target": "FACON",
+    "sub": "Escribe con la cedilla (forma / manera)",
     "ans": [
-      "un",
-      "le"
+      "façon"
     ],
-    "rule": "💡 <strong>LE sang (Masculin) :</strong> En español es <em>la sangre</em>, pero en francés es masculino: <em>donner son sang</em>.",
-    "example": "un don de sang citoyen"
+    "rule": "💡 <strong>façon :</strong> Lleva cedilla 'ç' antes de 'o': <strong>de façon efficace</strong>."
   },
   {
-    "id": "gs_arret",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "ARRÊT",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_decu",
+    "cat": "accents",
+    "badge": "Accents · é & ç",
+    "target": "DECU",
+    "sub": "Escribe con acento y cedilla (decepcionado)",
     "ans": [
-      "un",
-      "l'",
-      "le"
+      "déçu"
     ],
-    "rule": "💡 <strong>UN arrêt (Masculin) :</strong> En español decimos <em>la parada</em>, pero en francés es masculino: <em>un arrêt de bus</em>.",
-    "example": "le logement est situé près d'un arrêt de tramway"
+    "rule": "💡 <strong>déçu :</strong> Lleva acento agudo 'é' y cedilla 'ç': <strong>j'ai été déçu</strong>."
   },
   {
-    "id": "gs_couleur",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "COULEUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_fete",
+    "cat": "accents",
+    "badge": "Accents · Circonflexe (ê)",
+    "target": "FETE",
+    "sub": "Escribe con el acento correcto (fiesta)",
     "ans": [
-      "une",
-      "la"
+      "fête"
     ],
-    "rule": "💡 <strong>LA couleur (Féminin - Regla -EUR) :</strong> Casi todas las palabras en <em>-eur</em> son FEMENINAS en francés: <em>une couleur vive</em>.",
-    "example": "une belle couleur d'automne"
+    "rule": "💡 <strong>fête :</strong> Lleva acento circunflejo sobre la 'e': <strong>une fête conviviale</strong>."
   },
   {
-    "id": "gs_erreur",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "ERREUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_gout",
+    "cat": "accents",
+    "badge": "Accents · Circonflexe (û)",
+    "target": "GOUT",
+    "sub": "Escribe con el acento correcto (gusto)",
     "ans": [
-      "une",
-      "l'",
-      "la"
+      "goût"
     ],
-    "rule": "💡 <strong>UNE erreur (Féminin - Regla -EUR) :</strong> En español es <em>el error</em>, pero en francés es femenino: <em>une grave erreur</em>.",
-    "example": "ce serait une grave erreur de négliger ce facteur"
+    "rule": "💡 <strong>goût :</strong> Lleva acento circunflejo sobre la 'u': <strong>avoir le goût de</strong>."
   },
   {
-    "id": "gs_valeur",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "VALEUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_benefique",
+    "cat": "accents",
+    "badge": "Accents · é & é",
+    "target": "BENEFIQUE",
+    "sub": "Escribe con sus dos acentos correctos (beneficioso)",
     "ans": [
-      "une",
-      "la"
+      "bénéfique"
     ],
-    "rule": "💡 <strong>UNE valeur (Féminin - Regla -EUR) :</strong> Femenino en francés: <em>une valeur fondamentale de notre société</em>.",
-    "example": "transmettre une valeur essentielle aux enfants"
+    "rule": "💡 <strong>bénéfique :</strong> Lleva dos acentos agudos: <strong>bénéfique</strong>."
   },
   {
-    "id": "gs_peur",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "PEUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_efficacite",
+    "cat": "accents",
+    "badge": "Accents · é final",
+    "target": "EFFICACITE",
+    "sub": "Escribe con el acento correcto (eficacia)",
     "ans": [
-      "une",
-      "la"
+      "efficacité"
     ],
-    "rule": "💡 <strong>LA peur (Féminin - Regla -EUR) :</strong> En español es <em>el miedo</em>, pero en francés es femenino: <em>avoir une grande peur</em>.",
-    "example": "de peur que la situation ne se dégrade"
+    "rule": "💡 <strong>efficacité :</strong> Casi todos los nombres en <em>-té</em> llevan acento agudo final: <strong>efficacité, société, qualité</strong>."
   },
   {
-    "id": "gs_chaleur",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "CHALEUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_a_vs_a",
+    "cat": "accents",
+    "badge": "Accents · a vs à",
+    "target": "Il va [ ... ] la gare",
+    "sub": "¿Preposición con acento (à) o verbo avoir (a)?",
     "ans": [
-      "une",
-      "la"
+      "à"
     ],
-    "rule": "💡 <strong>LA chaleur (Féminin - Regla -EUR) :</strong> Femenino en francés: <em>une chaleur étouffante</em>.",
-    "example": "malgré une forte chaleur estivale"
+    "rule": "💡 <strong>à (preposición) :</strong> Si indica destino, modo o tiempo, lleva acento grave: <strong>à</strong>. Sin acento (a) es el verbo tener (il a)."
   },
   {
-    "id": "gs_douleur",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "DOULEUR",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_ou_vs_ou",
+    "cat": "accents",
+    "badge": "Accents · ou vs où",
+    "target": "La ville [ ... ] j'habite",
+    "sub": "¿Lugar con acento (où) o conjunción (ou)?",
     "ans": [
-      "une",
-      "la"
+      "où"
     ],
-    "rule": "💡 <strong>UNE douleur (Féminin - Regla -EUR) :</strong> Femenino en francés: <em>ressentir une vive douleur</em>.",
-    "example": "soulager une douleur persistante"
+    "rule": "💡 <strong>où (lugar / donde) :</strong> Con acento grave 'ù' indica lugar ('donde'). Sin acento 'ou' significa 'o'."
   },
   {
-    "id": "gs_fin",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "FIN",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_sur_vs_sur",
+    "cat": "accents",
+    "badge": "Accents · sur vs sûr",
+    "target": "Je suis [ ... ] de mon avis",
+    "sub": "¿Seguro con circunflejo (sûr) o preposición (sur)?",
     "ans": [
-      "une",
-      "la"
+      "sûr"
     ],
-    "rule": "💡 <strong>LA fin (Féminin) :</strong> En español decimos <em>el fin</em>, pero en francés es femenino: <em>la fin du débat, une fin heureuse</em>.",
-    "example": "vers la fin de l'année 2026"
+    "rule": "💡 <strong>sûr (seguro) :</strong> Con circunflejo significa 'seguro/certero': <em>je suis sûr</em>. Sin acento es 'sobre' (sur la table)."
   },
   {
-    "id": "gs_planete",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "PLANÈTE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
+    "id": "acc_du_vs_du",
+    "cat": "accents",
+    "badge": "Accents · du vs dû",
+    "target": "J'ai [ ... ] partir plus tôt",
+    "sub": "¿Participio de devoir (dû) o artículo contracto (du)?",
     "ans": [
-      "une",
-      "la"
+      "dû"
     ],
-    "rule": "💡 <strong>LA planète (Féminin) :</strong> En español decimos <em>el planeta</em>, pero en francés termina en <em>-ète</em> y es femenino: <em>notre planète est menacée</em>.",
-    "example": "protéger notre planète pour les générations futures"
-  },
-  {
-    "id": "gs_methode",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "MÉTHODE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "la"
-    ],
-    "rule": "💡 <strong>UNE méthode (Féminin) :</strong> En español decimos <em>el método</em>, pero en francés es femenino: <em>une méthode pédagogique innovante</em>.",
-    "example": "adopter une méthode d'évaluation plus souple"
-  },
-  {
-    "id": "gs_equipe",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "ÉQUIPE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "l'",
-      "la"
-    ],
-    "rule": "💡 <strong>UNE équipe (Féminin) :</strong> En español decimos <em>el equipo</em>, pero en francés es femenino: <em>une équipe soudée</em>.",
-    "example": "au sein d'une équipe dynamique"
-  },
-  {
-    "id": "gs_rencontre",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "RENCONTRE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "la"
-    ],
-    "rule": "💡 <strong>UNE rencontre (Féminin) :</strong> En español decimos <em>el encuentro</em>, pero en francés es femenino: <em>une rencontre enrichissante</em>.",
-    "example": "ce fut une rencontre mémorable"
-  },
-  {
-    "id": "gs_limite",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "LIMITE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "la"
-    ],
-    "rule": "💡 <strong>UNE limite (Féminin) :</strong> En español decimos <em>el límite</em>, pero en francés es femenino: <em>fixer une limite stricte</em>.",
-    "example": "cette mesure atteint vite une limite"
-  },
-  {
-    "id": "gs_voiture",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "VOITURE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "la"
-    ],
-    "rule": "💡 <strong>LA voiture (Féminin) :</strong> En español decimos <em>el carro/coche</em>, pero en francés es femenino: <em>une voiture écologique</em>.",
-    "example": "l'usage de la voiture en centre-ville"
-  },
-  {
-    "id": "gs_mer",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "MER",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "la"
-    ],
-    "rule": "💡 <strong>LA mer (Féminin) :</strong> En español decimos <em>el mar</em>, pero en francés es femenino: <em>au bord de la mer</em>.",
-    "example": "un week-end revigorant au bord de la mer"
-  },
-  {
-    "id": "gs_affaire",
-    "cat": "genre",
-    "badge": "Faux Ami de Genre (ES ↔ FR)",
-    "target": "AFFAIRE",
-    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe \"un\" o \"une\"",
-    "ans": [
-      "une",
-      "l'",
-      "la"
-    ],
-    "rule": "💡 <strong>UNE affaire (Féminin) :</strong> En francés es femenino: <em>une affaire urgente</em> o <em>faire une bonne affaire</em>.",
-    "example": "il s'agit d'une affaire prioritaire"
-  },
-  {
-    "id": "fa_pb_comp",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "PROBLÈME  +  (complexe)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "un problème complexe",
-      "le problème complexe"
-    ],
-    "rule": "💡 <strong>UN problème complexe :</strong> 'Problème' es MASCULINO (-ème). Se escribe: <em>un problème complexe</em>.",
-    "example": "pour résoudre un problème complexe"
-  },
-  {
-    "id": "fa_av_maj",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "AVANTAGE  +  (majeur)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "un avantage majeur",
-      "l'avantage majeur"
-    ],
-    "rule": "💡 <strong>UN avantage majeur :</strong> 'Avantage' es MASCULINO (-age). Adjetivo masculino: <em>un avantage majeur</em>.",
-    "example": "constitue un avantage majeur"
-  },
-  {
-    "id": "fa_exp_enr",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "EXPÉRIENCE  +  (enrichissant)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une expérience enrichissante",
-      "l'expérience enrichissante"
-    ],
-    "rule": "💡 <strong>UNE expérience enrichissante :</strong> 'Expérience' es FEMENINO. El adjetivo debe llevar la '-e' de femenino: <em>une expérience enrichissante</em>.",
-    "example": "ce fut une expérience enrichissante"
-  },
-  {
-    "id": "fa_err_grav",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "ERREUR  +  (grave)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une erreur grave",
-      "l'erreur grave",
-      "une grave erreur"
-    ],
-    "rule": "💡 <strong>UNE erreur grave :</strong> En francés 'erreur' es FEMENINO (-eur): <em>une erreur grave</em>.",
-    "example": "ce serait une grave erreur"
-  },
-  {
-    "id": "fa_meth_eff",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "MÉTHODE  +  (efficace)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une méthode efficace",
-      "la méthode efficace"
-    ],
-    "rule": "💡 <strong>UNE méthode efficace :</strong> 'Méthode' es FEMENINO en francés: <em>une méthode efficace</em>.",
-    "example": "adopter une méthode efficace"
-  },
-  {
-    "id": "fa_id_nov",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "IDÉE  +  (novateur)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une idée novatrice",
-      "l'idée novatrice"
-    ],
-    "rule": "💡 <strong>UNE idée novatrice :</strong> 'Idée' es femenino. 'Novateur' en femenino hace <em>novatrice</em>: <em>une idée novatrice</em>.",
-    "example": "promouvoir une idée novatrice"
-  },
-  {
-    "id": "fa_dec_imp",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "DÉCISION  +  (important)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une décision importante",
-      "la décision importante"
-    ],
-    "rule": "💡 <strong>UNE décision importante :</strong> 'Décision' es femenino (-sion). Adjetivo femenino con '-e': <em>une décision importante</em>.",
-    "example": "prendre une décision importante"
-  },
-  {
-    "id": "fa_sej_dep",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "SÉJOUR  +  (dépaysant)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "un séjour dépaysant",
-      "le séjour dépaysant"
-    ],
-    "rule": "💡 <strong>UN séjour dépaysant :</strong> 'Séjour' es MASCULINO: <em>un séjour dépaysant</em>.",
-    "example": "nous avons passé un séjour dépaysant"
-  },
-  {
-    "id": "fa_voit_elec",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "VOITURE  +  (électrique)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une voiture électrique",
-      "la voiture électrique"
-    ],
-    "rule": "💡 <strong>UNE voiture électrique :</strong> 'Voiture' es FEMENINO en francés: <em>une voiture électrique</em>.",
-    "example": "l'achat d'une voiture électrique"
-  },
-  {
-    "id": "fa_plan_men",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "PLANÈTE  +  (menacé)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + participio acordado",
-    "ans": [
-      "une planète menacée",
-      "la planète menacée"
-    ],
-    "rule": "💡 <strong>UNE planète menacée :</strong> 'Planète' es FEMENINO. El participio/adjetivo lleva '-e': <em>une planète menacée</em>.",
-    "example": "préserver une planète menacée"
-  },
-  {
-    "id": "fa_enj_cruc",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "ENJEU  +  (crucial)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "un enjeu crucial",
-      "l'enjeu crucial"
-    ],
-    "rule": "💡 <strong>UN enjeu crucial :</strong> 'Enjeu' es MASCULINO en francés: <em>un enjeu crucial</em>.",
-    "example": "constitue un enjeu crucial"
-  },
-  {
-    "id": "fa_init_ben",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "INITIATIVE  +  (bénéfique)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une initiative bénéfique",
-      "l'initiative bénéfique"
-    ],
-    "rule": "💡 <strong>UNE initiative bénéfique :</strong> 'Initiative' es FEMENINO: <em>une initiative bénéfique</em>.",
-    "example": "soutenir une initiative bénéfique"
-  },
-  {
-    "id": "fa_role_prim",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "RÔLE  +  (primordial)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "un rôle primordial",
-      "le rôle primordial"
-    ],
-    "rule": "💡 <strong>UN rôle primordial :</strong> 'Rôle' es MASCULINO: <em>un rôle primordial</em>.",
-    "example": "jouer un rôle primordial"
-  },
-  {
-    "id": "fa_sol_dur",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "SOLUTION  +  (durable)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une solution durable",
-      "la solution durable"
-    ],
-    "rule": "💡 <strong>UNE solution durable :</strong> 'Solution' es FEMENINO (-tion): <em>une solution durable</em>.",
-    "example": "trouver une solution durable"
-  },
-  {
-    "id": "fa_cons_nef",
-    "cat": "accords",
-    "badge": "Groupe Nominal Complet · Genre & Accord",
-    "target": "CONSÉQUENCE  +  (néfaste)",
-    "prompt_es": "🇪🇸 Escribe: artículo 'un/une' + sustantivo + adjetivo acordado",
-    "ans": [
-      "une conséquence néfaste",
-      "la conséquence néfaste"
-    ],
-    "rule": "💡 <strong>UNE conséquence néfaste :</strong> 'Conséquence' es FEMENINO: <em>une conséquence néfaste</em>.",
-    "example": "engendrer une conséquence néfaste"
+    "rule": "💡 <strong>dû (devoir) :</strong> El participio pasado de <em>devoir</em> lleva acento circunflejo: <strong>j'ai dû partir</strong>."
   }
 ];
 
-    const STORAGE_KEY = 'tcf_ee_flash_errors_v2';
+    const STORAGE_KEY = 'tcf_ee_flash_v3';
 
     let state = {
       category: 'all',
@@ -1903,34 +1478,9 @@
       score: 0,
       streak: 0,
       answered: false,
-      errorUuids: new Set()
+      errorIds: new Set(),
+      activeDeck: []
     };
-
-    function loadErrors() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const arr = JSON.parse(raw);
-          state.errorUuids = new Set(arr);
-        }
-      } catch (e) {
-        state.errorUuids = new Set();
-      }
-      updateErrorBadges();
-    }
-
-    function saveErrors() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.errorUuids)));
-      } catch (e) {}
-      updateErrorBadges();
-    }
-
-    function updateErrorBadges() {
-      const count = state.errorUuids.size;
-      document.getElementById('stat-errors-count').textContent = count;
-      document.getElementById('tab-err-badge').textContent = count;
-    }
 
     function shuffle(arr) {
       const copy = [...arr];
@@ -1941,212 +1491,190 @@
       return copy;
     }
 
-    let cachedPool = null;
-    let cachedCategory = null;
-
-    function getActivePool() {
-      if (cachedPool && cachedCategory === state.category) {
-        return cachedPool;
+    function loadErrors() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) state.errorIds = new Set(JSON.parse(raw));
+      } catch (e) {
+        state.errorIds = new Set();
       }
-      cachedCategory = state.category;
-      let raw;
-      if (state.category === 'errors') {
-        raw = FLASH_ITEMS.filter(it => state.errorUuids.has(it.id));
-      } else if (state.category === 'all') {
-        raw = FLASH_ITEMS;
-      } else {
-        raw = FLASH_ITEMS.filter(it => it.cat === state.category);
-      }
-      // Shuffle automatically so it's always dynamic and unpredictable
-      cachedPool = shuffle(raw);
-      return cachedPool;
+      document.getElementById('errCountBadge').textContent = state.errorIds.size;
     }
 
-    function switchCategory(cat) {
+    function saveErrors() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.errorIds)));
+      } catch (e) {}
+      document.getElementById('errCountBadge').textContent = state.errorIds.size;
+    }
+
+    function setCategory(cat) {
       state.category = cat;
       state.currentIndex = 0;
-      cachedPool = null;
-      cachedCategory = null;
-      
-      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = Array.from(document.querySelectorAll('.cat-btn')).find(b => b.getAttribute('onclick').includes("'" + cat + "'"));
+
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.getAttribute('onclick').includes("'" + cat + "'"));
       if (activeBtn) activeBtn.classList.add('active');
 
-      loadCurrentCard();
+      rebuildDeck();
+      renderCard();
     }
 
-    function loadCurrentCard() {
-      const pool = getActivePool();
-      const arenaBox = document.getElementById('arenaBox');
-      const emptyState = document.getElementById('emptyState');
-      const targetBox = document.getElementById('targetBox');
-      const inputZone = document.getElementById('inputZone');
-      const fb = document.getElementById('feedbackPanel');
-      const metaBox = document.querySelector('.card-meta');
+    function rebuildDeck() {
+      let raw;
+      if (state.category === 'errors') {
+        raw = ITEMS.filter(it => state.errorIds.has(it.id));
+      } else if (state.category === 'all') {
+        raw = ITEMS;
+      } else {
+        raw = ITEMS.filter(it => it.cat === state.category);
+      }
+      state.activeDeck = shuffle(raw);
+    }
+
+    function renderCard() {
+      const deck = state.activeDeck;
+      const content = document.getElementById('activeContent');
+      const empty = document.getElementById('emptyBox');
+      const cardTop = document.getElementById('cardTop');
+      const fb = document.getElementById('feedbackBox');
 
       fb.classList.remove('show', 'correct', 'wrong');
-      document.getElementById('resolveBtnWrap').style.display = 'none';
+      document.getElementById('btnRemoveErr').style.display = 'none';
 
-      if (!pool || pool.length === 0) {
-        if (state.category === 'errors') {
-          targetBox.style.display = 'none';
-          inputZone.style.display = 'none';
-          metaBox.style.display = 'none';
-          emptyState.style.display = 'block';
-          return;
-        }
+      if (!deck || deck.length === 0) {
+        content.style.display = 'none';
+        cardTop.style.display = 'none';
+        empty.style.display = 'block';
+        return;
       }
 
-      targetBox.style.display = 'block';
-      inputZone.style.display = 'flex';
-      metaBox.style.display = 'flex';
-      emptyState.style.display = 'none';
+      content.style.display = 'block';
+      cardTop.style.display = 'flex';
+      empty.style.display = 'none';
 
-      if (state.currentIndex >= pool.length) {
+      if (state.currentIndex >= deck.length) {
         state.currentIndex = 0;
       }
 
-      const item = pool[state.currentIndex];
+      const item = deck[state.currentIndex];
       state.answered = false;
 
-      document.getElementById('cardBadge').textContent = item.badge;
-      document.getElementById('cardProgress').textContent = (state.currentIndex + 1) + ' / ' + pool.length;
-      document.getElementById('targetWord').textContent = item.target;
-      document.getElementById('targetInstruction').textContent = item.prompt_es;
+      document.getElementById('badgeCat').textContent = item.badge;
+      document.getElementById('counterProgress').textContent = (state.currentIndex + 1) + ' / ' + deck.length;
+      document.getElementById('targetDisplay').textContent = item.target;
+      document.getElementById('targetSub').textContent = item.sub;
 
-      const input = document.getElementById('drillInput');
-      input.value = '';
-      input.className = 'flash-input';
-      input.disabled = false;
-      input.focus();
+      const inp = document.getElementById('answerInput');
+      inp.value = '';
+      inp.className = 'user-input';
+      inp.disabled = false;
+      inp.focus();
     }
 
-    function handleKey(e) {
+    function onKey(e) {
       if (e.key === 'Enter') {
-        if (state.answered) {
-          nextItem();
-        } else {
-          submitFlashAnswer();
-        }
+        if (state.answered) nextCard();
+        else checkAnswer();
       }
     }
 
-    function diagnoseMistake(userAns, target) {
-      const u = userAns.trim();
-      const t = target.trim();
-      const uLower = u.toLowerCase();
-      const tLower = t.toLowerCase();
+    function diagnose(userAns, target) {
+      const u = userAns.trim().toLowerCase();
+      const t = target.trim().toLowerCase();
 
-      const uNoAcc = uLower.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      const tNoAcc = tLower.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const uNoAcc = u.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "");
+      const tNoAcc = t.normalize("NFD").replace(/[\\u0300-\\u036f]/g, "");
 
-      if (uNoAcc === tNoAcc && uLower !== tLower) {
-        return "<div style='color:#fcd34d;'>⚠️ <strong>Falta de ortografía / acentos:</strong> Escribiste <code>" + u + "</code> pero la ortografía oficial exige <code>" + t + "</code> con acento.</div>";
+      if (uNoAcc === tNoAcc && u !== t) {
+        return "⚠️ <strong>Falta de acentos:</strong> Escribiste <code>" + userAns + "</code> sin la tilde correcta. Forma exacta: <code>" + target + "</code>.";
       }
-
-      if (tLower.endsWith('e') && !uLower.endsWith('e') && tLower.slice(0, -1) === uLower) {
-        return "<div style='color:#fca5a5;'>⚠️ <strong>Falta de concordancia de GÉNERO:</strong> Olvidaste la <strong>'-e'</strong> final de femenino (escribiste <code>" + u + "</code> en vez de <code>" + t + "</code>).</div>";
+      if (t.endsWith('e') && !u.endsWith('e') && t.slice(0, -1) === u) {
+        return "⚠️ <strong>Falta de GÉNERO:</strong> Olvidaste la <strong>'-e'</strong> final de femenino.";
       }
-
-      if (tLower.endsWith('s') && !uLower.endsWith('s') && tLower.slice(0, -1) === uLower) {
-        return "<div style='color:#fca5a5;'>⚠️ <strong>Falta de concordancia de NÚMERO (Plural):</strong> Olvidaste la <strong>'-s'</strong> final de plural (escribiste <code>" + u + "</code> en vez de <code>" + t + "</code>).</div>";
+      if (t.endsWith('s') && !u.endsWith('s') && t.slice(0, -1) === u) {
+        return "⚠️ <strong>Falta de PLURAL:</strong> Olvidaste la <strong>'-s'</strong> final de plural.";
       }
-
-      if ((tLower === 'un' || tLower === 'le') && (uLower === 'une' || uLower === 'la')) {
-        return "<div style='color:#fca5a5;'>⚠️ <strong>Falso amigo de GÉNERO:</strong> ¡Es una palabra MASCULINA en francés! (En español solemos decir <em>'la ventaja, la duda, la falta, la estancia, la sonrisa'</em>, pero en francés es obligatoriamente <strong>UN / LE</strong>: <code>" + t + "</code>).</div>";
+      if ((t === 'un' || t === 'le') && (u === 'une' || u === 'la')) {
+        return "⚠️ <strong>Error de Género:</strong> Es una palabra <strong>MASCULINA</strong> en francés.";
       }
-
-      if ((tLower === 'une' || tLower === 'la') && (uLower === 'un' || uLower === 'le')) {
-        return "<div style='color:#fca5a5;'>⚠️ <strong>Falso amigo de GÉNERO:</strong> ¡Es una palabra FEMENINA en francés! (En español solemos decir <em>'el error, el color, el valor, el planeta, el método, el equipo'</em>, pero en francés o termina en <em>-eur</em> o es femenina: <strong>UNE / LA</strong>: <code>" + t + "</code>).</div>";
+      if ((t === 'une' || t === 'la') && (u === 'un' || u === 'le')) {
+        return "⚠️ <strong>Error de Género:</strong> Es una palabra <strong>FEMENINA</strong> en francés.";
       }
-
-      if (tLower === 'cet' && uLower === 'ce') {
-        return "<div style='color:#fca5a5;'>⚠️ <strong>Regla de 'CET':</strong> Al empezar por vocal o H muda, se escribe obligatoriamente <code>cet</code> para evitar el choque de vocales.</div>";
-      }
-
-      if (tLower === 'cette' && (uLower === 'ce' || uLower === 'cet')) {
-        return "<div style='color:#fca5a5;'>⚠️ <strong>Démonstratif féminin:</strong> El sustantivo es femenino singular, debes escribir <code>cette</code>.</div>";
-      }
-
-      return "<div style='color:#fca5a5;'>⚠️ <strong>Respuesta incorrecta:</strong> Escribiste <code>" + u + "</code>. La forma exigida es <code>" + t + "</code>.</div>";
+      return "⚠️ <strong>Forma no válida:</strong> Compara lo que escribiste con la respuesta oficial.";
     }
 
-    function submitFlashAnswer() {
+    function checkAnswer() {
       if (state.answered) return;
-      const input = document.getElementById('drillInput');
-      const userVal = input.value.trim();
-      if (!userVal) return;
+      const inp = document.getElementById('answerInput');
+      const val = inp.value.trim();
+      if (!val) return;
 
       state.answered = true;
-      const pool = getActivePool();
-      const item = pool[state.currentIndex];
+      const deck = state.activeDeck;
+      const item = deck[state.currentIndex];
 
-      const normUser = userVal.toLowerCase();
-      const isCorrect = item.ans.some(a => a.toLowerCase() === normUser);
+      const norm = val.toLowerCase();
+      const isOk = item.ans.some(a => a.toLowerCase() === norm);
 
-      const fb = document.getElementById('feedbackPanel');
-      const fbTitle = document.getElementById('fbTitle');
-      const fbDiag = document.getElementById('fbDiagnosis');
+      const fb = document.getElementById('feedbackBox');
+      const fbStatus = document.getElementById('fbStatus');
+      const fbDetail = document.getElementById('fbDetail');
       const fbRule = document.getElementById('fbRule');
-      const fbEx = document.getElementById('fbExample');
-      const resolveWrap = document.getElementById('resolveBtnWrap');
+      const btnRemove = document.getElementById('btnRemoveErr');
 
       fb.classList.remove('correct', 'wrong');
 
-      if (isCorrect) {
+      if (isOk) {
         state.score++;
         state.streak++;
         fb.classList.add('correct', 'show');
-        input.classList.add('correct');
-        input.disabled = true;
+        inp.classList.add('correct');
+        inp.disabled = true;
 
-        fbTitle.innerHTML = "✅ ¡Exacto! Escribiste correctamente : <strong style='color:#34d399; margin-left:6px;'>" + userVal + "</strong>";
-        fbDiag.innerHTML = "";
+        fbStatus.innerHTML = "✅ ¡Correcto!";
+        fbDetail.innerHTML = "Escribiste exactamente: <strong style='color:#34d399;'>" + val + "</strong>";
         fbRule.innerHTML = item.rule;
-        fbEx.textContent = item.example ? "Exemple officiel : « " + item.example + " »" : "";
 
-        if (state.category === 'errors' || state.errorUuids.has(item.id)) {
-          resolveWrap.style.display = 'block';
+        if (state.category === 'errors' || state.errorIds.has(item.id)) {
+          btnRemove.style.display = 'inline-block';
         }
       } else {
         state.streak = 0;
-        state.errorUuids.add(item.id);
+        state.errorIds.add(item.id);
         saveErrors();
 
         fb.classList.add('wrong', 'show');
-        input.classList.add('wrong');
-        input.disabled = true;
+        inp.classList.add('wrong');
+        inp.disabled = true;
 
-        fbTitle.innerHTML = "❌ ¡Error guardado en tu Banco de Errores! Respuesta oficial : <strong style='color:#34d399; margin-left:6px;'>" + item.ans[0] + "</strong>";
-        fbDiag.innerHTML = diagnoseMistake(userVal, item.ans[0]);
+        fbStatus.innerHTML = "❌ ¡Error guardado en tu Banco de Errores!";
+        fbDetail.innerHTML = "Respuesta oficial: <strong style='color:#34d399;'>" + item.ans[0] + "</strong><br>" + diagnose(val, item.ans[0]);
         fbRule.innerHTML = item.rule;
-        fbEx.textContent = item.example ? "Exemple officiel : « " + item.example + " »" : "";
       }
 
-      document.getElementById('stat-score').textContent = state.score;
-      document.getElementById('stat-streak').textContent = state.streak + ' 🔥';
+      document.getElementById('scoreVal').textContent = state.score;
+      document.getElementById('streakVal').textContent = state.streak + ' 🔥';
     }
 
-    function nextItem() {
+    function nextCard() {
       state.currentIndex++;
-      loadCurrentCard();
+      renderCard();
     }
 
-    function markAssimilated() {
-      const pool = getActivePool();
-      if (!pool || pool.length === 0) return;
-      const item = pool[state.currentIndex];
-
-      if (state.errorUuids.has(item.id)) {
-        state.errorUuids.delete(item.id);
+    function resolveCurrentError() {
+      const deck = state.activeDeck;
+      const item = deck[state.currentIndex];
+      if (state.errorIds.has(item.id)) {
+        state.errorIds.delete(item.id);
         saveErrors();
-        alert("✨ Notions assimilée ! Retirée de la banque d'erreurs.");
-        loadCurrentCard();
+        rebuildDeck();
+        renderCard();
       }
     }
 
-    function insertAccent(ch) {
-      const inp = document.getElementById('drillInput');
+    function addAccent(ch) {
+      const inp = document.getElementById('answerInput');
       const start = inp.selectionStart || inp.value.length;
       const end = inp.selectionEnd || inp.value.length;
       inp.value = inp.value.substring(0, start) + ch + inp.value.substring(end);
@@ -2156,7 +1684,7 @@
 
     window.onload = () => {
       loadErrors();
-      switchCategory('all');
+      setCategory('all');
     };
   </script>
 </body>
