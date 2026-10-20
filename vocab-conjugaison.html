@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entraîneur Vocabulaire & Conjugaison · TCF Canada (Objectif 10+ / 12-13)</title>
+  <title>Entraîneur Vocabulaire & Conjugaison · TCF Canada (100% Basé sur le Recueil 2026)</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,7 @@
       --text-dim: #64748b;
       --success: #10b981;
       --danger: #ef4444;
+      --wrong: #ef4444;
       --font-ui: "Plus Jakarta Sans", -apple-system, sans-serif;
       --font-serif: "Newsreader", Georgia, serif;
       --font-mono: "JetBrains Mono", monospace;
@@ -140,7 +141,7 @@
 
     /* Container */
     .app-main {
-      max-width: 1240px;
+      max-width: 1260px;
       margin: 18px auto;
       padding: 0 20px;
     }
@@ -151,8 +152,8 @@
       border: 1px solid var(--border);
       border-left: 4px solid var(--success);
       border-radius: 14px;
-      padding: 18px 24px;
-      margin-bottom: 20px;
+      padding: 16px 22px;
+      margin-bottom: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -161,7 +162,7 @@
     }
 
     .hero-text h2 {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
       color: #ffffff;
       margin-bottom: 4px;
@@ -173,7 +174,7 @@
     .hero-text p {
       font-size: 13px;
       color: var(--text-muted);
-      max-width: 760px;
+      max-width: 780px;
       line-height: 1.5;
     }
 
@@ -184,7 +185,7 @@
     .hero-stats {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .stat-pill {
@@ -193,6 +194,20 @@
       border-radius: 10px;
       padding: 8px 14px;
       text-align: center;
+      min-width: 85px;
+    }
+
+    .stat-pill.error-pill {
+      border-color: rgba(239, 68, 68, 0.35);
+      background: rgba(239, 68, 68, 0.08);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stat-pill.error-pill:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--danger);
+      transform: translateY(-1px);
     }
 
     .stat-val {
@@ -202,62 +217,40 @@
       color: var(--success);
     }
 
+    .stat-val.error-val {
+      color: #f87171;
+    }
+
     .stat-lbl {
-      font-size: 10.5px;
+      font-size: 10px;
       color: var(--text-dim);
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    /* Diagnostic Card for Prompt Errors */
-    .diagnostic-panel {
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-    }
-
-    .diag-head {
+    /* Source Provenance Banner */
+    .provenance-bar {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin-bottom: 18px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-size: 13px;
-      font-weight: 800;
-      color: #fca5a5;
-      margin-bottom: 8px;
-    }
-
-    .diag-pills {
-      display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
+      font-size: 12.5px;
+      color: #cbd5e1;
     }
 
-    .diag-pill {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-family: var(--font-mono);
-    }
-
-    .diag-pill .wrong {
-      color: #f87171;
-      text-decoration: line-through;
-      margin-right: 4px;
-    }
-
-    .diag-pill .arrow {
-      color: var(--text-dim);
-      margin: 0 4px;
-    }
-
-    .diag-pill .right {
-      color: #34d399;
+    .provenance-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-weight: 700;
+      color: #34d399;
     }
 
     /* Control Deck (Modes & Categories) */
@@ -265,7 +258,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .mode-tabs {
@@ -280,14 +273,14 @@
 
     .mode-btn {
       flex: 1;
-      min-width: 180px;
+      min-width: 170px;
       background: transparent;
       border: none;
       color: var(--text-muted);
       font-family: var(--font-ui);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
-      padding: 10px 18px;
+      padding: 10px 14px;
       border-radius: 8px;
       cursor: pointer;
       display: flex;
@@ -309,19 +302,29 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .mode-btn.active.color-conj {
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
-    }
-
     .mode-btn.active.color-vocab {
       border-color: var(--primary);
       color: var(--primary);
     }
 
+    .mode-btn.active.color-conj {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
     .mode-btn.active.color-combo {
       border-color: var(--success);
       color: var(--success);
+    }
+
+    .mode-btn.color-errors {
+      color: #fca5a5;
+    }
+
+    .mode-btn.active.color-errors {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--danger);
+      color: #ffffff;
     }
 
     .cat-strip {
@@ -360,7 +363,7 @@
     /* Drill Arena */
     .arena-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.45fr 1fr;
       gap: 20px;
       align-items: start;
     }
@@ -379,13 +382,16 @@
       align-items: center;
       border-bottom: 1px solid var(--border);
       padding-bottom: 14px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .drill-badge-group {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .badge-task {
@@ -409,6 +415,17 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
+    .badge-pdf-source {
+      font-size: 10.5px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
     .drill-counter {
       font-family: var(--font-mono);
       font-size: 13px;
@@ -424,8 +441,8 @@
       padding: 22px;
       margin-bottom: 20px;
       font-family: var(--font-serif);
-      font-size: 19px;
-      line-height: 1.8;
+      font-size: 18.5px;
+      line-height: 1.85;
       color: #f8fafc;
     }
 
@@ -607,6 +624,8 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .btn-submit {
@@ -646,6 +665,35 @@
       transform: translateY(-1px);
     }
 
+    .btn-resolve-error {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--success);
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-resolve-error:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+
+    /* Empty State for Errors */
+    .empty-state-card {
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .empty-icon { font-size: 42px; margin-bottom: 12px; }
+    .empty-title { font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
+    .empty-desc { font-size: 13px; color: var(--text-muted); max-width: 480px; margin: 0 auto 18px auto; }
+
     /* Right Side Reference & Master List */
     .sidebar-pane {
       display: flex;
@@ -678,27 +726,6 @@
       overflow-y: auto;
     }
 
-    .ref-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 12.5px;
-    }
-
-    .ref-item-head {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      color: var(--accent-blue);
-      margin-bottom: 2px;
-    }
-
-    .ref-item-sub {
-      color: var(--text-muted);
-      font-size: 11.5px;
-    }
-
     .ref-crutch {
       display: flex;
       align-items: center;
@@ -720,6 +747,55 @@
       font-weight: 700;
     }
 
+    .ref-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12.5px;
+    }
+
+    .ref-item-head {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 2px;
+    }
+
+    .ref-item-sub {
+      color: var(--text-muted);
+      font-size: 11.5px;
+    }
+
+    /* Error Manager Header */
+    .error-ctrl-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .btn-clear-errors {
+      background: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-clear-errors:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
@@ -738,8 +814,8 @@
     <div class="brand-group">
       <div class="brand-logo">🎯</div>
       <div class="brand-text">
-        <h1>Entraîneur Vocabulaire & Conjugaison <span class="brand-tag">Objectif 10+ / NCLC 8</span></h1>
-        <div class="brand-sub">Verbes C1 en contexte d'examen & automatismes grammaticaux TCF Canada</div>
+        <h1>Entraîneur Vocabulaire & Conjugaison <span class="brand-tag">100% Recueil 2026</span></h1>
+        <div class="brand-sub">Phrases authentiques extraites des 76 Sujets Officiels & 228 Corrigés Types</div>
       </div>
     </div>
     <div class="header-links">
@@ -754,11 +830,10 @@
     <!-- HERO / GOAL 10+ BANNER -->
     <div class="hero-banner">
       <div class="hero-text">
-        <h2><span>🚀</span> Pourquoi stagner à 9/20 et comment décrocher 10–13 ?</h2>
+        <h2><span>📖</span> Vocabulaire & Verbes C1 basés à 100% sur le Recueil 2026</h2>
         <p>
-          Au TCF Expression Écrite, la note de <strong>9/20 (NCLC 6)</strong> sanctionne deux faiblesses précises : 
-          les <strong>erreurs de terminaisons verbales</strong> (confondre infinitif et conjugué, mauvais participe passé, absence de subjonctif) et l'<strong>abus des verbes pauvres</strong> (<em>faire, avoir, être, il y a</em>). 
-          Cet atelier t'entraîne sur des phrases réelles de l'examen pour acquérir les automatismes réflexes.
+          Chaque question est une <strong>phrase authentique extraite mot pour mot des 228 corrigés officiels du livre PDF</strong>. 
+          En maîtrisant ces tournures, tu acquiers le lexique exact récompensé par les évaluateurs pour franchir le cap de <strong>10/20 (NCLC 7)</strong> et viser <strong>12-13 (NCLC 8)</strong>.
         </p>
       </div>
       <div class="hero-stats">
@@ -768,37 +843,40 @@
         </div>
         <div class="stat-pill">
           <div class="stat-val" id="stat-streak">0 🔥</div>
-          <div class="stat-lbl">Série en cours</div>
+          <div class="stat-lbl">Série</div>
+        </div>
+        <div class="stat-pill error-pill" onclick="switchMode('errors')" title="Cliquez pour réviser uniquement vos fautes">
+          <div class="stat-val error-val" id="stat-errors-count">0</div>
+          <div class="stat-lbl">Erreurs (Recycler)</div>
         </div>
       </div>
     </div>
 
-    <!-- DIAGNOSTIC DES PIÈGES COURANTS -->
-    <div class="diagnostic-panel">
-      <div class="diag-head">
-        <span>⚠️ Les 5 pièges fréquents qui font perdre le 10+ (corrige-les dès aujourd'hui) :</span>
-        <span style="font-size:11px; color:#fca5a5; font-weight:normal;">Éviter au brouillon</span>
+    <!-- PROVENANCE CITATION -->
+    <div class="provenance-bar">
+      <div>
+        <span class="provenance-tag"><span>📚</span> Corpus Certifié :</span>
+        76 combinaisons complètes · 228 tâches rédigées aux standards NCLC 7 / NCLC 9 (Janvier à Octobre 2026).
       </div>
-      <div class="diag-pills">
-        <div class="diag-pill"><span class="wrong">je veux amelliore</span> <span class="arrow">➔</span> <span class="right">je veux améliorer (infinitif après semi-auxiliaire)</span></div>
-        <div class="diag-pill"><span class="wrong">mes conjugations</span> <span class="arrow">➔</span> <span class="right">mes conjugaisons (franciser le terme)</span></div>
-        <div class="diag-pill"><span class="wrong">une outil / ma but</span> <span class="arrow">➔</span> <span class="right">un outil / mon but (noms masculins)</span></div>
-        <div class="diag-pill"><span class="wrong">practiquer</span> <span class="arrow">➔</span> <span class="right">pratiquer (sans 'c')</span></div>
-        <div class="diag-pill"><span class="wrong">la meme (but)</span> <span class="arrow">➔</span> <span class="right">le même (accord masculin)</span></div>
+      <div style="font-size:11.5px; color:var(--text-dim);">
+        Sauvegarde automatique des erreurs dans le navigateur (localStorage).
       </div>
     </div>
 
     <!-- CONTROL DECK -->
     <div class="deck-container">
       <div class="mode-tabs">
-        <button class="mode-btn active color-conj" id="btn-mode-conj" onclick="switchMode('conj')">
-          <span>🔀</span> Mode 1 : Conjugaisons Clés TCF
+        <button class="mode-btn active color-vocab" id="btn-mode-vocab" onclick="switchMode('vocab')">
+          <span>📚</span> Mode 1 : Vocabulaire C1 du Recueil
         </button>
-        <button class="mode-btn color-vocab" id="btn-mode-vocab" onclick="switchMode('vocab')">
-          <span>📚</span> Mode 2 : Vocabulaire C1 (Chasse aux Verbes Pauvres)
+        <button class="mode-btn color-conj" id="btn-mode-conj" onclick="switchMode('conj')">
+          <span>🔀</span> Mode 2 : Subjonctif & Grammaire 10+ du Recueil
         </button>
         <button class="mode-btn color-combo" id="btn-mode-combo" onclick="switchMode('combo')">
-          <span>⚡</span> Mode 3 : Le Grand Mix 10+
+          <span>⚡</span> Mode 3 : Le Grand Mix 2026
+        </button>
+        <button class="mode-btn color-errors" id="btn-mode-errors" onclick="switchMode('errors')">
+          <span>🚨</span> Banque d'erreurs (<span id="errors-tab-badge">0</span>)
         </button>
       </div>
 
@@ -811,11 +889,21 @@
     <div class="arena-grid">
       
       <!-- LEFT: ACTIVE QUESTION CARD -->
-      <div class="drill-card">
+      <div class="drill-card" id="drill-card-main">
+        
+        <!-- Error Mode Specific Bar -->
+        <div id="error-manager-bar" class="error-ctrl-bar" style="display:none;">
+          <span style="font-size:12.5px; font-weight:700; color:#fca5a5;">
+            🚨 Session de renforcement : Tu t'entraînes uniquement sur tes erreurs enregistrées.
+          </span>
+          <button class="btn-clear-errors" onclick="clearAllErrors()">🗑️ Vider l'historique d'erreurs</button>
+        </div>
+
         <div class="drill-header">
           <div class="drill-badge-group">
+            <span class="badge-pdf-source" id="card-source-badge">Sujet #1 · Janvier 2026</span>
             <span class="badge-task" id="card-task-badge">Tâche 3 · Débat</span>
-            <span class="badge-tense" id="card-type-badge">Subjonctif Présent</span>
+            <span class="badge-tense" id="card-type-badge">Verbe C1</span>
           </div>
           <span class="drill-counter" id="card-progress">Question 1 / 15</span>
         </div>
@@ -828,7 +916,7 @@
         <!-- Interaction Area -->
         <div class="interaction-area">
           <div id="input-mode-text" class="text-input-wrap">
-            <input type="text" class="drill-input" id="answer-input" placeholder="Tapez la réponse exacte ici..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter') submitAnswer()">
+            <input type="text" class="drill-input" id="answer-input" placeholder="Tapez la réponse exacte issue du corrigé officiel..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter') submitAnswer()">
             <button class="btn-submit" onclick="submitAnswer()">Valider</button>
           </div>
 
@@ -858,68 +946,93 @@
           <div class="fb-title" id="fb-title">Explication</div>
           <div class="fb-rule" id="fb-rule">Règle d'or pour le TCF</div>
           <div class="action-row">
+            <div id="resolve-error-btn-wrap" style="display:none;">
+              <button class="btn-resolve-error" onclick="markCurrentErrorResolved()">
+                ✅ Marquer comme assimilée (Retirer des erreurs)
+              </button>
+            </div>
             <span style="font-size:12px; color:var(--text-muted);" id="fb-example"></span>
             <button class="btn-next" onclick="nextQuestion()">Suivant ➔</button>
           </div>
         </div>
 
+        <!-- Empty state when error bank is empty -->
+        <div id="error-empty-state" class="empty-state-card" style="display:none;">
+          <div class="empty-icon">🎉</div>
+          <div class="empty-title">Aucune erreur en attente !</div>
+          <div class="empty-desc">
+            Tu as assimilé toutes les notions du recueil 2026. Continue de t'entraîner sur les modes réguliers pour renforcer ta vitesse d'écriture.
+          </div>
+          <button class="btn-submit" onclick="switchMode('vocab')">Revenir au Mode 1</button>
+        </div>
+
       </div>
 
-      <!-- RIGHT: REPERTOIRE DES FORMULES C1 & ANTI-VERBES PAUVRES -->
+      <!-- RIGHT: REPERTOIRE DU RECUEIL 2026 -->
       <div class="sidebar-pane">
         
         <div class="ref-card">
           <div class="ref-title">
-            <span>🛡️ Remplacer les 6 Verbes Pauvres</span>
-            <span style="font-size:11px; color:var(--primary);">Niveau B2+ / C1</span>
+            <span>🛡️ Verbes C1 Récurrents du Recueil</span>
+            <span style="font-size:11px; color:var(--primary);">Corrigés 2026</span>
           </div>
           <div class="ref-list">
             <div class="ref-crutch">
-              <span class="bad">faire des problèmes</span> ➔ <span class="good">engendrer des difficultés</span>
+              <span class="bad">aide à apprendre</span> ➔ <span class="good">favorise l'apprentissage (Sujet #1)</span>
             </div>
             <div class="ref-crutch">
-              <span class="bad">avoir un impact</span> ➔ <span class="good">exercer une influence majeure</span>
+              <span class="bad">était mal organisée</span> ➔ <span class="good">laissait à désirer (Sujet #2)</span>
             </div>
             <div class="ref-crutch">
-              <span class="bad">il y a beaucoup de</span> ➔ <span class="good">constitue un enjeu primordial</span>
+              <span class="bad">fait du mal à</span> ➔ <span class="good">se fait au détriment de (Sujet #16)</span>
             </div>
             <div class="ref-crutch">
-              <span class="bad">donner des solutions</span> ➔ <span class="good">préconiser des mesures pérennes</span>
+              <span class="bad">je propose de</span> ➔ <span class="good">je préconise de combiner (Sujet #17)</span>
             </div>
             <div class="ref-crutch">
-              <span class="bad">dire son avis</span> ➔ <span class="good">faire valoir sa position</span>
+              <span class="bad">font des problèmes</span> ➔ <span class="good">engendrent des tensions (Sujet #24)</span>
             </div>
             <div class="ref-crutch">
-              <span class="bad">voir que</span> ➔ <span class="good">force est de constater que</span>
+              <span class="bad">est un gros problème</span> ➔ <span class="good">constitue un enjeu majeur (Sujet #6)</span>
+            </div>
+            <div class="ref-crutch">
+              <span class="bad">se faire des amis</span> ➔ <span class="good">tisser des liens forts (Sujet #6)</span>
+            </div>
+            <div class="ref-crutch">
+              <span class="bad">se reposer</span> ➔ <span class="good">se ressourcer loin de la ville (Sujet #18)</span>
             </div>
           </div>
         </div>
 
         <div class="ref-card">
           <div class="ref-title">
-            <span>👑 Les 5 Subjonctifs Indispensables (12-13)</span>
-            <span style="font-size:11px; color:var(--accent-blue);">Automatisme</span>
+            <span>👑 Subjonctifs Clés des 228 Corrigés</span>
+            <span style="font-size:11px; color:var(--accent-blue);">Automatismes</span>
           </div>
           <div class="ref-list">
             <div class="ref-item">
-              <div class="ref-item-head"><span>POUVOIR</span> <code>afin que nous puissions</code></div>
-              <div class="ref-item-sub">Indispensable en Tâche 1 et 3 pour formuler le but et le compromis.</div>
+              <div class="ref-item-head"><span>Sujet #1 · T1</span> <code>pour que tu voies</code></div>
+              <div class="ref-item-sub">Verbe <em>voir</em> au subjonctif avec <em>tu</em>.</div>
             </div>
             <div class="ref-item">
-              <div class="ref-item-head"><span>ÊTRE</span> <code>bien que ce soit / qu'il soit</code></div>
-              <div class="ref-item-sub">La concession reine pour montrer la nuance exigée au niveau B2+.</div>
+              <div class="ref-item-head"><span>Sujet #2 · T1</span> <code>afin que nous puissions</code></div>
+              <div class="ref-item-sub">Verbe <em>pouvoir</em> au subjonctif avec <em>nous</em>.</div>
             </div>
             <div class="ref-item">
-              <div class="ref-item-head"><span>FAIRE</span> <code>pour que chacun fasse</code></div>
-              <div class="ref-item-sub">Parfait pour préconiser une action collective équilibrée.</div>
+              <div class="ref-item-head"><span>Sujet #3 · T3</span> <code>pour que cette mesure soit</code></div>
+              <div class="ref-item-sub">Verbe <em>être</em> au subjonctif de but.</div>
             </div>
             <div class="ref-item">
-              <div class="ref-item-head"><span>AVOIR</span> <code>afin que chacun ait</code></div>
-              <div class="ref-item-sub">Idéal pour parler d'égalité des chances ou d'accès aux services.</div>
+              <div class="ref-item-head"><span>Sujet #4 · T1</span> <code>pour que vous puissiez</code></div>
+              <div class="ref-item-sub">Verbe <em>pouvoir</em> de courtoisie avec <em>vous</em>.</div>
             </div>
             <div class="ref-item">
-              <div class="ref-item-head"><span>PRENDRE</span> <code>afin que l'État prenne</code></div>
-              <div class="ref-item-sub">Recommandation formelle pour les mesures publiques ou scolaires.</div>
+              <div class="ref-item-head"><span>Sujet #5 · T3</span> <code>afin qu'ils restent</code></div>
+              <div class="ref-item-sub">Verbe régulier <em>rester</em> au pluriel de compromis.</div>
+            </div>
+            <div class="ref-item">
+              <div class="ref-item-head"><span>Sujet #14 · T3</span> <code>pour que femmes et hommes bénéficient</code></div>
+              <div class="ref-item-sub">Subjonctif pluriel de finalité sociétale.</div>
             </div>
           </div>
         </div>
@@ -932,406 +1045,469 @@
 
   <script>
     // ══════════════════════════════════════════════════════════════════════
-    // QUESTIONS DATABASE (100+ DRILL ITEMS)
+    // QUESTIONS DATABASE (100% DRAWN FROM THE 228 MODEL ESSAYS OF THE PDF)
     // ══════════════════════════════════════════════════════════════════════
-    const DATABASE = {
+    const DATABASE_2026 = [
       // ─────────────────────────────────────────────────────────────────
-      // MODE 1 : CONJUGAISONS CLÉS DU TCF
+      // SECTION 1 : VOCABULAIRE C1 & EXPRESSIONS EXACTES DU RECUEIL
       // ─────────────────────────────────────────────────────────────────
-      conj: [
-        // Subjonctif Présent
-        {
-          cat: "subjonctif",
-          task: "Tâche 3 · Prise de position",
-          tense: "Subjonctif Présent",
-          sentence: "Il convient d'encadrer les écrans à l'école afin que les élèves {gap} se concentrer sans distraction.",
-          verb: "pouvoir",
-          ans: ["puissent"],
-          rule: "Après <strong>afin que</strong>, le subjonctif est obligatoire. Le verbe <em>pouvoir</em> avec <em>les élèves (ils)</em> fait <strong>puissent</strong>.",
-          example: "afin que nous puissions / afin qu'ils puissent"
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 3 · Débat & Compromis",
-          tense: "Subjonctif Présent",
-          sentence: "Bien que cette mesure {gap} des coûts élevés, elle favorise la transition écologique.",
-          verb: "engendrer",
-          ans: ["engendre"],
-          rule: "Après la conjonction de concession <strong>bien que</strong>, on emploie le subjonctif. <em>Engendrer</em> est régulier : <em>qu'elle engendre</em>.",
-          example: "bien que cette mesure engendre..."
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 1 · Message Amical",
-          tense: "Subjonctif Présent",
-          sentence: "Fais-moi signe dès que possible afin que nous {gap} réserver nos billets de train ensemble.",
-          verb: "pouvoir",
-          ans: ["puissions"],
-          rule: "En Tâche 1 amicale, injecter <strong>afin que nous puissions + infinitif</strong> garantit les points de complexité grammaticale B2.",
-          example: "afin que nous puissions réserver"
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 3 · Prise de position",
-          tense: "Subjonctif Présent",
-          sentence: "Il est indispensable que les autorités {gap} des mesures rigoureuses pour protéger les usagers.",
-          verb: "prendre",
-          ans: ["prennent"],
-          rule: "Après une formule impersonnelle d'obligation (<em>il est indispensable que</em>), le verbe <em>prendre</em> fait <strong>qu'ils prennent</strong>.",
-          example: "que les autorités prennent"
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 3 · Débat 2026",
-          tense: "Subjonctif Présent",
-          sentence: "Bien que le télétravail {gap} un confort indéniable, il peut affaiblir les liens professionnels.",
-          verb: "être",
-          ans: ["soit"],
-          rule: "Le verbe <em>être</em> au subjonctif présent : <em>que je sois, que tu sois, qu'il/elle soit, que nous soyons, que vous soyez, qu'ils soient</em>.",
-          example: "bien que ce soit / bien que le télétravail soit"
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 1 · Message Amical",
-          tense: "Subjonctif Présent",
-          sentence: "J'aimerais que tu {gap} m'aider pour le déménagement samedi matin vers dix heures.",
-          verb: "venir",
-          ans: ["viennes"],
-          rule: "Après les verbes de souhait (<em>aimer que, vouloir que</em>), on emploie le subjonctif. <em>Venir</em> avec <em>tu</em> s'écrit <strong>viennes</strong>.",
-          example: "j'aimerais que tu viennes"
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 3 · Prise de position",
-          tense: "Subjonctif Présent",
-          sentence: "Il est primordial que chaque citoyen {gap} conscience de l'impact écologique de ses déplacements.",
-          verb: "avoir",
-          ans: ["ait"],
-          rule: "Le verbe <em>avoir</em> au subjonctif avec <em>il / chacun</em> s'écrit <strong>ait</strong> (ne pas confondre avec <em>est</em> ou <em>a</em>).",
-          example: "pour que chacun ait accès"
-        },
-        {
-          cat: "subjonctif",
-          task: "Tâche 3 · Synthèse",
-          tense: "Subjonctif Présent",
-          sentence: "Il faut que la municipalité {gap} des compromis pour satisfaire les deux parties opposées.",
-          verb: "faire",
-          ans: ["fasse"],
-          rule: "Le subjonctif de <em>faire</em> se forme sur le radical <strong>fass-</strong> : <em>qu'elle fasse</em>.",
-          example: "pour que le gouvernement fasse"
-        },
-
-        // Alternance Imparfait / Passé Composé (Tâche 2)
-        {
-          cat: "passe_imparfait",
-          task: "Tâche 2 · Récit d'expérience",
-          tense: "Imparfait (Description / Décor)",
-          sentence: "L'année dernière, lorsque je participais à ce projet, l'ambiance au sein de l'équipe {gap} particulièrement chaleureuse.",
-          verb: "être",
-          ans: ["était"],
-          rule: "Pour décrire un état d'esprit, une atmosphère continue ou un décor dans le passé, on utilise l'<strong>Imparfait</strong>.",
-          example: "l'ambiance était formidable"
-        },
-        {
-          cat: "passe_imparfait",
-          task: "Tâche 2 · Récit d'expérience",
-          tense: "Passé Composé (Événement ponctuel)",
-          sentence: "Dès mon arrivée sur les lieux, j'{gap} immédiatement compte de l'importance de cette initiative citoyenne.",
-          verb: "se rendre",
-          ans: ["me suis rendu", "me suis rendue"],
-          rule: "L'action ponctuelle et achevée (une prise de conscience soudaine) exige le <strong>Passé Composé</strong>.",
-          example: "je me suis rendu compte"
-        },
-        {
-          cat: "passe_imparfait",
-          task: "Tâche 2 · Récit d'expérience",
-          tense: "Passé Composé",
-          sentence: "Cette immersion linguistique m'{gap} de progresser rapidement et de surmonter mes appréhensions initiales.",
-          verb: "permettre",
-          ans: ["a permis"],
-          rule: "Le participe passé du verbe <em>permettre</em> est <strong>permis</strong> avec un 's' muet final.",
-          example: "cette expérience m'a permis de"
-        },
-        {
-          cat: "passe_imparfait",
-          task: "Tâche 2 · Récit d'expérience",
-          tense: "Imparfait",
-          sentence: "Tous les matins, les formateurs nous {gap} des ateliers pratiques captivants.",
-          verb: "proposer",
-          ans: ["proposaient"],
-          rule: "Pour exprimer une habitude répétée dans le passé (<em>tous les matins</em>), on conjugue à l'imparfait : terminaison <strong>-aient</strong>.",
-          example: "ils proposaient des activités"
-        },
-        {
-          cat: "passe_imparfait",
-          task: "Tâche 2 · Récit d'expérience",
-          tense: "Passé Composé",
-          sentence: "Au cours de ce séjour, nous {gap} de précieux souvenirs avec les habitants locaux.",
-          verb: "créer",
-          ans: ["avons créé"],
-          rule: "Avec l'auxiliaire <em>avoir</em>, le participe passé de <em>créer</em> est <strong>créé</strong>.",
-          example: "nous avons créé des liens"
-        },
-
-        // Conditionnel Présent (Politesse Tâche 1 formelle)
-        {
-          cat: "conditionnel",
-          task: "Tâche 1 · Courriel Formel",
-          tense: "Conditionnel de Politesse",
-          sentence: "Je me permets de vous contacter car je {gap} obtenir des précisions sur votre offre de formation.",
-          verb: "souhaiter",
-          ans: ["souhaiterais"],
-          rule: "En courriel formel TCF, le conditionnel présent atténue la demande et prouve votre maîtrise du registre soutenu.",
-          example: "je souhaiterais solliciter..."
-        },
-        {
-          cat: "conditionnel",
-          task: "Tâche 1 · Courriel Formel",
-          tense: "Conditionnel de Politesse",
-          sentence: "{gap}-il possible de m'indiquer les horaires exacts des cours dispensés en soirée ?",
-          verb: "être",
-          ans: ["Serait"],
-          rule: "La formule <strong>Serait-il possible de... ?</strong> est la tournure type pour formuler une demande polie.",
-          example: "Serait-il envisageable de..."
-        },
-        {
-          cat: "conditionnel",
-          task: "Tâche 1 · Courriel Formel",
-          tense: "Conditionnel de Politesse",
-          sentence: "{gap}-vous m'adresser la brochure détaillée ainsi que la grille tarifaire complète ?",
-          verb: "pouvoir",
-          ans: ["Pourriez"],
-          rule: "Le conditionnel de <em>pouvoir</em> avec <em>vous</em> s'écrit avec deux 'r' : <strong>Pourriez-vous</strong>.",
-          example: "Pourriez-vous m'indiquer..."
-        },
-
-        // Piège Infinitif vs Conjugué (-ER vs -É)
-        {
-          cat: "infinitif_vs_conj",
-          task: "Toutes Tâches · Piège classique",
-          tense: "Infinitif obligatoire",
-          sentence: "Pour le TCF, je veux {gap} mon expression écrite avant le jour de l'épreuve.",
-          verb: "améliorer",
-          ans: ["améliorer"],
-          rule: "Après un verbe semi-auxiliaire conjugué (<em>vouloir, pouvoir, devoir</em>), le second verbe se met TOUJOURS à l'<strong>infinitif en -er</strong>.",
-          example: "je veux améliorer (jamais 'améliore')"
-        },
-        {
-          cat: "infinitif_vs_conj",
-          task: "Toutes Tâches · Piège classique",
-          tense: "Infinitif après préposition",
-          sentence: "Il est impératif d'adopter des réformes équilibrées afin de {gap} le bien-être de la population.",
-          verb: "préserver",
-          ans: ["préserver"],
-          rule: "Après une préposition (<em>pour, sans, afin de, avant de, de</em>), le verbe est TOUJOURS à l'<strong>infinitif</strong>.",
-          example: "afin de préserver / sans compromettre"
-        },
-        {
-          cat: "infinitif_vs_conj",
-          task: "Toutes Tâches · Piège classique",
-          tense: "Participe passé",
-          sentence: "Après avoir mûrement {gap} à cette situation, j'ai pris la décision de m'inscrire.",
-          verb: "réfléchir",
-          ans: ["réfléchi"],
-          rule: "Après <em>après avoir</em>, on emploie le participe passé : <em>avoir réfléchi</em> (sans 't').",
-          example: "après avoir réfléchi"
-        }
-      ],
+      {
+        id: "recueil_v1",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #1 · Janv 2026",
+        task: "Tâche 3 : Lecture & Enfants",
+        tense: "Verbe de stimulation",
+        sentence: "Lire avec son enfant favorise l'apprentissage du vocabulaire et {gap} durablement l'envie de lire chez les jeunes.",
+        hint: "Verbe signifiant faire grandir / développer",
+        ans: ["augmente", "développe", "renforce"],
+        options: ["fait", "augmente", "donne", "trouve"],
+        rule: "Dans le corrigé du Sujet #1, l'auteur emploie <strong>augmente durablement l'envie de lire</strong> plutôt qu'un verbe plat comme <em>donne envie</em>.",
+        example: "augmente durablement l'intérêt"
+      },
+      {
+        id: "recueil_v2",
+        mode: "vocab",
+        cat: "collocations",
+        source: "Sujet #2 · Janv 2026",
+        task: "Tâche 2 : Festival de musique",
+        tense: "Formule d'insatisfaction C1",
+        sentence: "Malheureusement, mon expérience a été décevante. L'organisation {gap} à désirer : longues files d'attente et scènes trop éloignées.",
+        hint: "Expression figée : laisser ...",
+        ans: ["laissait", "laisse"],
+        options: ["faisait", "laissait", "avait", "donnait"],
+        rule: "La locution <strong>laisser à désirer</strong> (être imparfait, décevant) est la formule type du Sujet #2 pour exprimer une critique élégante sans agressivité.",
+        example: "l'organisation laissait à désirer"
+      },
+      {
+        id: "recueil_v3",
+        mode: "vocab",
+        cat: "collocations",
+        source: "Sujet #2 · Janv 2026",
+        task: "Tâche 3 : Ville ou Campagne",
+        tense: "Expression de modération",
+        sentence: "Cette diversité permet à chacun de trouver un {gap} milieu entre vie sociale et qualité de vie.",
+        hint: "Adjectif qualifiant le juste équilibre",
+        ans: ["juste"],
+        options: ["bon", "juste", "vrai", "grand"],
+        rule: "Dans la conclusion du Sujet #2, l'évaluateur valorise l'expression <strong>trouver un juste milieu</strong> pour réconcilier deux thèses.",
+        example: "trouver un juste milieu"
+      },
+      {
+        id: "recueil_v4",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #3 · Janv 2026",
+        task: "Tâche 3 : Villes sans voitures",
+        tense: "Verbe d'harmonisation",
+        sentence: "Plutôt que de se limiter à l'interdiction pure et simple, un plan bien pensé permet de {gap} sécurité, accessibilité et écologie.",
+        hint: "Verbe signifiant associer / concilier",
+        ans: ["combiner", "concilier"],
+        options: ["faire", "combiner", "mettre", "voir"],
+        rule: "Dans le Sujet #3, l'auteur utilise <strong>combiner sécurité, accessibilité et écologie</strong> pour formuler une solution dialectique complète.",
+        example: "combiner efficacité et respect de l'environnement"
+      },
+      {
+        id: "recueil_v5",
+        mode: "vocab",
+        cat: "collocations",
+        source: "Sujet #16 · Févr 2026",
+        task: "Tâche 3 : Vols Low-Cost",
+        tense: "Locution prépositive de préjudice",
+        sentence: "Voyager à petit prix ne devrait pas se faire au {gap} du bien-être des passagers ni de la sécurité.",
+        hint: "Locution : au ... de",
+        ans: ["détriment"],
+        options: ["service", "profit", "détriment", "lieu"],
+        rule: "La formule <strong>au détriment de</strong> (Sujet #16) prouve une excellente maîtrise du registre soutenu dans la synthèse comparative.",
+        example: "au détriment de la qualité de vie"
+      },
+      {
+        id: "recueil_v6",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #17 · Févr 2026",
+        task: "Tâche 3 : Supermarché vs Proximité",
+        tense: "Verbe de proposition formelle",
+        sentence: "Plutôt que de choisir l'un ou l'autre systématiquement, je {gap} de combiner les deux solutions selon les besoins.",
+        hint: "Verbe signifiant recommander vivement",
+        ans: ["préconise", "conseille"],
+        options: ["dis", "préconise", "pense", "fais"],
+        rule: "Le verbe <strong>préconiser</strong> (utilisé dans le corrigé du Sujet #17) est le terme par excellence pour énoncer une recommandation d'expert.",
+        example: "je préconise d'adopter une démarche progressive"
+      },
+      {
+        id: "recueil_v7",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #20 · Févr 2026",
+        task: "Tâche 2 : Bénévolat aînés",
+        tense: "Collocation de solidarité",
+        sentence: "Ces actions bénévoles visent à {gap} l'isolement, à offrir de l'écoute et à améliorer le quotidien des personnes seules.",
+        hint: "Verbe signifiant briser / casser",
+        ans: ["rompre", "briser"],
+        options: ["quitter", "rompre", "fermer", "perdre"],
+        rule: "Dans le Sujet #20, l'expression <strong>rompre l'isolement</strong> est la collocation officielle valorisée dans les sujets sociaux du TCF.",
+        example: "rompre l'isolement social"
+      },
+      {
+        id: "recueil_v8",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #24 · Mars 2026",
+        task: "Tâche 3 : Amitié au travail",
+        tense: "Verbe de causalité négative",
+        sentence: "Des amitiés trop exclusives entre collègues peuvent parfois {gap} des tensions ou des conflits hiérarchiques.",
+        hint: "Verbe signifiant causer / provoquer",
+        ans: ["engendrer", "provoquer", "susciter"],
+        options: ["faire", "engendrer", "donner", "voir"],
+        rule: "Dans le corrigé du Sujet #24, le modèle emploie <strong>engendrer des tensions</strong> au lieu du basique <em>faire des conflits</em>.",
+        example: "engendrer des conséquences fâcheuses"
+      },
+      {
+        id: "recueil_v9",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #6 · Janv 2026",
+        task: "Tâche 3 : Villes & Environnement",
+        tense: "Verbe d'équivalence formelle",
+        sentence: "La vie urbaine {gap} donc un enjeu écologique majeur pour les décennies à venir.",
+        hint: "Verbe signifiant être / représenter",
+        ans: ["constitue", "représente"],
+        options: ["est", "constitue", "fait", "a"],
+        rule: "Dans le Sujet #6, l'auteur remplace <em>est un enjeu</em> par <strong>constitue un enjeu écologique majeur</strong>.",
+        example: "constitue un tournant décisif"
+      },
+      {
+        id: "recueil_v10",
+        mode: "vocab",
+        cat: "collocations",
+        source: "Sujet #6 · Janv 2026",
+        task: "Tâche 2 : Colocation",
+        tense: "Collocation relationnelle",
+        sentence: "La colocation permet de {gap} des liens forts tout en apprenant à mieux gérer la vie en communauté.",
+        hint: "Verbe signifiant nouer / créer (comme un tissu)",
+        ans: ["tisser", "nouer", "créer"],
+        options: ["prendre", "tisser", "tenir", "mettre"],
+        rule: "Dans le Sujet #6 Tâche 2, l'expression <strong>tisser des liens</strong> remplace le langage familier <em>se faire des amis</em>.",
+        example: "tisser des liens étroits avec la population locale"
+      },
+      {
+        id: "recueil_v11",
+        mode: "vocab",
+        cat: "collocations",
+        source: "Sujet #7 · Janv 2026",
+        task: "Tâche 3 : Objets connectés",
+        tense: "Formule de légitimité C1",
+        sentence: "Cependant, le Document 2 rappelle à {gap} titre les menaces réelles liées à la cybersécurité et au piratage.",
+        hint: "Adjectif : à ... titre",
+        ans: ["juste"],
+        options: ["bon", "juste", "vrai", "droit"],
+        rule: "La locution <strong>rappeler à juste titre</strong> (Sujet #7) est omniprésente dans les synthèses neutres du recueil 2026.",
+        example: "rappeler à juste titre les contraintes financières"
+      },
+      {
+        id: "recueil_v12",
+        mode: "vocab",
+        cat: "verbes_c1",
+        source: "Sujet #18 · Févr 2026",
+        task: "Tâche 2 : Journée à la campagne",
+        tense: "Verbe de régénération",
+        sentence: "Cette escapade permet de se {gap} et de partager de bons moments avec ses amis, loin du rythme quotidien.",
+        hint: "Verbe pronominal signifiant reprendre des forces",
+        ans: ["ressourcer", "détendre"],
+        options: ["reposer", "ressourcer", "changer", "calmer"],
+        rule: "Dans le Sujet #18 Tâche 2, <strong>se ressourcer</strong> est employé systématiquement pour les récits d'escapade en nature.",
+        example: "se ressourcer au contact de la nature"
+      },
 
       // ─────────────────────────────────────────────────────────────────
-      // MODE 2 : VOCABULAIRE C1 (CHASSE AUX VERBES PAUVRES)
+      // SECTION 2 : SUBJONCTIF & GRAMMAIRE 10+ DU RECUEIL 2026
       // ─────────────────────────────────────────────────────────────────
-      vocab: [
-        {
-          cat: "verbes_riches",
-          task: "Tâche 3 · Remplacement C1",
-          tense: "Éliminer 'FAIRE'",
-          sentence: "Une exposition prolongée aux écrans {gap} des troubles du sommeil et de la concentration.",
-          hint: "Remplacer 'fait / cause'",
-          ans: ["engendre", "provoque", "suscite"],
-          options: ["fait", "engendre", "donne", "voit"],
-          rule: "Bannir <em>faire des problèmes</em> ! Utiliser <strong>engendrer</strong>, <em>provoquer</em> ou <em>susciter des difficultés</em>.",
-          example: "engendrer des conséquences néfastes"
-        },
-        {
-          cat: "verbes_riches",
-          task: "Tâche 3 · Remplacement C1",
-          tense: "Éliminer 'IL Y A'",
-          sentence: "Le manque d'investissements publics {gap} un obstacle majeur au bon fonctionnement des transports.",
-          hint: "Remplacer 'est / il y a un problème'",
-          ans: ["constitue", "représente"],
-          options: ["est", "constitue", "fait", "a"],
-          rule: "Remplacer <em>être</em> ou <em>il y a un obstacle</em> par <strong>constituer un obstacle majeur</strong> ou <em>représenter un frein</em>.",
-          example: "constituer un défi de taille"
-        },
-        {
-          cat: "verbes_riches",
-          task: "Tâche 3 · Compromis & Nuance",
-          tense: "Vocabulaire de proposition C1",
-          sentence: "Plutôt que d'interdire purement et simplement, de nombreux experts {gap} un encadrement progressif.",
-          hint: "Verbe signifiant recommander formellement",
-          ans: ["préconisent", "recommandent"],
-          options: ["disent", "donnent", "préconisent", "font"],
-          rule: "Le verbe <strong>préconiser</strong> (+ COD) est le mot d'or des copies notées 12-14 pour proposer une solution équilibrée.",
-          example: "préconiser une démarche solidaire"
-        },
-        {
-          cat: "verbes_riches",
-          task: "Tâche 2 · Récit d'expérience",
-          tense: "Éliminer 'AVOIR'",
-          sentence: "Avant de monter sur scène pour la première fois, j'{gap} de vives appréhensions.",
-          hint: "Remplacer 'j'avais peur'",
-          ans: ["éprouvais", "ressentais"],
-          options: ["avais", "éprouvais", "faisais", "mettais"],
-          rule: "Remplacer <em>j'avais peur</em> par <strong>j'éprouvais des appréhensions</strong> ou <em>je ressentais une vive inquiétude</em>.",
-          example: "éprouver des doutes / des appréhensions"
-        },
-        {
-          cat: "verbes_riches",
-          task: "Tâche 3 · Débat d'idées",
-          tense: "Éliminer 'DIRE'",
-          sentence: "Chaque intervenant a pu {gap} son point de vue lors de la réunion publique de quartier.",
-          hint: "Remplacer 'dire son avis'",
-          ans: ["exprimer", "faire valoir", "défendre"],
-          options: ["dire", "exprimer", "parler", "donner"],
-          rule: "Dire <strong>exprimer son point de vue</strong> ou <strong>faire valoir sa position</strong> plutôt que <em>donner son avis</em>.",
-          example: "faire valoir ses arguments"
-        },
-        {
-          cat: "verbes_riches",
-          task: "Tâche 3 · Transition Dialectique",
-          tense: "Connecteur de constatation soutenu",
-          sentence: "Néanmoins, {gap} est de constater que les résultats obtenus demeurent insuffisants.",
-          hint: "Expression figée de constat C1",
-          ans: ["force"],
-          options: ["clair", "évident", "force", "sûr"],
-          rule: "La locution figée <strong>Force est de constater que...</strong> propulse directement votre style au niveau C1.",
-          example: "Force est de constater que les avis divergent."
-        },
-        {
-          cat: "collocations",
-          task: "Tâche 3 · Compromis final",
-          tense: "Expression de modération",
-          sentence: "Il est primordial de trouver un juste {gap} entre liberté individuelle et sécurité collective.",
-          hint: "Équivalent de balance / équilibre",
-          ans: ["milieu", "équilibre"],
-          options: ["point", "milieu", "centre", "sens"],
-          rule: "La collocation <strong>trouver un juste milieu</strong> (ou <em>un juste équilibre</em>) est la clé de voûte du 2ème paragraphe de la Tâche 3.",
-          example: "trouver un juste milieu"
-        },
-        {
-          cat: "collocations",
-          task: "Tâche 3 · Nuance C1",
-          tense: "Formule de préjudice",
-          sentence: "Le développement économique rapide ne doit pas s'opérer au {gap} de la préservation de l'environnement.",
-          hint: "Locution prépositive : au ... de",
-          ans: ["détriment"],
-          options: ["service", "détriment", "profit", "lieu"],
-          rule: "La locution <strong>au détriment de</strong> (au préjudice de) prouve votre capacité à peser les coûts et les bénéfices.",
-          example: "au détriment de la santé publique"
-        },
-        {
-          cat: "collocations",
-          task: "Tâche 1 · Courriel Formel",
-          tense: "Clôture professionnelle",
-          sentence: "Je reste à votre entière {gap} pour tout renseignement complémentaire relatif à ma candidature.",
-          hint: "Formule de disponibilité",
-          ans: ["disposition"],
-          options: ["écoute", "disposition", "attention", "décision"],
-          rule: "En courriel formel, la formule canonique est : <strong>Je reste à votre entière disposition</strong>.",
-          example: "à votre entière disposition"
-        },
-        {
-          cat: "verbes_riches",
-          task: "Tâche 3 · Thème Écologie",
-          tense: "Vocabulaire d'impact",
-          sentence: "La gratuité des métros permet de {gap} considérablement les émissions de gaz polluants en centre-ville.",
-          hint: "Verbe signifiant baisser / atténuer",
-          ans: ["réduire", "diminuer", "freiner", "limiter"],
-          options: ["faire", "réduire", "perdre", "quitter"],
-          rule: "Privilégier <strong>réduire</strong>, <strong>atténuer</strong> ou <strong>freiner</strong> plutôt que <em>faire baisser</em>.",
-          example: "réduire l'empreinte carbone"
-        }
-      ],
+      {
+        id: "recueil_c1",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #1 · Janv 2026",
+        task: "Tâche 1 : Message à Laura",
+        tense: "Subjonctif Présent",
+        sentence: "Si tu veux, on peut y aller ensemble pour que tu (voir) {gap} l'endroit et essaies un cours.",
+        verb: "voir",
+        ans: ["voies"],
+        rule: "Après <strong>pour que</strong>, le subjonctif est obligatoire. Le verbe <em>voir</em> avec <em>tu</em> s'écrit <strong>voies</strong> avec un 'e'.",
+        example: "pour que tu voies le gymnase"
+      },
+      {
+        id: "recueil_c2",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #2 · Janv 2026",
+        task: "Tâche 1 : Sortie Versailles",
+        tense: "Subjonctif Présent",
+        sentence: "Faites-moi savoir rapidement si vous êtes disponibles afin que nous (pouvoir) {gap} organiser le transport.",
+        verb: "pouvoir",
+        ans: ["puissions"],
+        rule: "Après <strong>afin que</strong>, le verbe <em>pouvoir</em> avec <em>nous</em> fait <strong>puissions</strong>. Indispensable en Tâche 1.",
+        example: "afin que nous puissions réserver"
+      },
+      {
+        id: "recueil_c3",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #3 · Janv 2026",
+        task: "Tâche 3 : Villes sans voitures",
+        tense: "Subjonctif Présent",
+        sentence: "Le Document 2 souligne l'importance de préparer les infrastructures pour que cette mesure (être) {gap} réellement efficace.",
+        verb: "être",
+        ans: ["soit"],
+        rule: "Dans le Sujet #3, après <em>pour que</em>, le verbe <em>être</em> avec <em>cette mesure (elle)</em> s'écrit <strong>soit</strong>.",
+        example: "pour que le projet soit couronné de succès"
+      },
+      {
+        id: "recueil_c4",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #4 · Janv 2026",
+        task: "Tâche 1 : Vente de vélo",
+        tense: "Subjonctif Présent",
+        sentence: "Si vous le souhaitez, nous pouvons convenir d'un rendez-vous pour que vous (pouvoir) {gap} le tester.",
+        verb: "pouvoir",
+        ans: ["puissiez"],
+        rule: "Après <em>pour que</em>, avec le pronom de politesse <em>vous</em>, <em>pouvoir</em> fait <strong>puissiez</strong> (Sujet #4).",
+        example: "pour que vous puissiez vérifier son état"
+      },
+      {
+        id: "recueil_c5",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #5 · Janv 2026",
+        task: "Tâche 1 : Sortie musée",
+        tense: "Subjonctif Présent",
+        sentence: "N'hésitez pas à me confirmer votre présence afin que je (réserver) {gap} les places nécessaires.",
+        verb: "réserver",
+        ans: ["réserve"],
+        rule: "Après <em>afin que</em>, le verbe du 1er groupe <em>réserver</em> avec <em>je</em> prend la terminaison <strong>-e</strong> : <em>afin que je réserve</em>.",
+        example: "afin que je réserve la table"
+      },
+      {
+        id: "recueil_c6",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #5 · Janv 2026",
+        task: "Tâche 3 : Devoirs scolaires",
+        tense: "Subjonctif Présent",
+        sentence: "Il serait pertinent d'adapter les devoirs selon les besoins, afin qu'ils (rester) {gap} un outil éducatif utile et équilibré.",
+        verb: "rester",
+        ans: ["restent"],
+        rule: "Dans la conclusion du Sujet #5, après <em>afin que</em>, avec <em>ils</em>, la terminaison est <strong>-ent</strong> : <em>afin qu'ils restent</em>.",
+        example: "afin qu'ils restent accessibles"
+      },
+      {
+        id: "recueil_c7",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #14 · Févr 2026",
+        task: "Tâche 3 : Parité femmes-hommes",
+        tense: "Subjonctif Présent",
+        sentence: "Ces obstacles doivent inciter à poursuivre des actions concrètes pour que femmes et hommes (bénéficier) {gap} des mêmes chances.",
+        verb: "bénéficier",
+        ans: ["bénéficient"],
+        rule: "Dans le Sujet #14, après <em>pour que</em>, le sujet pluriel exige le subjonctif : <strong>bénéficient</strong>.",
+        example: "pour que tous bénéficient d'un soutien adapté"
+      },
+      {
+        id: "recueil_c8",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #16 · Févr 2026",
+        task: "Tâche 1 : Fête d'anniversaire",
+        tense: "Subjonctif Présent",
+        sentence: "Pensez à confirmer votre présence pour que je (pouvoir) {gap} tout préparer au mieux chez moi.",
+        verb: "pouvoir",
+        ans: ["puisse"],
+        rule: "Après <em>pour que</em>, avec <em>je</em>, le verbe <em>pouvoir</em> donne <strong>puisse</strong> (Sujet #16).",
+        example: "pour que je puisse anticiper les achats"
+      },
+      {
+        id: "recueil_c9",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #16 · Févr 2026",
+        task: "Tâche 3 : Vols Low-Cost",
+        tense: "Subjonctif Présent",
+        sentence: "L'idéal serait que les compagnies à bas coût (trouver) {gap} un compromis entre accessibilité et qualité.",
+        verb: "trouver",
+        ans: ["trouvent"],
+        rule: "Après <em>l'idéal serait que</em>, on emploie le subjonctif : <strong>trouvent</strong>.",
+        example: "l'idéal serait que les acteurs trouvent un accord"
+      },
+      {
+        id: "recueil_c10",
+        mode: "conj",
+        cat: "subjonctif",
+        source: "Sujet #24 · Mars 2026",
+        task: "Tâche 3 : Relations au travail",
+        tense: "Subjonctif Présent",
+        sentence: "Il est crucial de veiller à ce que les relations personnelles ne (compromettre) {gap} pas le bon fonctionnement de l'équipe.",
+        verb: "compromettre",
+        ans: ["compromettent"],
+        rule: "Après <em>veiller à ce que</em>, le verbe <em>compromettre</em> avec <em>les relations (elles)</em> fait <strong>compromettent</strong> (Sujet #24).",
+        example: "sans que cela compromette la productivité"
+      },
+      {
+        id: "recueil_c11",
+        mode: "conj",
+        cat: "recit_passe",
+        source: "Sujet #2 · Janv 2026",
+        task: "Tâche 2 : Festival décevant",
+        tense: "Imparfait de description",
+        sentence: "Le public (sembler) {gap} frustré et le confort était insuffisant pour profiter pleinement des spectacles.",
+        verb: "sembler",
+        ans: ["semblait"],
+        rule: "Pour décrire l'état émotionnel d'une foule dans le passé, on emploie l'imparfait : <strong>le public semblait</strong>.",
+        example: "le public semblait conquis"
+      },
+      {
+        id: "recueil_c12",
+        mode: "conj",
+        cat: "recit_passe",
+        source: "Sujet #7 · Janv 2026",
+        task: "Tâche 2 : Chanteur préféré",
+        tense: "Passé Composé d'impact",
+        sentence: "Pour ma part, écouter ses chansons m'a profondément (marquer) {gap} dès mon premier voyage.",
+        verb: "marquer",
+        ans: ["marqué"],
+        rule: "Avec l'auxiliaire <em>avoir</em> sans COD antéposé, le participe passé de <em>marquer</em> se termine par <strong>-é</strong>.",
+        example: "cet événement m'a profondément marqué"
+      },
 
       // ─────────────────────────────────────────────────────────────────
-      // MODE 3 : LE GRAND MIX 10+ (VOCABULAIRE + CONJUGAISON ENSEMBLE)
+      // SECTION 3 : LE GRAND MIX 2026 (VOCABULAIRE + ACCORD / FORME)
       // ─────────────────────────────────────────────────────────────────
-      combo: [
-        {
-          cat: "mix",
-          task: "Tâche 3 · Prise de position",
-          tense: "Subjonctif Présent + Verbe Précis",
-          sentence: "Il est indispensable que le gouvernement (préconiser) {gap} des solutions adaptées aux réalités locales.",
-          verb: "préconiser",
-          ans: ["préconise"],
-          rule: "On utilise le verbe riche <em>préconiser</em> (recommander formellement) au subjonctif présent : <strong>qu'il préconise</strong>.",
-          example: "qu'il préconise des alternatives"
-        },
-        {
-          cat: "mix",
-          task: "Tâche 3 · Débat",
-          tense: "Subjonctif Présent + Verbe d'impact",
-          sentence: "Bien que cette réforme (susciter) {gap} une vive controverse, elle modernise le service public.",
-          verb: "susciter",
-          ans: ["suscite"],
-          rule: "<em>Susciter</em> (engendrer des réactions) après <em>bien que</em> se met au subjonctif : <strong>qu'elle suscite</strong>.",
-          example: "bien que cela suscite des débats"
-        },
-        {
-          cat: "mix",
-          task: "Tâche 2 · Récit de voyage / blog",
-          tense: "Passé Composé + Verbe de transformation",
-          sentence: "Cette aventure en solitaire (bouleverser) {gap} ma perception du voyage et m'a appris l'autonomie.",
-          verb: "bouleverser",
-          ans: ["a bouleversé"],
-          rule: "<em>Bouleverser</em> (changer en profondeur) au passé composé avec l'auxiliaire avoir : <strong>a bouleversé</strong>.",
-          example: "cela a bouleversé ma vision"
-        },
-        {
-          cat: "mix",
-          task: "Tâche 1 · Demande formelle",
-          tense: "Conditionnel + Verbe de sollicitation",
-          sentence: "Étant actuellement en reconversion, je (solliciter) {gap} un entretien d'information auprès de votre service.",
-          verb: "solliciter",
-          ans: ["solliciterais"],
-          rule: "<em>Solliciter</em> (demander formellement) au conditionnel de politesse avec <em>je</em> prend la terminaison <strong>-ais</strong>.",
-          example: "je solliciterais des précisions"
-        },
-        {
-          cat: "mix",
-          task: "Tâche 3 · Synthèse objective",
-          tense: "Présent de l'indicatif + Verbe d'opposition",
-          sentence: "Tandis que le premier document valorise le progrès, le second texte (souligner) {gap} les risques de dérive.",
-          verb: "souligner",
-          ans: ["souligne"],
-          rule: "Dans la synthèse du 1er paragraphe de la Tâche 3, utiliser <strong>souligne</strong> ou <em>met en exergue</em> à l'indicatif présent.",
-          example: "le second texte souligne les limites"
-        },
-        {
-          cat: "mix",
-          task: "Tâche 3 · Recommandation finale",
-          tense: "Subjonctif Présent + Verbe d'épanouissement",
-          sentence: "Il importe d'encadrer le travail hybride afin que les salariés (s'épanouir) {gap} sereinement.",
-          verb: "s'épanouir",
-          ans: ["s'épanouissent"],
-          rule: "Le verbe du 2ème groupe <em>s'épanouir</em> avec <em>les salariés (ils)</em> fait <strong>qu'ils s'épanouissent</strong>.",
-          example: "afin que les employés s'épanouissent"
-        }
-      ]
-    };
+      {
+        id: "recueil_m1",
+        mode: "combo",
+        cat: "mix",
+        source: "Sujet #22 · Févr 2026",
+        task: "Tâche 3 : Télévision & Société",
+        tense: "Accord Conditionnel / Concession",
+        sentence: "À mon avis, la télévision occupe une place clé, à condition d'être (utiliser) {gap} avec modération.",
+        verb: "utiliser",
+        ans: ["utilisée"],
+        rule: "Le participe passé s'accorde au féminin avec <em>la télévision</em> : <strong>à condition d'être utilisée</strong> (Sujet #22).",
+        example: "à condition d'être bien encadrée"
+      },
+      {
+        id: "recueil_m2",
+        mode: "combo",
+        cat: "mix",
+        source: "Sujet #26 · Mars 2026",
+        task: "Tâche 3 : Colocation adulte",
+        tense: "Participe présent / Gérondif",
+        sentence: "La colocation peut être une expérience conviviale et formatrice, (concilier) {gap} vie sociale et autonomie.",
+        verb: "concilier",
+        ans: ["conciliant"],
+        rule: "Le participe présent du verbe <em>concilier</em> se termine par <strong>-ant</strong> : <em>conciliant vie privée et profession</em>.",
+        example: "conciliant rigueur et créativité"
+      },
+      {
+        id: "recueil_m3",
+        mode: "combo",
+        cat: "mix",
+        source: "Sujet #29 · Avril 2026",
+        task: "Tâche 3 : Caméras à l'école",
+        tense: "Subjonctif Présent + Verbe de dissuasion",
+        sentence: "Bien que les caméras (pouvoir) {gap} dissuader certaines infractions, elles ne règlent pas les causes profondes.",
+        verb: "pouvoir",
+        ans: ["puissent"],
+        rule: "Après la locution de concession <em>bien que</em>, avec <em>les caméras (elles)</em>, on écrit <strong>puissent</strong>.",
+        example: "bien que ces mesures puissent aider"
+      },
+      {
+        id: "recueil_m4",
+        mode: "combo",
+        cat: "mix",
+        source: "Sujet #34 · Avril 2026",
+        task: "Tâche 1 : Recherche appartement à Nice",
+        tense: "Conditionnel de politesse",
+        sentence: "Je (souhaiter) {gap} trouver un logement calme, bien desservi par les transports et proche des commerces.",
+        verb: "souhaiter",
+        ans: ["souhaiterais"],
+        rule: "Le conditionnel de politesse est la règle d'or de la Tâche 1 formelle dans le recueil : <strong>je souhaiterais trouver</strong>.",
+        example: "je souhaiterais solliciter un devis"
+      },
+      {
+        id: "recueil_m5",
+        mode: "combo",
+        cat: "mix",
+        source: "Sujet #44 · Mai 2026",
+        task: "Tâche 3 : Cuisine amateur vs pro",
+        tense: "Subjonctif d'opposition",
+        sentence: "Les amateurs, bien qu'{gap} (enthousiaste), manquent souvent de techniques avancées de découpe.",
+        verb: "être",
+        ans: ["enthousiastes"],
+        rule: "Accord de l'adjectif attribut au pluriel : <em>bien qu'enthousiastes</em> ou <em>bien qu'ils soient enthousiastes</em> (Sujet #44).",
+        example: "bien qu'enthousiastes"
+      },
+      {
+        id: "recueil_m6",
+        mode: "combo",
+        cat: "mix",
+        source: "Sujet #71 · Sept 2026",
+        task: "Tâche 1 : Garde de maison",
+        tense: "Subjonctif Présent après 'veiller à ce que'",
+        sentence: "Voici les consignes : veille à ce que les portes et fenêtres (être) {gap} bien fermées chaque soir.",
+        verb: "être",
+        ans: ["soient"],
+        rule: "Dans le Sujet #71, après <em>veille à ce que</em>, le sujet pluriel <em>les portes et fenêtres</em> exige <strong>soient</strong>.",
+        example: "veille à ce que les clés soient rangées"
+      }
+    ];
 
     // ══════════════════════════════════════════════════════════════════════
-    // APPLICATION STATE & LOGIC
+    // STATE & ERROR RECYCLER (LOCALSTORAGE PERSISTENCE)
     // ══════════════════════════════════════════════════════════════════════
+    const STORAGE_KEY_ERRORS = 'tcf_ee_vocab_errors_v1';
+
     let state = {
-      mode: 'conj',
+      mode: 'vocab',
       cat: 'all',
       currentIndex: 0,
       score: 0,
       streak: 0,
-      answered: false
+      answered: false,
+      errorUuids: new Set()
     };
+
+    // Load persisted errors from localStorage
+    function loadSavedErrors() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_ERRORS);
+        if (raw) {
+          const list = JSON.parse(raw);
+          if (Array.isArray(list)) {
+            state.errorUuids = new Set(list);
+          }
+        }
+      } catch (e) {
+        state.errorUuids = new Set();
+      }
+      updateErrorBadge();
+    }
+
+    function saveErrorsToStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY_ERRORS, JSON.stringify(Array.from(state.errorUuids)));
+      } catch (e) {}
+      updateErrorBadge();
+    }
+
+    function updateErrorBadge() {
+      const count = state.errorUuids.size;
+      const pillCount = document.getElementById('stat-errors-count');
+      const tabBadge = document.getElementById('errors-tab-badge');
+      if (pillCount) pillCount.textContent = count;
+      if (tabBadge) tabBadge.textContent = count;
+    }
 
     function switchMode(newMode) {
       state.mode = newMode;
@@ -1352,23 +1528,25 @@
       const strip = document.getElementById('cat-strip-container');
       let cats = [];
 
-      if (state.mode === 'conj') {
+      if (state.mode === 'vocab') {
         cats = [
-          { id: 'all', label: '⚡ Tous les temps' },
-          { id: 'subjonctif', label: '👑 Subjonctif Présent (T1 & T3)' },
-          { id: 'passe_imparfait', label: '📖 Imparfait vs Passé Composé (T2)' },
-          { id: 'conditionnel', label: '✉️ Conditionnel de Politesse (T1)' },
-          { id: 'infinitif_vs_conj', label: '⚠️ Piège Infinitif vs Conjugué' }
+          { id: 'all', label: '⚡ Tout le lexique du Recueil' },
+          { id: 'verbes_c1', label: '🚫 Verbes Riches C1 (Anti-Verbes Pauvres)' },
+          { id: 'collocations', label: '🎯 Collocations Reconnues (Juste milieu, etc.)' }
         ];
-      } else if (state.mode === 'vocab') {
+      } else if (state.mode === 'conj') {
         cats = [
-          { id: 'all', label: '⚡ Tout le vocabulaire' },
-          { id: 'verbes_riches', label: '🚫 Chasse aux Verbes Pauvres' },
-          { id: 'collocations', label: '🎯 Collocations C1 Indispensables' }
+          { id: 'all', label: '⚡ Toutes les conjugaisons du Recueil' },
+          { id: 'subjonctif', label: '👑 Subjonctif Obligatoire (T1 & T3)' },
+          { id: 'recit_passe', label: '📖 Imparfait & Passé Composé (T2)' }
         ];
-      } else {
+      } else if (state.mode === 'combo') {
         cats = [
-          { id: 'all', label: '🔥 Le Grand Mix 10+ (Conjugaison + Vocabulaire)' }
+          { id: 'all', label: '🔥 Le Grand Mix 2026 (Phrases complètes)' }
+        ];
+      } else if (state.mode === 'errors') {
+        cats = [
+          { id: 'all', label: `🚨 Mes fautes archivées (${state.errorUuids.size})` }
         ];
       }
 
@@ -1386,7 +1564,12 @@
     }
 
     function getActivePool() {
-      let pool = DATABASE[state.mode] || [];
+      if (state.mode === 'errors') {
+        // Return only items whose id is in state.errorUuids
+        return DATABASE_2026.filter(q => state.errorUuids.has(q.id));
+      }
+
+      let pool = DATABASE_2026.filter(q => q.mode === state.mode);
       if (state.cat !== 'all') {
         pool = pool.filter(q => q.cat === state.cat);
       }
@@ -1395,7 +1578,29 @@
 
     function loadActiveQuestion() {
       const pool = getActivePool();
-      if (!pool || pool.length === 0) return;
+      const cardMain = document.getElementById('drill-card-main');
+      const emptyState = document.getElementById('error-empty-state');
+      const errBar = document.getElementById('error-manager-bar');
+
+      errBar.style.display = (state.mode === 'errors') ? 'flex' : 'none';
+
+      if (!pool || pool.length === 0) {
+        if (state.mode === 'errors') {
+          // Show clean empty state for errors
+          document.getElementById('card-prompt').style.display = 'none';
+          document.querySelector('.interaction-area').style.display = 'none';
+          document.getElementById('feedback-panel').style.display = 'none';
+          emptyState.style.display = 'block';
+          document.getElementById('card-progress').textContent = '0 / 0';
+          return;
+        }
+        return;
+      }
+
+      // Normal display
+      document.getElementById('card-prompt').style.display = 'block';
+      document.querySelector('.interaction-area').style.display = 'flex';
+      emptyState.style.display = 'none';
 
       if (state.currentIndex >= pool.length) {
         state.currentIndex = 0;
@@ -1405,13 +1610,14 @@
       state.answered = false;
 
       // Update Badges & Progress
+      document.getElementById('card-source-badge').textContent = q.source;
       document.getElementById('card-task-badge').textContent = q.task;
       document.getElementById('card-type-badge').textContent = q.tense;
       document.getElementById('card-progress').textContent = `Question ${state.currentIndex + 1} / ${pool.length}`;
 
       // Prompt Rendering
       const promptBox = document.getElementById('card-prompt');
-      const verbHint = q.verb ? ` <em>(${q.verb})</em>` : '';
+      const verbHint = q.verb ? ` <em>(${q.verb})</em>` : (q.hint ? ` <span style="font-size:13px; color:var(--text-muted); font-family:var(--font-ui); font-style:italic;">[${q.hint}]</span>` : '');
       const formatted = q.sentence.replace('{gap}', `<span class="prompt-gap">[ ... ]</span>${verbHint}`);
       promptBox.innerHTML = formatted;
 
@@ -1443,6 +1649,7 @@
       // Hide feedback box
       const fb = document.getElementById('feedback-panel');
       fb.classList.remove('show', 'correct', 'wrong');
+      document.getElementById('resolve-error-btn-wrap').style.display = 'none';
     }
 
     function selectOption(selectedOpt) {
@@ -1473,6 +1680,7 @@
       const fbTitle = document.getElementById('fb-title');
       const fbRule = document.getElementById('fb-rule');
       const fbEx = document.getElementById('fb-example');
+      const resolveBtnWrap = document.getElementById('resolve-error-btn-wrap');
 
       fb.classList.remove('correct', 'wrong');
 
@@ -1480,27 +1688,34 @@
         state.score++;
         state.streak++;
         fb.classList.add('correct', 'show');
-        fbTitle.innerHTML = "✅ Bravo ! Réponse exacte !";
+        fbTitle.innerHTML = `✅ Bravo ! Réponse exacte [Source : ${q.source}]`;
         fbRule.innerHTML = q.rule;
-        fbEx.textContent = q.example ? "Exemple réutilisable : « " + q.example + " »" : "";
+        fbEx.textContent = q.example ? "Tournure officielle du PDF : « " + q.example + " »" : "";
 
-        // Text input styling
         const input = document.getElementById('answer-input');
         input.classList.add('correct');
         input.disabled = true;
 
-        // Options button styling
         document.querySelectorAll('.opt-btn').forEach(btn => {
           if (q.ans.some(v => normalizeText(v) === normalizeText(btn.textContent))) {
             btn.classList.add('correct');
           }
         });
+
+        // If we are in errors mode, show "Mark as resolved" button
+        if (state.mode === 'errors' || state.errorUuids.has(q.id)) {
+          resolveBtnWrap.style.display = 'block';
+        }
       } else {
         state.streak = 0;
+        // RECORD ERROR TO ERROR BANK
+        state.errorUuids.add(q.id);
+        saveErrorsToStorage();
+
         fb.classList.add('wrong', 'show');
-        fbTitle.innerHTML = `❌ Attention ! La bonne forme est : <strong style="color:#34d399; margin-left:6px;">${q.ans[0]}</strong>`;
+        fbTitle.innerHTML = `❌ Enregistré dans tes erreurs ! Réponse officielle : <strong style="color:#34d399; margin-left:6px;">${q.ans[0]}</strong>`;
         fbRule.innerHTML = q.rule;
-        fbEx.textContent = q.example ? "Formule d'examen : « " + q.example + " »" : "";
+        fbEx.textContent = q.example ? "Extrait du corrigé type : « " + q.example + " »" : "";
 
         const input = document.getElementById('answer-input');
         input.classList.add('wrong');
@@ -1516,9 +1731,39 @@
         });
       }
 
-      // Update stats
+      // Update counters
       document.getElementById('stat-score').textContent = state.score;
       document.getElementById('stat-streak').textContent = state.streak + ' 🔥';
+    }
+
+    function markCurrentErrorResolved() {
+      const pool = getActivePool();
+      if (!pool || pool.length === 0) return;
+      const q = pool[state.currentIndex];
+
+      if (state.errorUuids.has(q.id)) {
+        state.errorUuids.delete(q.id);
+        saveErrorsToStorage();
+        document.getElementById('resolve-error-btn-wrap').style.display = 'none';
+        alert("✨ Notions assimilée ! Cette question est retirée de ta banque d'erreurs.");
+        if (state.mode === 'errors') {
+          renderCategoryPills();
+          loadActiveQuestion();
+        }
+      }
+    }
+
+    function clearAllErrors() {
+      if (state.errorUuids.size === 0) {
+        alert("Aucune erreur à effacer.");
+        return;
+      }
+      if (confirm(`Désires-tu vider les ${state.errorUuids.size} erreurs archivées ?`)) {
+        state.errorUuids.clear();
+        saveErrorsToStorage();
+        renderCategoryPills();
+        loadActiveQuestion();
+      }
     }
 
     function nextQuestion() {
@@ -1536,7 +1781,8 @@
     }
 
     window.onload = () => {
-      switchMode('conj');
+      loadSavedErrors();
+      switchMode('vocab');
     };
   </script>
 </body>
