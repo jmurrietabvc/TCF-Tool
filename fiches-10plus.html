@@ -3,44 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TCF EE — Fiches de Mémorisation 10+ (Par Tâche & Grammaire Anti-Erreurs)</title>
+  <title>TCF EE — Fiches 10+ Bilingues (Français / Español)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07080c;
-      --bg-surface: #101119;
-      --bg-card: #151722;
-      --bg-card-hover: #1a1d2c;
-      --text: #f6f2ea;
-      --text-muted: #9598b0;
-      --border: #222436;
-      --gold: #e5b93b;
-      --gold-glow: rgba(229, 185, 59, 0.15);
-      --green: #2ecc71;
-      --red: #e74c3c;
-      --blue: #3498db;
-      --purple: #9b59b6;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
+      --bg: #0b0f19;
+      --surface: #121826;
+      --card: #182234;
+      --card-hover: #1f2c42;
+      --border: #243046;
+      --border-light: rgba(255,255,255,0.08);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --gold: #f59e0b;
+      --gold-light: #fbbf24;
+      --gold-subtle: rgba(245, 158, 11, 0.12);
+      --es-trans: #38bdf8; /* Azul cielo para traducción español */
+      --green: #10b981;
+      --red: #ef4444;
+      --purple: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       min-height: 100vh;
-      line-height: 1.6;
-      padding-bottom: 60px;
+      line-height: 1.5;
+      padding-bottom: 70px;
     }
 
-    /* Top Nav */
-    .top-nav {
-      background: rgba(16, 17, 25, 0.85);
-      backdrop-filter: blur(12px);
+    /* Minimal Header */
+    header {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -49,826 +49,889 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    .nav-brand {
-      display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 12px;
-      text-decoration: none;
-      color: var(--text);
     }
-    .brand-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-    .badge-target {
-      background: var(--gold-glow);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 999px;
-      letter-spacing: 0.5px;
-    }
-    .nav-links {
+
+    .brand {
       display: flex;
-      gap: 16px;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-icon {
+      font-size: 20px;
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold);
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .brand-title span { color: var(--gold); }
+    .brand-badge {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
       align-items: center;
     }
-    .nav-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: var(--gold); }
-    .nav-btn {
-      background: var(--bg-card);
+    .btn-nav {
+      background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.82rem;
-      cursor: pointer;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
       text-decoration: none;
+      cursor: pointer;
       transition: all 0.2s;
     }
-    .nav-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* Hero */
-    .hero {
-      max-width: 1000px;
-      margin: 40px auto 25px;
-      padding: 0 24px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+    .btn-nav:hover {
+      background: var(--card);
       color: #fff;
-      margin-bottom: 12px;
-    }
-    .hero h1 span { color: var(--gold); }
-    .hero p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      max-width: 720px;
-      margin: 0 auto 24px;
+      border-color: var(--gold);
     }
 
-    /* Tabs Bar */
-    .tabs-bar {
-      max-width: 1000px;
-      margin: 0 auto 30px;
-      padding: 0 24px;
+    /* Container */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Hero / Search Controls */
+    .controls-deck {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .search-row {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      justify-content: center;
     }
-    .tab-btn {
-      background: var(--bg-card);
+
+    .search-input {
+      flex: 1;
+      min-width: 240px;
+      background: var(--bg);
       border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 10px 18px;
-      border-radius: var(--radius-md);
-      font-size: 0.9rem;
-      font-weight: 600;
+      border-radius: 10px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--gold); }
+    .search-input::placeholder { color: #64748b; }
+
+    .btn-toggle-es {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--es-trans);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 10px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: all 0.2s;
+    }
+    .btn-toggle-es:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--es-trans);
+    }
+
+    /* Tab Buttons */
+    .tabs-strip {
       display: flex;
-      align-items: center;
       gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
     }
-    .tab-btn:hover {
-      border-color: var(--gold);
-      color: #fff;
-    }
-    .tab-btn.active {
-      background: var(--gold-glow);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* Content Container */
-    .content-wrap {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .tab-panel {
-      display: none;
-    }
-    .tab-panel.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Rule Alert Banner */
-    .rule-banner {
-      background: rgba(229, 185, 59, 0.08);
-      border-left: 4px solid var(--gold);
-      border-radius: var(--radius-sm);
-      padding: 16px 20px;
-      margin-bottom: 24px;
-    }
-    .rule-banner h3 {
-      font-size: 1.05rem;
-      color: var(--gold);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .rule-banner p {
-      font-size: 0.9rem;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    /* Grid of Cards */
-    .fiches-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .fiche-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-    .fiche-card:hover {
-      border-color: rgba(229, 185, 59, 0.4);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
-    .fiche-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-    }
-    .card-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .tag-verb { background: rgba(52, 152, 219, 0.15); color: var(--blue); border: 1px solid var(--blue); }
-    .tag-adj { background: rgba(155, 89, 182, 0.15); color: var(--purple); border: 1px solid var(--purple); }
-    .tag-rule { background: rgba(231, 76, 60, 0.15); color: var(--red); border: 1px solid var(--red); }
-    .tag-tip { background: rgba(46, 204, 113, 0.15); color: var(--green); border: 1px solid var(--green); }
-
-    .card-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    /* Items list inside card */
-    .word-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .word-item {
-      background: var(--bg-surface);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      font-size: 0.88rem;
-    }
-    .word-term {
-      font-weight: 700;
-      color: var(--gold);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3px;
-    }
-    .word-gender {
-      font-size: 0.72rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-muted);
-      font-weight: normal;
-    }
-    .word-example {
-      color: #cbd5e1;
-      font-size: 0.82rem;
-      font-style: italic;
-      line-height: 1.4;
-    }
-    .word-example strong {
-      color: #fff;
-      font-style: normal;
-    }
-    .word-ref {
-      font-size: 0.7rem;
-      color: #64748b;
-      margin-top: 4px;
-      display: block;
-    }
-
-    /* Comparison Table */
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th, .compare-table td {
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      text-align: left;
-    }
-    .compare-table th {
-      background: var(--bg-surface);
-      color: var(--gold);
-      font-weight: 700;
-    }
-    .compare-table tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .wrong-text {
-      color: var(--red);
-      font-weight: 600;
-      text-decoration: line-through;
-    }
-    .correct-text {
-      color: var(--green);
-      font-weight: 700;
-    }
-
-    /* Copy Button */
-    .copy-pill {
+    .tab-pill {
       background: transparent;
-      border: 1px solid rgba(229, 185, 59, 0.3);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-pill:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.2);
+    }
+    .tab-pill.active {
+      background: var(--gold-subtle);
+      border-color: var(--gold);
       color: var(--gold);
-      font-size: 0.72rem;
+    }
+
+    /* Simple Banner */
+    .summary-card {
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+    }
+    .summary-card strong { color: var(--gold); }
+    .summary-card span.es { color: var(--es-trans); font-style: italic; }
+
+    /* Flash Items Stream (List format) */
+    .items-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .flash-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .flash-item:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .item-fr {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .item-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
       padding: 2px 6px;
       border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
+      letter-spacing: 0.5px;
     }
-    .copy-pill:hover {
-      background: var(--gold);
-      color: #000;
+    .tag-verb { background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .tag-adj  { background: rgba(168, 85, 247, 0.12); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .tag-rule { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .item-es {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--es-trans);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .item-es::before { content: "🇪🇸"; font-size: 11px; }
+
+    .item-example {
+      background: var(--bg);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      margin-top: 8px;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .example-fr {
+      color: #f1f5f9;
+      font-weight: 500;
+    }
+    .example-fr strong {
+      color: var(--gold);
+    }
+    .example-es {
+      color: #94a3b8;
+      font-size: 12.5px;
+      font-style: italic;
+      margin-top: 4px;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 1.6rem; }
-      .tabs-bar { gap: 6px; }
-      .tab-btn { font-size: 0.8rem; padding: 8px 12px; }
-      .fiches-grid { grid-template-columns: 1fr; }
+    .item-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn-copy {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-copy:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Minimal Tables */
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 12px;
+      background: var(--bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .mini-table th, .mini-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .mini-table th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+    .bad-txt { color: #f87171; text-decoration: line-through; }
+    .ok-txt { color: #34d399; font-weight: 700; }
+    .es-txt { color: var(--es-trans); font-size: 12px; display: block; }
+
+    /* Hide translations toggle mode */
+    body.hide-es .item-es,
+    body.hide-es .example-es,
+    body.hide-es .es-txt,
+    body.hide-es span.es {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .item-header { flex-direction: column; gap: 4px; }
+      .search-row { flex-direction: column; }
+      .btn-toggle-es { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <header class="top-nav">
-    <a href="index.html" class="nav-brand">
-      <span class="brand-logo">TCF Studio X</span>
-      <span class="badge-target">OBJECTIF 10–13 / NCLC 7–8</span>
+  <!-- Minimal Header -->
+  <header>
+    <a href="index.html" class="brand">
+      <div class="brand-icon">📑</div>
+      <div>
+        <div class="brand-title">TCF Fiches <span>10+</span> Bilingues</div>
+      </div>
+      <span class="brand-badge">228 Corrigés 2026</span>
     </a>
-    <div class="nav-links">
-      <a href="vocab-conjugaison.html" class="nav-btn">⚡ Entraîneur Vocab/Conjugaison</a>
-      <a href="squelette-atelier.html" class="nav-btn">🦴 Atelier Squelette</a>
-      <a href="index.html" class="nav-btn">🏠 Accueil</a>
+    <div class="nav-actions">
+      <a href="vocab-conjugaison.html" class="btn-nav">⚡ Entraîneur</a>
+      <a href="squelette-atelier.html" class="btn-nav">🦴 Squelette</a>
+      <a href="index.html" class="btn-nav">🏠 Hub</a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Fiches de Mémorisation <span>10+</span> par Tâche</h1>
-    <p>
-      Les verbes d'action, adjetivos de alto rendimiento y las 4 reglas gramaticales críticas para erradicar los errores que te costaron el 9 en el TCF Canada. Todo extraído de las 228 respuestas oficiales del Recueil 2026.
-    </p>
+  <div class="container">
 
-    <!-- Tabs Navigation -->
-    <div class="tabs-bar">
-      <button class="tab-btn active" onclick="showTab('tab-t1')">✉️ Tâche 1 (Message/Courriel)</button>
-      <button class="tab-btn" onclick="showTab('tab-t2')">📖 Tâche 2 (Récit d'expérience)</button>
-      <button class="tab-btn" onclick="showTab('tab-t3')">⚖️ Tâche 3 (Prise de position)</button>
-      <button class="tab-btn" onclick="showTab('tab-grammaire')">🛡️ Kit Anti-Erreurs (Grammaire)</button>
-      <button class="tab-btn" onclick="showTab('tab-passetemps')">⏳ Passé Composé vs Imparfait</button>
-    </div>
-  </section>
-
-  <!-- Main Content Wrap -->
-  <main class="content-wrap">
-
-    <!-- ==================== TAB 1 : TÂCHE 1 ==================== -->
-    <div id="tab-t1" class="tab-panel active">
-      <div class="rule-banner">
-        <h3>🎯 Secret pour avoir 10+ en Tâche 1 (60–120 mots)</h3>
-        <p>
-          En la Tâche 1 no te compliques con filosofía. El corrector busca: <strong>formule d'appel</strong> adecuada (informal o formal), <strong>3 ideas claras</strong> (motivo, propuesta, detalles prácticos) y una <strong>formule de prise de congé</strong> cálida. ¡Cuidado con el modo del verbo después de <em>j'espère que</em> (indicativo) vs <em>afin que</em> (subjuntivo)!
-        </p>
+    <!-- Search & Fast Filter Deck -->
+    <div class="controls-deck">
+      <div class="search-row">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Filtrer par mot, règle ou traduction (ej. 'souligner', 'inoubliable', 'ce cet', 'imparfait')..." oninput="filterItems()">
+        <button class="btn-toggle-es" onclick="toggleTranslations()" id="toggleEsBtn">
+          <span>👁️</span> Ocultar Traducciones Español
+        </button>
       </div>
 
-      <div class="fiches-grid">
-        <!-- Verbos Tâche 1 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Verbes d'Action (Tâche 1)</h3>
-            <span class="card-tag tag-verb">Top 10 Verbes</span>
-          </div>
-          <p class="card-desc">Reemplaza <em>vouloir / dire / faire</em> por estos verbos precisos utilizados en el PDF 2026.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>proposer de + inf.</span><button class="copy-pill" onclick="copyText('Je te propose de nous retrouver')">Copier</button></div>
-              <div class="word-example">« Je te <strong>propose de</strong> nous retrouver samedi prochain au parc. »</div>
-              <span class="word-ref">PDF Recueil 2026 · Sujet #1</span>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>partager (un moment / une passion)</span><button class="copy-pill" onclick="copyText('partager cette aventure avec toi')">Copier</button></div>
-              <div class="word-example">« Ce serait l'occasion idéale de <strong>partager</strong> cette aventure avec toi. »</div>
-              <span class="word-ref">PDF Recueil 2026 · Sujet #8</span>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>convenir à (être adéquat)</span><button class="copy-pill" onclick="copyText('si cet horaire te convient')">Copier</button></div>
-              <div class="word-example">« Fais-moi savoir si cet horaire <strong>te convient</strong>. »</div>
-              <span class="word-ref">PDF Recueil 2026 · Sujet #14</span>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>réserver / bloquer</span><button class="copy-pill" onclick="copyText('afin que je réserve nos places')">Copier</button></div>
-              <div class="word-example">« Préviens-moi vite <strong>afin que je réserve</strong> nos places. » (Subjontif)</div>
-              <span class="word-ref">PDF Recueil 2026 · Sujet #20</span>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>déplorer / regretter (réclamation)</span><button class="copy-pill" onclick="copyText('Je déplore le manque d\'organisation')">Copier</button></div>
-              <div class="word-example">« Je <strong>déplore</strong> le manque total d'organisation lors de l'activité. »</div>
-              <span class="word-ref">PDF Recueil 2026 · Sujet #2</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Adjectifs Tâche 1 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Adjectifs Clés (Tâche 1)</h3>
-            <span class="card-tag tag-adj">Top Adjectifs</span>
-          </div>
-          <p class="card-desc">Con sus formas Masculino y Femenino para evitar errores de acorde de género.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>disponible(s)</span><span class="word-gender">m/f invariable</span></div>
-              <div class="word-example">« Es-tu <strong>disponible</strong> vendredi soir pour en discuter ? »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>convivial / conviviale</span><span class="word-gender">m / f</span></div>
-              <div class="word-example">« L'ambiance promet d'être particulièrement <strong>conviviale</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>inadmissible(s)</span><span class="word-gender">m/f invariable (réclamation)</span></div>
-              <div class="word-example">« Ce retard est tout simplement <strong>inadmissible</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>enthousiaste(s)</span><span class="word-gender">m/f invariable</span></div>
-              <div class="word-example">« Je suis très <strong>enthousiaste</strong> à l'idée de débuter ce cours. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>enrichissant / enrichissante</span><span class="word-gender">m / f</span></div>
-              <div class="word-example">« Une sortie culturelle très <strong>enrichissante</strong> pour nous deux. »</div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Formules Fixes Tâche 1 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Formules Clés Prêtes à l'Emploi</h3>
-            <span class="card-tag tag-tip">Automatismes</span>
-          </div>
-          <p class="card-desc">Memoriza estas oraciones completas del Recueil para ganar tiempo.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>Introduction amicale</span></div>
-              <div class="word-example">« J'espère que tout va bien de ton côté. Je t'écris pour te proposer... »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Relance d'intérêt</span></div>
-              <div class="word-example">« Ça te dirait de te joindre à moi pour cette sortie ? »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Prise de congé 10+</span></div>
-              <div class="word-example">« Fais-moi signe dès que possible pour que nous puissions nous organiser. »</div>
-            </li>
-          </ul>
-        </div>
+      <!-- Category Filter Pills -->
+      <div class="tabs-strip">
+        <button class="tab-pill active" onclick="switchCategory('all')">🌟 Tout voir (Todas)</button>
+        <button class="tab-pill" onclick="switchCategory('t1')">✉️ Tâche 1 (Message)</button>
+        <button class="tab-pill" onclick="switchCategory('t2')">📖 Tâche 2 (Récit)</button>
+        <button class="tab-pill" onclick="switchCategory('t3')">⚖️ Tâche 3 (Avis)</button>
+        <button class="tab-pill" onclick="switchCategory('past')">⏳ Passé vs Imparfait</button>
+        <button class="tab-pill" onclick="switchCategory('grammar')">🛡️ Ce/Cet & Genre</button>
       </div>
     </div>
 
-    <!-- ==================== TAB 2 : TÂCHE 2 ==================== -->
-    <div id="tab-t2" class="tab-panel">
-      <div class="rule-banner">
-        <h3>🎯 Secret pour avoir 10+ en Tâche 2 (120–150 mots)</h3>
-        <p>
-          La Tâche 2 es <strong>SIEMPRE un relato en pasado</strong> (un viaje, un voluntariado, un evento deportivo, una compra decepcionante). Para sacar más de 10 necesitas alternar: <strong>Imparfait</strong> para describir el ambiente/contexto y <strong>Passé Composé</strong> para las acciones que viviste. Termina SIEMPRE recomendando la experiencia con la fórmula del PDF: <em>« Je recommande vivement cette expérience à tous ceux qui... »</em>.
-        </p>
-      </div>
-
-      <div class="fiches-grid">
-        <!-- Verbos Passé Composé vs Imparfait Tâche 2 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Verbes de Récit (Tâche 2)</h3>
-            <span class="card-tag tag-verb">Passé Composé / Imparfait</span>
-          </div>
-          <p class="card-desc">Los verbos más frecuentes en los 76 modelos de Tâche 2 del PDF 2026.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>permettre de (a permis de)</span><span class="word-gender">Passé Composé</span></div>
-              <div class="word-example">« Cette expérience m'<strong>a permis de</strong> découvrir une nouvelle passion. »</div>
-              <span class="word-ref">PDF Recueil 2026 (cité 27 fois)</span>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>participer à (j'ai participé à)</span><span class="word-gender">Passé Composé</span></div>
-              <div class="word-example">« Le mois dernier, <strong>j'ai participé à</strong> un festival culinaire local. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>se dérouler (s'est déroulé/e)</span><span class="word-gender">Passé Composé</span></div>
-              <div class="word-example">« L'événement <strong>s'est déroulé</strong> dans une ambiance festive. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>être (l'ambiance était...)</span><span class="word-gender">Imparfait (Description)</span></div>
-              <div class="word-example">« L'organisation <strong>était</strong> irréprochable et les participants <strong>étaient</strong> très chaleureux. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>laisser à désirer</span><span class="word-gender">Imparfait (Critique négative)</span></div>
-              <div class="word-example">« En revanche, la propreté des lieux <strong>laissait à désirer</strong>. »</div>
-              <span class="word-ref">Sujet #2 & #26</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Adjectifs Tâche 2 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Adjectifs d'Expérience (Tâche 2)</h3>
-            <span class="card-tag tag-adj">Évaluation & Ressenti</span>
-          </div>
-          <p class="card-desc">Asegura los puntos de vocabulario B2/C1 usando estos adjetivos precisos.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>inoubliable(s)</span><span class="word-gender">m/f invariable</span></div>
-              <div class="word-example">« Ce fut un séjour véritablement <strong>inoubliable</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>chaleureux / chaleureuse</span><span class="word-gender">m / f</span></div>
-              <div class="word-example">« Nous avons reçu un accueil très <strong>chaleureux</strong> de la part des habitants. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>dépaysant / dépaysante</span><span class="word-gender">m / f (qui change le quotidien)</span></div>
-              <div class="word-example">« Une escapade en pleine nature particulièrement <strong>dépaysante</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>festif / festive</span><span class="word-gender">m / f</span></div>
-              <div class="word-example">« Toute la ville était plongée dans une atmosphère <strong>festive</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>décevant / décevante</span><span class="word-gender">m / f (expérience négative)</span></div>
-              <div class="word-example">« La qualité du service était hélas très <strong>décevante</strong>. »</div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Formule de Conclusion Tâche 2 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">La Formule Magique de Fin</h3>
-            <span class="card-tag tag-tip">Recommandation</span>
-          </div>
-          <p class="card-desc">Aparece en más de 45 de los 76 modelos oficiales del PDF 2026:</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>Recommandation Positive</span></div>
-              <div class="word-example">« Je <strong>recommande vivement</strong> cette expérience à tous ceux qui souhaitent se ressourcer. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Mise en garde nuancée</span></div>
-              <div class="word-example">« Bien que le tarif soit élevé, cela en vaut largement la peine. »</div>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <!-- Active Summary Info -->
+    <div id="categorySummary" class="summary-card">
+      <strong>🎯 Objetivo 10–13 en TCF Expression Écrite :</strong> 
+      Aprende los verbos y adjetivos exactos utilizados en los 228 modelos corregidos del examen oficial, junto con su significado directo en español y ejemplos reales.
     </div>
 
-    <!-- ==================== TAB 3 : TÂCHE 3 ==================== -->
-    <div id="tab-t3" class="tab-panel">
-      <div class="rule-banner">
-        <h3>🎯 Secret pour avoir 10+ en Tâche 3 (120–180 mots)</h3>
-        <p>
-          La Tâche 3 es un <strong>ensayo argumentativo</strong> basado en dos documentos contradictorios. Nunca digas solamente <em>« Je pense que »</em> o <em>« Je suis d'accord »</em>. Utiliza verbos de síntesis (<em>le document 1 souligne... tandis que le second rappelle...</em>) y verbos de impacto causal (<em>engendrer, favoriser, nuire</em>).
-        </p>
-      </div>
+    <!-- Stream of Bilingual Flash Cards -->
+    <div class="items-stream" id="itemsList">
 
-      <div class="fiches-grid">
-        <!-- Verbos de Argumentación Tâche 3 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Verbes de Synthèse (Tâche 3)</h3>
-            <span class="card-tag tag-verb">Objectif C1</span>
+      <!-- ==================== TÂCHE 1 ITEMS ==================== -->
+      <div class="flash-item" data-cat="t1">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>proposer de + infinitif</span>
+            <span class="item-tag tag-verb">Verbe · T1</span>
           </div>
-          <p class="card-desc">Verbos para citar y contrastar las opiniones de los dos textos.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>souligner (le doc. 1 souligne...)</span><button class="copy-pill" onclick="copyText('souligne que')">Copier</button></div>
-              <div class="word-example">« Le premier texte <strong>souligne</strong> les bienfaits de cette pratique... »</div>
-              <span class="word-ref">PDF Recueil 2026 (cité 74 fois !)</span>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>rappeler / mettre en avant</span><button class="copy-pill" onclick="copyText('met en avant le fait que')">Copier</button></div>
-              <div class="word-example">« Tandis que le second document <strong>met en avant</strong> les dérives possibles. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>engendrer (des conséquences)</span><button class="copy-pill" onclick="copyText('engendrer des dérives')">Copier</button></div>
-              <div class="word-example">« Une utilisation excessive peut <strong>engendrer</strong> des tensions sociales. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>constituer un enjeu</span><button class="copy-pill" onclick="copyText('constitue un enjeu majeur')">Copier</button></div>
-              <div class="word-example">« Ce phénomène <strong>constitue un véritable enjeu</strong> de santé publique. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>concilier (deux aspects)</span><button class="copy-pill" onclick="copyText('concilier vie professionnelle et vie personnelle')">Copier</button></div>
-              <div class="word-example">« Il convient de <strong>concilier</strong> impératifs économiques et bien-être des salariés. »</div>
-            </li>
-          </ul>
+          <div class="item-es">proponer hacer algo</div>
         </div>
-
-        <!-- Adjetivos Argumentativos Tâche 3 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Adjectifs d'Analyse (Tâche 3)</h3>
-            <span class="card-tag tag-adj">B2 / C1 Nuance</span>
-          </div>
-          <p class="card-desc">Adjetivos binarios (positivos vs negativos) para estructurar pros y contras.</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>bénéfique / néfaste</span><span class="word-gender">Positif vs Négatif</span></div>
-              <div class="word-example">« Si cette mesure est <strong>bénéfique</strong> à court terme, ses effets à long terme sont <strong>néfastes</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>primordial / primordiale</span><span class="word-gender">m / f (essentiel)</span></div>
-              <div class="word-example">« Il est <strong>primordial</strong> d'encadrer cette pratique par une réglementation stricte. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>indispensable(s)</span><span class="word-gender">m/f invariable</span></div>
-              <div class="word-example">« Une sensibilisation des jeunes s'avère <strong>indispensable</strong>. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>controversé / controversée</span><span class="word-gender">m / f (sujet de débat)</span></div>
-              <div class="word-example">« Cette question demeure vivement <strong>controversée</strong> au sein de l'opinion. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>contre-productif / -ve</span><span class="word-gender">m / f (effet inverse)</span></div>
-              <div class="word-example">« Une interdiction totale serait totalement <strong>contre-productive</strong>. »</div>
-            </li>
-          </ul>
+        <div class="item-example">
+          <div class="example-fr">« Je te <strong>propose de</strong> nous retrouver samedi prochain au parc municipal. »</div>
+          <div class="example-es">« Te propongo encontrarnos el próximo sábado en el parque municipal. »</div>
         </div>
-
-        <!-- Structure d'avis Tâche 3 -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">Structure de Prise de Position</h3>
-            <span class="card-tag tag-tip">Équilibre 10+</span>
-          </div>
-          <p class="card-desc">Cómo expresar tu opinión con matiz sin sonar dogmático:</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>Trouver un juste milieu</span></div>
-              <div class="word-example">« À mon sens, il est nécessaire de <strong>trouver un juste milieu</strong> entre liberté et encadrement. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Partager l'avis</span></div>
-              <div class="word-example">« Je <strong>partage pleinement l'avis</strong> selon lequel l'éducation reste la clé de voûte. »</div>
-            </li>
-          </ul>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Je te propose de nous retrouver')">📋 Copier français</button>
         </div>
       </div>
+
+      <div class="flash-item" data-cat="t1">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>partager (un moment / une passion)</span>
+            <span class="item-tag tag-verb">Verbe · T1</span>
+          </div>
+          <div class="item-es">compartir (un momento / una afición)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Ce serait l'occasion idéale de <strong>partager</strong> un agréable moment ensemble. »</div>
+          <div class="example-es">« Sería la ocasión ideal para compartir un agradable momento juntos. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Ce serait l\'occasion idéale de partager')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t1">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>convenir à (cet horaire te convient)</span>
+            <span class="item-tag tag-verb">Verbe · T1</span>
+          </div>
+          <div class="item-es">venir bien / ser conveniente para alguien</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Fais-moi signe rapidement pour me dire si cette date <strong>te convient</strong>. »</div>
+          <div class="example-es">« Avísame pronto para decirme si esta fecha te viene bien. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Fais-moi signe rapidement pour me dire si cette date te convient')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t1">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>déplorer (le manque d'organisation)</span>
+            <span class="item-tag tag-verb">Verbe · T1 Réclamation</span>
+          </div>
+          <div class="item-es">lamentar profundamente / quejarse formalmente</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Je <strong>déplore</strong> le manque total de communication de la part de vos équipes. »</div>
+          <div class="example-es">« Lamento la falta total de comunicación por parte de sus equipos. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Je déplore le manque total de')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t1">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>convivial / conviviale</span>
+            <span class="item-tag tag-adj">Adjectif · T1</span>
+          </div>
+          <div class="item-es">acogedor(a), de ambiente agradable y cercano</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« L'ambiance de cette soirée s'annonce particulièrement <strong>conviviale</strong>. »</div>
+          <div class="example-es">« El ambiente de esta velada promete ser especialmente acogedor. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'L\'ambiance s\'annonce particulièrement conviviale')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t1">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>inadmissible (m/f invariable)</span>
+            <span class="item-tag tag-adj">Adjectif · T1 Réclamation</span>
+          </div>
+          <div class="item-es">inadmisible, inaceptable</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Une telle défaillance technique demeure <strong>inadmissible</strong> pour un service payant. »</div>
+          <div class="example-es">« Semejante fallo técnico sigue siendo inadmisible para un servicio de pago. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'demeure inadmissible pour un service payant')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <!-- ==================== TÂCHE 2 ITEMS ==================== -->
+      <div class="flash-item" data-cat="t2">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>permettre de (m'a permis de + inf.)</span>
+            <span class="item-tag tag-verb">Passé Composé · T2</span>
+          </div>
+          <div class="item-es">permitir / dar la oportunidad de (¡citado 27 veces en el PDF!)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Cette escapade m'<strong>a permis de</strong> découvrir des traditions locales passionnantes. »</div>
+          <div class="example-es">« Esta escapada me permitió descubrir tradiciones locales apasionantes. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Cette expérience m\'a permis de')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t2">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>participer à (j'ai participé à)</span>
+            <span class="item-tag tag-verb">Passé Composé · T2</span>
+          </div>
+          <div class="item-es">participar en / formar parte de un evento</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Le mois dernier, <strong>j'ai participé à</strong> un projet de reboisement dans ma région. »</div>
+          <div class="example-es">« El mes pasado, participé en un proyecto de reforestación en mi región. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Le mois dernier, j\'ai participé à')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t2">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>laisser à désirer (laissait à désirer)</span>
+            <span class="item-tag tag-verb">Imparfait · T2 Critique</span>
+          </div>
+          <div class="item-es">dejar mucho que desear (para críticas o decepciones)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Si le cadre était charmant, la propreté de l'hôtel <strong>laissait à désirer</strong>. »</div>
+          <div class="example-es">« Si bien el entorno era encantador, la limpieza del hotel dejaba que desear. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'la propreté laissait à désirer')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t2">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>recommander vivement</span>
+            <span class="item-tag tag-verb">Formule Clôture · T2</span>
+          </div>
+          <div class="item-es">recomendar encarecidamente (aparece en 46 de los 76 modelos)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Je <strong>recommande vivement</strong> cette expérience à tous ceux qui souhaitent se ressourcer. »</div>
+          <div class="example-es">« Recomiendo encarecidamente esta experiencia a todos aquellos que deseen desconectar. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Je recommande vivement cette expérience à tous ceux qui')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t2">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>dépaysant / dépaysante</span>
+            <span class="item-tag tag-adj">Adjectif · T2</span>
+          </div>
+          <div class="item-es">que desconecta, que cambia de aires y de rutina</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Ce séjour en montagne fut une parenthèse extrêmement <strong>dépaysante</strong>. »</div>
+          <div class="example-es">« Esta estancia en la montaña fue un paréntesis sumamente desconectador. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'une parenthèse extrêmement dépaysante')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t2">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>chaleureux / chaleureuse</span>
+            <span class="item-tag tag-adj">Adjectif · T2</span>
+          </div>
+          <div class="item-es">cálido(a), acogedor(a), hospitalario(a)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Nous avons reçu un accueil particulièrement <strong>chaleureux</strong> de la part des hôtes. »</div>
+          <div class="example-es">« Recibimos una acogida especialmente cálida por parte de los anfitriones. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'un accueil particulièrement chaleureux')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <!-- ==================== TÂCHE 3 ITEMS ==================== -->
+      <div class="flash-item" data-cat="t3">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>souligner (le document 1 souligne que)</span>
+            <span class="item-tag tag-verb">Verbe C1 · T3 Synthèse</span>
+          </div>
+          <div class="item-es">destacar / subrayar que (¡citado 74 veces en el PDF!)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Le premier texte <strong>souligne</strong> les nombreux avantages économiques de cette innovation. »</div>
+          <div class="example-es">« El primer texto destaca las numerosas ventajas económicas de esta innovación. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'Le premier texte souligne les nombreux avantages de')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t3">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>mettre en avant / rappeler que</span>
+            <span class="item-tag tag-verb">Verbe C1 · T3 Synthèse</span>
+          </div>
+          <div class="item-es">poner de relieve / recordar que (para contrastar el texto 2)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« En revanche, le second auteur <strong>met en avant</strong> les dérives potentielles sur la santé. »</div>
+          <div class="example-es">« En cambio, el segundo autor pone de relieve los posibles excesos sobre la salud. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'En revanche, le second auteur met en avant')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t3">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>engendrer (des conséquences / des tensions)</span>
+            <span class="item-tag tag-verb">Verbe C1 · T3 Impact</span>
+          </div>
+          <div class="item-es">engendrar / provocar / generar (reemplaza al básico "faire")</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Cette décision précipitée risque d'<strong>engendrer</strong> des tensions au sein du personnel. »</div>
+          <div class="example-es">« Esta decisión precipitada corre el riesgo de generar tensiones dentro del personal. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'risque d\'engendrer des tensions')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t3">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>constituer un enjeu majeur</span>
+            <span class="item-tag tag-verb">Verbe C1 · T3 Problématique</span>
+          </div>
+          <div class="item-es">representar un reto / asunto de suma importancia</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« La formation continue <strong>constitue un véritable enjeu</strong> pour la compétitivité. »</div>
+          <div class="example-es">« La formación continua representa un verdadero reto para la competitividad. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'constitue un véritable enjeu pour')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t3">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>bénéfique / néfaste</span>
+            <span class="item-tag tag-adj">Adjectifs C1 · T3 Nuance</span>
+          </div>
+          <div class="item-es">beneficioso(a) vs dañino(a) o nefasto(a)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« Si le télétravail s'avère <strong>bénéfique</strong> pour l'autonomie, l'isolement peut devenir <strong>néfaste</strong>. »</div>
+          <div class="example-es">« Si bien el teletrabajo resulta beneficioso para la autonomía, el aislamiento puede volverse dañino. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 's\'avère bénéfique pour..., ses effets peuvent devenir néfastes')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <div class="flash-item" data-cat="t3">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>trouver un juste milieu</span>
+            <span class="item-tag tag-verb">Formule Avis · T3</span>
+          </div>
+          <div class="item-es">encontrar un punto medio equilibrado (opinión personal equilibrada)</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">« À mon sens, il est impératif de <strong>trouver un juste milieu</strong> entre interdiction et liberté. »</div>
+          <div class="example-es">« A mi parecer, es imprescindible encontrar un punto medio entre prohibición y libertad. »</div>
+        </div>
+        <div class="item-actions">
+          <button class="btn-copy" onclick="copyFr(this, 'À mon sens, il est impératif de trouver un juste milieu entre')">📋 Copier français</button>
+        </div>
+      </div>
+
+      <!-- ==================== PASSÉ VS IMPARFAIT ITEMS ==================== -->
+      <div class="flash-item" data-cat="past">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>🎬 La Règle de la Caméra de Cinéma</span>
+            <span class="item-tag tag-rule">Grammaire T2</span>
+          </div>
+          <div class="item-es">¿Cuándo usar Passé Composé vs Imparfait?</div>
+        </div>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Imparfait (Le Décor / La Foto Fija 📸)</th>
+              <th>Passé Composé (L'Action / El Evento 🎬)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Describe el <strong>clima, escenario o sentimiento constante</strong>.<br>
+                • <em>Il faisait un froid glacial.</em> <span class="es-txt">Hacía un frío glacial.</span><br>
+                • <em>L'ambiance était festive.</em> <span class="es-txt">El ambiente era festivo.</span><br>
+                • <em>J'avais hâte d'y être.</em> <span class="es-txt">Tenía muchas ganas de estar allí.</span>
+              </td>
+              <td>
+                Acción <strong>puntual, que empezó y terminó</strong>.<br>
+                • <em>J'ai pris le train.</em> <span class="es-txt">Tomé el tren.</span><br>
+                • <em>Nous avons visité le musée.</em> <span class="es-txt">Visitamos el museo.</span><br>
+                • <em>Soudain, une alarme a sonné.</em> <span class="es-txt">De repente, una alarma sonó.</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="item-example" style="margin-top:12px;">
+          <div class="example-fr">
+            « Pendant que nous <strong>marchions</strong> (imparfait) tranquillement, soudain la pluie <strong>a commencé</strong> (passé composé) à tomber. »
+          </div>
+          <div class="example-es">
+            « Mientras caminábamos (imparfait) tranquilamente, de repente la lluvia empezó (passé compuesto) a caer. »
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== GRAMMAR (CE/CET & GENRE) ITEMS ==================== -->
+      <div class="flash-item" data-cat="grammar">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>🛡️ Ce vs Cet vs Cette vs Ces (En 10 secondes)</span>
+            <span class="item-tag tag-rule">Règle d'or</span>
+          </div>
+          <div class="item-es">Demostrativos sin errores</div>
+        </div>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Démonstratif</th>
+              <th>Emploi</th>
+              <th>Exemples ✅</th>
+              <th>Erreurs ❌</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CE</strong></td>
+              <td>Masculin devant consonne</td>
+              <td><span class="ok-txt">Ce projet, ce voyage, ce problème</span> <span class="es-txt">este proyecto, este viaje, este problema</span></td>
+              <td><span class="bad-txt">Cette problème, ce avis</span></td>
+            </tr>
+            <tr>
+              <td><strong>CET</strong></td>
+              <td>Masculin devant <strong>voyelle</strong> ou <strong>H muet</strong></td>
+              <td><span class="ok-txt">Cet événement, cet avis, cet outil, cet été</span> <span class="es-txt">este evento, esta opinión, esta herramienta, este verano</span></td>
+              <td><span class="bad-txt">Ce événement, ce outil</span></td>
+            </tr>
+            <tr>
+              <td><strong>CETTE</strong></td>
+              <td><strong>Féminin</strong> singulier</td>
+              <td><span class="ok-txt">Cette expérience, cette idée, cette situation</span> <span class="es-txt">esta experiencia, esta idea, esta situación</span></td>
+              <td><span class="bad-txt">Ce expérience, cet idée</span></td>
+            </tr>
+            <tr>
+              <td><strong>CES</strong></td>
+              <td><strong>Pluriel</strong> (m/f)</td>
+              <td><span class="ok-txt">Ces problèmes, ces solutions, ces gens</span> <span class="es-txt">estos problemas, estas soluciones, esta gente</span></td>
+              <td><span class="bad-txt">Ce problèmes</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flash-item" data-cat="grammar">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>🛡️ Les Pièges de Genre du TCF (Faux Amis)</span>
+            <span class="item-tag tag-rule">Masculin vs Féminin</span>
+          </div>
+          <div class="item-es">Géneros engañosos para hispanohablantes</div>
+        </div>
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Toujours MASCULIN (LE / UN / CE) ♂️</th>
+              <th>Toujours FÉMININ (LA / UNE / CETTE) ♀️</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                • <strong>Le problème</strong> <span class="es-txt">(el problema - termina en -ème pero es MASCULINO)</span><br>
+                • <strong>Le système</strong> <span class="es-txt">(el sistema)</span><br>
+                • <strong>Le programme</strong> <span class="es-txt">(el programa)</span><br>
+                • <strong>Le rôle</strong> <span class="es-txt">(el papel / rol)</span><br>
+                • <strong>Le manque</strong> <span class="es-txt">(la falta / carencia)</span><br>
+                • <strong>Le domaine</strong> <span class="es-txt">(el ámbito / terreno)</span>
+              </td>
+              <td>
+                • <strong>La situation</strong> <span class="es-txt">(la situación - palabras en -tion)</span><br>
+                • <strong>La solution</strong> <span class="es-txt">(la solución)</span><br>
+                • <strong>La décision</strong> <span class="es-txt">(la decisión)</span><br>
+                • <strong>L'activité</strong> <span class="es-txt">(la actividad - palabras en -té)</span><br>
+                • <strong>La société</strong> <span class="es-txt">(la sociedad)</span><br>
+                • <strong>La responsabilité</strong> <span class="es-txt">(la responsabilidad)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flash-item" data-cat="grammar">
+        <div class="item-header">
+          <div class="item-fr">
+            <span>🛡️ L'Accord en Pluriel et en Féminin (Checklist)</span>
+            <span class="item-tag tag-rule">Relecture Finale</span>
+          </div>
+          <div class="item-es">Revisión obligatoria de los últimos 2 minutos</div>
+        </div>
+        <div class="item-example">
+          <div class="example-fr">
+            1. <strong>Féminin :</strong> Une expérience enrichissant<strong>e</strong>, une mesure efficac<strong>e</strong>.<br>
+            2. <strong>Pluriel :</strong> Des projets innovant<strong>s</strong>, des réformes utile<strong>s</strong>.<br>
+            3. <strong>Infinitif après verbe :</strong> Je veux amélior<strong>er</strong> (jamais <em>je veux améliore</em>).
+          </div>
+          <div class="example-es">
+            1. Femenino: añade '-e' si el sustantivo es femenino.<br>
+            2. Plural: añade '-s' al adjetivo si el sustantivo está en plural.<br>
+            3. Dos verbos juntos: el segundo va SIEMPRE en infinitivo (-er).
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ==================== TAB 4 : KIT ANTI-ERREURS (GRAMMAIRE) ==================== -->
-    <div id="tab-grammaire" class="tab-panel">
-      <div class="rule-banner">
-        <h3>🛡️ Kit Anti-Erreurs : Les 4 Pièges qui font perdre 3 points sur la note finale</h3>
-        <p>
-          Los evaluadores del TCF penalizan con severidad los errores sistemáticos de <strong>Ce/Cet/Cette/Ces</strong>, los <strong>géneros de palabras comunes</strong> y los <strong>acuerdos de plural</strong>. Domina estas 4 tablas y blindarás tu examen.
-        </p>
-      </div>
-
-      <div class="fiches-grid">
-        <!-- RÈGLE 1 : CE / CET / CETTE / CES -->
-        <div class="fiche-card" style="grid-column: 1 / -1;">
-          <div class="fiche-card-header">
-            <h3 class="card-title">1. La Règle Infaillible : Ce vs Cet vs Cette vs Ces</h3>
-            <span class="card-tag tag-rule">Erreur #1 des candidats</span>
-          </div>
-          <p class="card-desc">Aprende esta distinción de 10 segundos y nunca más te equivocarás:</p>
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th>Démonstratif</th>
-                <th>S'utilise devant...</th>
-                <th>Exemples Corrects ✅</th>
-                <th>Erreurs Typiques à Éviter ❌</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>CE</strong></td>
-                <td>Masculin Singulier commençant par une <strong>consonne</strong></td>
-                <td><span class="correct-text">Ce projet, ce voyage, ce problème, ce sujet</span></td>
-                <td><span class="wrong-text">Cette projet, ce avis</span></td>
-              </tr>
-              <tr>
-                <td><strong>CET</strong></td>
-                <td>Masculin Singulier commençant par une <strong>voyelle</strong> ou un <strong>H muet</strong> (liaison phonétique)</td>
-                <td><span class="correct-text">Cet événement, cet avis, cet homme, cet hôtel, cet été, cet outil</span></td>
-                <td><span class="wrong-text">Ce événement, ce outil, cette homme</span></td>
-              </tr>
-              <tr>
-                <td><strong>CETTE</strong></td>
-                <td><strong>Féminin</strong> Singulier (qu'il commence par consonne ou voyelle)</td>
-                <td><span class="correct-text">Cette expérience, cette idée, cette situation, cette mesure</span></td>
-                <td><span class="wrong-text">Ce expérience, cet idée, cette problème</span></td>
-              </tr>
-              <tr>
-                <td><strong>CES</strong></td>
-                <td><strong>Pluriel</strong> (Masculin OU Féminin devant consonne ou voyelle)</td>
-                <td><span class="correct-text">Ces problèmes, ces solutions, ces avantages, ces gens</span></td>
-                <td><span class="wrong-text">Ce problèmes, ses problèmes (attention: ses = possessif !)</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- RÈGLE 2 : LES PIÈGES DE GENRE -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">2. Les Faux Amis de Genre du TCF</h3>
-            <span class="card-tag tag-rule">Genre Masculin vs Féminin</span>
-          </div>
-          <p class="card-desc">Palabras que todo hispanohablante confunde por interferencia con el español:</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>LE problème, LE système, LE thème</span><span class="word-gender">Toujours MASCULIN (-ème)</span></div>
-              <div class="word-example">✅ « <strong>Un</strong> problème complexe » (❌ jamais <em>une problème</em>)</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>LE rôle, LE programme, LE groupe</span><span class="word-gender">Toujours MASCULIN</span></div>
-              <div class="word-example">✅ « <strong>Ce</strong> programme éducatif joue <strong>un</strong> rôle clé. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>LE manque, LE domaine, LE modèle</span><span class="word-gender">Toujours MASCULIN</span></div>
-              <div class="word-example">✅ « Je déplore <strong>un</strong> manque de clarté. »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>LA situation, LA solution, LA décision</span><span class="word-gender">Toujours FÉMININ (-tion/-sion)</span></div>
-              <div class="word-example">✅ « <strong>Une</strong> solution efficace » (accord en -e)</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>L'activité, LA société, LA responsabilité</span><span class="word-gender">Toujours FÉMININ (-té)</span></div>
-              <div class="word-example">✅ « <strong>Cette</strong> activité enrichissante »</div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- RÈGLE 3 : ACCORDS EN PLURIEL ET FÉMININ -->
-        <div class="fiche-card">
-          <div class="fiche-card-header">
-            <h3 class="card-title">3. Accords : Pluriels & Féminins Invisibles</h3>
-            <span class="card-tag tag-tip">Checklist de Relecture</span>
-          </div>
-          <p class="card-desc">El 80% de los puntos se pierden en la relecture por olvidar la 'e' o la 's':</p>
-          <ul class="word-list">
-            <li class="word-item">
-              <div class="word-term"><span>Adjectif après nom féminin</span></div>
-              <div class="word-example">« Une expérience enrichissant<strong>e</strong> » (ajoute le -e)</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Adjectif après nom pluriel</span></div>
-              <div class="word-example">« Des initiatives novatric<strong>es</strong> et bénéfiqu<strong>es</strong> » (ajoute le -s)</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Participes Passés avec ÊTRE</span></div>
-              <div class="word-example">« Elles sont venu<strong>es</strong> », « Nous sommes resté<strong>s</strong> »</div>
-            </li>
-            <li class="word-item">
-              <div class="word-term"><span>Verbes après semi-auxiliaire</span></div>
-              <div class="word-example">« Je veux amélior<strong>er</strong> » (jamais <em>je veux améliore</em>)</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== TAB 5 : PASSÉ COMPOSÉ VS IMPARFAIT ==================== -->
-    <div id="tab-passetemps" class="tab-panel">
-      <div class="rule-banner">
-        <h3>⏳ La Règle de la Caméra de Cinéma : Passé Composé vs Imparfait</h3>
-        <p>
-          Para tu Tâche 2 (Récit d'expérience), imagina que estás filmando una película:
-          <br>• <strong>L'Imparfait = Le Décor (La photo fixe, le climat, l'émotion constante, ce qui durait).</strong>
-          <br>• <strong>Le Passé Composé = L'Action (Ce qui s'est produit, le coup de théâtre, l'événement précis qui a commencé et s'est terminé).</strong>
-        </p>
-      </div>
-
-      <div class="fiches-grid">
-        <div class="fiche-card" style="grid-column: 1 / -1;">
-          <h3 class="card-title" style="margin-bottom: 12px;">Tableau Comparatif & Déclencheurs Temporels</h3>
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th>Critère</th>
-                <th>Imparfait (Le Décor) 📸</th>
-                <th>Passé Composé (L'Action) 🎬</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Rôle dans le récit</strong></td>
-                <td>Description de l'état, du temps météo, des sentiments, du décor</td>
-                <td>Action ponctuelle, succession d'événements, changement brutal</td>
-              </tr>
-              <tr>
-                <td><strong>Mots déclencheurs</strong></td>
-                <td>
-                  <em>Tous les jours, souvent, pendant que, à cette époque, le ciel était, j'avais l'impression de...</em>
-                </td>
-                <td>
-                  <em>Soudain, tout à coup, un jour, d'abord, ensuite, finalement, le mois dernier, hier...</em>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Verbes typiques du Recueil</strong></td>
-                <td>
-                  • Il <strong>faisait</strong> un soleil radieux.<br>
-                  • Les rues <strong>étaient</strong> animées.<br>
-                  • J'<strong>avais</strong> hâte d'arriver.<br>
-                  • L'ambiance <strong>laissait</strong> à désirer.
-                </td>
-                <td>
-                  • J'<strong>ai décidé</strong> de partir.<br>
-                  • Nous <strong>avons visité</strong> le musée.<br>
-                  • Un imprévu <strong>a éclaté</strong>.<br>
-                  • Cette sortie m'<strong>a permis</strong> de comprendre.
-                </td>
-              </tr>
-              <tr>
-                <td><strong>La formule combinée 10+</strong></td>
-                <td colspan="2">
-                  <span class="correct-text">« Pendant que nous <strong>marchions</strong> (imparfait) tranquillement dans les ruelles, soudain la pluie <strong>a commencé</strong> (passé composé) à tomber. »</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-  </main>
+  </div>
 
   <script>
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
-      const targetPanel = document.getElementById(tabId);
-      if (targetPanel) targetPanel.classList.add('active');
-      
-      // Update active button
-      event.currentTarget.classList.add('active');
-      window.scrollTo({ top: 220, behavior: 'smooth' });
+    let hideEs = false;
+
+    function toggleTranslations() {
+      hideEs = !hideEs;
+      document.body.classList.toggle('hide-es', hideEs);
+      const btn = document.getElementById('toggleEsBtn');
+      if (hideEs) {
+        btn.innerHTML = '<span>👁️</span> Mostrar Traducciones Español';
+        btn.style.color = '#94a3b8';
+      } else {
+        btn.innerHTML = '<span>👁️</span> Ocultar Traducciones Español';
+        btn.style.color = 'var(--es-trans)';
+      }
     }
 
-    function copyText(str) {
-      navigator.clipboard.writeText(str).then(() => {
-        alert('Copié dans le presse-papier : ' + str);
+    function switchCategory(cat) {
+      document.querySelectorAll('.tab-pill').forEach(pill => pill.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      const items = document.querySelectorAll('.flash-item');
+      items.forEach(item => {
+        if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      const summaries = {
+        all: "<strong>🌟 Toutes les fiches bilingues :</strong> Vue globale du lexique 10+ et des règles clés.",
+        t1: "<strong>✉️ Tâche 1 (Message/Courriel) :</strong> Formules pour proposer, inviter, réserver et réclamer avec politesse et efficacité.",
+        t2: "<strong>📖 Tâche 2 (Récit d'expérience) :</strong> Verbes d'action en passé composé, descriptions en imparfait et la formule magique de clôture.",
+        t3: "<strong>⚖️ Tâche 3 (Prise de position) :</strong> Verbes C1 de synthèse pour confronter les deux textes sans répéter 'je pense'.",
+        past: "<strong>⏳ Passé Composé vs Imparfait :</strong> La règle de la caméra (Le décor = Imparfait / L'action = Passé composé).",
+        grammar: "<strong>🛡️ Ce/Cet/Cette/Ces & Genre :</strong> Éradique les fautes de genre (le problème) et les accords d'adjectifs."
+      };
+
+      document.getElementById('categorySummary').innerHTML = summaries[cat] || summaries.all;
+    }
+
+    function filterItems() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.flash-item');
+
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function copyFr(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.innerText;
+        btn.innerText = '✅ Copié !';
+        btn.style.borderColor = 'var(--green)';
+        btn.style.color = 'var(--green)';
+        setTimeout(() => {
+          btn.innerText = original;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 1500);
       });
     }
   </script>
