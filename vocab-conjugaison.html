@@ -384,13 +384,13 @@
   <!-- Clean Controls (Single Dropdown + Error Toggle, zero side-scrolling) -->
   <div class="controls-deck">
     <select id="categorySelect" class="dropdown-select" onchange="onCategoryChange(this.value)">
-      <option value="all">🌟 Mix Total (Todos los temas)</option>
+      <option value="all">🌟 Mix Total (129 items)</option>
       <option value="genre">♂️♀️ Género: Falsos amigos (un / une)</option>
       <option value="accents">🎯 Acentos & Cedillas (é, è, ê, à, ç, û...)</option>
+      <option value="conj">🔀 Conjugación Clave: Subjuntivo, Condicional & Acuerdos (32)</option>
+      <option value="contractions">🔗 Contracciones en Contexto: au, du, aux, des...</option>
       <option value="demonstratif">👉 Demostrativos: Ce / Cet / Cette / Ces</option>
       <option value="accords">🎭 Acuerdos Nominales: un/une + adjetivo</option>
-      <option value="conj">🔀 Subjuntivo, Condicional & Pasado</option>
-      <option value="contractions">🔗 Contracciones en Contexto: au, du, aux, des...</option>
       <option value="antirepetition">🚀 Vocabulario C1 Anti-repetición</option>
     </select>
     <button class="btn-err-toggle" id="btnErrToggle" onclick="toggleErrorMode()">
@@ -402,7 +402,7 @@
   <div class="flashcard">
     <div class="card-top" id="cardTop">
       <span class="badge-cat" id="badgeCat">GENRE</span>
-      <span id="counterProgress">1 / 109</span>
+      <span id="counterProgress">1 / 129</span>
     </div>
 
     <!-- Active Card Content -->
@@ -535,19 +535,46 @@
       { id:"ac9", cat:"accords", badge:"Accord Complet", target:"VOITURE  +  (électrique)", sub:"Escribe: artículo 'un/une' + sustantivo + adjetivo acordado", ans:["une voiture électrique"], rule:"💡 <strong>une voiture électrique :</strong> 'Voiture' es femenino en francés." },
       { id:"ac10", cat:"accords", badge:"Accord Complet", target:"ENJEU  +  (crucial)", sub:"Escribe: artículo 'un/une' + sustantivo + adjetivo acordado", ans:["un enjeu crucial"], rule:"💡 <strong>un enjeu crucial :</strong> 'Enjeu' es masculino." },
 
-      // 5. CONJUGAISONS CLÉS
-      { id:"c1", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (nous)", sub:"Subjonctif présent (afin que nous...)", ans:["puissions"], rule:"💡 <strong>puissions :</strong> <em>afin que nous</em> <strong>puissions</strong>." },
-      { id:"c2", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (vous)", sub:"Subjonctif présent (pour que vous...)", ans:["puissiez"], rule:"💡 <strong>puissiez :</strong> <em>pour que vous</em> <strong>puissiez</strong>." },
-      { id:"c3", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (je)", sub:"Subjonctif présent (pour que je...)", ans:["puisse"], rule:"💡 <strong>puisse :</strong> <em>pour que je</em> <strong>puisse</strong>." },
-      { id:"c4", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (ils)", sub:"Subjonctif présent (bien qu'ils...)", ans:["puissent"], rule:"💡 <strong>puissent :</strong> <em>bien qu'ils</em> <strong>puissent</strong>." },
-      { id:"c5", cat:"conj", badge:"Subjonctif", target:"ÊTRE  (il / cette mesure)", sub:"Subjonctif présent (pour que cette mesure...)", ans:["soit"], rule:"💡 <strong>soit :</strong> <em>pour que cette mesure</em> <strong>soit</strong>." },
-      { id:"c6", cat:"conj", badge:"Subjonctif", target:"ÊTRE  (ils / les portes)", sub:"Subjonctif présent (veille à ce que les portes...)", ans:["soient"], rule:"💡 <strong>soient :</strong> <em>pour qu'elles</em> <strong>soient</strong>." },
-      { id:"c7", cat:"conj", badge:"Subjonctif", target:"VOIR  (tu)", sub:"Subjonctif présent (pour que tu...)", ans:["voies"], rule:"💡 <strong>voies :</strong> Con 'tu' en subjuntivo lleva '-es': <em>pour que tu</em> <strong>voies</strong>." },
-      { id:"c8", cat:"conj", badge:"Conditionnel", target:"SOUHAITER  (je)", sub:"Conditionnel de politesse (je...)", ans:["souhaiterais"], rule:"💡 <strong>souhaiterais :</strong> En cartas formales de Tâche 1: <em>je souhaiterais</em>." },
-      { id:"c9", cat:"conj", badge:"Imparfait", target:"ÊTRE  (l'ambiance)", sub:"Imparfait de décor (l'ambiance...)", ans:["était"], rule:"💡 <strong>était :</strong> Para describir ambiente en Tâche 2: <em>l'ambiance était</em>." },
-      { id:"c10", cat:"conj", badge:"Imparfait", target:"LAISSER  (l'organisation)", sub:"Imparfait de critique (l'organisation... à désirer)", ans:["laissait"], rule:"💡 <strong>laissait à désirer :</strong> Crítica en Tâche 2: <em>laissait à désirer</em>." },
-      { id:"c11", cat:"conj", badge:"Passé Composé", target:"PERMETTRE  (participe)", sub:"Participe passé (cette expérience m'a...)", ans:["permis"], rule:"💡 <strong>permis :</strong> <em>m'a permis de</em> (con '-s' invariable)." },
-      { id:"c12", cat:"conj", badge:"Voix Passive", target:"ÊTRE (utiliser) · fém.", sub:"Participe passé (la télévision doit être...)", ans:["utilisée"], rule:"💡 <strong>utilisée :</strong> Voz pasiva con <em>être</em> concuerda con 'la télévision': <em>utilisée</em>." },
+      // 5. CONJUGAISONS CLÉS (Subjonctif, Conditionnel, Accords du participe, Imparfait)
+      // Subjonctif Présent
+      { id:"c1", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (nous)", sub:"Subjonctif présent : afin que nous [ ... ]", ans:["puissions"], rule:"💡 <strong>puissions :</strong> <em>afin que nous</em> <strong>puissions</strong>." },
+      { id:"c2", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (vous)", sub:"Subjonctif présent : pour que vous [ ... ]", ans:["puissiez"], rule:"💡 <strong>puissiez :</strong> <em>pour que vous</em> <strong>puissiez</strong>." },
+      { id:"c3", cat:"conj", badge:"Subjonctif", target:"POUVOIR  (ils)", sub:"Subjonctif présent : bien qu'ils [ ... ]", ans:["puissent"], rule:"💡 <strong>puissent :</strong> <em>bien qu'ils</em> <strong>puissent</strong>." },
+      { id:"c4", cat:"conj", badge:"Subjonctif", target:"FAIRE  (nous)", sub:"Subjonctif présent : il faut que nous [ ... ]", ans:["fassions"], rule:"💡 <strong>fassions :</strong> Radical irregular 'fass-': <em>que nous <strong>fassions</strong></em>." },
+      { id:"c5", cat:"conj", badge:"Subjonctif", target:"FAIRE  (vous)", sub:"Subjonctif présent : afin que vous [ ... ]", ans:["fassiez"], rule:"💡 <strong>fassiez :</strong> <em>que vous <strong>fassiez</strong></em>." },
+      { id:"c6", cat:"conj", badge:"Subjonctif", target:"FAIRE  (il / cela)", sub:"Subjonctif présent : bien que cela [ ... ] débat", ans:["fasse"], rule:"💡 <strong>fasse :</strong> <em>bien que cela <strong>fasse</strong> débat</em>." },
+      { id:"c7", cat:"conj", badge:"Subjonctif", target:"ÊTRE  (cette mesure)", sub:"Subjonctif présent : pour que cette mesure [ ... ] efficace", ans:["soit"], rule:"💡 <strong>soit :</strong> <em>pour que cette mesure</em> <strong>soit</strong>." },
+      { id:"c8", cat:"conj", badge:"Subjonctif", target:"ÊTRE  (nous)", sub:"Subjonctif présent : afin que nous [ ... ] prêts", ans:["soyons"], rule:"💡 <strong>soyons :</strong> <em>afin que nous <strong>soyons</strong></em>." },
+      { id:"c9", cat:"conj", badge:"Subjonctif", target:"ÊTRE  (les règles)", sub:"Subjonctif présent : pour que les règles [ ... ] respectées", ans:["soient"], rule:"💡 <strong>soient :</strong> Plural: <em>pour qu'elles</em> <strong>soient</strong>." },
+      { id:"c10", cat:"conj", badge:"Subjonctif", target:"AVOIR  (nous)", sub:"Subjonctif présent : pour que nous [ ... ] le temps", ans:["ayons"], rule:"💡 <strong>ayons :</strong> <em>pour que nous <strong>ayons</strong></em>." },
+      { id:"c11", cat:"conj", badge:"Subjonctif", target:"AVOIR  (ils)", sub:"Subjonctif présent : afin qu'ils [ ... ] accès", ans:["aient"], rule:"💡 <strong>aient :</strong> <em>afin qu'ils <strong>aient</strong></em>." },
+      { id:"c12", cat:"conj", badge:"Subjonctif", target:"SAVOIR  (vous)", sub:"Subjonctif présent : pour que vous [ ... ] la vérité", ans:["sachiez"], rule:"💡 <strong>sachiez :</strong> Radical irregular 'sach-': <em>pour que vous <strong>sachiez</strong></em>." },
+      { id:"c13", cat:"conj", badge:"Subjonctif", target:"PRENDRE  (ils)", sub:"Subjonctif présent : pour qu'ils [ ... ] conscience", ans:["prennent"], rule:"💡 <strong>prennent :</strong> Doble 'n': <em>qu'ils <strong>prennent</strong></em>." },
+      { id:"c14", cat:"conj", badge:"Subjonctif", target:"VOIR  (tu)", sub:"Subjonctif présent : pour que tu [ ... ] la réalité", ans:["voies"], rule:"💡 <strong>voies :</strong> Terminación '-es' con 'tu': <em>pour que tu <strong>voies</strong></em>." },
+
+      // Conditionnel Présent (Politesse, Suggestions Tâche 1 & Tâche 3)
+      { id:"c15", cat:"conj", badge:"Conditionnel", target:"SOUHAITER  (je)", sub:"Conditionnel de politesse : je [ ... ] vous informer", ans:["souhaiterais"], rule:"💡 <strong>souhaiterais :</strong> Fórmula clave de Tâche 1: <em>je souhaiterais</em>." },
+      { id:"c16", cat:"conj", badge:"Conditionnel", target:"VOULOIR  (je)", sub:"Conditionnel de politesse : je [ ... ] attirer votre attention", ans:["voudrais"], rule:"💡 <strong>voudrais :</strong> <em>je voudrais</em>." },
+      { id:"c17", cat:"conj", badge:"Conditionnel", target:"AIMER  (j')", sub:"Conditionnel de politesse : j' [ ... ] savoir si...", ans:["aimerais"], rule:"💡 <strong>aimerais :</strong> <em>j'aimerais</em>." },
+      { id:"c18", cat:"conj", badge:"Conditionnel", target:"FALLOIR", sub:"Conditionnel présent (recommandation) : il [ ... ] agir rapidement", ans:["faudrait"], rule:"💡 <strong>faudrait :</strong> Ensayos Tâche 3: <em>il faudrait agir</em>." },
+      { id:"c19", cat:"conj", badge:"Conditionnel", target:"POUVOIR  (nous)", sub:"Conditionnel présent (suggestion) : nous [ ... ] organiser un atelier", ans:["pourrions"], rule:"💡 <strong>pourrions :</strong> <em>nous pourrions</em>." },
+      { id:"c20", cat:"conj", badge:"Conditionnel", target:"DEVOIR  (la mairie)", sub:"Conditionnel présent : la mairie [ ... ] intervenir", ans:["devrait"], rule:"💡 <strong>devrait :</strong> <em>elle devrait intervenir</em>." },
+      { id:"c21", cat:"conj", badge:"Conditionnel", target:"ÊTRE  (il)", sub:"Conditionnel présent : il [ ... ] judicieux de...", ans:["serait"], rule:"💡 <strong>serait :</strong> <em>il serait judicieux de</em>." },
+
+      // Passé Composé & Accords du participe passé
+      { id:"c22", cat:"conj", badge:"Passé Composé", target:"PERMETTRE  (participe)", sub:"Passé composé : cette expérience m'a [ ... ] de grandir", ans:["permis"], rule:"💡 <strong>permis :</strong> <em>m'a permis de</em> (con '-s' invariable)." },
+      { id:"c23", cat:"conj", badge:"Accord Participe", target:"PRENDRE  (participe)", sub:"Passé composé (accord COD placé devant) : la décision que j'ai [ ... ]", ans:["prise"], rule:"💡 <strong>prise :</strong> El COD 'la décision' (femenino) va antes ➔ <em>que j'ai <strong>prise</strong></em>." },
+      { id:"c24", cat:"conj", badge:"Accord Participe", target:"METTRE  (participe)", sub:"Passé composé (accord COD placé devant) : les moyens qu'ils ont [ ... ] en place", ans:["mis"], rule:"💡 <strong>mis :</strong> El COD 'les moyens' (masc. plural) va antes ➔ <em>qu'ils ont <strong>mis</strong></em>." },
+      { id:"c25", cat:"conj", badge:"Accord Participe", target:"ÉCRIRE  (participe)", sub:"Passé composé (accord COD placé devant) : la lettre que je vous ai [ ... ]", ans:["écrite"], rule:"💡 <strong>écrite :</strong> El COD 'la lettre' (femenino) va antes ➔ <em>que je vous ai <strong>écrite</strong></em>." },
+      { id:"c26", cat:"conj", badge:"Accord Participe", target:"VIVRE  (participe)", sub:"Passé composé (accord COD placé devant) : l'expérience que nous avons [ ... ]", ans:["vécue"], rule:"💡 <strong>vécue :</strong> El COD 'l'expérience' (femenino) va antes ➔ <em>que nous avons <strong>vécue</strong></em>." },
+      { id:"c27", cat:"conj", badge:"Accord Participe", target:"NAÎTRE  (participe)", sub:"Passé composé avec être : cette belle initiative est [ ... ] en 2024", ans:["née"], rule:"💡 <strong>née :</strong> Con el auxiliar être concuerda con el sujeto femenino 'l'initiative' ➔ <em>est <strong>née</strong></em>." },
+      { id:"c28", cat:"conj", badge:"Voix Passive", target:"UTILISER  (participe)", sub:"Voix passive avec être : la méthode doit être [ ... ] avec soin", ans:["utilisée"], rule:"💡 <strong>utilisée :</strong> Voz pasiva con être concuerda con 'la méthode' (fém.) ➔ <em>doit être <strong>utilisée</strong></em>." },
+
+      // Imparfait de description (Tâche 2 récit)
+      { id:"c29", cat:"conj", badge:"Imparfait", target:"ÊTRE  (l'ambiance)", sub:"Imparfait de description : l'ambiance [ ... ] chaleureuse", ans:["était"], rule:"💡 <strong>était :</strong> Para descripciones en el pasado (Tâche 2): <em>l'ambiance était</em>." },
+      { id:"c30", cat:"conj", badge:"Imparfait", target:"FAIRE  (il)", sub:"Imparfait de décor : il [ ... ] un temps splendide", ans:["faisait"], rule:"💡 <strong>faisait :</strong> Se escribe con 'ai': <em>il <strong>faisait</strong></em>." },
+      { id:"c31", cat:"conj", badge:"Imparfait", target:"LAISSER  (l'organisation)", sub:"Imparfait de critique : l'organisation [ ... ] à désirer", ans:["laissait"], rule:"💡 <strong>laissait à désirer :</strong> Crítica típica de Tâche 2: <em>laissait à désirer</em>." },
+      { id:"c32", cat:"conj", badge:"Imparfait", target:"SAVOIR  (je)", sub:"Imparfait : je ne [ ... ] pas à quoi m'attendre", ans:["savais"], rule:"💡 <strong>savais :</strong> <em>je ne savais pas</em>." },
 
       // 6. CONTRACTIONS & RÉGIMES VERBAUX (Verbos + à / de + contracción obligatoria)
       { id:"ct1", cat:"contractions", badge:"Contraction", target:"PARTICIPER  [ ... ]  projet", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au projet"], rule:"💡 <strong>participer À :</strong> 'Projet' es masculino singular ➔ <em>participer <strong>au</strong> projet</em> (nunca 'à le')." },
