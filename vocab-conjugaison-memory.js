@@ -139,7 +139,7 @@
   }
   document.querySelectorAll('[data-task]').forEach(button=>button.addEventListener('click',()=>{task=button.dataset.task;revealed.clear();render();}));
   $('memory-toggle').addEventListener('click',()=>{recall=!recall;revealed.clear();render();});
-  const drillCats={pastChoice:'past_narrative',demo:'demonstratif',agree:'accords',subject:'indicatif_pluriel'};
+  const drillCats={pastChoice:'past_narrative',demo:'demonstratif',agree:'accords',subject:'indicatif_pluriel',relative:'relatifs'};
   document.querySelectorAll('[data-drill]').forEach(button=>button.addEventListener('click',()=>{
     const category=drillCats[button.dataset.drill];
     if (!category || typeof window.onCategoryChange !== 'function') return;
