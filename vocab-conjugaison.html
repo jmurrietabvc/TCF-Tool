@@ -602,7 +602,7 @@
       cursor: pointer;
     }
     .transfer-tabs button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
-    .transfer-prompt { padding: 12px 14px; border-radius: 10px; background: var(--card-inner); }
+    .transfer-prompt { padding: 12px 14px; border-radius: 10px; background: var(--card-inner); white-space: pre-line; }
     .transfer-source { font-size: 12px; color: var(--text-muted) !important; }
     .transfer-input {
       width: 100%;
@@ -719,8 +719,8 @@
   </div>
 
   <section class="transfer-section" id="transferSection" aria-labelledby="transferTitle">
-    <h2 id="transferTitle">Del ejercicio a la EE: escribe 2–3 frases</h2>
-    <p>Practica una consigna real adaptada a formato corto. Escribe tú primero; después comprueba contenido, registro y gramática. Esto no sustituye una tarea completa con su límite de palabras.</p>
+    <h2 id="transferTitle">Práctica corta de EE: 2–3 frases</h2>
+    <p>Este es un calentamiento, no una simulación completa. Lee el mensaje o los documentos, sigue los pasos y escribe tu respuesta. Después revisa contenido y gramática.</p>
     <div class="transfer-tabs" role="group" aria-label="Elegir tarea de expresión escrita">
       <button type="button" data-transfer-task="t1" aria-pressed="true">Tâche 1 · mensaje</button>
       <button type="button" data-transfer-task="t2" aria-pressed="false">Tâche 2 · experiencia</button>
@@ -728,7 +728,7 @@
     </div>
     <p class="transfer-prompt" id="transferPrompt"></p>
     <p class="transfer-source" id="transferSource"></p>
-    <label for="transferText">Tu respuesta breve en francés:</label>
+    <label for="transferText">Escribe aquí tus 2–3 frases en francés:</label>
     <textarea class="transfer-input" id="transferText" placeholder="Escribe 2–3 frases aquí..." spellcheck="true"></textarea>
     <div class="transfer-meta" id="transferCount">0 palabras · borrador guardado en este navegador</div>
     <button type="button" class="btn-check" id="transferCheck">Revisar mi respuesta</button>

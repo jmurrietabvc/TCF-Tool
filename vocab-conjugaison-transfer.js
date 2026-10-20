@@ -4,8 +4,14 @@
 
   const TASKS = {
     t1: {
-      prompt: 'Laura te pregunta por una sala de deporte cercana. En 2–3 frases, responde como a una amiga e incluye ubicación, tipos de cursos y precio.',
-      source: 'Consigna resumida: sujeto 1, Tâche 1, pág. 7 del PDF. Ejercicio corto: la tarea real exige 60–120 palabras.',
+      prompt: `Laura te escribió:
+«Bonjour, je souhaite commencer le sport dans une salle. Est-ce que tu pourrais me donner des informations sur les salles de sport près de chez nous ? Merci d’avance. Bisous, Laura.»
+
+Responde a Laura en francés. Puedes inventar una sala y datos realistas.
+1. Di qué sala recomiendas y dónde está.
+2. Menciona uno o dos cursos que ofrece.
+3. Indica el precio y cierra el mensaje. Usa «tu» porque Laura es una amiga.`,
+      source: 'Práctica corta: bastan 2–3 frases. Fuente: sujeto 1, Tâche 1, pág. 7 del PDF. Una respuesta completa de examen exige 60–120 palabras.',
       checks: [
         '¿Respondí a Laura con un tono informal coherente (tu), sin mezclarlo con vous?',
         '¿Incluí lugar, cursos y precio concretos?',
@@ -14,8 +20,13 @@
       example: 'Salut Laura, la salle près du centre propose des cours de yoga et de cardio. Elle se trouve à dix minutes de chez nous et l’abonnement coûte 30 euros par mois. Si tu veux, nous pouvons y aller samedi.'
     },
     t2: {
-      prompt: 'Cuenta una fiesta que recuerdas. En 2–3 frases, indica qué ocurrió y qué fue lo que más te gustó.',
-      source: 'Consigna resumida: sujeto 1, Tâche 2, pág. 7 del PDF. Ejercicio corto: la tarea real exige 120–150 palabras.',
+      prompt: `Un concurso te pide contar tu fiesta más bonita. Explica cómo transcurrió y qué recuerdas de ella.
+
+Escribe 2–3 frases en francés:
+1. Di cuándo o dónde fue.
+2. Cuenta un hecho que ocurrió (passé composé).
+3. Describe el ambiente (imparfait) y di qué te gustó.`,
+      source: 'Práctica corta: bastan 2–3 frases. Fuente: sujeto 1, Tâche 2, pág. 7 del PDF. Una respuesta completa de examen exige 120–150 palabras.',
       checks: [
         '¿Conté al menos un hecho terminado en passé composé?',
         'Si describí el ambiente, ¿usé imparfait para el contexto?',
@@ -25,8 +36,15 @@
       example: 'Samedi dernier, j’ai fêté mon anniversaire avec mes amis. L’ambiance était chaleureuse et nous avons préparé un repas ensemble. J’ai surtout aimé nos conversations, car nous avons enfin passé du temps ensemble.'
     },
     t3: {
-      prompt: 'Sobre la lectura infantil: un documento rechaza obligar a los niños a leer; el otro destaca los beneficios de leer juntos. En 2–3 frases, presenta ambas ideas y da tu opinión.',
-      source: 'Documentos resumidos: sujeto 1, Tâche 3, pág. 8 del PDF. Ejercicio corto: la tarea real exige 120–180 palabras.',
+      prompt: `Tema: la lectura de los niños.
+Documento 1: obligarlos a leer puede quitarles el gusto por la lectura.
+Documento 2: leer juntos unos minutos les ayuda a aprender palabras y disfrutar del momento.
+
+Escribe 2–3 frases en francés:
+1. Resume la idea del documento 1.
+2. Resume la idea del documento 2.
+3. Da tu opinión y una razón.`,
+      source: 'Práctica corta: bastan 2–3 frases. Documentos resumidos del sujeto 1, Tâche 3, pág. 8 del PDF. Una respuesta completa de examen exige 120–180 palabras.',
       checks: [
         '¿Distinguí la idea del primer documento de la del segundo?',
         '¿Separé mi propia opinión de la síntesis?',
