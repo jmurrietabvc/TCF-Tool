@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="vocab-conjugaison-memory.css">
   <script src="vocab-conjugaison-memory.js" defer></script>
+  <script src="vocab-conjugaison-transfer.js" defer></script>
   <style>
     :root {
       --bg: #090a10;
@@ -340,21 +341,6 @@
     }
     .btn-next:hover { opacity: 0.9; }
 
-    .btn-remove-err {
-      background: transparent;
-      border: 1.5px solid var(--green);
-      color: var(--green);
-      padding: 7px 12px;
-      border-radius: 10px;
-      font-size: 11.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .btn-remove-err:hover {
-      background: rgba(16, 185, 129, 0.15);
-    }
-
     /* Score Bar */
     .score-row {
       width: 100%;
@@ -594,6 +580,51 @@
       border-radius: 5px;
       font-size: 11px;
     }
+    .transfer-section {
+      width: min(100%, 800px);
+      margin: 30px auto;
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .transfer-section h2 { margin: 0 0 8px; color: #fff; font-size: 21px; }
+    .transfer-section p { color: #cbd5e1; line-height: 1.5; }
+    .transfer-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .transfer-tabs button {
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 9px 12px;
+      background: var(--card-inner);
+      color: #cbd5e1;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .transfer-tabs button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
+    .transfer-prompt { padding: 12px 14px; border-radius: 10px; background: var(--card-inner); }
+    .transfer-source { font-size: 12px; color: var(--text-muted) !important; }
+    .transfer-input {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      margin: 8px 0;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: var(--card-inner);
+      color: #fff;
+      font: inherit;
+      line-height: 1.5;
+    }
+    .transfer-input:focus { outline: none; border-color: var(--cyan); }
+    .transfer-meta { color: var(--text-muted); font-size: 12px; margin-bottom: 12px; }
+    .transfer-review { margin-top: 14px; padding: 15px; border-radius: 10px; background: var(--card-inner); }
+    .transfer-review h3 { color: #fff; margin: 0 0 10px; font-size: 16px; }
+    .transfer-review label { display: block; margin: 9px 0; color: #e2e8f0; line-height: 1.4; }
+    .transfer-review input { margin-right: 8px; accent-color: var(--cyan); }
+    .transfer-review details { margin-top: 15px; color: var(--gold); }
+    .transfer-review summary { cursor: pointer; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -629,11 +660,11 @@
   <div class="score-row" aria-label="Progreso del ejercicio">
     <div class="score-stat"><span>Aciertos sesión</span><strong id="scoreVal">0</strong></div>
     <div class="score-stat"><span>Racha actual</span><strong id="streakVal">0 🔥</strong></div>
-    <button type="button" class="btn-err-toggle score-error" id="btnErrToggle" onclick="toggleErrorMode()" aria-label="Abrir errores guardados" aria-pressed="false">
-      <span>Errores guardados</span><strong id="errCountBadge">0</strong>
+    <button type="button" class="btn-err-toggle score-error" id="btnErrToggle" onclick="toggleErrorMode()" aria-label="Abrir errores pendientes" aria-pressed="false">
+      <span>Errores pendientes</span><strong id="errCountBadge">0</strong>
     </button>
   </div>
-  <p class="score-legend">Racha: aciertos seguidos · Errores: tarjetas pendientes para repasar</p>
+  <p class="score-legend">Racha: aciertos seguidos · Errores: tarjetas que aún debes acertar; bajan al responder bien</p>
 
   <!-- Minimalist Flashcard Container -->
   <div class="flashcard">
@@ -675,18 +706,39 @@
       <div class="fb-detail" id="fbDetail"></div>
       <div class="fb-rule" id="fbRule"></div>
       <div class="next-row">
-        <button class="btn-remove-err" id="btnRemoveErr" style="display:none;" onclick="resolveCurrentError()">✅ Marcar asimilada</button>
         <button class="btn-next" onclick="nextCard()">Suivant ➔ (Entrée)</button>
       </div>
     </div>
 
     <!-- Empty State -->
     <div class="empty-box" id="emptyBox">
-      <h3>🎉 ¡Banco de errores vacío!</h3>
-      <p>Todas tus dudas registradas han sido dominadas. ¡Excelente trabajo!</p>
+      <h3>🎉 ¡No quedan errores pendientes!</h3>
+      <p>Acertaste todas las tarjetas que habías fallado.</p>
       <button class="btn-check" onclick="onCategoryChange('all')" style="padding:10px 18px;">🌟 Volver al Mix General</button>
     </div>
   </div>
+
+  <section class="transfer-section" id="transferSection" aria-labelledby="transferTitle">
+    <h2 id="transferTitle">Del ejercicio a la EE: escribe 2–3 frases</h2>
+    <p>Practica una consigna real adaptada a formato corto. Escribe tú primero; después comprueba contenido, registro y gramática. Esto no sustituye una tarea completa con su límite de palabras.</p>
+    <div class="transfer-tabs" role="group" aria-label="Elegir tarea de expresión escrita">
+      <button type="button" data-transfer-task="t1" aria-pressed="true">Tâche 1 · mensaje</button>
+      <button type="button" data-transfer-task="t2" aria-pressed="false">Tâche 2 · experiencia</button>
+      <button type="button" data-transfer-task="t3" aria-pressed="false">Tâche 3 · opinión</button>
+    </div>
+    <p class="transfer-prompt" id="transferPrompt"></p>
+    <p class="transfer-source" id="transferSource"></p>
+    <label for="transferText">Tu respuesta breve en francés:</label>
+    <textarea class="transfer-input" id="transferText" placeholder="Escribe 2–3 frases aquí..." spellcheck="true"></textarea>
+    <div class="transfer-meta" id="transferCount">0 palabras · borrador guardado en este navegador</div>
+    <button type="button" class="btn-check" id="transferCheck">Revisar mi respuesta</button>
+    <div class="transfer-review" id="transferReview" hidden>
+      <h3>Comprueba estos puntos antes de darla por terminada</h3>
+      <div id="transferChecklist"></div>
+      <p>Esta revisión es manual: el ejercicio no asigna una nota ni detecta todos los errores.</p>
+      <details id="transferExample"><summary>Ver un ejemplo adaptado (después de escribir)</summary><p id="transferExampleText"></p></details>
+    </div>
+  </section>
 
   <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle">
     <div class="memory-head"><div><span class="memory-eyebrow">Basado en modelos del PDF proporcionado</span><h2 id="memoryTitle">Memoriza verbos y adjetivos por tâche</h2><p>Aprende una forma segura, oculta el francés y comprueba si puedes recordarla. Después practica la regla que te falla.</p></div><span id="memory-count" class="memory-count">0/20 marcadas</span></div>
@@ -1046,7 +1098,7 @@
       const errorButton = document.getElementById('btnErrToggle');
       errorButton.classList.remove('active');
       errorButton.setAttribute('aria-pressed', 'false');
-      errorButton.setAttribute('aria-label', 'Abrir errores guardados');
+      errorButton.setAttribute('aria-label', 'Abrir errores pendientes');
       document.getElementById('categorySelect').value = cat;
       rebuildDeck();
       renderCard();
@@ -1061,7 +1113,7 @@
         const errorButton = document.getElementById('btnErrToggle');
         errorButton.classList.add('active');
         errorButton.setAttribute('aria-pressed', 'true');
-        errorButton.setAttribute('aria-label', 'Salir de errores guardados');
+        errorButton.setAttribute('aria-label', 'Salir de errores pendientes');
         rebuildDeck();
         renderCard();
       }
@@ -1088,7 +1140,6 @@
       const fb = document.getElementById('feedbackBox');
 
       fb.classList.remove('show', 'correct', 'wrong');
-      document.getElementById('btnRemoveErr').style.display = 'none';
 
       if (!deck || deck.length === 0) {
         content.style.display = 'none';
@@ -1176,7 +1227,6 @@
       const fbStatus = document.getElementById('fbStatus');
       const fbDetail = document.getElementById('fbDetail');
       const fbRule = document.getElementById('fbRule');
-      const btnRemove = document.getElementById('btnRemoveErr');
 
       fb.classList.remove('correct', 'wrong');
 
@@ -1191,8 +1241,9 @@
         fbDetail.innerHTML = "Escribiste exactamente: <strong style='color:#34d399;'>" + escapeHtml(val) + "</strong>";
         fbRule.innerHTML = item.rule;
 
-        if (state.category === 'errors' || state.errorIds.has(item.id)) {
-          btnRemove.style.display = 'inline-block';
+        if (state.errorIds.delete(item.id)) {
+          saveErrors();
+          fbDetail.innerHTML += '<br>Este error salió de tus pendientes.';
         }
       } else {
         state.streak = 0;
@@ -1203,7 +1254,7 @@
         inp.classList.add('wrong');
         inp.disabled = true;
 
-        fbStatus.innerHTML = "❌ ¡Error guardado en tu Banco de Errores!";
+        fbStatus.innerHTML = "❌ Error añadido a tus pendientes";
         fbDetail.innerHTML = "Respuesta esperada: <strong style='color:#34d399;'>" + escapeHtml(item.ans[0]) + "</strong><br>" + diagnose(val, item.ans[0]);
         fbRule.innerHTML = item.rule;
       }
@@ -1213,19 +1264,13 @@
     }
 
     function nextCard() {
-      state.currentIndex++;
-      renderCard();
-    }
-
-    function resolveCurrentError() {
-      const deck = state.activeDeck;
-      const item = deck[state.currentIndex];
-      if (state.errorIds.has(item.id)) {
-        state.errorIds.delete(item.id);
-        saveErrors();
-        rebuildDeck();
-        renderCard();
+      if (state.category === 'errors' && !state.errorIds.has(state.activeDeck[state.currentIndex]?.id)) {
+        state.activeDeck.splice(state.currentIndex, 1);
+        if (state.currentIndex >= state.activeDeck.length) state.currentIndex = 0;
+      } else {
+        state.currentIndex++;
       }
+      renderCard();
     }
 
     function addAccent(ch) {
