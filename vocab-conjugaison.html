@@ -143,6 +143,7 @@
     .flashcard {
       width: 100%;
       max-width: 520px;
+      scroll-margin-top: 92px;
       background: var(--card);
       border: 1.5px solid var(--border);
       border-radius: 20px;
@@ -347,14 +348,41 @@
     .score-row {
       width: 100%;
       max-width: 520px;
-      display: flex;
-      justify-content: space-between;
-      margin-top: 16px;
-      font-size: 12.5px;
-      color: var(--text-muted);
-      padding: 0 4px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+      margin: 0 0 5px;
+      padding: 7px;
+      background: rgba(19, 21, 31, 0.97);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     }
-    .score-row strong { color: #ffffff; }
+    .score-stat,
+    .score-row .score-error {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 7px 4px;
+      text-align: center;
+      border-radius: 9px;
+    }
+    .score-stat { background: var(--card-inner); }
+    .score-stat span,
+    .score-row .score-error span { color: var(--text-muted); font-size: 10.5px; font-weight: 700; line-height: 1.2; }
+    .score-row strong { color: #ffffff; font-size: 17px; line-height: 1.15; }
+    .score-row .score-error { width: 100%; border-color: rgba(244, 63, 94, 0.35); }
+    .score-row .score-error span,
+    .score-row .score-error strong { color: #fb7185; }
+    .score-row .score-error.active span,
+    .score-row .score-error.active strong { color: #ffffff; }
+    .score-legend { width: 100%; max-width: 520px; margin: 0 0 12px; color: var(--text-muted); font-size: 11px; text-align: center; line-height: 1.4; }
 
     /* Empty state */
     .empty-box {
@@ -584,19 +612,16 @@
       <option value="accords">🎭 Frases completas: un/une + palabra + descripción</option>
       <option value="antirepetition">🎯 Vocabulario útil: alternativas a verbos repetidos</option>
     </select>
-    <button class="btn-err-toggle" id="btnErrToggle" onclick="toggleErrorMode()">
-      🚨 Errores (<span id="errCountBadge">0</span>)
-    </button>
   </div>
 
-  <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle">
-    <div class="memory-head"><div><span class="memory-eyebrow">Basado en modelos del PDF proporcionado</span><h2 id="memoryTitle">Memoriza verbos y adjetivos por tâche</h2><p>Aprende una forma segura, oculta el francés y comprueba si puedes recordarla. Después practica la regla que te falla.</p></div><span id="memory-count" class="memory-count">0/20 marcadas</span></div>
-    <div class="memory-toolbar"><div class="memory-tabs" role="group" aria-label="Elegir lista por tarea"><button type="button" data-task="t1" class="active" aria-pressed="true">Tâche 1 · mensajes</button><button type="button" data-task="t2" aria-pressed="false">Tâche 2 · experiencias</button><button type="button" data-task="t3" aria-pressed="false">Tâche 3 · opinión</button></div><button type="button" id="memory-toggle" class="memory-toggle" aria-pressed="false">Ocultar francés para recordar</button></div>
-    <p class="memory-intro" id="memory-intro"></p><p class="memory-source" id="memory-source"></p>
-    <div class="memory-grid"><div class="memory-panel"><h3>12 verbos de alto uso</h3><p>Memoriza el verbo con su preposición y una frase breve.</p><div id="memory-verbs" class="memory-list"></div></div><div class="memory-panel"><h3>8 adjetivos seguros</h3><p>Memoriza el femenino y el plural con un nombre.</p><div id="memory-adjectives" class="memory-list"></div></div></div>
-    <div class="grammar-map"><h3>Passé composé + imparfait cuando narras en T2</h3><div class="grammar-columns"><p><strong>Imparfait = escenario o hábito.</strong> ¿Cómo era la situación? ¿Qué pasaba habitualmente? <em>Il y avait beaucoup de monde. L’ambiance était chaleureuse.</em></p><p><strong>Passé composé = hechos terminados.</strong> ¿Qué ocurrió y qué hiciste después? <em>J’ai participé à l’atelier. Nous avons rencontré un problème.</em></p></div><p><strong>Juntos:</strong> <em>L’ambiance était chaleureuse et nous avons commencé l’activité à neuf heures.</em> Primero describes el fondo; luego cuentas el hecho. El marcador temporal por sí solo no decide el tiempo.</p><div class="memory-drills"><button type="button" data-drill="pastChoice">Practicar 12 contrastes de pasado</button><button type="button" data-drill="demo">Practicar ce/cet/cette/ces</button><button type="button" data-drill="agree">Practicar género y acuerdo</button><button type="button" data-drill="subject">Practicar plural del verbo</button></div></div>
-    <p class="memory-note">T1 y T2 pueden pedir otros tipos de texto: adapta la lista a la consigna y al destinatario. Algunos modelos del PDF superan sus propios límites de palabras. Esta lista es práctica personal, no una promesa de nota.</p>
-  </section>
+  <div class="score-row" aria-label="Progreso del ejercicio">
+    <div class="score-stat"><span>Aciertos sesión</span><strong id="scoreVal">0</strong></div>
+    <div class="score-stat"><span>Racha actual</span><strong id="streakVal">0 🔥</strong></div>
+    <button type="button" class="btn-err-toggle score-error" id="btnErrToggle" onclick="toggleErrorMode()" aria-label="Abrir errores guardados" aria-pressed="false">
+      <span>Errores guardados</span><strong id="errCountBadge">0</strong>
+    </button>
+  </div>
+  <p class="score-legend">Racha: aciertos seguidos · Errores: tarjetas pendientes para repasar</p>
 
   <!-- Minimalist Flashcard Container -->
   <div class="flashcard">
@@ -650,11 +675,14 @@
     </div>
   </div>
 
-  <!-- Score & Streak -->
-  <div class="score-row">
-    <div>Aciertos: <strong id="scoreVal">0</strong></div>
-    <div>Racha: <strong id="streakVal">0 🔥</strong></div>
-  </div>
+  <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle">
+    <div class="memory-head"><div><span class="memory-eyebrow">Basado en modelos del PDF proporcionado</span><h2 id="memoryTitle">Memoriza verbos y adjetivos por tâche</h2><p>Aprende una forma segura, oculta el francés y comprueba si puedes recordarla. Después practica la regla que te falla.</p></div><span id="memory-count" class="memory-count">0/20 marcadas</span></div>
+    <div class="memory-toolbar"><div class="memory-tabs" role="group" aria-label="Elegir lista por tarea"><button type="button" data-task="t1" class="active" aria-pressed="true">Tâche 1 · mensajes</button><button type="button" data-task="t2" aria-pressed="false">Tâche 2 · experiencias</button><button type="button" data-task="t3" aria-pressed="false">Tâche 3 · opinión</button></div><button type="button" id="memory-toggle" class="memory-toggle" aria-pressed="false">Ocultar francés para recordar</button></div>
+    <p class="memory-intro" id="memory-intro"></p><p class="memory-source" id="memory-source"></p>
+    <div class="memory-grid"><div class="memory-panel"><h3>12 verbos de alto uso</h3><p>Memoriza el verbo con su preposición y una frase breve.</p><div id="memory-verbs" class="memory-list"></div></div><div class="memory-panel"><h3>8 adjetivos seguros</h3><p>Memoriza el femenino y el plural con un nombre.</p><div id="memory-adjectives" class="memory-list"></div></div></div>
+    <div class="grammar-map"><h3>Passé composé + imparfait cuando narras en T2</h3><div class="grammar-columns"><p><strong>Imparfait = escenario o hábito.</strong> ¿Cómo era la situación? ¿Qué pasaba habitualmente? <em>Il y avait beaucoup de monde. L’ambiance était chaleureuse.</em></p><p><strong>Passé composé = hechos terminados.</strong> ¿Qué ocurrió y qué hiciste después? <em>J’ai participé à l’atelier. Nous avons rencontré un problème.</em></p></div><p><strong>Juntos:</strong> <em>L’ambiance était chaleureuse et nous avons commencé l’activité à neuf heures.</em> Primero describes el fondo; luego cuentas el hecho. El marcador temporal por sí solo no decide el tiempo.</p><div class="memory-drills"><button type="button" data-drill="pastChoice">Practicar 12 contrastes de pasado</button><button type="button" data-drill="demo">Practicar ce/cet/cette/ces</button><button type="button" data-drill="agree">Practicar género y acuerdo</button><button type="button" data-drill="subject">Practicar plural del verbo</button></div></div>
+    <p class="memory-note">T1 y T2 pueden pedir otros tipos de texto: adapta la lista a la consigna y al destinatario. Algunos modelos del PDF superan sus propios límites de palabras. Esta lista es práctica personal, no una promesa de nota.</p>
+  </section>
 
   <!-- Guide: Cómo pasar de 9 a 13 en cada Tâche -->
   <div class="strategy-section" id="strategySection">
@@ -983,7 +1011,10 @@
     function onCategoryChange(cat) {
       state.category = cat;
       state.currentIndex = 0;
-      document.getElementById('btnErrToggle').classList.remove('active');
+      const errorButton = document.getElementById('btnErrToggle');
+      errorButton.classList.remove('active');
+      errorButton.setAttribute('aria-pressed', 'false');
+      errorButton.setAttribute('aria-label', 'Abrir errores guardados');
       document.getElementById('categorySelect').value = cat;
       rebuildDeck();
       renderCard();
@@ -995,10 +1026,14 @@
       } else {
         state.category = 'errors';
         state.currentIndex = 0;
-        document.getElementById('btnErrToggle').classList.add('active');
+        const errorButton = document.getElementById('btnErrToggle');
+        errorButton.classList.add('active');
+        errorButton.setAttribute('aria-pressed', 'true');
+        errorButton.setAttribute('aria-label', 'Salir de errores guardados');
         rebuildDeck();
         renderCard();
       }
+      document.querySelector('.flashcard').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function rebuildDeck() {
