@@ -384,14 +384,14 @@
   <!-- Clean Controls (Single Dropdown + Error Toggle, zero side-scrolling) -->
   <div class="controls-deck">
     <select id="categorySelect" class="dropdown-select" onchange="onCategoryChange(this.value)">
-      <option value="all">🌟 Mix Total (129 items)</option>
+      <option value="all">🌟 Mix Total (132 items)</option>
       <option value="genre">♂️♀️ Género: Falsos amigos (un / une)</option>
       <option value="accents">🎯 Acentos & Cedillas (é, è, ê, à, ç, û...)</option>
       <option value="conj">🔀 Conjugación Clave: Subjuntivo, Condicional & Acuerdos (32)</option>
       <option value="contractions">🔗 Contracciones en Contexto: au, du, aux, des...</option>
       <option value="demonstratif">👉 Demostrativos: Ce / Cet / Cette / Ces</option>
       <option value="accords">🎭 Acuerdos Nominales: un/une + adjetivo</option>
-      <option value="antirepetition">🚀 Vocabulario C1 Anti-repetición</option>
+      <option value="antirepetition">🎯 Vocabulario B2 (12-13): Anti-repetición</option>
     </select>
     <button class="btn-err-toggle" id="btnErrToggle" onclick="toggleErrorMode()">
       🚨 Errores (<span id="errCountBadge">0</span>)
@@ -402,7 +402,7 @@
   <div class="flashcard">
     <div class="card-top" id="cardTop">
       <span class="badge-cat" id="badgeCat">GENRE</span>
-      <span id="counterProgress">1 / 129</span>
+      <span id="counterProgress">1 / 132</span>
     </div>
 
     <!-- Active Card Content -->
@@ -598,16 +598,19 @@
       { id:"ct19", cat:"contractions", badge:"Contraction", target:"S'OPPOSER  [ ... ]  projet", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au projet"], rule:"💡 <strong>s'opposer À :</strong> 'Projet' es masculino ➔ <em>s'opposer <strong>au</strong> projet</em>." },
       { id:"ct20", cat:"contractions", badge:"Contraction", target:"SE RENDRE  [ ... ]  travail", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au travail"], rule:"💡 <strong>se rendre À :</strong> 'Travail' es masculino ➔ <em>se rendre <strong>au</strong> travail</em>." },
 
-      // 7. ANTI-RÉPÉTITION C1
-      { id:"ar1", cat:"antirepetition", badge:"C1 Vocab", target:"FAIRE DES PROBLÈMES", sub:"Verbe C1 équivalent (infinitif) :", ans:["engendrer"], rule:"💡 <strong>engendrer :</strong> Sustituye a <em>faire des problèmes</em>: <em>engendrer des tensions</em>." },
-      { id:"ar2", cat:"antirepetition", badge:"C1 Vocab", target:"FAIRE DU MAL À", sub:"Verbe C1 équivalent (infinitif) :", ans:["nuire"], rule:"💡 <strong>nuire à :</strong> Sustituye a <em>faire du mal</em>: <em>nuire au bien-être</em>." },
-      { id:"ar3", cat:"antirepetition", badge:"C1 Vocab", target:"LE DOCUMENT DIT QUE", sub:"Verbe C1 (3ª sing. présent) :", ans:["souligne"], rule:"💡 <strong>souligne :</strong> En vez de <em>le texte dit</em>, usa <em>le document souligne</em>." },
-      { id:"ar4", cat:"antirepetition", badge:"C1 Vocab", target:"SE FAIRE DES AMIS", sub:"Verbe C1 (infinitif) :", ans:["tisser"], rule:"💡 <strong>tisser des liens :</strong> Sustituye a <em>se faire des amis</em>." },
-      { id:"ar5", cat:"antirepetition", badge:"C1 Vocab", target:"SE REPOSER LOIN", sub:"Verbe C1 (infinitif) :", ans:["ressourcer","se ressourcer"], rule:"💡 <strong>se ressourcer :</strong> Verbo culto de relax en la Tâche 2." },
-      { id:"ar6", cat:"antirepetition", badge:"C1 Vocab", target:"EST UN GROS PROBLÈME", sub:"Nom C1 masculin (un ... majeur) :", ans:["enjeu"], rule:"💡 <strong>un enjeu majeur :</strong> Reemplaza a <em>un gros problème</em>." },
-      { id:"ar7", cat:"antirepetition", badge:"C1 Vocab", target:"TRÈS BON POUR", sub:"Adjectif C1 équivalent :", ans:["bénéfique"], rule:"💡 <strong>bénéfique :</strong> Sustituye a <em>très bon</em> en ensayos." },
-      { id:"ar8", cat:"antirepetition", badge:"C1 Vocab", target:"TRÈS MAUVAIS POUR", sub:"Adjectif C1 équivalent :", ans:["néfaste"], rule:"💡 <strong>néfaste :</strong> Opuesto de <em>bénéfique</em>." },
-      { id:"ar9", cat:"antirepetition", badge:"C1 Vocab", target:"TRÈS IMPORTANT (fém.)", sub:"Adjectif C1 au féminin :", ans:["primordiale"], rule:"💡 <strong>primordiale :</strong> Sustituye a <em>très importante</em>." }
+      // 7. VOCABULAIRE NATUREL B2 (12-13) : ANTI-RÉPÉTITION
+      { id:"ar1", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"FAIRE DES PROBLÈMES", sub:"Verbo natural B2 (en vez de 'faire des problèmes') :", ans:["engendrer","créer","poser","créer des problèmes","poser problème"], rule:"💡 <strong>créer des problèmes / poser problème / engendrer :</strong> Mucho más limpio y natural en el examen." },
+      { id:"ar2", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"FAIRE DU MAL À", sub:"Verbo natural B2 (nuire ...) :", ans:["nuire","nuire à"], rule:"💡 <strong>nuire à :</strong> Expresión estándar B2 para ensayos: <em>nuire au bien-être / à la santé</em>." },
+      { id:"ar3", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"LE TEXTE DIT QUE", sub:"Verbo natural B2 (3ª sing. présent) :", ans:["souligne","indique","précise","évoque"], rule:"💡 <strong>souligne / indique / précise :</strong> Para resumir documentos en la Tâche 3 sin repetir 'dit'." },
+      { id:"ar4", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"SE FAIRE DES AMIS", sub:"Expresión natural B2 (... des liens) :", ans:["tisser","nouer","tisser des liens","nouer des liens"], rule:"💡 <strong>tisser / nouer des liens :</strong> Frase hecha indispensable en cartas y relatos de convivencia." },
+      { id:"ar5", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"DÉCONNECTER / SE REPOSER", sub:"Verbo reflexivo natural B2 (se ...) :", ans:["se ressourcer","ressourcer","se détendre","détendre"], rule:"💡 <strong>se ressourcer / se détendre :</strong> Perfecto para narrar viajes o fines de semana en la Tâche 2." },
+      { id:"ar6", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"UN GROS PROBLÈME", sub:"Sustantivo masculino B2 (un ... majeur / actuel) :", ans:["enjeu","défi","un enjeu","un défi"], rule:"💡 <strong>un enjeu / un défi majeur :</strong> Sustituye de forma elegante y sobria a 'un gros problème'." },
+      { id:"ar7", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"TRÈS BON / POSITIF", sub:"Adjetivo natural B2 (un impact ...) :", ans:["bénéfique","favorable","positif","avantageux"], rule:"💡 <strong>bénéfique / favorable :</strong> Adjetivo sobrio de B2 para defender ventajas en ensayos." },
+      { id:"ar8", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"TRÈS MAUVAIS / NÉGATIF", sub:"Adjetivo natural B2 (un effet ...) :", ans:["néfaste","nuisible","négatif"], rule:"💡 <strong>néfaste / nuisible :</strong> Expresa consecuencias negativas sin caer en exageraciones." },
+      { id:"ar9", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"TRÈS IMPORTANTE (fém.)", sub:"Adjetivo natural B2 al femenino :", ans:["essentielle","primordiale","indispensable"], rule:"💡 <strong>essentielle / primordiale :</strong> Ideal para valorar medidas y soluciones propuestas." },
+      { id:"ar10", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"METTRE UNE NOUVELLE RÈGLE", sub:"Verbo natural B2 (adop... / instau... une règle) :", ans:["adopter","instaurer","mettre en place"], rule:"💡 <strong>adopter / instaurer une règle :</strong> Estilo institucional limpio para propuestas y recomendaciones." },
+      { id:"ar11", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"AVOIR DES BONS EFFETS", sub:"Expresión natural B2 (avoir un ... positif) :", ans:["impact","un impact"], rule:"💡 <strong>avoir un impact positif :</strong> Mucho más profesional que 'avoir des bons effets'." },
+      { id:"ar12", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"EXPLIQUER ET ALERTER LES GENS", sub:"Verbo clave B2 de soluciones (sensi... le public) :", ans:["sensibiliser"], rule:"💡 <strong>sensibiliser le public :</strong> El verbo clásico de conclusión y propuestas ciudadanas en el TCF." }
     ];
 
     const STORAGE_KEY = 'tcf_ee_flash_v4';
