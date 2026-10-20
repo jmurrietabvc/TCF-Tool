@@ -3,31 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entraîneur Vocabulaire & Conjugaison · TCF Canada (100% Basé sur le Recueil 2026)</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <title>TCF EE — Flash Drill Mot par Mot & Grammaire 10+</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #080c14;
-      --surface: #121929;
-      --surface-hover: #192338;
-      --card: #151e32;
-      --border: #23304c;
-      --primary: #f59e0b;
-      --primary-glow: rgba(245, 158, 11, 0.2);
-      --accent-blue: #38bdf8;
-      --accent-purple: #a855f7;
+      --bg: #07090e;
+      --surface: #0f1420;
+      --card: #151c2c;
+      --card-hover: #1c253a;
+      --border: #232e44;
+      --border-focus: #38bdf8;
       --text: #f1f5f9;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-      --success: #10b981;
-      --danger: #ef4444;
-      --wrong: #ef4444;
-      --font-ui: "Plus Jakarta Sans", -apple-system, sans-serif;
-      --font-serif: "Newsreader", Georgia, serif;
-      --font-mono: "JetBrains Mono", monospace;
+      --gold: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.18);
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.15);
+      --green: #10b981;
+      --green-glow: rgba(16, 185, 129, 0.2);
+      --red: #ef4444;
+      --red-glow: rgba(239, 68, 68, 0.2);
+      --purple: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,533 +34,315 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font-ui);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
       line-height: 1.5;
-      padding-bottom: 80px;
+      padding-bottom: 70px;
       -webkit-font-smoothing: antialiased;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.07) 0px, transparent 50%),
         radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.06) 0px, transparent 50%);
     }
 
-    /* Scrollbars */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #334155; }
-
-    /* Header */
+    /* Top Navigation */
     header {
-      background: rgba(18, 25, 41, 0.85);
+      background: rgba(15, 20, 32, 0.88);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 12px 28px;
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 100;
-    }
-
-    .brand-group {
-      display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 12px;
     }
 
-    .brand-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #10b981, #047857);
+    .brand-wrap {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
     }
-
+    .brand-icon {
+      font-size: 20px;
+      background: var(--cyan-glow);
+      border: 1px solid var(--cyan);
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
     .brand-text h1 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.3px;
-      color: #ffffff;
+    }
+    .brand-text h1 span { color: var(--gold); }
+    .brand-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--green);
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-left: 6px;
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .brand-tag {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 6px;
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--primary);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      letter-spacing: 0.5px;
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .header-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-btn-link {
+    .btn-nav {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 8px;
       font-size: 12.5px;
       font-weight: 600;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover {
+      background: var(--card);
+      color: #fff;
+      border-color: var(--gold);
     }
 
-    .nav-btn-link:hover {
-      background: var(--surface-hover);
-      color: #ffffff;
-      border-color: var(--accent-blue);
-    }
-
-    /* Container */
+    /* Main Container */
     .app-main {
-      max-width: 1260px;
-      margin: 18px auto;
-      padding: 0 20px;
+      max-width: 860px;
+      margin: 24px auto;
+      padding: 0 18px;
     }
 
-    /* Hero / Trap Analysis Banner */
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--success);
-      border-radius: 14px;
-      padding: 16px 22px;
-      margin-bottom: 18px;
+    /* Stats Banner */
+    .top-stats-strip {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .hero-text h2 {
-      font-size: 15.5px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-text p {
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 780px;
-      line-height: 1.5;
-    }
-
-    .hero-text strong {
-      color: #ffffff;
-    }
-
-    .hero-stats {
-      display: flex;
-      align-items: center;
       gap: 12px;
     }
-
-    .stat-pill {
-      background: rgba(13, 19, 32, 0.8);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 14px;
-      text-align: center;
-      min-width: 85px;
+    .stats-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
-
-    .stat-pill.error-pill {
-      border-color: rgba(239, 68, 68, 0.35);
-      background: rgba(239, 68, 68, 0.08);
+    .stat-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stat-badge strong {
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+      font-size: 15px;
+    }
+    .stat-badge.errors {
+      color: #f87171;
       cursor: pointer;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
       transition: all 0.2s;
     }
+    .stat-badge.errors:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
 
-    .stat-pill.error-pill:hover {
+    /* Category Pill Selector */
+    .categories-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    .cat-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .cat-btn:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+    .cat-btn.active {
+      background: var(--cyan-glow);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+    }
+    .cat-btn.color-error {
+      border-color: rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+    .cat-btn.color-error.active {
       background: rgba(239, 68, 68, 0.15);
-      border-color: var(--danger);
-      transform: translateY(-1px);
-    }
-
-    .stat-val {
-      font-size: 18px;
-      font-weight: 800;
-      font-family: var(--font-mono);
-      color: var(--success);
-    }
-
-    .stat-val.error-val {
+      border-color: var(--red);
       color: #f87171;
     }
 
-    .stat-lbl {
-      font-size: 10px;
-      color: var(--text-dim);
+    /* The Flash Drill Arena */
+    .drill-arena {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Card Header Meta */
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .meta-badge {
+      font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      padding: 4px 10px;
+      border-radius: 6px;
     }
-
-    /* Source Provenance Banner */
-    .provenance-bar {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      border-radius: 10px;
-      padding: 10px 16px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 12.5px;
-      color: #cbd5e1;
-    }
-
-    .provenance-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .progress-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dim);
       font-weight: 700;
-      color: #34d399;
     }
 
-    /* Control Deck (Modes & Categories) */
-    .deck-container {
+    /* Big Target Box (No long sentence!) */
+    .target-box {
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 24px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .target-word {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .target-word span.highlight {
+      color: var(--gold);
+    }
+    .target-instruction {
+      font-size: 14px;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* Typing Input Area */
+    .input-zone {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .mode-tabs {
-      display: flex;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 4px;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .mode-btn {
-      flex: 1;
-      min-width: 170px;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-family: var(--font-ui);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .mode-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .mode-btn.active {
-      background: var(--card);
-      color: #ffffff;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .mode-btn.active.color-vocab {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .mode-btn.active.color-conj {
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
-    }
-
-    .mode-btn.active.color-combo {
-      border-color: var(--success);
-      color: var(--success);
-    }
-
-    .mode-btn.color-errors {
-      color: #fca5a5;
-    }
-
-    .mode-btn.active.color-errors {
-      background: rgba(239, 68, 68, 0.15);
-      border-color: var(--danger);
-      color: #ffffff;
-    }
-
-    .cat-strip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .cat-pill {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 5px 13px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s;
-    }
-
-    .cat-pill:hover {
-      color: #ffffff;
-      border-color: var(--text-muted);
-    }
-
-    .cat-pill.active {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent-blue);
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    /* Drill Arena */
-    .arena-grid {
-      display: grid;
-      grid-template-columns: 1.45fr 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .drill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      position: relative;
-    }
-
-    .drill-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 14px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .drill-badge-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .badge-task {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--primary);
-      border: 1px solid rgba(245, 158, 11, 0.3);
-    }
-
-    .badge-tense {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
-
-    .badge-pdf-source {
-      font-size: 10.5px;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .drill-counter {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-dim);
-    }
-
-    /* Prompt Box */
-    .prompt-box {
-      background: #090e17;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 20px;
-      font-family: var(--font-serif);
-      font-size: 18.5px;
-      line-height: 1.85;
-      color: #f8fafc;
-    }
-
-    .prompt-box em {
-      color: var(--primary);
-      font-style: normal;
-      font-weight: 700;
-    }
-
-    .prompt-gap {
-      display: inline-block;
-      min-width: 140px;
-      padding: 0 4px;
-      border-bottom: 2px solid var(--accent-blue);
-      color: var(--accent-blue);
-      font-family: var(--font-mono);
-      font-weight: 700;
-      text-align: center;
-      font-size: 18px;
-    }
-
-    /* Input & Options Area */
-    .interaction-area {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
       margin-bottom: 20px;
     }
-
-    .text-input-wrap {
+    .input-row {
       display: flex;
       gap: 10px;
     }
-
-    .drill-input {
+    .flash-input {
       flex: 1;
-      background: #0a0f1b;
+      background: #090d15;
       border: 2px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
       color: #ffffff;
-      font-family: var(--font-ui);
-      font-size: 16px;
-      font-weight: 600;
-      padding: 12px 16px;
       outline: none;
       transition: all 0.2s;
     }
-
-    .drill-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    .flash-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
     }
-
-    .drill-input.correct {
-      border-color: var(--success);
+    .flash-input.correct {
+      border-color: var(--green);
       background: rgba(16, 185, 129, 0.08);
       color: #34d399;
     }
-
-    .drill-input.wrong {
-      border-color: var(--danger);
+    .flash-input.wrong {
+      border-color: var(--red);
       background: rgba(239, 68, 68, 0.08);
       color: #f87171;
     }
 
-    .options-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .opt-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: #cbd5e1;
-      font-family: var(--font-ui);
-      font-size: 14px;
-      font-weight: 600;
-      text-align: left;
+    .btn-submit {
+      background: var(--cyan);
+      color: #0b0f19;
+      border: none;
+      border-radius: 12px;
+      padding: 0 24px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.15s;
+      transition: all 0.2s;
+    }
+    .btn-submit:hover {
+      background: #7dd3fc;
+      transform: translateY(-1px);
     }
 
-    .opt-btn:hover {
-      background: var(--surface-hover);
-      border-color: var(--accent-blue);
-      color: #ffffff;
-    }
-
-    .opt-btn.correct {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: var(--success);
-      color: #34d399;
-      font-weight: 700;
-    }
-
-    .opt-btn.wrong {
-      background: rgba(239, 68, 68, 0.15);
-      border-color: var(--danger);
-      color: #f87171;
-    }
-
-    /* Accent dock */
+    /* Accents Bar */
     .accents-dock {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
+      align-items: center;
     }
-
+    .accent-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-right: 4px;
+    }
     .accent-key {
       background: var(--card);
       border: 1px solid var(--border);
       color: #cbd5e1;
-      font-family: var(--font-ui);
+      font-family: inherit;
       font-weight: 700;
       font-size: 13px;
       padding: 5px 11px;
@@ -569,475 +350,220 @@
       cursor: pointer;
       transition: all 0.15s;
     }
-
     .accent-key:hover {
-      background: var(--surface-hover);
-      border-color: var(--accent-blue);
-      color: #ffffff;
+      border-color: var(--cyan);
+      color: #fff;
+      background: var(--card-hover);
     }
 
-    /* Feedback Card */
+    /* Feedback Display */
     .feedback-box {
-      background: #090e17;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      margin-top: 20px;
+      border-radius: 12px;
+      padding: 16px 18px;
       display: none;
-      animation: fadeIn 0.25s ease;
+      animation: fadeIn 0.2s ease;
     }
-
     .feedback-box.show { display: block; }
+    .feedback-box.correct {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .feedback-box.wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
 
     .fb-title {
-      font-size: 13.5px;
+      font-size: 15px;
       font-weight: 800;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .feedback-box.correct {
-      border-color: rgba(16, 185, 129, 0.35);
-      background: rgba(16, 185, 129, 0.05);
+    .fb-diagnosis {
+      margin: 8px 0;
+      font-size: 13.5px;
+      line-height: 1.5;
     }
-    .feedback-box.correct .fb-title { color: #34d399; }
-
-    .feedback-box.wrong {
-      border-color: rgba(239, 68, 68, 0.35);
-      background: rgba(239, 68, 68, 0.05);
-    }
-    .feedback-box.wrong .fb-title { color: #f87171; }
-
     .fb-rule {
       font-size: 13px;
       color: #cbd5e1;
-      line-height: 1.55;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .fb-example {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 8px;
     }
 
-    .fb-rule strong {
-      color: #ffffff;
-    }
-
-    .action-row {
+    .fb-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 18px;
+      margin-top: 14px;
       flex-wrap: wrap;
       gap: 10px;
     }
-
-    .btn-submit {
-      background: linear-gradient(135deg, var(--accent-blue), #0284c7);
-      color: #ffffff;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-submit:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
-    }
-
     .btn-next {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: #0b0f17;
+      background: #ffffff;
+      color: #0b0f19;
       border: none;
-      padding: 10px 24px;
+      padding: 9px 20px;
       border-radius: 8px;
       font-size: 13.5px;
       font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-
-    .btn-next:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
-    }
-
-    .btn-resolve-error {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: var(--success);
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-resolve-error:hover {
-      background: rgba(16, 185, 129, 0.25);
-    }
-
-    /* Empty State for Errors */
-    .empty-state-card {
-      background: var(--card);
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .empty-icon { font-size: 42px; margin-bottom: 12px; }
-    .empty-title { font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
-    .empty-desc { font-size: 13px; color: var(--text-muted); max-width: 480px; margin: 0 auto 18px auto; }
-
-    /* Right Side Reference & Master List */
-    .sidebar-pane {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .ref-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .ref-title {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .ref-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 380px;
-      overflow-y: auto;
-    }
-
-    .ref-crutch {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      padding: 6px 8px;
-      border-radius: 6px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .ref-crutch .bad {
-      color: #f87171;
-      text-decoration: line-through;
-    }
-
-    .ref-crutch .good {
-      color: #34d399;
-      font-weight: 700;
-    }
-
-    .ref-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 12.5px;
-    }
-
-    .ref-item-head {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      color: var(--accent-blue);
-      margin-bottom: 2px;
-    }
-
-    .ref-item-sub {
-      color: var(--text-muted);
-      font-size: 11.5px;
-    }
-
-    /* Error Manager Header */
-    .error-ctrl-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 14px;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      border-radius: 8px;
-      margin-bottom: 16px;
-    }
-
-    .btn-clear-errors {
-      background: transparent;
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #f87171;
-      padding: 5px 12px;
-      border-radius: 6px;
-      font-size: 11.5px;
-      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s;
     }
-
-    .btn-clear-errors:hover {
-      background: rgba(239, 68, 68, 0.2);
+    .btn-next:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
     }
+    .btn-resolve {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .empty-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .empty-desc { font-size: 13px; color: var(--text-muted); max-width: 440px; margin: 0 auto 16px; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 960px) {
-      .arena-grid { grid-template-columns: 1fr; }
-      .sidebar-pane { order: 2; }
+    @media (max-width: 640px) {
+      .drill-arena { padding: 20px 16px; }
+      .target-word { font-size: 22px; }
+      .input-row { flex-direction: column; }
+      .btn-submit { padding: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOPBAR -->
+  <!-- Top Navigation Header -->
   <header>
-    <div class="brand-group">
-      <div class="brand-logo">🎯</div>
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-icon">⚡</div>
       <div class="brand-text">
-        <h1>Entraîneur Vocabulaire & Conjugaison <span class="brand-tag">100% Recueil 2026</span></h1>
-        <div class="brand-sub">Phrases authentiques extraites des 76 Sujets Officiels & 228 Corrigés Types</div>
+        <h1>Flash Drill <span>10+</span> Mot par Mot <span class="brand-tag">Écriture Directe</span></h1>
       </div>
-    </div>
-    <div class="header-links">
-      <a href="fiches-10plus.html" class="nav-btn-link" style="border-color: var(--primary); color: var(--primary);"><span>📑</span> Fiches 10+ par Tâche</a>
-      <a href="squelette-atelier.html" class="nav-btn-link"><span>⚡</span> Atelier Squelette</a>
-      <a href="ecrivance.html" class="nav-btn-link"><span>✍️</span> Cahier Écrivance</a>
-      <a href="index.html" class="nav-btn-link"><span>🏠</span> Hub</a>
+    </a>
+    <div class="nav-links">
+      <a href="fiches-10plus.html" class="btn-nav">📑 Fiches Mémorisation</a>
+      <a href="squelette-atelier.html" class="btn-nav">🦴 Squelette Atelier</a>
+      <a href="index.html" class="btn-nav">🏠 Hub</a>
     </div>
   </header>
 
   <div class="app-main">
 
-    <!-- HERO / GOAL 10+ BANNER -->
-    <div class="hero-banner">
-      <div class="hero-text">
-        <h2><span>📖</span> Vocabulaire & Verbes C1 basés à 100% sur le Recueil 2026</h2>
-        <p>
-          Chaque question est une <strong>phrase authentique extraite mot pour mot des 228 corrigés officiels du livre PDF</strong>. 
-          En maîtrisant ces tournures, tu acquiers le lexique exact récompensé par les évaluateurs pour franchir le cap de <strong>10/20 (NCLC 7)</strong> et viser <strong>12-13 (NCLC 8)</strong>.
-        </p>
+    <!-- Top Counter Strip -->
+    <div class="top-stats-strip">
+      <div class="stats-group">
+        <div class="stat-badge">Réussites: <strong id="stat-score">0</strong></div>
+        <div class="stat-badge">Série: <strong id="stat-streak">0 🔥</strong></div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-pill">
-          <div class="stat-val" id="stat-score">0</div>
-          <div class="stat-lbl">Réussites</div>
-        </div>
-        <div class="stat-pill">
-          <div class="stat-val" id="stat-streak">0 🔥</div>
-          <div class="stat-lbl">Série</div>
-        </div>
-        <div class="stat-pill error-pill" onclick="switchMode('errors')" title="Cliquez pour réviser uniquement vos fautes">
-          <div class="stat-val error-val" id="stat-errors-count">0</div>
-          <div class="stat-lbl">Erreurs (Recycler)</div>
+      <div class="stats-group">
+        <div class="stat-badge errors" onclick="switchCategory('errors')" title="Cliquer pour réviser uniquement les erreurs">
+          🚨 Banque d'erreurs: <strong id="stat-errors-count">0</strong>
         </div>
       </div>
     </div>
 
-    <!-- PROVENANCE CITATION -->
-    <div class="provenance-bar">
-      <div>
-        <span class="provenance-tag"><span>📚</span> Corpus Certifié :</span>
-        76 combinaisons complètes · 228 tâches rédigées aux standards NCLC 7 / NCLC 9 (Janvier à Octobre 2026).
-      </div>
-      <div style="font-size:11.5px; color:var(--text-dim);">
-        Sauvegarde automatique des erreurs dans le navigateur (localStorage).
-      </div>
+    <!-- Category Selector Tabs -->
+    <div class="categories-bar">
+      <button class="cat-btn active" onclick="switchCategory('all')">🌟 Tout (Mix Rapide)</button>
+      <button class="cat-btn" onclick="switchCategory('genre')">♂️♀️ Genre (Un / Une · Le / La)</button>
+      <button class="cat-btn" onclick="switchCategory('demonstratif')">👉 Ce / Cet / Cette / Ces</button>
+      <button class="cat-btn" onclick="switchCategory('accords')">🎭 Féminins & Pluriels</button>
+      <button class="cat-btn" onclick="switchCategory('conj')">🔀 Conjugaisons 10+ (Subjonctif...)</button>
+      <button class="cat-btn" onclick="switchCategory('contractions')">🔗 Contractions (au, du, aux...)</button>
+      <button class="cat-btn" onclick="switchCategory('antirepetition')">🚀 Vocab C1 Anti-Répétition</button>
+      <button class="cat-btn color-error" onclick="switchCategory('errors')">🚨 Banque d'erreurs (<span id="tab-err-badge">0</span>)</button>
     </div>
 
-    <!-- CONTROL DECK -->
-    <div class="deck-container">
-      <div class="mode-tabs">
-        <button class="mode-btn active color-vocab" id="btn-mode-vocab" onclick="switchMode('vocab')">
-          <span>📚</span> Mode 1 : Vocabulaire C1 du Recueil
-        </button>
-        <button class="mode-btn color-conj" id="btn-mode-conj" onclick="switchMode('conj')">
-          <span>🔀</span> Mode 2 : Subjonctif & Grammaire 10+ du Recueil
-        </button>
-        <button class="mode-btn color-combo" id="btn-mode-combo" onclick="switchMode('combo')">
-          <span>⚡</span> Mode 3 : Le Grand Mix 2026
-        </button>
-        <button class="mode-btn color-errors" id="btn-mode-errors" onclick="switchMode('errors')">
-          <span>🚨</span> Banque d'erreurs (<span id="errors-tab-badge">0</span>)
-        </button>
+    <!-- The Drill Card Arena -->
+    <div class="drill-arena" id="arenaBox">
+
+      <!-- Card Meta Header -->
+      <div class="card-meta">
+        <span class="meta-badge" id="cardBadge">Genre du Nom · Faux ami</span>
+        <span class="progress-pill" id="cardProgress">Item 1 / 66</span>
       </div>
 
-      <div class="cat-strip" id="cat-strip-container">
-        <!-- Injected via JS according to mode -->
-      </div>
-    </div>
-
-    <!-- DRILL ARENA -->
-    <div class="arena-grid">
-      
-      <!-- LEFT: ACTIVE QUESTION CARD -->
-      <div class="drill-card" id="drill-card-main">
-        
-        <!-- Error Mode Specific Bar -->
-        <div id="error-manager-bar" class="error-ctrl-bar" style="display:none;">
-          <span style="font-size:12.5px; font-weight:700; color:#fca5a5;">
-            🚨 Session de renforcement : Tu t'entraînes uniquement sur tes erreurs enregistrées.
-          </span>
-          <button class="btn-clear-errors" onclick="clearAllErrors()">🗑️ Vider l'historique d'erreurs</button>
-        </div>
-
-        <div class="drill-header">
-          <div class="drill-badge-group">
-            <span class="badge-pdf-source" id="card-source-badge">Sujet #1 · Janvier 2026</span>
-            <span class="badge-task" id="card-task-badge">Tâche 3 · Débat</span>
-            <span class="badge-tense" id="card-type-badge">Verbe C1</span>
-          </div>
-          <span class="drill-counter" id="card-progress">Question 1 / 15</span>
-        </div>
-
-        <!-- The Sentence to Solve -->
-        <div class="prompt-box" id="card-prompt">
-          <!-- Text with highlighted blank -->
-        </div>
-
-        <!-- Interaction Area -->
-        <div class="interaction-area">
-          <div id="input-mode-text" class="text-input-wrap">
-            <input type="text" class="drill-input" id="answer-input" placeholder="Tapez la réponse exacte issue du corrigé officiel..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter') submitAnswer()">
-            <button class="btn-submit" onclick="submitAnswer()">Valider</button>
-          </div>
-
-          <!-- Multiple choice alternatives if applicable -->
-          <div class="options-grid" id="options-grid" style="display:none;"></div>
-
-          <!-- French Accent Dock -->
-          <div class="accents-dock">
-            <span style="font-size:11px; color:var(--text-dim); display:flex; align-items:center;">Accents rapides :</span>
-            <button class="accent-key" onclick="insertAccent('é')">é</button>
-            <button class="accent-key" onclick="insertAccent('è')">è</button>
-            <button class="accent-key" onclick="insertAccent('ê')">ê</button>
-            <button class="accent-key" onclick="insertAccent('à')">à</button>
-            <button class="accent-key" onclick="insertAccent('â')">â</button>
-            <button class="accent-key" onclick="insertAccent('ç')">ç</button>
-            <button class="accent-key" onclick="insertAccent('ù')">ù</button>
-            <button class="accent-key" onclick="insertAccent('î')">î</button>
-            <button class="accent-key" onclick="insertAccent('ï')">ï</button>
-            <button class="accent-key" onclick="insertAccent('ô')">ô</button>
-            <button class="accent-key" onclick="insertAccent('û')">û</button>
-            <button class="accent-key" onclick="insertAccent('œ')">œ</button>
-          </div>
-        </div>
-
-        <!-- Feedback & Explanation Box -->
-        <div class="feedback-box" id="feedback-panel">
-          <div class="fb-title" id="fb-title">Explication</div>
-          <div class="fb-rule" id="fb-rule">Règle d'or pour le TCF</div>
-          <div class="action-row">
-            <div id="resolve-error-btn-wrap" style="display:none;">
-              <button class="btn-resolve-error" onclick="markCurrentErrorResolved()">
-                ✅ Marquer comme assimilée (Retirer des erreurs)
-              </button>
-            </div>
-            <span style="font-size:12px; color:var(--text-muted);" id="fb-example"></span>
-            <button class="btn-next" onclick="nextQuestion()">Suivant ➔</button>
-          </div>
-        </div>
-
-        <!-- Empty state when error bank is empty -->
-        <div id="error-empty-state" class="empty-state-card" style="display:none;">
-          <div class="empty-icon">🎉</div>
-          <div class="empty-title">Aucune erreur en attente !</div>
-          <div class="empty-desc">
-            Tu as assimilé toutes les notions du recueil 2026. Continue de t'entraîner sur les modes réguliers pour renforcer ta vitesse d'écriture.
-          </div>
-          <button class="btn-submit" onclick="switchMode('vocab')">Revenir au Mode 1</button>
-        </div>
-
+      <!-- The Big Isolated Target (No sentences!) -->
+      <div class="target-box" id="targetBox">
+        <div class="target-word" id="targetWord">PROBLÈME</div>
+        <div class="target-instruction" id="targetInstruction">🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')</div>
       </div>
 
-      <!-- RIGHT: REPERTOIRE DU RECUEIL 2026 -->
-      <div class="sidebar-pane">
-        
-        <div class="ref-card">
-          <div class="ref-title">
-            <span>🛡️ Verbes C1 Récurrents du Recueil</span>
-            <span style="font-size:11px; color:var(--primary);">Corrigés 2026</span>
-          </div>
-          <div class="ref-list">
-            <div class="ref-crutch">
-              <span class="bad">aide à apprendre</span> ➔ <span class="good">favorise l'apprentissage (Sujet #1)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">était mal organisée</span> ➔ <span class="good">laissait à désirer (Sujet #2)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">fait du mal à</span> ➔ <span class="good">se fait au détriment de (Sujet #16)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">je propose de</span> ➔ <span class="good">je préconise de combiner (Sujet #17)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">font des problèmes</span> ➔ <span class="good">engendrent des tensions (Sujet #24)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">est un gros problème</span> ➔ <span class="good">constitue un enjeu majeur (Sujet #6)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">se faire des amis</span> ➔ <span class="good">tisser des liens forts (Sujet #6)</span>
-            </div>
-            <div class="ref-crutch">
-              <span class="bad">se reposer</span> ➔ <span class="good">se ressourcer loin de la ville (Sujet #18)</span>
-            </div>
-          </div>
+      <!-- Typing Input -->
+      <div class="input-zone" id="inputZone">
+        <div class="input-row">
+          <input type="text" id="drillInput" class="flash-input" placeholder="Écris la réponse exacte..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="handleKey(event)">
+          <button class="btn-submit" onclick="submitFlashAnswer()">Valider</button>
         </div>
 
-        <div class="ref-card">
-          <div class="ref-title">
-            <span>👑 Subjonctifs Clés des 228 Corrigés</span>
-            <span style="font-size:11px; color:var(--accent-blue);">Automatismes</span>
-          </div>
-          <div class="ref-list">
-            <div class="ref-item">
-              <div class="ref-item-head"><span>Sujet #1 · T1</span> <code>pour que tu voies</code></div>
-              <div class="ref-item-sub">Verbe <em>voir</em> au subjonctif avec <em>tu</em>.</div>
-            </div>
-            <div class="ref-item">
-              <div class="ref-item-head"><span>Sujet #2 · T1</span> <code>afin que nous puissions</code></div>
-              <div class="ref-item-sub">Verbe <em>pouvoir</em> au subjonctif avec <em>nous</em>.</div>
-            </div>
-            <div class="ref-item">
-              <div class="ref-item-head"><span>Sujet #3 · T3</span> <code>pour que cette mesure soit</code></div>
-              <div class="ref-item-sub">Verbe <em>être</em> au subjonctif de but.</div>
-            </div>
-            <div class="ref-item">
-              <div class="ref-item-head"><span>Sujet #4 · T1</span> <code>pour que vous puissiez</code></div>
-              <div class="ref-item-sub">Verbe <em>pouvoir</em> de courtoisie avec <em>vous</em>.</div>
-            </div>
-            <div class="ref-item">
-              <div class="ref-item-head"><span>Sujet #5 · T3</span> <code>afin qu'ils restent</code></div>
-              <div class="ref-item-sub">Verbe régulier <em>rester</em> au pluriel de compromis.</div>
-            </div>
-            <div class="ref-item">
-              <div class="ref-item-head"><span>Sujet #14 · T3</span> <code>pour que femmes et hommes bénéficient</code></div>
-              <div class="ref-item-sub">Subjonctif pluriel de finalité sociétale.</div>
-            </div>
-          </div>
+        <!-- French Accents Quick Bar -->
+        <div class="accents-dock">
+          <span class="accent-label">Accents :</span>
+          <button class="accent-key" onclick="insertAccent('é')">é</button>
+          <button class="accent-key" onclick="insertAccent('è')">è</button>
+          <button class="accent-key" onclick="insertAccent('ê')">ê</button>
+          <button class="accent-key" onclick="insertAccent('à')">à</button>
+          <button class="accent-key" onclick="insertAccent('â')">â</button>
+          <button class="accent-key" onclick="insertAccent('ç')">ç</button>
+          <button class="accent-key" onclick="insertAccent('ù')">ù</button>
+          <button class="accent-key" onclick="insertAccent('î')">î</button>
+          <button class="accent-key" onclick="insertAccent('ï')">ï</button>
+          <button class="accent-key" onclick="insertAccent('ô')">ô</button>
+          <button class="accent-key" onclick="insertAccent('û')">û</button>
+          <button class="accent-key" onclick="insertAccent('œ')">œ</button>
         </div>
+      </div>
 
+      <!-- Feedback Panel -->
+      <div class="feedback-box" id="feedbackPanel">
+        <div class="fb-title" id="fbTitle"></div>
+        <div class="fb-diagnosis" id="fbDiagnosis"></div>
+        <div class="fb-rule" id="fbRule"></div>
+        <div class="fb-example" id="fbExample"></div>
+
+        <div class="fb-actions">
+          <div id="resolveBtnWrap" style="display:none;">
+            <button class="btn-resolve" onclick="markAssimilated()">✅ Marquer comme assimilée</button>
+          </div>
+          <button class="btn-next" onclick="nextItem()">Suivant ➔ (Entrée)</button>
+        </div>
+      </div>
+
+      <!-- Empty State for Errors -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">🎉</div>
+        <div class="empty-title">Banque d'erreurs vide !</div>
+        <div class="empty-desc">Toutes les notions ont été assimilées avec succès. Choisis une autre catégorie pour continuer à t'entraîner.</div>
+        <button class="btn-nav" onclick="switchCategory('all')" style="display:inline-block;">🌟 Retour au mode général</button>
       </div>
 
     </div>
@@ -1045,575 +571,821 @@
   </div>
 
   <script>
-    // ══════════════════════════════════════════════════════════════════════
-    // QUESTIONS DATABASE (100% DRAWN FROM THE 228 MODEL ESSAYS OF THE PDF)
-    // ══════════════════════════════════════════════════════════════════════
-    const DATABASE_2026 = [
-      // ─────────────────────────────────────────────────────────────────
-      // SECTION 1 : VOCABULAIRE C1 & EXPRESSIONS EXACTES DU RECUEIL
-      // ─────────────────────────────────────────────────────────────────
-      {
-        id: "recueil_v1",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #1 · Janv 2026",
-        task: "Tâche 3 : Lecture & Enfants",
-        tense: "Verbe de stimulation",
-        sentence: "Lire avec son enfant favorise l'apprentissage du vocabulaire et {gap} durablement l'envie de lire chez les jeunes.",
-        trans_es: "Leer con su hijo favorece el aprendizaje del vocabulario y aumenta de forma duradera las ganas de leer en los jóvenes.",
-        hint: "Verbo que significa hacer crecer / desarrollar (3ª pers. sing.)",
-        ans: ["augmente", "développe", "renforce"],
-        options: ["fait", "augmente", "donne", "trouve"],
-        rule: "💡 <strong>Vocabulario C1:</strong> En el modelo del Sujet #1 se utiliza <em>augmente durablement l'envie de lire</em> en lugar de verbos básicos o comodines como <em>fait</em> o <em>donne envie</em>.",
-        example: "augmente durablement l'intérêt"
-      },
-      {
-        id: "recueil_v2",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #2 · Janv 2026",
-        task: "Tâche 2 : Festival de musique",
-        tense: "Formule d'insatisfaction C1",
-        sentence: "Malheureusement, mon expérience a été décevante. L'organisation {gap} à désirer : longues files d'attente et scènes trop éloignées.",
-        trans_es: "Por desgracia, mi experiencia fue decepcionante. La organización dejaba que desear: largas filas de espera y escenarios demasiado alejados.",
-        hint: "Expresión fija: laisser ... (imparfait)",
-        ans: ["laissait", "laisse"],
-        options: ["faisait", "laissait", "avait", "donnait"],
-        rule: "💡 <strong>Crítica elegante (Imparfait):</strong> La expresión fija <em>laisser à désirer</em> (dejar mucho que desear). En Tâche 2 para describir cómo era la organización se usa el Imparfait: <strong>laissait à désirer</strong>.",
-        example: "l'organisation laissait à désirer"
-      },
-      {
-        id: "recueil_v3",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #2 · Janv 2026",
-        task: "Tâche 3 : Ville ou Campagne",
-        tense: "Expression de modération",
-        sentence: "Cette diversité permet à chacun de trouver un {gap} milieu entre vie sociale et qualité de vie.",
-        trans_es: "Esta diversidad permite a cada uno encontrar un punto medio entre vida social y calidad de vida.",
-        hint: "Adjetivo para 'punto medio' equilibrado",
-        ans: ["juste"],
-        options: ["bon", "juste", "vrai", "grand"],
-        rule: "💡 <strong>Expresión de balance 10+:</strong> <em>Trouver un juste milieu</em> (encontrar un término medio o punto de equilibrio). Es la frase predilecta en Tâche 3 para concluir un debate equilibrado.",
-        example: "trouver un juste milieu"
-      },
-      {
-        id: "recueil_v4",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #3 · Janv 2026",
-        task: "Tâche 3 : Villes sans voitures",
-        tense: "Verbe d'harmonisation",
-        sentence: "Plutôt que de se limiter à l'interdiction pure et simple, un plan bien pensé permet de {gap} sécurité, accessibilité et écologie.",
-        trans_es: "En lugar de limitarse a la prohibición pura y simple, un plan bien pensado permite combinar seguridad, accesibilidad y ecología.",
-        hint: "Verbo en infinitivo que significa compaginar / asociar",
-        ans: ["combiner", "concilier"],
-        options: ["faire", "combiner", "mettre", "voir"],
-        rule: "💡 <strong>Verbo C1 de armonización:</strong> Después de <em>permet de</em> se requiere un infinitivo: <strong>combiner</strong> (o <em>concilier</em>) sustituye a construcciones infantiles como <em>faire de la sécurité</em>.",
-        example: "combiner efficacité et respect de l'environnement"
-      },
-      {
-        id: "recueil_v5",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #16 · Févr 2026",
-        task: "Tâche 3 : Vols Low-Cost",
-        tense: "Locution prépositive de préjudice",
-        sentence: "Voyager à petit prix ne devrait pas se faire au {gap} du bien-être des passagers ni de la sécurité.",
-        trans_es: "Viajar a bajo precio no debería hacerse a expensas del bienestar de los pasajeros ni de la seguridad.",
-        hint: "Locución: au ... de (en detrimento de / a expensas de)",
-        ans: ["détriment"],
-        options: ["service", "profit", "détriment", "lieu"],
-        rule: "💡 <strong>Conector C1 de perjuicio:</strong> <em>Au détriment de</em> (en detrimento de / a costa de). Eleva de inmediato el registro lingüístico frente a decir <em>sans faire mal à</em>.",
-        example: "au détriment de la qualité de vie"
-      },
-      {
-        id: "recueil_v6",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #17 · Févr 2026",
-        task: "Tâche 3 : Supermarché vs Proximité",
-        tense: "Verbe de proposition formelle",
-        sentence: "Plutôt que de choisir l'un ou l'autre systématiquement, je {gap} de combiner les deux solutions selon les besoins.",
-        trans_es: "En lugar de elegir uno u otro sistemáticamente, aconsejo/recomiendo combinar ambas soluciones según las necesidades.",
-        hint: "Verbo formal para recomendar (1ª pers. sing. en presente)",
-        ans: ["préconise", "conseille"],
-        options: ["dis", "préconise", "pense", "fais"],
-        rule: "💡 <strong>Verbo de opinión experta:</strong> <em>Préconiser</em> (recomendar formalmente / preconizar). Reemplaza al sobreutilizado <em>je pense que</em> y otorga puntuación C1.",
-        example: "je préconise d'adopter une démarche progressive"
-      },
-      {
-        id: "recueil_v7",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #20 · Févr 2026",
-        task: "Tâche 2 : Bénévolat aînés",
-        tense: "Collocation de solidarité",
-        sentence: "Ces actions bénévoles visent à {gap} l'isolement, à offrir de l'écoute et à améliorer le quotidien des personnes seules.",
-        trans_es: "Estas acciones voluntarias tienen como fin romper el aislamiento, ofrecer escucha y mejorar el día a día de las personas solas.",
-        hint: "Verbo en infinitivo que significa romper / quebrar",
-        ans: ["rompre", "briser"],
-        options: ["quitter", "rompre", "fermer", "perdre"],
-        rule: "💡 <strong>Colocación formal:</strong> <em>Rompre l'isolement</em> (romper el aislamiento social). Es la combinación léxica premiada en los ensayos sobre temas sociales.",
-        example: "rompre l'isolement social"
-      },
-      {
-        id: "recueil_v8",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #24 · Mars 2026",
-        task: "Tâche 3 : Amitié au travail",
-        tense: "Verbe de causalité négative",
-        sentence: "Des amitiés trop exclusives entre collègues peuvent parfois {gap} des tensions ou des conflits hiérarchiques.",
-        trans_es: "Las amistades demasiado exclusivas entre compañeros pueden a veces provocar tensiones o conflictos jerárquicos.",
-        hint: "Verbo en infinitivo para causar / engendrar",
-        ans: ["engendrer", "provoquer", "susciter"],
-        options: ["faire", "engendrer", "donner", "voir"],
-        rule: "💡 <strong>Causa y consecuencia C1:</strong> <em>Engendrer des tensions / des dérives</em> (engendrar / provocar tensiones). Reemplaza al error B1 <em>faire des conflits</em>.",
-        example: "engendrer des conséquences fâcheuses"
-      },
-      {
-        id: "recueil_v9",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #6 · Janv 2026",
-        task: "Tâche 3 : Villes & Environnement",
-        tense: "Verbe d'équivalence formelle",
-        sentence: "La vie urbaine {gap} donc un enjeu écologique majeur pour les décennies à venir.",
-        trans_es: "La vida urbana representa, por tanto, un reto ecológico mayúsculo para las próximas décadas.",
-        hint: "Verbo formal para representar / ser (3ª pers. sing.)",
-        ans: ["constitue", "représente"],
-        options: ["est", "constitue", "fait", "a"],
-        rule: "💡 <strong>Estructura clave de Tâche 3:</strong> <em>Constituer un enjeu majeur</em> (constituir / representar un reto crucial). Sustituye con elegancia al verbo <em>être</em>.",
-        example: "constitue un tournant décisif"
-      },
-      {
-        id: "recueil_v10",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #6 · Janv 2026",
-        task: "Tâche 2 : Colocation",
-        tense: "Collocation relationnelle",
-        sentence: "La colocation permet de {gap} des liens forts tout en apprenant à mieux gérer la vie en communauté.",
-        trans_es: "Compartir piso permite tejer lazos fuertes mientras se aprende a gestionar mejor la vida comunitaria.",
-        hint: "Verbo en infinitivo para tejer / forjar lazos",
-        ans: ["tisser", "nouer", "créer"],
-        options: ["prendre", "tisser", "tenir", "mettre"],
-        rule: "💡 <strong>Metáfora relacional B2/C1:</strong> <em>Tisser des liens</em> (tejer lazos). Evita expresiones coloquiales como <em>se faire des amis</em> en la Tâche 2.",
-        example: "tisser des liens étroits avec la population locale"
-      },
-      {
-        id: "recueil_v11",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #7 · Janv 2026",
-        task: "Tâche 3 : Objets connectés",
-        tense: "Formule de légitimité C1",
-        sentence: "Cependant, le Document 2 rappelle à {gap} titre les menaces réelles liées à la cybersécurité et au piratage.",
-        trans_es: "Sin embargo, el Documento 2 recuerda con razón las amenazas reales vinculadas a la ciberseguridad y al hackeo.",
-        hint: "Adjetivo para 'con justa razón': à ... titre",
-        ans: ["juste"],
-        options: ["bon", "juste", "vrai", "droit"],
-        rule: "💡 <strong>Síntesis dialectal:</strong> <em>Rappeler à juste titre</em> (recordar con toda razón). Fórmula ideal en Tâche 3 para darle legitimidad a los argumentos del texto 2.",
-        example: "rappeler à juste titre les contraintes financières"
-      },
-      {
-        id: "recueil_v12",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #18 · Févr 2026",
-        task: "Tâche 2 : Journée à la campagne",
-        tense: "Verbe de régénération",
-        sentence: "Cette escapade permet de se {gap} et de partager de bons moments avec ses amis, loin du rythme quotidien.",
-        trans_es: "Esta escapada permite recargar energías y compartir buenos momentos con amigos, lejos del ritmo diario.",
-        hint: "Verbo pronominal reflexivo para recargar energías / desconectar",
-        ans: ["ressourcer", "détendre"],
-        options: ["reposer", "ressourcer", "changer", "calmer"],
-        rule: "💡 <strong>Léxico de bienestar para Tâche 2:</strong> <em>Se ressourcer</em> (recargar energías / renovarse en la naturaleza). Muy superior a un simple <em>se reposer</em>.",
-        example: "se ressourcer au contact de la nature"
-      },
+    const FLASH_ITEMS = [
+  {
+    "id": "g_pb",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "PROBLÈME",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE problème (Masculin) :</strong> Todos los nombres terminados en <em>-ème</em> de origen griego son MASCULINOS en francés: <em>un problème complexe</em> (jamais <em>une problème</em>).",
+    "example": "un véritable problème sociétal"
+  },
+  {
+    "id": "g_sys",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "SYSTÈME",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE système (Masculin) :</strong> Termina en <em>-ème</em>, por lo que es masculino: <em>un système éducatif efficace</em>.",
+    "example": "le système actuel"
+  },
+  {
+    "id": "g_theme",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "THÈME",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE thème (Masculin) :</strong> Termina en <em>-ème</em>, masculino: <em>un thème récurrent</em>.",
+    "example": "aborder un thème délicat"
+  },
+  {
+    "id": "g_prog",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "PROGRAMME",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE programme (Masculin) :</strong> Termina en <em>-amme</em>, siempre masculino: <em>un programme novateur</em>.",
+    "example": "ce programme de formation"
+  },
+  {
+    "id": "g_role",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "RÔLE",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE rôle (Masculin) :</strong> Es masculino: <em>jouer un rôle primordial</em>.",
+    "example": "jouer un rôle déterminant"
+  },
+  {
+    "id": "g_manque",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "MANQUE",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE manque (Masculin) :</strong> En francés es masculino: <em>un manque de clarté</em>.",
+    "example": "je déplore un manque d'organisation"
+  },
+  {
+    "id": "g_domaine",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "DOMAINE",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE domaine (Masculin) :</strong> Es masculino: <em>dans un domaine spécifique</em>.",
+    "example": "dans le domaine de la santé"
+  },
+  {
+    "id": "g_groupe",
+    "cat": "genre",
+    "badge": "Genre du Nom · Faux ami",
+    "target": "GROUPE",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE groupe (Masculin) :</strong> Es masculino: <em>un groupe de travail</em>.",
+    "example": "au sein d'un groupe uni"
+  },
+  {
+    "id": "g_sejour",
+    "cat": "genre",
+    "badge": "Genre du Nom · Tâche 2",
+    "target": "SÉJOUR",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'un' (o 'le')",
+    "ans": [
+      "un",
+      "le"
+    ],
+    "rule": "💡 <strong>LE séjour (Masculin) :</strong> Es masculino: <em>un séjour inoubliable</em>.",
+    "example": "ce séjour à la montagne"
+  },
+  {
+    "id": "g_sol",
+    "cat": "genre",
+    "badge": "Genre du Nom · Règle -tion",
+    "target": "SOLUTION",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'une' (o 'la')",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>LA solution (Féminin) :</strong> Todos los nombres terminados en <em>-tion</em> son FEMENINOS: <em>une solution adéquate</em>.",
+    "example": "trouver une solution durable"
+  },
+  {
+    "id": "g_sit",
+    "cat": "genre",
+    "badge": "Genre du Nom · Règle -tion",
+    "target": "SITUATION",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'une' (o 'la')",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>LA situation (Féminin) :</strong> Termina en <em>-tion</em>, siempre femenino: <em>une situation complexe</em>.",
+    "example": "face à cette situation"
+  },
+  {
+    "id": "g_dec",
+    "cat": "genre",
+    "badge": "Genre du Nom · Règle -sion",
+    "target": "DÉCISION",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'une' (o 'la')",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>LA décision (Féminin) :</strong> Termina en <em>-sion</em>, femenino: <em>une sage décision</em>.",
+    "example": "prendre une décision éclairée"
+  },
+  {
+    "id": "g_act",
+    "cat": "genre",
+    "badge": "Genre du Nom · Règle -té",
+    "target": "ACTIVITÉ",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'une' (o 'la')",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>L'activité (Féminin) :</strong> La inmensa mayoría de nombres en <em>-té</em> son femeninos: <em>une activité enrichissante</em>.",
+    "example": "participer à cette activité"
+  },
+  {
+    "id": "g_soc",
+    "cat": "genre",
+    "badge": "Genre du Nom · Règle -té",
+    "target": "SOCIÉTÉ",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'une' (o 'la')",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>LA société (Féminin) :</strong> Termina en <em>-té</em>, femenino: <em>au sein d'une société moderne</em>.",
+    "example": "l'évolution de notre société"
+  },
+  {
+    "id": "g_exp",
+    "cat": "genre",
+    "badge": "Genre du Nom · Tâche 2",
+    "target": "EXPÉRIENCE",
+    "prompt_es": "🇪🇸 ¿Es masculino o femenino? Escribe 'une' (o 'la')",
+    "ans": [
+      "une",
+      "la"
+    ],
+    "rule": "💡 <strong>UNE expérience (Féminin) :</strong> Femenino: <em>une expérience inoubliable</em>.",
+    "example": "je recommande vivement cette expérience"
+  },
+  {
+    "id": "d_ev",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Devant voyelle",
+    "target": "[ ... ] ÉVÉNEMENT",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este evento)",
+    "ans": [
+      "cet"
+    ],
+    "rule": "💡 <strong>CET devant voyelle :</strong> 'Événement' es masculino singular que empieza por vocal (é). Para evitar el choque de vocales (hiato), se usa <strong>cet</strong>.",
+    "example": "cet événement musical"
+  },
+  {
+    "id": "d_av",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Devant voyelle",
+    "target": "[ ... ] AVIS",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta opinión / parecer)",
+    "ans": [
+      "cet"
+    ],
+    "rule": "💡 <strong>CET devant voyelle :</strong> 'Avis' es masculino singular y empieza por vocal (a): <strong>cet avis</strong>.",
+    "example": "je partage pleinement cet avis"
+  },
+  {
+    "id": "d_out",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Devant voyelle",
+    "target": "[ ... ] OUTIL",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta herramienta)",
+    "ans": [
+      "cet"
+    ],
+    "rule": "💡 <strong>CET outil :</strong> 'Outil' es masculino y empieza por vocal (o): <strong>cet outil</strong> (jamás <em>cette outil</em>).",
+    "example": "utiliser cet outil au quotidien"
+  },
+  {
+    "id": "d_hom",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Devant H muet",
+    "target": "[ ... ] HOMME",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este hombre)",
+    "ans": [
+      "cet"
+    ],
+    "rule": "💡 <strong>CET devant H mudo :</strong> 'Homme' es masculino singular con H muda: <strong>cet homme</strong>.",
+    "example": "l'engagement de cet homme"
+  },
+  {
+    "id": "d_pb",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Masculin consonne",
+    "target": "[ ... ] PROBLÈME",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este problema)",
+    "ans": [
+      "ce"
+    ],
+    "rule": "💡 <strong>CE devant consonne masculine :</strong> 'Problème' es masculino singular con consonante (p): <strong>ce problème</strong> (¡nunca <em>cette problème</em>!).",
+    "example": "pour résoudre ce problème"
+  },
+  {
+    "id": "d_proj",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Masculin consonne",
+    "target": "[ ... ] PROJET",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (este proyecto)",
+    "ans": [
+      "ce"
+    ],
+    "rule": "💡 <strong>CE projet :</strong> Masculino con consonante: <strong>ce projet</strong>.",
+    "example": "mener à bien ce projet"
+  },
+  {
+    "id": "d_id",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Féminin",
+    "target": "[ ... ] IDÉE",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta idea)",
+    "ans": [
+      "cette"
+    ],
+    "rule": "💡 <strong>CETTE idée :</strong> 'Idée' es femenino singular. Para cualquier femenino singular siempre se usa <strong>cette</strong>.",
+    "example": "je suis favorable à cette idée"
+  },
+  {
+    "id": "d_exp",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Féminin",
+    "target": "[ ... ] EXPÉRIENCE",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta experiencia)",
+    "ans": [
+      "cette"
+    ],
+    "rule": "💡 <strong>CETTE expérience :</strong> Femenino singular: <strong>cette expérience</strong>.",
+    "example": "je recommande cette expérience"
+  },
+  {
+    "id": "d_mes",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Féminin",
+    "target": "[ ... ] MESURE",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (esta medida)",
+    "ans": [
+      "cette"
+    ],
+    "rule": "💡 <strong>CETTE mesure :</strong> Femenino singular: <strong>cette mesure</strong>.",
+    "example": "l'application de cette mesure"
+  },
+  {
+    "id": "d_sol_pl",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Pluriel",
+    "target": "[ ... ] SOLUTIONS",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (estas soluciones)",
+    "ans": [
+      "ces"
+    ],
+    "rule": "💡 <strong>CES soluciones (Pluriel) :</strong> En plural (sea masculino o femenino) siempre se usa <strong>ces</strong>.",
+    "example": "combiner ces solutions"
+  },
+  {
+    "id": "d_pb_pl",
+    "cat": "demonstratif",
+    "badge": "Démonstratifs · Pluriel",
+    "target": "[ ... ] PROBLÈMES",
+    "prompt_es": "🇪🇸 Escribe 'ce', 'cet', 'cette' o 'ces' (estos problemas)",
+    "ans": [
+      "ces"
+    ],
+    "rule": "💡 <strong>CES problèmes :</strong> Plural: <strong>ces problèmes</strong> (cuidado de no escribir <em>ses</em> con 's' posesivo).",
+    "example": "surmonter ces problèmes"
+  },
+  {
+    "id": "f_enr",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "ENRICHISSANT  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (enriquecedora)",
+    "ans": [
+      "enrichissante"
+    ],
+    "rule": "💡 <strong>Féminin régulier en -e :</strong> <em>enrichissant</em> + <strong>e</strong> = <strong>enrichissante</strong> (ej. <em>une sortie enrichissante</em>).",
+    "example": "une expérience enrichissante"
+  },
+  {
+    "id": "f_chal",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "CHALEUREUX  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (cálida / hospitalaria)",
+    "ans": [
+      "chaleureuse"
+    ],
+    "rule": "💡 <strong>Féminin en -eux ➔ -euse :</strong> Los adjetivos terminados en <em>-eux</em> cambian a <strong>-euse</strong>: <strong>chaleureuse</strong>.",
+    "example": "une ambiance chaleureuse"
+  },
+  {
+    "id": "f_dep",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "DÉPAYSANT  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (desconectadora / fuera de rutina)",
+    "ans": [
+      "dépaysante"
+    ],
+    "rule": "💡 <strong>Féminin régulier :</strong> <em>dépaysant</em> + <strong>e</strong> = <strong>dépaysante</strong>.",
+    "example": "une parenthèse dépaysante"
+  },
+  {
+    "id": "f_fest",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "FESTIF  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (festiva)",
+    "ans": [
+      "festive"
+    ],
+    "rule": "💡 <strong>Féminin en -if ➔ -ive :</strong> Los adjetivos en <em>-if</em> cambian a <strong>-ive</strong>: <strong>festive</strong>.",
+    "example": "une atmosphère festive"
+  },
+  {
+    "id": "f_dec",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "DÉCEVANT  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (decepcionante)",
+    "ans": [
+      "décevante"
+    ],
+    "rule": "💡 <strong>Féminin régulier :</strong> <em>décevant</em> + <strong>e</strong> = <strong>décevante</strong>.",
+    "example": "une prestation décevante"
+  },
+  {
+    "id": "f_cp",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "CONTRE-PRODUCTIF  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (contraproducente)",
+    "ans": [
+      "contre-productive"
+    ],
+    "rule": "💡 <strong>Féminin en -if ➔ -ive :</strong> <em>contre-productif</em> ➔ <strong>contre-productive</strong>.",
+    "example": "une mesure contre-productive"
+  },
+  {
+    "id": "f_prim",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "PRIMORDIAL  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (primordial / vital)",
+    "ans": [
+      "primordiale"
+    ],
+    "rule": "💡 <strong>Féminin régulier :</strong> <em>primordial</em> + <strong>e</strong> = <strong>primordiale</strong>.",
+    "example": "une fonction primordiale"
+  },
+  {
+    "id": "f_nov",
+    "cat": "accords",
+    "badge": "Féminin de l'adjectif",
+    "target": "NOVATEUR  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe la forma femenina singular (innovadora)",
+    "ans": [
+      "novatrice"
+    ],
+    "rule": "💡 <strong>Féminin en -teur ➔ -trice :</strong> <em>novateur</em> se transforma en <strong>novatrice</strong>.",
+    "example": "une initiative novatrice"
+  },
+  {
+    "id": "f_ut_pass",
+    "cat": "accords",
+    "badge": "Voix passive · Participe passé",
+    "target": "ÊTRE (utiliser)  ➔  Féminin singulier",
+    "prompt_es": "🇪🇸 Escribe el participio femenino (la télévision doit être...)",
+    "ans": [
+      "utilisée"
+    ],
+    "rule": "💡 <strong>Participe passé avec ÊTRE :</strong> Con el auxiliar o infinitivo <em>être</em>, el participio concuerda con el sujeto femenino: <strong>utilisée</strong>.",
+    "example": "à condition d'être utilisée avec modération"
+  },
+  {
+    "id": "p_ben",
+    "cat": "accords",
+    "badge": "Pluriel de l'adjectif",
+    "target": "BÉNÉFIQUE  ➔  Pluriel",
+    "prompt_es": "🇪🇸 Escribe la forma en plural (des effets...)",
+    "ans": [
+      "bénéfiques"
+    ],
+    "rule": "💡 <strong>Pluriel régulier en -s :</strong> Añade <strong>-s</strong> al adjetivo: <strong>bénéfiques</strong>.",
+    "example": "des retombées bénéfiques"
+  },
+  {
+    "id": "p_nef",
+    "cat": "accords",
+    "badge": "Pluriel de l'adjectif",
+    "target": "NÉFASTE  ➔  Pluriel",
+    "prompt_es": "🇪🇸 Escribe la forma en plural (des conséquences...)",
+    "ans": [
+      "néfastes"
+    ],
+    "rule": "💡 <strong>Pluriel régulier :</strong> <em>néfaste</em> + <strong>s</strong> = <strong>néfastes</strong>.",
+    "example": "des effets néfastes"
+  },
+  {
+    "id": "p_inn",
+    "cat": "accords",
+    "badge": "Pluriel de l'adjectif",
+    "target": "INNOVANT  ➔  Masculin pluriel",
+    "prompt_es": "🇪🇸 Escribe la forma masculino plural (des projets...)",
+    "ans": [
+      "innovants"
+    ],
+    "rule": "💡 <strong>Pluriel masculin :</strong> <em>innovant</em> + <strong>s</strong> = <strong>innovants</strong>.",
+    "example": "des projets innovants"
+  },
+  {
+    "id": "p_soc",
+    "cat": "accords",
+    "badge": "Pluriel irrégulier",
+    "target": "SOCIAL  ➔  Masculin pluriel",
+    "prompt_es": "🇪🇸 Escribe la forma masculino plural (des liens...)",
+    "ans": [
+      "sociaux"
+    ],
+    "rule": "💡 <strong>Pluriel en -al ➔ -aux :</strong> La mayoría de adjetivos en <em>-al</em> hacen su plural masculino en <strong>-aux</strong>: <strong>sociaux</strong>.",
+    "example": "tisser des liens sociaux"
+  },
+  {
+    "id": "c_pouvoir_nous",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #2",
+    "target": "POUVOIR  (nous)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (afin que nous...)",
+    "ans": [
+      "puissions"
+    ],
+    "rule": "💡 <strong>POUVOIR au subjonctif (nous) :</strong> <em>afin que nous</em> <strong>puissions</strong>. Clave absoluta para la Tâche 1.",
+    "example": "afin que nous puissions organiser le séjour"
+  },
+  {
+    "id": "c_pouvoir_vous",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #4",
+    "target": "POUVOIR  (vous)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que vous...)",
+    "ans": [
+      "puissiez"
+    ],
+    "rule": "💡 <strong>POUVOIR au subjonctif (vous) :</strong> <em>pour que vous</em> <strong>puissiez</strong>.",
+    "example": "pour que vous puissiez vérifier l'état"
+  },
+  {
+    "id": "c_pouvoir_je",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #16",
+    "target": "POUVOIR  (je)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que je...)",
+    "ans": [
+      "puisse"
+    ],
+    "rule": "💡 <strong>POUVOIR au subjonctif (je) :</strong> <em>pour que je</em> <strong>puisse</strong>.",
+    "example": "pour que je puisse tout préparer"
+  },
+  {
+    "id": "c_pouvoir_ils",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #29",
+    "target": "POUVOIR  (ils / elles)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (bien que les caméras...)",
+    "ans": [
+      "puissent"
+    ],
+    "rule": "💡 <strong>POUVOIR au subjonctif (ils) :</strong> <em>bien qu'ils</em> <strong>puissent</strong>.",
+    "example": "bien que ces mesures puissent aider"
+  },
+  {
+    "id": "c_etre_il",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #3",
+    "target": "ÊTRE  (il / elle / cette mesure)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que cette mesure...)",
+    "ans": [
+      "soit"
+    ],
+    "rule": "💡 <strong>ÊTRE au subjonctif (3ª sing.) :</strong> <em>pour que cette mesure</em> <strong>soit</strong>.",
+    "example": "pour que cette mesure soit efficace"
+  },
+  {
+    "id": "c_etre_ils",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #71",
+    "target": "ÊTRE  (ils / elles / les portes)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (veille à ce que les portes...)",
+    "ans": [
+      "soient"
+    ],
+    "rule": "💡 <strong>ÊTRE au subjonctif (3ª plur.) :</strong> <em>pour qu'elles</em> <strong>soient</strong>.",
+    "example": "veille à ce que les portes soient fermées"
+  },
+  {
+    "id": "c_avoir_nous",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · C1",
+    "target": "AVOIR  (nous)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (afin que nous...)",
+    "ans": [
+      "ayons"
+    ],
+    "rule": "💡 <strong>AVOIR au subjonctif (nous) :</strong> <em>afin que nous</em> <strong>ayons</strong>.",
+    "example": "afin que nous ayons le temps"
+  },
+  {
+    "id": "c_faire_il",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · C1",
+    "target": "FAIRE  (il / elle)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (bien qu'il...)",
+    "ans": [
+      "fasse"
+    ],
+    "rule": "💡 <strong>FAIRE au subjonctif (il) :</strong> <em>bien qu'il</em> <strong>fasse</strong>.",
+    "example": "bien qu'il fasse des efforts"
+  },
+  {
+    "id": "c_voir_tu",
+    "cat": "conj",
+    "badge": "Subjonctif Présent · Sujet #1",
+    "target": "VOIR  (tu)",
+    "prompt_es": "🇪🇸 Escribe la forma en subjuntivo (pour que tu...)",
+    "ans": [
+      "voies"
+    ],
+    "rule": "💡 <strong>VOIR au subjonctif (tu) :</strong> <em>pour que tu</em> <strong>voies</strong> (con -es final).",
+    "example": "pour que tu voies le gymnase"
+  },
+  {
+    "id": "c_souhaiter_je",
+    "cat": "conj",
+    "badge": "Conditionnel de Politesse · T1",
+    "target": "SOUHAITER  (je)",
+    "prompt_es": "🇪🇸 Escribe el condicional de cortesía (desearía / me gustaría)",
+    "ans": [
+      "souhaiterais"
+    ],
+    "rule": "💡 <strong>Conditionnel de politesse :</strong> En Tâche 1 formal, usa <strong>je souhaiterais</strong> (con -ais). Nunca digas <em>je veux</em>.",
+    "example": "je souhaiterais obtenir des informations"
+  },
+  {
+    "id": "c_etre_imp",
+    "cat": "conj",
+    "badge": "Imparfait de Description · T2",
+    "target": "ÊTRE  (l'ambiance / 3ª sing.)",
+    "prompt_es": "🇪🇸 Escribe el imparfait para describir el ambiente en el pasado (el ambiente era...)",
+    "ans": [
+      "était"
+    ],
+    "rule": "💡 <strong>Imparfait de décor :</strong> Para describir cómo era un lugar o evento en T2 se usa imparfait: <em>l'ambiance</em> <strong>était</strong>.",
+    "example": "l'organisation était irréprochable"
+  },
+  {
+    "id": "c_laisser_imp",
+    "cat": "conj",
+    "badge": "Imparfait de Critique · T2",
+    "target": "LAISSER  (l'organisation / 3ª sing.)",
+    "prompt_es": "🇪🇸 Escribe el imparfait en la locución 'dejaba que desear'",
+    "ans": [
+      "laissait"
+    ],
+    "rule": "💡 <strong>Laisser à désirer :</strong> En pasado para críticas: <em>la propreté</em> <strong>laissait</strong> <em>à désirer</em>.",
+    "example": "le service laissait à désirer"
+  },
+  {
+    "id": "c_permis_pc",
+    "cat": "conj",
+    "badge": "Passé Composé · Participe passé",
+    "target": "PERMETTRE  (participe passé)",
+    "prompt_es": "🇪🇸 Escribe el participio de permettre (esta experiencia me ha permitido...)",
+    "ans": [
+      "permis"
+    ],
+    "rule": "💡 <strong>Participe passé de PERMETTRE :</strong> <em>cette expérience m'a</em> <strong>permis</strong> (con -s final invariable). Aparece 27 veces en el PDF.",
+    "example": "m'a permis d'apprendre"
+  },
+  {
+    "id": "ct_a_le",
+    "cat": "contractions",
+    "badge": "Contraction obligatoire",
+    "target": "À  +  LE",
+    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "ans": [
+      "au"
+    ],
+    "rule": "💡 <strong>À + LE ➔ AU :</strong> En francés es obligatorio contraer: <em>au cinéma, au travail, au détriment de</em> (jamás <em>à le</em>).",
+    "example": "participer au débat"
+  },
+  {
+    "id": "ct_a_les",
+    "cat": "contractions",
+    "badge": "Contraction obligatoire",
+    "target": "À  +  LES",
+    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "ans": [
+      "aux"
+    ],
+    "rule": "💡 <strong>À + LES ➔ AUX :</strong> Contracción en plural: <strong>aux</strong> (ej. <em>aux citoyens, grâce aux efforts</em>).",
+    "example": "grâce aux nouvelles technologies"
+  },
+  {
+    "id": "ct_de_le",
+    "cat": "contractions",
+    "badge": "Contraction obligatoire",
+    "target": "DE  +  LE",
+    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "ans": [
+      "du"
+    ],
+    "rule": "💡 <strong>DE + LE ➔ DU :</strong> Contracción obligatoria: <em>au détriment</em> <strong>du</strong> <em>bien-être</em> (jamás <em>de le</em>).",
+    "example": "au détriment du repos"
+  },
+  {
+    "id": "ct_de_les",
+    "cat": "contractions",
+    "badge": "Contraction obligatoire",
+    "target": "DE  +  LES",
+    "prompt_es": "🇪🇸 Escribe la contracción obligatoria",
+    "ans": [
+      "des"
+    ],
+    "rule": "💡 <strong>DE + LES ➔ DES :</strong> Contracción en plural: <em>la majorité</em> <strong>des</strong> <em>gens</em> (jamás <em>de les</em>).",
+    "example": "le quotidien des personnes"
+  },
+  {
+    "id": "ar_eng",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'faire'",
+    "target": "FAIRE DES TENSIONS / CONFLITS",
+    "prompt_es": "🇪🇸 Escribe el verbo C1 en infinitivo para 'provocar / engendrar'",
+    "ans": [
+      "engendrer"
+    ],
+    "rule": "💡 <strong>ENGENDRER (C1) :</strong> Sustituye a <em>faire des problèmes</em>. Significa provocar o causar consecuencias negativas.",
+    "example": "engendrer des tensions sociales"
+  },
+  {
+    "id": "ar_nuire",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'faire du mal'",
+    "target": "FAIRE DU MAL À",
+    "prompt_es": "🇪🇸 Escribe el verbo C1 en infinitivo para 'perjudicar / dañar'",
+    "ans": [
+      "nuire"
+    ],
+    "rule": "💡 <strong>NUIRE À (C1) :</strong> Sustituye a <em>faire du mal</em>: <em>cela risque de</em> <strong>nuire</strong> <em>à la santé</em>.",
+    "example": "nuire au bien-être des enfants"
+  },
+  {
+    "id": "ar_souligner",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'dire'",
+    "target": "LE DOCUMENT DIT QUE",
+    "prompt_es": "🇪🇸 Escribe el verbo C1 en presente (3ª sing.) para 'destacar / subrayar'",
+    "ans": [
+      "souligne"
+    ],
+    "rule": "💡 <strong>SOULIGNE (C1) :</strong> ¡Aparece 74 veces en el PDF! Nunca digas <em>le texte dit</em>, di <em>le document</em> <strong>souligne</strong>.",
+    "example": "le premier document souligne"
+  },
+  {
+    "id": "ar_tisser",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'se faire des amis'",
+    "target": "SE FAIRE DES AMIS",
+    "prompt_es": "🇪🇸 Escribe el verbo C1 en infinitivo para 'tejer' lazos",
+    "ans": [
+      "tisser"
+    ],
+    "rule": "💡 <strong>TISSER des liens (C1) :</strong> Sustituye a la expresión infantil <em>se faire des amis</em> en Tâche 2.",
+    "example": "tisser des liens durables"
+  },
+  {
+    "id": "ar_ressourcer",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'se reposer'",
+    "target": "SE REPOSER LOIN DE LA VILLE",
+    "prompt_es": "🇪🇸 Escribe el infinitivo para 'recargar energías / renovarse'",
+    "ans": [
+      "ressourcer",
+      "se ressourcer"
+    ],
+    "rule": "💡 <strong>SE RESSOURCER (C1) :</strong> El verbo ideal para relatos de viajes o naturaleza en la Tâche 2.",
+    "example": "un endroit idéal pour se ressourcer"
+  },
+  {
+    "id": "ar_preconiser",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'donner une idée'",
+    "target": "JE PENSE QU'IL FAUT / JE CONSEILLE",
+    "prompt_es": "🇪🇸 Escribe el verbo formal en presente (1ª sing.) para 'recomiendo / preconizo'",
+    "ans": [
+      "préconise"
+    ],
+    "rule": "💡 <strong>JE PRÉCONISE (C1) :</strong> Verbo culto de recomendación formal para ganar puntos en Tâche 3.",
+    "example": "je préconise de trouver un équilibre"
+  },
+  {
+    "id": "ar_enjeu",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'gros problème'",
+    "target": "UN GROS PROBLÈME",
+    "prompt_es": "🇪🇸 Escribe el sustantivo C1 masculino para 'reto / desafío crucial' (un ... majeur)",
+    "ans": [
+      "enjeu"
+    ],
+    "rule": "💡 <strong>UN ENJEU MAJEUR (C1) :</strong> Sustituye a <em>un gros problème</em>. En francés: <em>constitue un</em> <strong>enjeu</strong> <em>majeur</em>.",
+    "example": "constitue un véritable enjeu"
+  },
+  {
+    "id": "ar_benefique",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'très bon'",
+    "target": "TRÈS BON POUR LA SANTÉ",
+    "prompt_es": "🇪🇸 Escribe el adjetivo C1 para 'beneficioso / provechoso'",
+    "ans": [
+      "bénéfique"
+    ],
+    "rule": "💡 <strong>BÉNÉFIQUE (C1) :</strong> Adjetivo elegante para contrastar en debates de la Tâche 3.",
+    "example": "s'avère très bénéfique"
+  },
+  {
+    "id": "ar_nefaste",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'mauvais'",
+    "target": "TRÈS MAUVAIS POUR",
+    "prompt_es": "🇪🇸 Escribe el adjetivo C1 para 'dañino / nefasto'",
+    "ans": [
+      "néfaste"
+    ],
+    "rule": "💡 <strong>NÉFASTE (C1) :</strong> Opuesto culto de <em>bénéfique</em>: <em>des retombées</em> <strong>néfastes</strong>.",
+    "example": "des conséquences néfastes"
+  },
+  {
+    "id": "ar_primordial",
+    "cat": "antirepetition",
+    "badge": "Anti-Répétition C1 · Remplacer 'très important'",
+    "target": "TRÈS IMPORTANT",
+    "prompt_es": "🇪🇸 Escribe el adjetivo C1 masculino para 'vital / de primer orden'",
+    "ans": [
+      "primordial"
+    ],
+    "rule": "💡 <strong>PRIMORDIAL (C1) :</strong> Sustituye a <em>très important</em>: <em>un rôle</em> <strong>primordial</strong>.",
+    "example": "il est primordial de souligner"
+  }
+];
 
-      // ─────────────────────────────────────────────────────────────────
-      // SECTION 2 : SUBJONCTIF & GRAMMAIRE 10+ DU RECUEIL 2026
-      // ─────────────────────────────────────────────────────────────────
-      {
-        id: "recueil_c1",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #1 · Janv 2026",
-        task: "Tâche 1 : Message à Laura",
-        tense: "Subjonctif Présent",
-        sentence: "Si tu veux, on peut y aller ensemble pour que tu (voir) {gap} l'endroit et essaies un cours.",
-        trans_es: "Si quieres, podemos ir juntos para que veas el lugar y pruebes una clase.",
-        verb: "voir",
-        ans: ["voies"],
-        rule: "💡 <strong>Subjuntivo tras 'Pour que':</strong> Después de <em>pour que</em> (para que), el subjuntivo es obligatorio. El verbo irregular <em>voir</em> con <em>tu</em> es <strong>voies</strong> (con -es).",
-        example: "pour que tu voies le gymnase"
-      },
-      {
-        id: "recueil_c2",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #2 · Janv 2026",
-        task: "Tâche 1 : Sortie Versailles",
-        tense: "Subjonctif Présent",
-        sentence: "Faites-moi savoir rapidement si vous êtes disponibles afin que nous (pouvoir) {gap} organiser le transport.",
-        trans_es: "Háganmelo saber pronto si están disponibles para que podamos organizar el transporte.",
-        verb: "pouvoir",
-        ans: ["puissions"],
-        rule: "💡 <strong>Subjuntivo tras 'Afin que':</strong> El conector formal <em>afin que</em> (a fin de que) exige subjuntivo. <em>Pouvoir</em> con <em>nous</em> se conjuga <strong>puissions</strong>. Imprescindible para el 10+ en Tâche 1.",
-        example: "afin que nous puissions réserver"
-      },
-      {
-        id: "recueil_c3",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #3 · Janv 2026",
-        task: "Tâche 3 : Villes sans voitures",
-        tense: "Subjonctif Présent",
-        sentence: "Le Document 2 souligne l'importance de préparer les infrastructures pour que cette mesure (être) {gap} réellement efficace.",
-        trans_es: "El Documento 2 subraya la importancia de preparar las infraestructuras para que esta medida sea realmente eficaz.",
-        verb: "être",
-        ans: ["soit"],
-        rule: "💡 <strong>Subjuntivo de ÊTRE (3ª pers. singular):</strong> Después de <em>pour que</em>, el verbo <em>être</em> con <em>cette mesure</em> (ella) se escribe <strong>soit</strong>.",
-        example: "pour que le projet soit couronné de succès"
-      },
-      {
-        id: "recueil_c4",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #4 · Janv 2026",
-        task: "Tâche 1 : Vente de vélo",
-        tense: "Subjonctif Présent",
-        sentence: "Si vous le souhaitez, nous pouvons convenir d'un rendez-vous pour que vous (pouvoir) {gap} le tester.",
-        trans_es: "Si lo desea, podemos fijar una cita para que usted pueda probarla.",
-        verb: "pouvoir",
-        ans: ["puissiez"],
-        rule: "💡 <strong>Subjuntivo de cortesía con VOUS:</strong> Tras <em>pour que</em>, el verbo <em>pouvoir</em> con <em>vous</em> es <strong>puissiez</strong>.",
-        example: "pour que vous puissiez vérifier son état"
-      },
-      {
-        id: "recueil_c5",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #5 · Janv 2026",
-        task: "Tâche 1 : Sortie musée",
-        tense: "Subjonctif Présent",
-        sentence: "N'hésitez pas à me confirmer votre présence afin que je (réserver) {gap} les places nécessaires.",
-        trans_es: "No dude en confirmarme su asistencia a fin de que yo reserve las plazas necesarias.",
-        verb: "réserver",
-        ans: ["réserve"],
-        rule: "💡 <strong>Subjuntivo 1er Grupo con JE:</strong> Tras <em>afin que</em>, los verbos terminados en <em>-er</em> llevan terminación <strong>-e</strong> con <em>je</em>: <em>afin que je réserve</em>.",
-        example: "afin que je réserve la table"
-      },
-      {
-        id: "recueil_c6",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #5 · Janv 2026",
-        task: "Tâche 3 : Devoirs scolaires",
-        tense: "Subjonctif Présent",
-        sentence: "Il serait pertinent d'adapter les devoirs selon les besoins, afin qu'ils (rester) {gap} un outil éducatif utile et équilibré.",
-        trans_es: "Sería pertinente adaptar los deberes según las necesidades, a fin de que sigan siendo una herramienta educativa útil y equilibrada.",
-        verb: "rester",
-        ans: ["restent"],
-        rule: "💡 <strong>Subjuntivo plural (-ent):</strong> Tras <em>afin que</em> con <em>ils</em> (los deberes), la desinencia es <strong>-ent</strong>: <em>afin qu'ils restent</em>.",
-        example: "afin qu'ils restent accessibles"
-      },
-      {
-        id: "recueil_c7",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #14 · Févr 2026",
-        task: "Tâche 3 : Parité femmes-hommes",
-        tense: "Subjonctif Présent",
-        sentence: "Ces obstacles doivent inciter à poursuivre des actions concrètes pour que femmes et hommes (bénéficier) {gap} des mêmes chances.",
-        trans_es: "Estos obstáculos deben incitar a continuar acciones concretas para que mujeres y hombres disfruten de las mismas oportunidades.",
-        verb: "bénéficier",
-        ans: ["bénéficient"],
-        rule: "💡 <strong>Subjuntivo con sujeto plural compuesto:</strong> <em>Femmes et hommes</em> equivale a <em>ils</em>; tras <em>pour que</em> se escribe <strong>bénéficient</strong>.",
-        example: "pour que tous bénéficient d'un soutien adapté"
-      },
-      {
-        id: "recueil_c8",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #16 · Févr 2026",
-        task: "Tâche 1 : Fête d'anniversaire",
-        tense: "Subjonctif Présent",
-        sentence: "Pensez à confirmer votre présence pour que je (pouvoir) {gap} tout préparer au mieux chez moi.",
-        trans_es: "Acuérdense de confirmar su asistencia para que yo pueda prepararlo todo lo mejor posible en mi casa.",
-        verb: "pouvoir",
-        ans: ["puisse"],
-        rule: "💡 <strong>Subjuntivo de POUVOIR con JE:</strong> Tras <em>pour que</em> con <em>je</em> es <strong>puisse</strong>. Memoriza: <em>pour que je puisse</em>.",
-        example: "pour que je puisse anticiper les achats"
-      },
-      {
-        id: "recueil_c9",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #16 · Févr 2026",
-        task: "Tâche 3 : Vols Low-Cost",
-        tense: "Subjonctif Présent",
-        sentence: "L'idéal serait que les compagnies à bas coût (trouver) {gap} un compromis entre accessibilité et qualité.",
-        trans_es: "Lo ideal sería que las compañías de bajo coste encontraran un compromiso entre accesibilidad y calidad.",
-        verb: "trouver",
-        ans: ["trouvent"],
-        rule: "💡 <strong>Subjuntivo tras fórmula de deseo/hipótesis:</strong> <em>L'idéal serait que</em> exige subjuntivo: <em>les compagnies... trouvent</em>.",
-        example: "l'idéal serait que les acteurs trouvent un accord"
-      },
-      {
-        id: "recueil_c10",
-        mode: "conj",
-        cat: "subjonctif",
-        source: "Sujet #24 · Mars 2026",
-        task: "Tâche 3 : Relations au travail",
-        tense: "Subjonctif Présent",
-        sentence: "Il est crucial de veiller à ce que les relations personnelles ne (compromettre) {gap} pas le bon fonctionnement de l'équipe.",
-        trans_es: "Es crucial velar por que las relaciones personales no comprometan el buen funcionamiento del equipo.",
-        verb: "compromettre",
-        ans: ["compromettent"],
-        rule: "💡 <strong>Subjuntivo tras 'veiller à ce que':</strong> Esta locución de vigilancia rige subjuntivo. Con <em>les relations</em> (ellas) hace <strong>compromettent</strong>.",
-        example: "sans que cela compromette la productivité"
-      },
-      {
-        id: "recueil_c11",
-        mode: "conj",
-        cat: "recit_passe",
-        source: "Sujet #2 · Janv 2026",
-        task: "Tâche 2 : Festival décevant",
-        tense: "Imparfait de description",
-        sentence: "Le public (sembler) {gap} frustré et le confort était insuffisant pour profiter pleinement des spectacles.",
-        trans_es: "El público parecía frustrado y la comodidad era insuficiente para disfrutar plenamente de los espectáculos.",
-        verb: "sembler",
-        ans: ["semblait"],
-        rule: "💡 <strong>Imparfait para describir emociones/estados en T2:</strong> Para describir cómo se sentía la gente o cómo era el lugar en el pasado se usa Imparfait: <strong>le public semblait</strong>.",
-        example: "le public semblait conquis"
-      },
-      {
-        id: "recueil_c12",
-        mode: "conj",
-        cat: "recit_passe",
-        source: "Sujet #7 · Janv 2026",
-        task: "Tâche 2 : Chanteur préféré",
-        tense: "Passé Composé d'impact",
-        sentence: "Pour ma part, écouter ses chansons m'a profondément (marquer) {gap} dès mon premier voyage.",
-        trans_es: "Por mi parte, escuchar sus canciones me marcó profundamente desde mi primer viaje.",
-        verb: "marquer",
-        ans: ["marqué"],
-        rule: "💡 <strong>Passé Composé para eventos puntuales:</strong> Acción que ocurrió y concluyó: <em>m'a profondément marqué</em>. Con <em>avoir</em> y pronombre indirecto, termina en <strong>-é</strong>.",
-        example: "cet événement m'a profondément marqué"
-      },
-
-      // ─────────────────────────────────────────────────────────────────
-      // SECTION 3 : LE GRAND MIX 2026 (VOCABULAIRE + ACCORD / FORME)
-      // ─────────────────────────────────────────────────────────────────
-      {
-        id: "recueil_m1",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #22 · Févr 2026",
-        task: "Tâche 3 : Télévision & Société",
-        tense: "Voz Pasiva con ÊTRE (Participe Passé)",
-        sentence: "À mon avis, la télévision occupe une place clé, à condition d'être (utiliser) {gap} avec modération.",
-        trans_es: "En mi opinión, la televisión ocupa un lugar clave, a condición de ser utilizada con moderación.",
-        verb: "utiliser",
-        ans: ["utilisée"],
-        rule: "💡 <strong>Voz Pasiva con ÊTRE:</strong> ¡El participio pasado NO solo se usa en passé composé! Cuando algo <em>'es hecho por alguien'</em> (voz pasiva), se usa <strong>ÊTRE + PARTICIPIO PASADO</strong> (igual que en español: <em>'a condición de ser utilizada'</em>). Al ir con <em>être</em>, el participio concuerda en género y número con el sujeto: <em>la télévision</em> (femenino singular) ➔ <strong>utilisée</strong>.",
-        example: "à condition d'être bien encadrée"
-      },
-      {
-        id: "recueil_m2",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #26 · Mars 2026",
-        task: "Tâche 3 : Colocation adulte",
-        tense: "Participe présent / Gérondif",
-        sentence: "La colocation peut être une expérience conviviale et formatrice, (concilier) {gap} vie sociale et autonomie.",
-        trans_es: "Compartir piso puede ser una experiencia agradable y formativa, conciliando vida social y autonomía.",
-        verb: "concilier",
-        ans: ["conciliant"],
-        rule: "💡 <strong>Participio Presente / Gerundio (-ant):</strong> Para indicar una acción simultánea ('conciliando...'), los verbos en francés adoptan la terminación <strong>-ant</strong>: <em>conciliant vie privée et profession</em>.",
-        example: "conciliant rigueur et créativité"
-      },
-      {
-        id: "recueil_m3",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #29 · Avril 2026",
-        task: "Tâche 3 : Caméras à l'école",
-        tense: "Subjonctif Présent + Concession",
-        sentence: "Bien que les caméras (pouvoir) {gap} dissuader certaines infractions, elles ne règlent pas les causes profondes.",
-        trans_es: "Aunque las cámaras puedan disuadir ciertas infracciones, no solucionan las causas profundas.",
-        verb: "pouvoir",
-        ans: ["puissent"],
-        rule: "💡 <strong>Subjuntivo tras BIEN QUE:</strong> La locución concesiva <em>bien que</em> (aunque) exige SIEMPRE subjuntivo. Con <em>les caméras</em> (ellas/pluriel) hace <strong>puissent</strong>.",
-        example: "bien que ces mesures puissent aider"
-      },
-      {
-        id: "recueil_m4",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #34 · Avril 2026",
-        task: "Tâche 1 : Recherche appartement à Nice",
-        tense: "Conditionnel de politesse",
-        sentence: "Je (souhaiter) {gap} trouver un logement calme, bien desservi par les transports et proche des commerces.",
-        trans_es: "Desearía encontrar una vivienda tranquila, bien comunicada por transporte y cerca de comercios.",
-        verb: "souhaiter",
-        ans: ["souhaiterais"],
-        rule: "💡 <strong>Condicional de Cortesía en T1:</strong> En cartas formales de la Tâche 1, nunca digas <em>je veux</em> (es descortés). Usa el condicional: <strong>je souhaiterais</strong> o <em>j'aimerais</em>.",
-        example: "je souhaiterais solliciter un devis"
-      },
-      {
-        id: "recueil_m5",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #44 · Mai 2026",
-        task: "Tâche 3 : Cuisine amateur vs pro",
-        tense: "Acuerdo de Adjetivo en Plural",
-        sentence: "Les amateurs, bien qu'{gap} (enthousiaste), manquent souvent de techniques avancées de découpe.",
-        trans_es: "Los aficionados, aunque entusiastas, a menudo carecen de técnicas avanzadas de corte.",
-        verb: "être",
-        ans: ["enthousiastes"],
-        rule: "💡 <strong>Acuerdo de Adjetivo en Plural:</strong> <em>Les amateurs</em> es masculino plural; el adjetivo debe llevar obligatoriamente una <strong>-s</strong> final: <strong>enthousiastes</strong>.",
-        example: "bien qu'enthousiastes"
-      },
-      {
-        id: "recueil_m6",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #71 · Sept 2026",
-        task: "Tâche 1 : Garde de maison",
-        tense: "Subjonctif Présent après 'veiller à ce que'",
-        sentence: "Voici les consignes : veille à ce que les portes et fenêtres (être) {gap} bien fermées chaque soir.",
-        trans_es: "Aquí tienes las instrucciones: asegúrate de que las puertas y ventanas estén bien cerradas cada noche.",
-        verb: "être",
-        ans: ["soient"],
-        rule: "💡 <strong>Subjuntivo plural tras 'veille à ce que':</strong> La expresión <em>veiller à ce que</em> (asegurarse de que) exige subjuntivo. Con <em>les portes et fenêtres</em> (ellas) se escribe <strong>soient</strong>.",
-        example: "veille à ce que les clés soient rangées"
-      },
-{
-        id: "recueil_ar1",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #3 · Janv 2026",
-        task: "Tâche 3 : Anti-Répétition (Remplacer 'faire du mal')",
-        tense: "Verbe C1 de préjudice",
-        sentence: "L'usage excessivo des écrans ne doit pas {gap} (nuire) au développement relationnel des enfants.",
-        trans_es: "El uso excesivo de pantallas no debe perjudicar / dañar el desarrollo relacional de los niños.",
-        hint: "Escribe el verbo C1 en infinitivo para 'dañar / perjudicar' (reemplaza a 'faire du mal')",
-        ans: ["nuire"],
-        rule: "💡 <strong>Anti-repetición C1:</strong> Nunca uses <em>faire du mal</em> en la Tâche 3. El verbo oficial del Recueil es <strong>nuire à</strong> (perjudicar a).",
-        example: "nuire au bien-être psychologique"
-      },
-      {
-        id: "recueil_ar2",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #8 · Janv 2026",
-        task: "Tâche 2 : Expérience bénévole",
-        tense: "Accord de Genre Féminin",
-        sentence: "Cette mission humanitaire fut une aventure profondément {gap} (enrichissant) sur le plan humain.",
-        trans_es: "Esta misión humanitaria fue una aventura profundamente enriquecedora en el plano humano.",
-        hint: "Escribe el adjetivo con su acuerdo de género con 'une aventure' (femenino)",
-        ans: ["enrichissante"],
-        rule: "💡 <strong>Acuerdo de Género Obligatorio:</strong> 'Une aventure' es femenino singular. Debes escribir la <strong>'-e'</strong> final: <strong>enrichissante</strong>.",
-        example: "une expérience particulièrement enrichissante"
-      },
-      {
-        id: "recueil_ar3",
-        mode: "vocab",
-        cat: "verbes_c1",
-        source: "Sujet #11 · Févr 2026",
-        task: "Tâche 3 : Anti-Répétition (Remplacer 'dire')",
-        tense: "Verbe C1 de citation",
-        sentence: "Le premier document {gap} (souligner) avec insistance les retombées positives de cette politique.",
-        trans_es: "El primer documento destaca con insistencia las repercusiones positivas de esta política.",
-        hint: "Escribe el verbo de síntesis en presente (3ª pers. sing.) para 'destacar / subrayar' (reemplaza a 'dit que')",
-        ans: ["souligne"],
-        rule: "💡 <strong>Verbo de Síntesis C1:</strong> Nunca escribas <em>le document 1 dit</em>. El PDF repite 74 veces <strong>souligne</strong> (destaca / subraya).",
-        example: "le premier document souligne l'importance de"
-      },
-      {
-        id: "recueil_ar4",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #19 · Févr 2026",
-        task: "Tâche 3 : Anti-Répétition (Remplacer 'mauvais')",
-        tense: "Adjectif C1 d'impact négatif",
-        sentence: "Une sédentarité prolongée entraîne des conséquences {gap} (néfaste) sur le métabolisme.",
-        trans_es: "Un sedentarismo prolongado acarrea consecuencias nefastas / dañinas sobre el metabolismo.",
-        hint: "Escribe el adjetivo C1 en femenino plural (concuerda con 'des conséquences')",
-        ans: ["néfastes"],
-        rule: "💡 <strong>Vocabulario C1 + Plural:</strong> En vez de <em>de mauvaises choses</em>, usa <strong>néfastes</strong> con <strong>-s</strong> porque 'conséquences' está en plural.",
-        example: "des retombées néfastes sur la santé"
-      },
-      {
-        id: "recueil_ar5",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #23 · Mars 2026",
-        task: "Tâche 3 : Anti-Répétition (Remplacer 'très bon')",
-        tense: "Adjectif C1 d'impact positif",
-        sentence: "La pratique régulière d'une activité sportive s'avère hautement {gap} (bénéfique) pour l'esprit.",
-        trans_es: "La práctica regular de una actividad deportiva resulta sumamente beneficiosa para la mente.",
-        hint: "Escribe el adjetivo C1 para 'beneficioso / provechoso' (reemplaza a 'très bon')",
-        ans: ["bénéfique"],
-        rule: "💡 <strong>Vocabulario C1:</strong> Sustituye <em>c'est très bon</em> por <strong>bénéfique</strong> (o <em>salutaire</em>).",
-        example: "s'avère hautement bénéfique"
-      },
-      {
-        id: "recueil_ar6",
-        mode: "vocab",
-        cat: "collocations",
-        source: "Sujet #31 · Avril 2026",
-        task: "Tâche 3 : Anti-Répétition (Remplacer 'très important')",
-        tense: "Accord de Genre Féminin C1",
-        sentence: "La protection des données personnelles joue une fonction {gap} (primordial) à l'ère numérique.",
-        trans_es: "La protección de datos personales desempeña una función primordial / vital en la era digital.",
-        hint: "Escribe el adjetivo C1 con su acuerdo en femenino con 'une fonction'",
-        ans: ["primordiale"],
-        rule: "💡 <strong>Acuerdo de Género C1:</strong> 'Une fonction' es femenina singular. Escribe <strong>primordiale</strong> con <strong>'-e'</strong> final (reemplaza a <em>très important</em>).",
-        example: "joue un rôle primordial"
-      },
-      {
-        id: "recueil_ar7",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #36 · Avril 2026",
-        task: "Tâche 2 : Séjour à la montagne",
-        tense: "Accord de Genre Féminin en T2",
-        sentence: "Cette escapade en pleine forêt fut particulièrement {gap} (dépaysant) après une année stressante.",
-        trans_es: "Esta escapada en pleno bosque fue especialmente desconectadora tras un año estresante.",
-        hint: "Escribe el adjetivo con su acuerdo en femenino con 'cette escapade'",
-        ans: ["dépaysante"],
-        rule: "💡 <strong>Acuerdo de Género en Tâche 2:</strong> 'Cette escapade' es femenino singular. Debes escribir la <strong>'-e'</strong> final: <strong>dépaysante</strong>.",
-        example: "une expérience fort dépaysante"
-      },
-      {
-        id: "recueil_ar8",
-        mode: "combo",
-        cat: "mix",
-        source: "Sujet #41 · Mai 2026",
-        task: "Tâche 3 : Débat Téléphone en classe",
-        tense: "Adjectif d'inefficacité (Accord Fém.)",
-        sentence: "Une répression aveugle sans pédagogie serait totalement {gap} (contre-productif).",
-        trans_es: "Una represión ciega sin pedagogía sería totalmente contraproducente.",
-        hint: "Escribe la forma femenina de 'contre-productif' (concuerda con 'une répression')",
-        ans: ["contre-productive"],
-        rule: "💡 <strong>Acuerdo de Adjetivos en -if ➔ -ive:</strong> 'Une répression' es femenino singular. Los adjetivos que terminan en <em>-if</em> hacen su femenino en <strong>-ive</strong>: <strong>contre-productive</strong>.",
-        example: "une sanction contre-productive"
-      }
-    ];
-
-    // ══════════════════════════════════════════════════════════════════════
-    // STATE & ERROR RECYCLER (LOCALSTORAGE PERSISTENCE)
-    // ══════════════════════════════════════════════════════════════════════
-    const STORAGE_KEY_ERRORS = 'tcf_ee_vocab_errors_v1';
+    const STORAGE_KEY = 'tcf_ee_flash_errors_v2';
 
     let state = {
-      mode: 'vocab',
-      cat: 'all',
+      category: 'all',
       currentIndex: 0,
       score: 0,
       streak: 0,
@@ -1621,184 +1393,107 @@
       errorUuids: new Set()
     };
 
-    // Load persisted errors from localStorage
-    function loadSavedErrors() {
+    function loadErrors() {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY_ERRORS);
+        const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
-          const list = JSON.parse(raw);
-          if (Array.isArray(list)) {
-            state.errorUuids = new Set(list);
-          }
+          const arr = JSON.parse(raw);
+          state.errorUuids = new Set(arr);
         }
       } catch (e) {
         state.errorUuids = new Set();
       }
-      updateErrorBadge();
+      updateErrorBadges();
     }
 
-    function saveErrorsToStorage() {
+    function saveErrors() {
       try {
-        localStorage.setItem(STORAGE_KEY_ERRORS, JSON.stringify(Array.from(state.errorUuids)));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.errorUuids)));
       } catch (e) {}
-      updateErrorBadge();
+      updateErrorBadges();
     }
 
-    function updateErrorBadge() {
+    function updateErrorBadges() {
       const count = state.errorUuids.size;
-      const pillCount = document.getElementById('stat-errors-count');
-      const tabBadge = document.getElementById('errors-tab-badge');
-      if (pillCount) pillCount.textContent = count;
-      if (tabBadge) tabBadge.textContent = count;
-    }
-
-    function switchMode(newMode) {
-      state.mode = newMode;
-      state.cat = 'all';
-      state.currentIndex = 0;
-      state.answered = false;
-
-      // Update mode button styles
-      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById('btn-mode-' + newMode);
-      if (activeBtn) activeBtn.classList.add('active');
-
-      renderCategoryPills();
-      loadActiveQuestion();
-    }
-
-    function renderCategoryPills() {
-      const strip = document.getElementById('cat-strip-container');
-      let cats = [];
-
-      if (state.mode === 'vocab') {
-        cats = [
-          { id: 'all', label: '⚡ Tout le lexique du Recueil' },
-          { id: 'verbes_c1', label: '🚫 Verbes Riches C1 (Anti-Verbes Pauvres)' },
-          { id: 'collocations', label: '🎯 Collocations Reconnues (Juste milieu, etc.)' }
-        ];
-      } else if (state.mode === 'conj') {
-        cats = [
-          { id: 'all', label: '⚡ Toutes les conjugaisons du Recueil' },
-          { id: 'subjonctif', label: '👑 Subjonctif Obligatoire (T1 & T3)' },
-          { id: 'recit_passe', label: '📖 Imparfait & Passé Composé (T2)' }
-        ];
-      } else if (state.mode === 'combo') {
-        cats = [
-          { id: 'all', label: '🔥 Le Grand Mix 2026 (Phrases complètes)' }
-        ];
-      } else if (state.mode === 'errors') {
-        cats = [
-          { id: 'all', label: `🚨 Mes fautes archivées (${state.errorUuids.size})` }
-        ];
-      }
-
-      strip.innerHTML = cats.map(c => `
-        <button class="cat-pill ${state.cat === c.id ? 'active' : ''}" onclick="filterCat('${c.id}')">${c.label}</button>
-      `).join('');
-    }
-
-    function filterCat(catId) {
-      state.cat = catId;
-      state.currentIndex = 0;
-      state.answered = false;
-      renderCategoryPills();
-      loadActiveQuestion();
+      document.getElementById('stat-errors-count').textContent = count;
+      document.getElementById('tab-err-badge').textContent = count;
     }
 
     function getActivePool() {
-      if (state.mode === 'errors') {
-        // Return only items whose id is in state.errorUuids
-        return DATABASE_2026.filter(q => state.errorUuids.has(q.id));
+      if (state.category === 'errors') {
+        return FLASH_ITEMS.filter(it => state.errorUuids.has(it.id));
       }
-
-      let pool = DATABASE_2026.filter(q => q.mode === state.mode);
-      if (state.cat !== 'all') {
-        pool = pool.filter(q => q.cat === state.cat);
+      if (state.category === 'all') {
+        return FLASH_ITEMS;
       }
-      return pool;
+      return FLASH_ITEMS.filter(it => it.cat === state.category);
     }
 
-    function loadActiveQuestion() {
-      const pool = getActivePool();
-      const cardMain = document.getElementById('drill-card-main');
-      const emptyState = document.getElementById('error-empty-state');
-      const errBar = document.getElementById('error-manager-bar');
+    function switchCategory(cat) {
+      state.category = cat;
+      state.currentIndex = 0;
+      
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.cat-btn')).find(b => b.getAttribute('onclick').includes("'" + cat + "'"));
+      if (activeBtn) activeBtn.classList.add('active');
 
-      errBar.style.display = (state.mode === 'errors') ? 'flex' : 'none';
+      loadCurrentCard();
+    }
+
+    function loadCurrentCard() {
+      const pool = getActivePool();
+      const arenaBox = document.getElementById('arenaBox');
+      const emptyState = document.getElementById('emptyState');
+      const targetBox = document.getElementById('targetBox');
+      const inputZone = document.getElementById('inputZone');
+      const fb = document.getElementById('feedbackPanel');
+      const metaBox = document.querySelector('.card-meta');
+
+      fb.classList.remove('show', 'correct', 'wrong');
+      document.getElementById('resolveBtnWrap').style.display = 'none';
 
       if (!pool || pool.length === 0) {
-        if (state.mode === 'errors') {
-          // Show clean empty state for errors
-          document.getElementById('card-prompt').style.display = 'none';
-          document.querySelector('.interaction-area').style.display = 'none';
-          document.getElementById('feedback-panel').style.display = 'none';
+        if (state.category === 'errors') {
+          targetBox.style.display = 'none';
+          inputZone.style.display = 'none';
+          metaBox.style.display = 'none';
           emptyState.style.display = 'block';
-          document.getElementById('card-progress').textContent = '0 / 0';
           return;
         }
-        return;
       }
 
-      // Normal display
-      document.getElementById('card-prompt').style.display = 'block';
-      document.querySelector('.interaction-area').style.display = 'flex';
+      targetBox.style.display = 'block';
+      inputZone.style.display = 'flex';
+      metaBox.style.display = 'flex';
       emptyState.style.display = 'none';
 
       if (state.currentIndex >= pool.length) {
         state.currentIndex = 0;
       }
 
-      const q = pool[state.currentIndex];
+      const item = pool[state.currentIndex];
       state.answered = false;
 
-      // Update Badges & Progress
-      document.getElementById('card-source-badge').textContent = q.source;
-      document.getElementById('card-task-badge').textContent = q.task;
-      document.getElementById('card-type-badge').textContent = q.tense;
-      document.getElementById('card-progress').textContent = `Question ${state.currentIndex + 1} / ${pool.length}`;
+      document.getElementById('cardBadge').textContent = item.badge;
+      document.getElementById('cardProgress').textContent = (state.currentIndex + 1) + ' / ' + pool.length;
+      document.getElementById('targetWord').textContent = item.target;
+      document.getElementById('targetInstruction').textContent = item.prompt_es;
 
-      // Prompt Rendering
-      const promptBox = document.getElementById('card-prompt');
-      const verbHint = q.verb ? ` <em>(${q.verb})</em>` : (q.hint ? ` <span style="font-size:13px; color:var(--text-muted); font-family:var(--font-ui); font-style:italic;">[${q.hint}]</span>` : '');
-      const formatted = q.sentence.replace('{gap}', `<span class="prompt-gap">[ ... ]</span>${verbHint}`);
-      const esSub = q.trans_es ? `<div style="font-size:13px; color:#38bdf8; font-family:var(--font-ui); font-style:italic; font-weight:normal; margin-top:12px; border-top:1px solid rgba(255,255,255,0.06); padding-top:8px;">🇪🇸 <em>Traducción:</em> « ${q.trans_es} »</div>` : '';
-      promptBox.innerHTML = formatted + esSub;
-
-      // Reset Inputs
-      const textInput = document.getElementById('answer-input');
-      textInput.value = '';
-      textInput.className = 'drill-input';
-      textInput.disabled = false;
-      textInput.focus();
-
-      // TOUJOURS 100% ÉCRITURE AU CLAVIER (Obligatoire pour corriger l'orthographe, les accords et le lexique)
-      const optionsGrid = document.getElementById('options-grid');
-      const textWrap = document.getElementById('input-mode-text');
-      optionsGrid.style.display = 'none';
-      textWrap.style.display = 'flex';
-      textInput.placeholder = "Écris le mot exact (attention aux accords de genre -e, pluriel -s et accents)...";
-
-      // Hide feedback box
-      const fb = document.getElementById('feedback-panel');
-      fb.classList.remove('show', 'correct', 'wrong');
-      document.getElementById('resolve-error-btn-wrap').style.display = 'none';
+      const input = document.getElementById('drillInput');
+      input.value = '';
+      input.className = 'flash-input';
+      input.disabled = false;
+      input.focus();
     }
 
-    function selectOption(selectedOpt) {
-      if (state.answered) return;
-      evaluateAnswer(selectedOpt);
-    }
-
-    function submitAnswer() {
-      if (state.answered) return;
-      const val = document.getElementById('answer-input').value.trim();
-      if (!val) return;
-      evaluateAnswer(val);
-    }
-
-    function normalizeText(str) {
-      return str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    function handleKey(e) {
+      if (e.key === 'Enter') {
+        if (state.answered) {
+          nextItem();
+        } else {
+          submitFlashAnswer();
+        }
+      }
     }
 
     function diagnoseMistake(userAns, target) {
@@ -1807,146 +1502,126 @@
       const uLower = u.toLowerCase();
       const tLower = t.toLowerCase();
 
-      // Check stripped accents
       const uNoAcc = uLower.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       const tNoAcc = tLower.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
       if (uNoAcc === tNoAcc && uLower !== tLower) {
-        return "<div style='background:rgba(245,158,11,0.15); border-left:3px solid #f59e0b; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; color:#fef3c7;'>" +
-               "⚠️ <strong>Falta de ortografía / acentos:</strong> Escribiste <code>" + u + "</code> sin el acento correcto. En el examen real del TCF debes escribir <code>" + t + "</code> (usa la barra de acentos rápidos abajo o tu teclado).</div>";
+        return "<div style='color:#fcd34d;'>⚠️ <strong>Falta de ortografía / acentos:</strong> Escribiste <code>" + u + "</code> pero la ortografía oficial exige <code>" + t + "</code> con acento.</div>";
       }
 
-      // Check feminine -e
       if (tLower.endsWith('e') && !uLower.endsWith('e') && tLower.slice(0, -1) === uLower) {
-        return "<div style='background:rgba(239,68,68,0.15); border-left:3px solid #ef4444; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; color:#fee2e2;'>" +
-               "⚠️ <strong>Falta de concordancia de GÉNERO:</strong> Te faltó la <strong>'-e'</strong> final de femenino (escribiste <code>" + u + "</code> en vez de <code>" + t + "</code>). Concuerda con un sujeto femenino o voz pasiva con <em>être</em>.</div>";
+        return "<div style='color:#fca5a5;'>⚠️ <strong>Falta de concordancia de GÉNERO:</strong> Olvidaste la <strong>'-e'</strong> final de femenino (escribiste <code>" + u + "</code> en vez de <code>" + t + "</code>).</div>";
       }
 
-      // Check plural -s
       if (tLower.endsWith('s') && !uLower.endsWith('s') && tLower.slice(0, -1) === uLower) {
-        return "<div style='background:rgba(239,68,68,0.15); border-left:3px solid #ef4444; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; color:#fee2e2;'>" +
-               "⚠️ <strong>Falta de concordancia de NÚMERO (Plural):</strong> Te faltó la <strong>'-s'</strong> de plural (escribiste <code>" + u + "</code> en vez de <code>" + t + "</code>).</div>";
+        return "<div style='color:#fca5a5;'>⚠️ <strong>Falta de concordancia de NÚMERO (Plural):</strong> Olvidaste la <strong>'-s'</strong> final de plural (escribiste <code>" + u + "</code> en vez de <code>" + t + "</code>).</div>";
       }
 
-      // Check repetitive crutches
-      const crutches = ['faire', 'fait', 'font', 'avoir', 'a', 'ont', 'donner', 'donne', 'mettre', 'met', 'dire', 'dit', 'bon', 'mauvais', 'gros', 'beaucoup', 'tres', 'très', 'probleme', 'problème'];
-      if (crutches.includes(uNoAcc)) {
-        return "<div style='background:rgba(168,85,247,0.15); border-left:3px solid #a855f7; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; color:#f3e8ff;'>" +
-               "⚠️ <strong>Vocabulario repetitivo A2/B1:</strong> Escribiste <code>" + u + "</code> (palabra comodín). Para pasar de 9 a 12-13 debes erradicar estas palabras y escribir el término C1 <code>" + t + "</code>.</div>";
+      if ((tLower === 'un' || tLower === 'le') && (uLower === 'une' || uLower === 'la')) {
+        return "<div style='color:#fca5a5;'>⚠️ <strong>Error de GÉNERO:</strong> ¡Es una palabra MASCULINA en francés! Debes usar <code>" + t + "</code> (ej. <em>le problème, le système, le manque</em>).</div>";
       }
 
-      // Check conjugation confusion (e.g. -ent instead of participle or -er)
-      if (uLower.endsWith('ent') && (tLower.endsWith('ée') || tLower.endsWith('é') || tLower.endsWith('er'))) {
-        return "<div style='background:rgba(239,68,68,0.15); border-left:3px solid #ef4444; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; color:#fee2e2;'>" +
-               "⚠️ <strong>Confusión de modo/tiempo verbal:</strong> Escribiste la desinencia personal de presente <code>-ent</code> (ej. <em>ils utilisent</em>). Pero la estructura exige participio pasivo o infinitivo: <code>" + t + "</code>.</div>";
+      if ((tLower === 'une' || tLower === 'la') && (uLower === 'un' || uLower === 'le')) {
+        return "<div style='color:#fca5a5;'>⚠️ <strong>Error de GÉNERO:</strong> ¡Es una palabra FEMENINA! Termina en <em>-tion</em> o <em>-té</em>, se usa <code>" + t + "</code>.</div>";
       }
 
-      return "<div style='background:rgba(239,68,68,0.1); border-left:3px solid #ef4444; padding:8px 12px; margin:8px 0; border-radius:4px; font-size:13px; color:#fee2e2;'>" +
-             "⚠️ <strong>Error gramatical / léxico:</strong> Escribiste <code>" + u + "</code>. La forma oficial exigida por el examen es <code>" + t + "</code>.</div>";
+      if (tLower === 'cet' && uLower === 'ce') {
+        return "<div style='color:#fca5a5;'>⚠️ <strong>Regla de 'CET':</strong> Al empezar por vocal o H muda, se escribe obligatoriamente <code>cet</code> para evitar el choque de vocales.</div>";
+      }
+
+      if (tLower === 'cette' && (uLower === 'ce' || uLower === 'cet')) {
+        return "<div style='color:#fca5a5;'>⚠️ <strong>Démonstratif féminin:</strong> El sustantivo es femenino singular, debes escribir <code>cette</code>.</div>";
+      }
+
+      return "<div style='color:#fca5a5;'>⚠️ <strong>Respuesta incorrecta:</strong> Escribiste <code>" + u + "</code>. La forma exigida es <code>" + t + "</code>.</div>";
     }
 
-    function evaluateAnswer(userAns) {
+    function submitFlashAnswer() {
+      if (state.answered) return;
+      const input = document.getElementById('drillInput');
+      const userVal = input.value.trim();
+      if (!userVal) return;
+
       state.answered = true;
       const pool = getActivePool();
-      const q = pool[state.currentIndex];
+      const item = pool[state.currentIndex];
 
-      const normUser = normalizeText(userAns);
-      const isExactCorrect = q.ans.some(valid => valid.trim().toLowerCase() === userAns.trim().toLowerCase());
-      const isNormalizedCorrect = q.ans.some(valid => normalizeText(valid) === normUser);
+      const normUser = userVal.toLowerCase();
+      const isCorrect = item.ans.some(a => a.toLowerCase() === normUser);
 
-      const fb = document.getElementById('feedback-panel');
-      const fbTitle = document.getElementById('fb-title');
-      const fbRule = document.getElementById('fb-rule');
-      const fbEx = document.getElementById('fb-example');
-      const resolveBtnWrap = document.getElementById('resolve-error-btn-wrap');
+      const fb = document.getElementById('feedbackPanel');
+      const fbTitle = document.getElementById('fbTitle');
+      const fbDiag = document.getElementById('fbDiagnosis');
+      const fbRule = document.getElementById('fbRule');
+      const fbEx = document.getElementById('fbExample');
+      const resolveWrap = document.getElementById('resolveBtnWrap');
 
       fb.classList.remove('correct', 'wrong');
 
-      if (isExactCorrect) {
+      if (isCorrect) {
         state.score++;
         state.streak++;
         fb.classList.add('correct', 'show');
-        fbTitle.innerHTML = `✅ ¡Perfecto! Escribiste exactamente : <strong style="color:#34d399; margin-left:6px;">${userAns}</strong>`;
-        fbRule.innerHTML = `${q.rule}${q.trans_es ? `<div style="margin-top:10px; font-size:13px; color:#38bdf8;">🇪🇸 <em>Traducción en español:</em> « ${q.trans_es} »</div>` : ''}`;
-        fbEx.textContent = q.example ? "Frase auténtica del PDF 2026: « " + q.example + " »" : "";
-
-        const input = document.getElementById('answer-input');
         input.classList.add('correct');
         input.disabled = true;
 
-        if (state.mode === 'errors' || state.errorUuids.has(q.id)) {
-          resolveBtnWrap.style.display = 'block';
+        fbTitle.innerHTML = "✅ ¡Exacto! Escribiste correctamente : <strong style='color:#34d399; margin-left:6px;'>" + userVal + "</strong>";
+        fbDiag.innerHTML = "";
+        fbRule.innerHTML = item.rule;
+        fbEx.textContent = item.example ? "Exemple officiel : « " + item.example + " »" : "";
+
+        if (state.category === 'errors' || state.errorUuids.has(item.id)) {
+          resolveWrap.style.display = 'block';
         }
       } else {
         state.streak = 0;
-        state.errorUuids.add(q.id);
-        saveErrorsToStorage();
+        state.errorUuids.add(item.id);
+        saveErrors();
 
         fb.classList.add('wrong', 'show');
-        fbTitle.innerHTML = `❌ ¡Fallo registrado en tu Banco de Errores! Respuesta oficial : <strong style="color:#34d399; margin-left:6px;">${q.ans[0]}</strong>`;
-
-        // Detailed mistake diagnosis
-        const diagnosis = diagnoseMistake(userAns, q.ans[0]);
-        fbRule.innerHTML = `${diagnosis}${q.rule}${q.trans_es ? `<div style="margin-top:10px; font-size:13px; color:#38bdf8;">🇪🇸 <em>Traducción en español:</em> « ${q.trans_es} »</div>` : ''}`;
-        fbEx.textContent = q.example ? "Extrait officiel du PDF 2026: « " + q.example + " »" : "";
-
-        const input = document.getElementById('answer-input');
         input.classList.add('wrong');
         input.disabled = true;
+
+        fbTitle.innerHTML = "❌ ¡Error guardado en tu Banco de Errores! Respuesta oficial : <strong style='color:#34d399; margin-left:6px;'>" + item.ans[0] + "</strong>";
+        fbDiag.innerHTML = diagnoseMistake(userVal, item.ans[0]);
+        fbRule.innerHTML = item.rule;
+        fbEx.textContent = item.example ? "Exemple officiel : « " + item.example + " »" : "";
       }
 
-      // Update counters
       document.getElementById('stat-score').textContent = state.score;
       document.getElementById('stat-streak').textContent = state.streak + ' 🔥';
     }
 
-    function markCurrentErrorResolved() {
+    function nextItem() {
+      state.currentIndex++;
+      loadCurrentCard();
+    }
+
+    function markAssimilated() {
       const pool = getActivePool();
       if (!pool || pool.length === 0) return;
-      const q = pool[state.currentIndex];
+      const item = pool[state.currentIndex];
 
-      if (state.errorUuids.has(q.id)) {
-        state.errorUuids.delete(q.id);
-        saveErrorsToStorage();
-        document.getElementById('resolve-error-btn-wrap').style.display = 'none';
-        alert("✨ Notions assimilée ! Cette question est retirée de ta banque d'erreurs.");
-        if (state.mode === 'errors') {
-          renderCategoryPills();
-          loadActiveQuestion();
-        }
+      if (state.errorUuids.has(item.id)) {
+        state.errorUuids.delete(item.id);
+        saveErrors();
+        alert("✨ Notions assimilée ! Retirée de la banque d'erreurs.");
+        loadCurrentCard();
       }
     }
 
-    function clearAllErrors() {
-      if (state.errorUuids.size === 0) {
-        alert("Aucune erreur à effacer.");
-        return;
-      }
-      if (confirm(`Désires-tu vider les ${state.errorUuids.size} erreurs archivées ?`)) {
-        state.errorUuids.clear();
-        saveErrorsToStorage();
-        renderCategoryPills();
-        loadActiveQuestion();
-      }
-    }
-
-    function nextQuestion() {
-      state.currentIndex++;
-      loadActiveQuestion();
-    }
-
-    function insertAccent(char) {
-      const input = document.getElementById('answer-input');
-      const start = input.selectionStart || input.value.length;
-      const end = input.selectionEnd || input.value.length;
-      input.value = input.value.substring(0, start) + char + input.value.substring(end);
-      input.focus();
-      input.selectionStart = input.selectionEnd = start + 1;
+    function insertAccent(ch) {
+      const inp = document.getElementById('drillInput');
+      const start = inp.selectionStart || inp.value.length;
+      const end = inp.selectionEnd || inp.value.length;
+      inp.value = inp.value.substring(0, start) + ch + inp.value.substring(end);
+      inp.focus();
+      inp.selectionStart = inp.selectionEnd = start + 1;
     }
 
     window.onload = () => {
-      loadSavedErrors();
-      switchMode('vocab');
+      loadErrors();
+      switchCategory('all');
     };
   </script>
 </body>
