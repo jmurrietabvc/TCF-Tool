@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCF EE — Fiches de Mémorisation 10+ (Par Tâche & Grammaire Anti-Erreurs)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07080c;
+      --bg-surface: #101119;
+      --bg-card: #151722;
+      --bg-card-hover: #1a1d2c;
+      --text: #f6f2ea;
+      --text-muted: #9598b0;
+      --border: #222436;
+      --gold: #e5b93b;
+      --gold-glow: rgba(229, 185, 59, 0.15);
+      --green: #2ecc71;
+      --red: #e74c3c;
+      --blue: #3498db;
+      --purple: #9b59b6;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      background: rgba(16, 17, 25, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .badge-target {
+      background: var(--gold-glow);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--gold); }
+    .nav-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1000px;
+      margin: 40px auto 25px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 720px;
+      margin: 0 auto 24px;
+    }
+
+    /* Tabs Bar */
+    .tabs-bar {
+      max-width: 1000px;
+      margin: 0 auto 30px;
+      padding: 0 24px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+    .tab-btn.active {
+      background: var(--gold-glow);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Content Container */
+    .content-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Rule Alert Banner */
+    .rule-banner {
+      background: rgba(229, 185, 59, 0.08);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .rule-banner h3 {
+      font-size: 1.05rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rule-banner p {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Grid of Cards */
+    .fiches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .fiche-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .fiche-card:hover {
+      border-color: rgba(229, 185, 59, 0.4);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .fiche-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-verb { background: rgba(52, 152, 219, 0.15); color: var(--blue); border: 1px solid var(--blue); }
+    .tag-adj { background: rgba(155, 89, 182, 0.15); color: var(--purple); border: 1px solid var(--purple); }
+    .tag-rule { background: rgba(231, 76, 60, 0.15); color: var(--red); border: 1px solid var(--red); }
+    .tag-tip { background: rgba(46, 204, 113, 0.15); color: var(--green); border: 1px solid var(--green); }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* Items list inside card */
+    .word-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .word-item {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.88rem;
+    }
+    .word-term {
+      font-weight: 700;
+      color: var(--gold);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+    .word-gender {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+    .word-example {
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .word-example strong {
+      color: #fff;
+      font-style: normal;
+    }
+    .word-ref {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Comparison Table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.88rem;
+    }
+    .compare-table th, .compare-table td {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .compare-table th {
+      background: var(--bg-surface);
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .compare-table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .wrong-text {
+      color: var(--red);
+      font-weight: 600;
+      text-decoration: line-through;
+    }
+    .correct-text {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Copy Button */
+    .copy-pill {
+      background: transparent;
+      border: 1px solid rgba(229, 185, 59, 0.3);
+      color: var(--gold);
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .copy-pill:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.6rem; }
+      .tabs-bar { gap: 6px; }
+      .tab-btn { font-size: 0.8rem; padding: 8px 12px; }
+      .fiches-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-logo">TCF Studio X</span>
+      <span class="badge-target">OBJECTIF 10–13 / NCLC 7–8</span>
+    </a>
+    <div class="nav-links">
+      <a href="vocab-conjugaison.html" class="nav-btn">⚡ Entraîneur Vocab/Conjugaison</a>
+      <a href="squelette-atelier.html" class="nav-btn">🦴 Atelier Squelette</a>
+      <a href="index.html" class="nav-btn">🏠 Accueil</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Fiches de Mémorisation <span>10+</span> par Tâche</h1>
+    <p>
+      Les verbes d'action, adjetivos de alto rendimiento y las 4 reglas gramaticales críticas para erradicar los errores que te costaron el 9 en el TCF Canada. Todo extraído de las 228 respuestas oficiales del Recueil 2026.
+    </p>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" onclick="showTab('tab-t1')">✉️ Tâche 1 (Message/Courriel)</button>
+      <button class="tab-btn" onclick="showTab('tab-t2')">📖 Tâche 2 (Récit d'expérience)</button>
+      <button class="tab-btn" onclick="showTab('tab-t3')">⚖️ Tâche 3 (Prise de position)</button>
+      <button class="tab-btn" onclick="showTab('tab-grammaire')">🛡️ Kit Anti-Erreurs (Grammaire)</button>
+      <button class="tab-btn" onclick="showTab('tab-passetemps')">⏳ Passé Composé vs Imparfait</button>
+    </div>
+  </section>
+
+  <!-- Main Content Wrap -->
+  <main class="content-wrap">
+
+    <!-- ==================== TAB 1 : TÂCHE 1 ==================== -->
+    <div id="tab-t1" class="tab-panel active">
+      <div class="rule-banner">
+        <h3>🎯 Secret pour avoir 10+ en Tâche 1 (60–120 mots)</h3>
+        <p>
+          En la Tâche 1 no te compliques con filosofía. El corrector busca: <strong>formule d'appel</strong> adecuada (informal o formal), <strong>3 ideas claras</strong> (motivo, propuesta, detalles prácticos) y una <strong>formule de prise de congé</strong> cálida. ¡Cuidado con el modo del verbo después de <em>j'espère que</em> (indicativo) vs <em>afin que</em> (subjuntivo)!
+        </p>
+      </div>
+
+      <div class="fiches-grid">
+        <!-- Verbos Tâche 1 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Verbes d'Action (Tâche 1)</h3>
+            <span class="card-tag tag-verb">Top 10 Verbes</span>
+          </div>
+          <p class="card-desc">Reemplaza <em>vouloir / dire / faire</em> por estos verbos precisos utilizados en el PDF 2026.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>proposer de + inf.</span><button class="copy-pill" onclick="copyText('Je te propose de nous retrouver')">Copier</button></div>
+              <div class="word-example">« Je te <strong>propose de</strong> nous retrouver samedi prochain au parc. »</div>
+              <span class="word-ref">PDF Recueil 2026 · Sujet #1</span>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>partager (un moment / une passion)</span><button class="copy-pill" onclick="copyText('partager cette aventure avec toi')">Copier</button></div>
+              <div class="word-example">« Ce serait l'occasion idéale de <strong>partager</strong> cette aventure avec toi. »</div>
+              <span class="word-ref">PDF Recueil 2026 · Sujet #8</span>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>convenir à (être adéquat)</span><button class="copy-pill" onclick="copyText('si cet horaire te convient')">Copier</button></div>
+              <div class="word-example">« Fais-moi savoir si cet horaire <strong>te convient</strong>. »</div>
+              <span class="word-ref">PDF Recueil 2026 · Sujet #14</span>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>réserver / bloquer</span><button class="copy-pill" onclick="copyText('afin que je réserve nos places')">Copier</button></div>
+              <div class="word-example">« Préviens-moi vite <strong>afin que je réserve</strong> nos places. » (Subjontif)</div>
+              <span class="word-ref">PDF Recueil 2026 · Sujet #20</span>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>déplorer / regretter (réclamation)</span><button class="copy-pill" onclick="copyText('Je déplore le manque d\'organisation')">Copier</button></div>
+              <div class="word-example">« Je <strong>déplore</strong> le manque total d'organisation lors de l'activité. »</div>
+              <span class="word-ref">PDF Recueil 2026 · Sujet #2</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Adjectifs Tâche 1 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Adjectifs Clés (Tâche 1)</h3>
+            <span class="card-tag tag-adj">Top Adjectifs</span>
+          </div>
+          <p class="card-desc">Con sus formas Masculino y Femenino para evitar errores de acorde de género.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>disponible(s)</span><span class="word-gender">m/f invariable</span></div>
+              <div class="word-example">« Es-tu <strong>disponible</strong> vendredi soir pour en discuter ? »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>convivial / conviviale</span><span class="word-gender">m / f</span></div>
+              <div class="word-example">« L'ambiance promet d'être particulièrement <strong>conviviale</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>inadmissible(s)</span><span class="word-gender">m/f invariable (réclamation)</span></div>
+              <div class="word-example">« Ce retard est tout simplement <strong>inadmissible</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>enthousiaste(s)</span><span class="word-gender">m/f invariable</span></div>
+              <div class="word-example">« Je suis très <strong>enthousiaste</strong> à l'idée de débuter ce cours. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>enrichissant / enrichissante</span><span class="word-gender">m / f</span></div>
+              <div class="word-example">« Une sortie culturelle très <strong>enrichissante</strong> pour nous deux. »</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Formules Fixes Tâche 1 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Formules Clés Prêtes à l'Emploi</h3>
+            <span class="card-tag tag-tip">Automatismes</span>
+          </div>
+          <p class="card-desc">Memoriza estas oraciones completas del Recueil para ganar tiempo.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>Introduction amicale</span></div>
+              <div class="word-example">« J'espère que tout va bien de ton côté. Je t'écris pour te proposer... »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Relance d'intérêt</span></div>
+              <div class="word-example">« Ça te dirait de te joindre à moi pour cette sortie ? »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Prise de congé 10+</span></div>
+              <div class="word-example">« Fais-moi signe dès que possible pour que nous puissions nous organiser. »</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2 : TÂCHE 2 ==================== -->
+    <div id="tab-t2" class="tab-panel">
+      <div class="rule-banner">
+        <h3>🎯 Secret pour avoir 10+ en Tâche 2 (120–150 mots)</h3>
+        <p>
+          La Tâche 2 es <strong>SIEMPRE un relato en pasado</strong> (un viaje, un voluntariado, un evento deportivo, una compra decepcionante). Para sacar más de 10 necesitas alternar: <strong>Imparfait</strong> para describir el ambiente/contexto y <strong>Passé Composé</strong> para las acciones que viviste. Termina SIEMPRE recomendando la experiencia con la fórmula del PDF: <em>« Je recommande vivement cette expérience à tous ceux qui... »</em>.
+        </p>
+      </div>
+
+      <div class="fiches-grid">
+        <!-- Verbos Passé Composé vs Imparfait Tâche 2 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Verbes de Récit (Tâche 2)</h3>
+            <span class="card-tag tag-verb">Passé Composé / Imparfait</span>
+          </div>
+          <p class="card-desc">Los verbos más frecuentes en los 76 modelos de Tâche 2 del PDF 2026.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>permettre de (a permis de)</span><span class="word-gender">Passé Composé</span></div>
+              <div class="word-example">« Cette expérience m'<strong>a permis de</strong> découvrir une nouvelle passion. »</div>
+              <span class="word-ref">PDF Recueil 2026 (cité 27 fois)</span>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>participer à (j'ai participé à)</span><span class="word-gender">Passé Composé</span></div>
+              <div class="word-example">« Le mois dernier, <strong>j'ai participé à</strong> un festival culinaire local. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>se dérouler (s'est déroulé/e)</span><span class="word-gender">Passé Composé</span></div>
+              <div class="word-example">« L'événement <strong>s'est déroulé</strong> dans une ambiance festive. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>être (l'ambiance était...)</span><span class="word-gender">Imparfait (Description)</span></div>
+              <div class="word-example">« L'organisation <strong>était</strong> irréprochable et les participants <strong>étaient</strong> très chaleureux. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>laisser à désirer</span><span class="word-gender">Imparfait (Critique négative)</span></div>
+              <div class="word-example">« En revanche, la propreté des lieux <strong>laissait à désirer</strong>. »</div>
+              <span class="word-ref">Sujet #2 & #26</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Adjectifs Tâche 2 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Adjectifs d'Expérience (Tâche 2)</h3>
+            <span class="card-tag tag-adj">Évaluation & Ressenti</span>
+          </div>
+          <p class="card-desc">Asegura los puntos de vocabulario B2/C1 usando estos adjetivos precisos.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>inoubliable(s)</span><span class="word-gender">m/f invariable</span></div>
+              <div class="word-example">« Ce fut un séjour véritablement <strong>inoubliable</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>chaleureux / chaleureuse</span><span class="word-gender">m / f</span></div>
+              <div class="word-example">« Nous avons reçu un accueil très <strong>chaleureux</strong> de la part des habitants. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>dépaysant / dépaysante</span><span class="word-gender">m / f (qui change le quotidien)</span></div>
+              <div class="word-example">« Une escapade en pleine nature particulièrement <strong>dépaysante</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>festif / festive</span><span class="word-gender">m / f</span></div>
+              <div class="word-example">« Toute la ville était plongée dans une atmosphère <strong>festive</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>décevant / décevante</span><span class="word-gender">m / f (expérience négative)</span></div>
+              <div class="word-example">« La qualité du service était hélas très <strong>décevante</strong>. »</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Formule de Conclusion Tâche 2 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">La Formule Magique de Fin</h3>
+            <span class="card-tag tag-tip">Recommandation</span>
+          </div>
+          <p class="card-desc">Aparece en más de 45 de los 76 modelos oficiales del PDF 2026:</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>Recommandation Positive</span></div>
+              <div class="word-example">« Je <strong>recommande vivement</strong> cette expérience à tous ceux qui souhaitent se ressourcer. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Mise en garde nuancée</span></div>
+              <div class="word-example">« Bien que le tarif soit élevé, cela en vaut largement la peine. »</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3 : TÂCHE 3 ==================== -->
+    <div id="tab-t3" class="tab-panel">
+      <div class="rule-banner">
+        <h3>🎯 Secret pour avoir 10+ en Tâche 3 (120–180 mots)</h3>
+        <p>
+          La Tâche 3 es un <strong>ensayo argumentativo</strong> basado en dos documentos contradictorios. Nunca digas solamente <em>« Je pense que »</em> o <em>« Je suis d'accord »</em>. Utiliza verbos de síntesis (<em>le document 1 souligne... tandis que le second rappelle...</em>) y verbos de impacto causal (<em>engendrer, favoriser, nuire</em>).
+        </p>
+      </div>
+
+      <div class="fiches-grid">
+        <!-- Verbos de Argumentación Tâche 3 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Verbes de Synthèse (Tâche 3)</h3>
+            <span class="card-tag tag-verb">Objectif C1</span>
+          </div>
+          <p class="card-desc">Verbos para citar y contrastar las opiniones de los dos textos.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>souligner (le doc. 1 souligne...)</span><button class="copy-pill" onclick="copyText('souligne que')">Copier</button></div>
+              <div class="word-example">« Le premier texte <strong>souligne</strong> les bienfaits de cette pratique... »</div>
+              <span class="word-ref">PDF Recueil 2026 (cité 74 fois !)</span>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>rappeler / mettre en avant</span><button class="copy-pill" onclick="copyText('met en avant le fait que')">Copier</button></div>
+              <div class="word-example">« Tandis que le second document <strong>met en avant</strong> les dérives possibles. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>engendrer (des conséquences)</span><button class="copy-pill" onclick="copyText('engendrer des dérives')">Copier</button></div>
+              <div class="word-example">« Une utilisation excessive peut <strong>engendrer</strong> des tensions sociales. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>constituer un enjeu</span><button class="copy-pill" onclick="copyText('constitue un enjeu majeur')">Copier</button></div>
+              <div class="word-example">« Ce phénomène <strong>constitue un véritable enjeu</strong> de santé publique. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>concilier (deux aspects)</span><button class="copy-pill" onclick="copyText('concilier vie professionnelle et vie personnelle')">Copier</button></div>
+              <div class="word-example">« Il convient de <strong>concilier</strong> impératifs économiques et bien-être des salariés. »</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Adjetivos Argumentativos Tâche 3 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Adjectifs d'Analyse (Tâche 3)</h3>
+            <span class="card-tag tag-adj">B2 / C1 Nuance</span>
+          </div>
+          <p class="card-desc">Adjetivos binarios (positivos vs negativos) para estructurar pros y contras.</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>bénéfique / néfaste</span><span class="word-gender">Positif vs Négatif</span></div>
+              <div class="word-example">« Si cette mesure est <strong>bénéfique</strong> à court terme, ses effets à long terme sont <strong>néfastes</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>primordial / primordiale</span><span class="word-gender">m / f (essentiel)</span></div>
+              <div class="word-example">« Il est <strong>primordial</strong> d'encadrer cette pratique par une réglementation stricte. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>indispensable(s)</span><span class="word-gender">m/f invariable</span></div>
+              <div class="word-example">« Une sensibilisation des jeunes s'avère <strong>indispensable</strong>. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>controversé / controversée</span><span class="word-gender">m / f (sujet de débat)</span></div>
+              <div class="word-example">« Cette question demeure vivement <strong>controversée</strong> au sein de l'opinion. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>contre-productif / -ve</span><span class="word-gender">m / f (effet inverse)</span></div>
+              <div class="word-example">« Une interdiction totale serait totalement <strong>contre-productive</strong>. »</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Structure d'avis Tâche 3 -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">Structure de Prise de Position</h3>
+            <span class="card-tag tag-tip">Équilibre 10+</span>
+          </div>
+          <p class="card-desc">Cómo expresar tu opinión con matiz sin sonar dogmático:</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>Trouver un juste milieu</span></div>
+              <div class="word-example">« À mon sens, il est nécessaire de <strong>trouver un juste milieu</strong> entre liberté et encadrement. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Partager l'avis</span></div>
+              <div class="word-example">« Je <strong>partage pleinement l'avis</strong> selon lequel l'éducation reste la clé de voûte. »</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4 : KIT ANTI-ERREURS (GRAMMAIRE) ==================== -->
+    <div id="tab-grammaire" class="tab-panel">
+      <div class="rule-banner">
+        <h3>🛡️ Kit Anti-Erreurs : Les 4 Pièges qui font perdre 3 points sur la note finale</h3>
+        <p>
+          Los evaluadores del TCF penalizan con severidad los errores sistemáticos de <strong>Ce/Cet/Cette/Ces</strong>, los <strong>géneros de palabras comunes</strong> y los <strong>acuerdos de plural</strong>. Domina estas 4 tablas y blindarás tu examen.
+        </p>
+      </div>
+
+      <div class="fiches-grid">
+        <!-- RÈGLE 1 : CE / CET / CETTE / CES -->
+        <div class="fiche-card" style="grid-column: 1 / -1;">
+          <div class="fiche-card-header">
+            <h3 class="card-title">1. La Règle Infaillible : Ce vs Cet vs Cette vs Ces</h3>
+            <span class="card-tag tag-rule">Erreur #1 des candidats</span>
+          </div>
+          <p class="card-desc">Aprende esta distinción de 10 segundos y nunca más te equivocarás:</p>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Démonstratif</th>
+                <th>S'utilise devant...</th>
+                <th>Exemples Corrects ✅</th>
+                <th>Erreurs Typiques à Éviter ❌</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CE</strong></td>
+                <td>Masculin Singulier commençant par une <strong>consonne</strong></td>
+                <td><span class="correct-text">Ce projet, ce voyage, ce problème, ce sujet</span></td>
+                <td><span class="wrong-text">Cette projet, ce avis</span></td>
+              </tr>
+              <tr>
+                <td><strong>CET</strong></td>
+                <td>Masculin Singulier commençant par une <strong>voyelle</strong> ou un <strong>H muet</strong> (liaison phonétique)</td>
+                <td><span class="correct-text">Cet événement, cet avis, cet homme, cet hôtel, cet été, cet outil</span></td>
+                <td><span class="wrong-text">Ce événement, ce outil, cette homme</span></td>
+              </tr>
+              <tr>
+                <td><strong>CETTE</strong></td>
+                <td><strong>Féminin</strong> Singulier (qu'il commence par consonne ou voyelle)</td>
+                <td><span class="correct-text">Cette expérience, cette idée, cette situation, cette mesure</span></td>
+                <td><span class="wrong-text">Ce expérience, cet idée, cette problème</span></td>
+              </tr>
+              <tr>
+                <td><strong>CES</strong></td>
+                <td><strong>Pluriel</strong> (Masculin OU Féminin devant consonne ou voyelle)</td>
+                <td><span class="correct-text">Ces problèmes, ces solutions, ces avantages, ces gens</span></td>
+                <td><span class="wrong-text">Ce problèmes, ses problèmes (attention: ses = possessif !)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RÈGLE 2 : LES PIÈGES DE GENRE -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">2. Les Faux Amis de Genre du TCF</h3>
+            <span class="card-tag tag-rule">Genre Masculin vs Féminin</span>
+          </div>
+          <p class="card-desc">Palabras que todo hispanohablante confunde por interferencia con el español:</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>LE problème, LE système, LE thème</span><span class="word-gender">Toujours MASCULIN (-ème)</span></div>
+              <div class="word-example">✅ « <strong>Un</strong> problème complexe » (❌ jamais <em>une problème</em>)</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>LE rôle, LE programme, LE groupe</span><span class="word-gender">Toujours MASCULIN</span></div>
+              <div class="word-example">✅ « <strong>Ce</strong> programme éducatif joue <strong>un</strong> rôle clé. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>LE manque, LE domaine, LE modèle</span><span class="word-gender">Toujours MASCULIN</span></div>
+              <div class="word-example">✅ « Je déplore <strong>un</strong> manque de clarté. »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>LA situation, LA solution, LA décision</span><span class="word-gender">Toujours FÉMININ (-tion/-sion)</span></div>
+              <div class="word-example">✅ « <strong>Une</strong> solution efficace » (accord en -e)</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>L'activité, LA société, LA responsabilité</span><span class="word-gender">Toujours FÉMININ (-té)</span></div>
+              <div class="word-example">✅ « <strong>Cette</strong> activité enrichissante »</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- RÈGLE 3 : ACCORDS EN PLURIEL ET FÉMININ -->
+        <div class="fiche-card">
+          <div class="fiche-card-header">
+            <h3 class="card-title">3. Accords : Pluriels & Féminins Invisibles</h3>
+            <span class="card-tag tag-tip">Checklist de Relecture</span>
+          </div>
+          <p class="card-desc">El 80% de los puntos se pierden en la relecture por olvidar la 'e' o la 's':</p>
+          <ul class="word-list">
+            <li class="word-item">
+              <div class="word-term"><span>Adjectif après nom féminin</span></div>
+              <div class="word-example">« Une expérience enrichissant<strong>e</strong> » (ajoute le -e)</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Adjectif après nom pluriel</span></div>
+              <div class="word-example">« Des initiatives novatric<strong>es</strong> et bénéfiqu<strong>es</strong> » (ajoute le -s)</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Participes Passés avec ÊTRE</span></div>
+              <div class="word-example">« Elles sont venu<strong>es</strong> », « Nous sommes resté<strong>s</strong> »</div>
+            </li>
+            <li class="word-item">
+              <div class="word-term"><span>Verbes après semi-auxiliaire</span></div>
+              <div class="word-example">« Je veux amélior<strong>er</strong> » (jamais <em>je veux améliore</em>)</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5 : PASSÉ COMPOSÉ VS IMPARFAIT ==================== -->
+    <div id="tab-passetemps" class="tab-panel">
+      <div class="rule-banner">
+        <h3>⏳ La Règle de la Caméra de Cinéma : Passé Composé vs Imparfait</h3>
+        <p>
+          Para tu Tâche 2 (Récit d'expérience), imagina que estás filmando una película:
+          <br>• <strong>L'Imparfait = Le Décor (La photo fixe, le climat, l'émotion constante, ce qui durait).</strong>
+          <br>• <strong>Le Passé Composé = L'Action (Ce qui s'est produit, le coup de théâtre, l'événement précis qui a commencé et s'est terminé).</strong>
+        </p>
+      </div>
+
+      <div class="fiches-grid">
+        <div class="fiche-card" style="grid-column: 1 / -1;">
+          <h3 class="card-title" style="margin-bottom: 12px;">Tableau Comparatif & Déclencheurs Temporels</h3>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Critère</th>
+                <th>Imparfait (Le Décor) 📸</th>
+                <th>Passé Composé (L'Action) 🎬</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Rôle dans le récit</strong></td>
+                <td>Description de l'état, du temps météo, des sentiments, du décor</td>
+                <td>Action ponctuelle, succession d'événements, changement brutal</td>
+              </tr>
+              <tr>
+                <td><strong>Mots déclencheurs</strong></td>
+                <td>
+                  <em>Tous les jours, souvent, pendant que, à cette époque, le ciel était, j'avais l'impression de...</em>
+                </td>
+                <td>
+                  <em>Soudain, tout à coup, un jour, d'abord, ensuite, finalement, le mois dernier, hier...</em>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Verbes typiques du Recueil</strong></td>
+                <td>
+                  • Il <strong>faisait</strong> un soleil radieux.<br>
+                  • Les rues <strong>étaient</strong> animées.<br>
+                  • J'<strong>avais</strong> hâte d'arriver.<br>
+                  • L'ambiance <strong>laissait</strong> à désirer.
+                </td>
+                <td>
+                  • J'<strong>ai décidé</strong> de partir.<br>
+                  • Nous <strong>avons visité</strong> le musée.<br>
+                  • Un imprévu <strong>a éclaté</strong>.<br>
+                  • Cette sortie m'<strong>a permis</strong> de comprendre.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>La formule combinée 10+</strong></td>
+                <td colspan="2">
+                  <span class="correct-text">« Pendant que nous <strong>marchions</strong> (imparfait) tranquillement dans les ruelles, soudain la pluie <strong>a commencé</strong> (passé composé) à tomber. »</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      const targetPanel = document.getElementById(tabId);
+      if (targetPanel) targetPanel.classList.add('active');
+      
+      // Update active button
+      event.currentTarget.classList.add('active');
+      window.scrollTo({ top: 220, behavior: 'smooth' });
+    }
+
+    function copyText(str) {
+      navigator.clipboard.writeText(str).then(() => {
+        alert('Copié dans le presse-papier : ' + str);
+      });
+    }
+  </script>
+</body>
+</html>
