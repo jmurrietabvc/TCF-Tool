@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vocab-conjugaison-memory.css">
+  <script src="vocab-conjugaison-memory.js" defer></script>
   <style>
     :root {
       --bg: #090a10;
@@ -561,7 +563,7 @@
   <header class="topbar">
     <a href="index.html" class="brand">⚡ Flash <span>TCF 10+</span></a>
     <div class="nav-actions">
-      <button onclick="toggleStrategyGuide(true)" class="nav-link" style="background:none;border:none;cursor:pointer;color:var(--cyan);font-weight:700;">🎯 Guía 9➔13</button>
+      <button onclick="toggleStrategyGuide(true)" class="nav-link" style="background:none;border:none;cursor:pointer;color:var(--cyan);font-weight:700;">🎯 Guía EE</button>
       <a href="fiches-10plus.html" class="nav-link">📑 Fiches</a>
       <a href="squelette-atelier.html" class="nav-link">🦴 Squelette</a>
       <a href="index.html" class="nav-link">🏠 Hub</a>
@@ -571,20 +573,30 @@
   <!-- Clean Controls (Single Dropdown + Error Toggle, zero side-scrolling) -->
   <div class="controls-deck">
     <select id="categorySelect" class="dropdown-select" onchange="onCategoryChange(this.value)">
-      <option value="all">🌟 Mix Total (148 items)</option>
+      <option value="all">🌟 Mix Total</option>
       <option value="indicatif_pluriel">👥 Plurales de Indicativo: ils/vous (font, peuvent, doivent...)</option>
       <option value="genre">♂️♀️ Género: Falsos amigos (un / une)</option>
       <option value="accents">🎯 Acentos & Cedillas (é, è, ê, à, ç, û...)</option>
       <option value="conj">🔀 Subjuntivo, Condicional & Acuerdos (32)</option>
+      <option value="past_narrative">🕰️ Passé composé o imparfait en T2</option>
       <option value="contractions">🔗 Contracciones en Contexto: au, du, aux, des...</option>
       <option value="demonstratif">👉 Demostrativos: Ce / Cet / Cette / Ces</option>
       <option value="accords">🎭 Frases completas: un/une + palabra + descripción</option>
-      <option value="antirepetition">🎯 Vocabulario B2 (12-13): Anti-repetición</option>
+      <option value="antirepetition">🎯 Vocabulario útil: alternativas a verbos repetidos</option>
     </select>
     <button class="btn-err-toggle" id="btnErrToggle" onclick="toggleErrorMode()">
       🚨 Errores (<span id="errCountBadge">0</span>)
     </button>
   </div>
+
+  <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle">
+    <div class="memory-head"><div><span class="memory-eyebrow">Basado en modelos del PDF proporcionado</span><h2 id="memoryTitle">Memoriza verbos y adjetivos por tâche</h2><p>Aprende una forma segura, oculta el francés y comprueba si puedes recordarla. Después practica la regla que te falla.</p></div><span id="memory-count" class="memory-count">0/20 marcadas</span></div>
+    <div class="memory-toolbar"><div class="memory-tabs" role="group" aria-label="Elegir lista por tarea"><button type="button" data-task="t1" class="active" aria-pressed="true">Tâche 1 · mensajes</button><button type="button" data-task="t2" aria-pressed="false">Tâche 2 · experiencias</button><button type="button" data-task="t3" aria-pressed="false">Tâche 3 · opinión</button></div><button type="button" id="memory-toggle" class="memory-toggle" aria-pressed="false">Ocultar francés para recordar</button></div>
+    <p class="memory-intro" id="memory-intro"></p><p class="memory-source" id="memory-source"></p>
+    <div class="memory-grid"><div class="memory-panel"><h3>12 verbos de alto uso</h3><p>Memoriza el verbo con su preposición y una frase breve.</p><div id="memory-verbs" class="memory-list"></div></div><div class="memory-panel"><h3>8 adjetivos seguros</h3><p>Memoriza el femenino y el plural con un nombre.</p><div id="memory-adjectives" class="memory-list"></div></div></div>
+    <div class="grammar-map"><h3>Passé composé + imparfait cuando narras en T2</h3><div class="grammar-columns"><p><strong>Imparfait = escenario o hábito.</strong> ¿Cómo era la situación? ¿Qué pasaba habitualmente? <em>Il y avait beaucoup de monde. L’ambiance était chaleureuse.</em></p><p><strong>Passé composé = hechos terminados.</strong> ¿Qué ocurrió y qué hiciste después? <em>J’ai participé à l’atelier. Nous avons rencontré un problème.</em></p></div><p><strong>Juntos:</strong> <em>L’ambiance était chaleureuse et nous avons commencé l’activité à neuf heures.</em> Primero describes el fondo; luego cuentas el hecho. El marcador temporal por sí solo no decide el tiempo.</p><div class="memory-drills"><button type="button" data-drill="pastChoice">Practicar 12 contrastes de pasado</button><button type="button" data-drill="demo">Practicar ce/cet/cette/ces</button><button type="button" data-drill="agree">Practicar género y acuerdo</button><button type="button" data-drill="subject">Practicar plural del verbo</button></div></div>
+    <p class="memory-note">T1 y T2 pueden pedir otros tipos de texto: adapta la lista a la consigna y al destinatario. Algunos modelos del PDF superan sus propios límites de palabras. Esta lista es práctica personal, no una promesa de nota.</p>
+  </section>
 
   <!-- Minimalist Flashcard Container -->
   <div class="flashcard">
@@ -650,7 +662,7 @@
       <div class="st-left">
         <span class="st-icon">🎯</span>
         <div class="st-title-group">
-          <span class="st-title">Guía de Examen: Cómo pasar de 9 a 13</span>
+          <span class="st-title">Guía EE: consigna, registro y claridad</span>
           <span class="st-sub">Aplica estos ejercicios directamente en Tâche 1, 2 y 3</span>
         </div>
       </div>
@@ -669,23 +681,23 @@
       <div class="st-pane" id="pane-t1">
         <div class="st-diff-box">
           <div class="diff-col col-9">
-            <span class="diff-tag">❌ Lo que te deja en 9 (Español traducido)</span>
+            <span class="diff-tag">Ejemplo incompleto: faltan datos pedidos</span>
             <p>« Bonjour, je veux savoir les informations. C'est combien le prix ? Envoyez-moi un message. Merci. »</p>
-            <div class="diff-why">⚠️ Pierdes puntos por: falta de cortesía formal, preguntas secas tipo A2 y falta de fórmulas estándar.</div>
+            <div class="diff-why">Revisa destinatario, registro y cada dato solicitado por la consigna. La fórmula de saludo depende de a quién escribes.</div>
           </div>
           <div class="diff-col col-13">
-            <span class="diff-tag">✅ Cómo sacar 12–13 (Francés natural y cortés)</span>
+            <span class="diff-tag">Versión formal más completa</span>
             <p>« Madame, Monsieur,<br><strong>Je me permets de vous écrire afin d'obtenir</strong> des renseignements <em>au sujet du</em> séjour.<br>Dans un premier temps, <strong>pourriez-vous me préciser</strong> la date exacte ? Par ailleurs, <strong>je souhaiterais savoir</strong> si un tarif de groupe est prévu.<br>En vous remerciant par avance, je vous prie d'agréer mes salutations distinguées. »</p>
-            <div class="diff-why">✨ Ganas 12–13 por: condicional de cortesía, contracción correcta (<em>du séjour</em>) y conectores fluidos.</div>
+            <div class="diff-why">El condicional de cortesía y <em>du séjour</em> son útiles. Asegúrate de responder también todos los puntos específicos de la consigna.</div>
           </div>
         </div>
 
         <div class="st-checklist">
           <div class="st-check-title">🧩 Lo que practicas en este Flash Drill y dónde ponerlo:</div>
           <ul class="st-list">
-            <li><strong>Condicional de cortesía:</strong> Escribe siempre <code>Je souhaiterais</code> o <code>Pourriez-vous me préciser</code> (categoría <em>Conjugaison</em>). Nunca uses <em>"Je veux"</em>.</li>
+            <li><strong>Registro formal:</strong> <code>Je souhaiterais</code> y <code>Pourriez-vous me préciser</code> son opciones seguras para una institución. Con un amigo, usa un tono natural.</li>
             <li><strong>Contracciones exactas:</strong> <code>au sujet du séjour</code>, <code>participer au projet</code> (categoría <em>Contractions</em>). Cero <em>"de le"</em> o <em>"à le"</em>.</li>
-            <li><strong>Extensión recomendada:</strong> 80 a 100 palabras (el rango oficial es 60-120). Si te quedas en 65, tu vocabulario se verá muy pobre.</li>
+            <li><strong>Extensión:</strong> respeta el rango de la consigna (a menudo 60–120 palabras en T1). Revisa cobertura de puntos antes de añadir frases de relleno.</li>
           </ul>
         </div>
       </div>
@@ -694,14 +706,14 @@
       <div class="st-pane" id="pane-t2" style="display:none;">
         <div class="st-diff-box">
           <div class="diff-col col-9">
-            <span class="diff-tag">❌ Lo que te deja en 9 (Lista plana de acciones)</span>
+            <span class="diff-tag">Ejemplo breve con pocos detalles</span>
             <p>« Hier je suis allé au restaurant avec des amis. Nous avons mangé et parlé. C'était très bon et très amusant. Je recommande. »</p>
-            <div class="diff-why">⚠️ Pierdes puntos por: usar solo Passé Composé plano, repetir "très", cero atmósfera ni vocabulario descriptivo.</div>
+            <div class="diff-why">Faltan detalles de la experiencia. Si describes el contexto, el imparfait puede ayudarte; no hace falta forzarlo en todas las frases.</div>
           </div>
           <div class="diff-col col-13">
-            <span class="diff-tag">✅ Cómo sacar 12–13 (Doble velocidad: Ambiente + Acción + Crítica)</span>
+            <span class="diff-tag">Versión con contexto, acciones y reacción</span>
             <p>« Le week-end dernier, <strong>il faisait un temps magnifique</strong> et <strong>l'ambiance était particulièrement chaleureuse</strong>.<br>Cette expérience nous a permis de <em>nous ressourcer</em> et de <em>tisser des liens</em> durables.<br>Certes, <strong>le service laissait un peu à désirer</strong> en raison de l'affluence, mais cette aventure reste mémorable. Je vous invite vivement à tenter l'expérience ! »</p>
-            <div class="diff-why">✨ Ganas 12–13 por: Imparfait para el ambiente + Passé Composé para la acción + crítica sutil que demuestra madurez.</div>
+            <div class="diff-why">El imparfait describe el ambiente y el passé composé cuenta hechos. Incluye una dificultad o crítica solo si corresponde a la consigna y a tu experiencia.</div>
           </div>
         </div>
 
@@ -719,23 +731,23 @@
       <div class="st-pane" id="pane-t3" style="display:none;">
         <div class="st-diff-box">
           <div class="diff-col col-9">
-            <span class="diff-tag">❌ Lo que te deja en 9 (Dar tu opinión desde el inicio)</span>
+            <span class="diff-tag">Ejemplo que no resume los dos documentos</span>
             <p>« Dans ce texte, je pense que le télétravail est très bien. Les gens sont contents. Mais il y a un problème pour les entreprises. Moi je préfère travailler chez moi. »</p>
-            <div class="diff-why">⚠️ Regla de oro violada: si dices "je pense / selon moi" en el párrafo 1, el evaluador del TCF te penaliza severamente (máximo 9/20).</div>
+            <div class="diff-why">En T3, identifica primero lo que aporta cada documento y su relación. Después desarrolla tu postura cuando la consigna lo pida.</div>
           </div>
           <div class="diff-col col-13">
-            <span class="diff-tag">✅ Cómo sacar 12–13 (Síntesis neutral + Tu opinión en Párrafo 2)</span>
-            <p>« <strong>Ce sujet représente un enjeu majeur</strong> dans notre société actuelle. D'un côté, le premier document <strong>met en avant les aspects bénéfiques</strong> ; de l'autre, le second <strong>souligne les effets néfastes</strong>.<br>Pour ma part, <strong>bien que cela fasse débat</strong>, <strong>il est essentiel que les pouvoirs publics adoptent</strong> des règles claires, <strong>afin que nous puissions</strong> trouver un équilibre durable. »</p>
-            <div class="diff-why">✨ Ganas 12–13 por: Párrafo 1 100% neutral + Párrafo 2 con Subjuntivo (<em>fasse</em>, <em>adoptent</em>, <em>puissions</em>) + adjetivos ricos (<em>bénéfique / néfaste</em>).</div>
+            <span class="diff-tag">Ejemplo de síntesis y opinión separadas</span>
+            <p>« Le premier document souligne que le télétravail réduit les déplacements. Le second indique qu'il peut compliquer la communication entre collègues.<br>Pour ma part, je pense qu'une formule souple serait utile : elle permettrait de travailler à distance certains jours tout en gardant des réunions en personne. »</p>
+            <div class="diff-why">La separación entre documentos y opinión mejora la claridad. Usa el subjuntivo solo si dominas la estructura; no es una fórmula de puntuación.</div>
           </div>
         </div>
 
         <div class="st-checklist">
           <div class="st-check-title">🧩 Lo que practicas en este Flash Drill y dónde ponerlo:</div>
           <ul class="st-list">
-            <li><strong>Párrafo 1 (CERO "je / moi"):</strong> Usa <code>un enjeu majeur</code>, <code>le document souligne...</code>, <code>bénéfique / néfaste</code> (categoría <em>Vocabulario B2</em>).</li>
-            <li><strong>Párrafo 2 (Tu opinión con Subjuntivo):</strong> <code>Bien que cela fasse débat...</code>, <code>Il faut que l'on sensibilise...</code>, <code>afin que nous puissions...</code> (categoría <em>Conjugaison</em>).</li>
-            <li><strong>Género sin fallos:</strong> <code>un problème</code>, <code>un avantage</code>, <code>une solution</code> (categoría <em>Genre</em>). El evaluador castiga de inmediato "une problème".</li>
+            <li><strong>Síntesis:</strong> presenta las dos ideas centrales y su relación con frases como <code>le premier document souligne...</code> y <code>le second document met en avant...</code>.</li>
+            <li><strong>Opinión:</strong> defiende una postura con una razón y un ejemplo. Prefiere una frase correcta en indicativo o condicional a un subjuntivo inseguro.</li>
+            <li><strong>Género:</strong> practica unidades completas: <code>un problème</code>, <code>un avantage</code>, <code>une solution</code>. Así reduces dudas durante la redacción.</li>
             <li><strong>Extensión recomendada:</strong> 150 a 170 palabras (el rango oficial es 120-180).</li>
           </ul>
         </div>
@@ -747,12 +759,12 @@
     // 100% UNBIASED, ZERO-SPOILER DATASET (BALANCED MASCULINE & FEMININE)
     const ITEMS = [
       // 1. GENRE DU NOM & FAUX AMIS (Balanced: alternates M and F)
-      { id:"g1", cat:"genre", badge:"Genre", target:"PROBLÈME", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> Todos los nombres en <em>-ème</em> son masculinos: <em>un problème</em>." },
+      { id:"g1", cat:"genre", badge:"Genre", target:"PROBLÈME", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> Memoriza la unidad <em>un problème</em>; la terminación -ème no garantiza el género de todos los nombres." },
       { id:"g15", cat:"genre", badge:"Genre", target:"SOLUTION", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Palabras en <em>-tion</em> son femeninas: <em>une solution</em>." },
       { id:"g10", cat:"genre", badge:"Genre", target:"AVANTAGE", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la ventaja', en francés termina en <em>-age</em> (masculino): <em>un avantage</em>." },
       { id:"g21", cat:"genre", badge:"Genre", target:"COULEUR", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el color', en francés termina en <em>-eur</em> (femenino): <em>une couleur</em>." },
       { id:"g6", cat:"genre", badge:"Genre", target:"MANQUE", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la falta', pero en francés es masculino: <em>un manque</em>." },
-      { id:"g22", cat:"genre", badge:"Genre", target:"ERREUR", sub:"¿Masculino o femenino? (un / une)", ans:["une","l'","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el error', en francés termina en <em>-eur</em>: <em>une erreur</em>." },
+      { id:"g22", cat:"genre", badge:"Genre", target:"ERREUR", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Memoriza <em>une erreur</em>; <em>l'erreur</em> no revela el género." },
       { id:"g9", cat:"genre", badge:"Genre", target:"SÉJOUR", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la estancia', en francés es: <em>un séjour</em>." },
       { id:"g23", cat:"genre", badge:"Genre", target:"VALEUR", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el valor', en francés termina en <em>-eur</em>: <em>une valeur</em>." },
       { id:"g11", cat:"genre", badge:"Genre", target:"DOUTE", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la duda', en francés es: <em>un doute</em>." },
@@ -760,7 +772,7 @@
       { id:"g12", cat:"genre", badge:"Genre", target:"SOURIRE", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la sonrisa', en francés es: <em>un sourire</em>." },
       { id:"g27", cat:"genre", badge:"Genre", target:"MÉTHODE", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el método', en francés es: <em>une méthode</em>." },
       { id:"g13", cat:"genre", badge:"Genre", target:"SANG", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la sangre', en francés es: <em>le sang</em>." },
-      { id:"g28", cat:"genre", badge:"Genre", target:"ÉQUIPE", sub:"¿Masculino o femenino? (un / une)", ans:["une","l'","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el equipo', en francés es: <em>une équipe</em>." },
+      { id:"g28", cat:"genre", badge:"Genre", target:"ÉQUIPE", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el equipo'; en francés memoriza <em>une équipe</em>." },
       { id:"g2", cat:"genre", badge:"Genre", target:"SYSTÈME", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> Termina en <em>-ème</em>: <em>un système</em>." },
       { id:"g26", cat:"genre", badge:"Genre", target:"PLANÈTE", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> En español es 'el planeta', en francés es femenino: <em>la planète</em>." },
       { id:"g3", cat:"genre", badge:"Genre", target:"THÈME", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> Termina en <em>-ème</em>: <em>un thème</em>." },
@@ -773,10 +785,10 @@
       { id:"g16", cat:"genre", badge:"Genre", target:"SITUATION", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Termina en <em>-tion</em>: <em>une situation</em>." },
       { id:"g8", cat:"genre", badge:"Genre", target:"GROUPE", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> Es: <em>un groupe</em>." },
       { id:"g17", cat:"genre", badge:"Genre", target:"DÉCISION", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Termina en <em>-sion</em>: <em>une décision</em>." },
-      { id:"g14", cat:"genre", badge:"Genre", target:"ARRÊT (de bus)", sub:"¿Masculino o femenino? (un / une)", ans:["un","l'","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la parada', en francés es: <em>un arrêt</em>." },
-      { id:"g18", cat:"genre", badge:"Genre", target:"ACTIVITÉ", sub:"¿Masculino o femenino? (un / une)", ans:["une","l'","la"], rule:"💡 <strong>FEMENINO:</strong> Palabras en <em>-té</em> son femeninas: <em>une activité</em>." },
+      { id:"g14", cat:"genre", badge:"Genre", target:"ARRÊT (de bus)", sub:"¿Masculino o femenino? (un / une)", ans:["un","le"], rule:"💡 <strong>MASCULINO:</strong> En español es 'la parada'; en francés memoriza <em>un arrêt</em>." },
+      { id:"g18", cat:"genre", badge:"Genre", target:"ACTIVITÉ", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Memoriza <em>une activité</em>; <em>l'activité</em> no revela el género." },
       { id:"g19", cat:"genre", badge:"Genre", target:"SOCIÉTÉ", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Termina en <em>-té</em>: <em>une société</em>." },
-      { id:"g20", cat:"genre", badge:"Genre", target:"EXPÉRIENCE", sub:"¿Masculino o femenino? (un / une)", ans:["une","l'","la"], rule:"💡 <strong>FEMENINO:</strong> Es: <em>une expérience</em>." },
+      { id:"g20", cat:"genre", badge:"Genre", target:"EXPÉRIENCE", sub:"¿Masculino o femenino? (un / une)", ans:["une","la"], rule:"💡 <strong>FEMENINO:</strong> Memoriza <em>une expérience</em>; <em>l'expérience</em> no revela el género." },
 
       // 2. ACCENTS & CÉDILLES (é, è, ê, à, ç, û, ô, î)
       { id:"acc1", cat:"accents", badge:"Accents", target:"DEJA", sub:"Escribe con la ortografía y acentos correctos (ya)", ans:["déjà"], rule:"💡 <strong>déjà :</strong> Agudo en la primera 'e' (é) y grave en la 'a' (à)." },
@@ -794,8 +806,8 @@
       { id:"acc13", cat:"accents", badge:"Accents", target:"EFFICACITE", sub:"Escribe con acento (eficacia)", ans:["efficacité"], rule:"💡 <strong>efficacité :</strong> Casi todos los nombres en <em>-té</em> llevan tilde final: <em>efficacité</em>." },
       { id:"acc14", cat:"accents", badge:"Accents", target:"Il va [ ... ] la gare", sub:"¿Preposición con acento (à) o verbo avoir (a)?", ans:["à"], rule:"💡 <strong>à :</strong> Preposición lleva acento grave 'à'. Sin acento es el verbo avoir (il a)." },
       { id:"acc15", cat:"accents", badge:"Accents", target:"La ville [ ... ] j'habite", sub:"¿Lugar con acento (où) o conjunción (ou)?", ans:["où"], rule:"💡 <strong>où :</strong> Indica lugar ('donde'). Sin acento 'ou' significa 'o'." },
-      { id:"acc16", cat:"accents", badge:"Accents", target:"Je suis [ ... ] de moi", sub:"¿Seguro con circunflejo (sûr) o preposición (sur)?", ans:["sûr"], rule:"💡 <strong>sûr :</strong> Significa seguro. Sin acento es 'sobre' (sur)." },
-      { id:"acc17", cat:"accents", badge:"Accents", target:"J'ai [ ... ] partir plus tôt", sub:"¿Participio de devoir (dû) o artículo (du)?", ans:["dû"], rule:"💡 <strong>dû :</strong> Participio de devoir lleva circunflejo." },
+      { id:"acc16", cat:"accents", badge:"Accents", target:"Je suis [ ... ] de moi", sub:"¿'Seguro de mí' lleva acento circunflejo o va sin acento?", ans:["sûr"], rule:"💡 <strong>sûr :</strong> Significa seguro. Sin acento es 'sobre' (sur)." },
+      { id:"acc17", cat:"accents", badge:"Accents", target:"J'ai [ ... ] partir plus tôt", sub:"¿'Tuve que' lleva acento circunflejo o va sin acento?", ans:["dû"], rule:"💡 <strong>dû :</strong> Participio de devoir lleva circunflejo." },
 
       // 3. DÉMONSTRATIFS (Ce / Cet / Cette / Ces)
       { id:"d1", cat:"demonstratif", badge:"Démonstratif", target:"[ ... ] ÉVÉNEMENT", sub:"Elige: ce, cet, cette o ces", ans:["cet"], rule:"💡 <strong>CET devant voyelle :</strong> 'Événement' es masculino con vocal: <em>cet événement</em>." },
@@ -811,16 +823,16 @@
       { id:"d11", cat:"demonstratif", badge:"Démonstratif", target:"[ ... ] PROBLÈMES", sub:"Elige: ce, cet, cette o ces", ans:["ces"], rule:"💡 <strong>CES en plural :</strong> <em>ces problèmes</em>." },
 
       // 4. FRASES COMPLETAS (un/une + palabra + descripción)
-      { id:"ac1", cat:"accords", badge:"Frase completa", target:"PROBLÈME  +  complexe", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: un problème complexe)", ans:["un problème complexe","le problème complexe"], rule:"💡 <strong>un problème complexe :</strong> 'Problème' es masculino." },
-      { id:"ac2", cat:"accords", badge:"Frase completa", target:"AVANTAGE  +  majeur", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: un avantage majeur)", ans:["un avantage majeur","l'avantage majeur"], rule:"💡 <strong>un avantage majeur :</strong> 'Avantage' es masculino." },
-      { id:"ac3", cat:"accords", badge:"Frase completa", target:"EXPÉRIENCE  +  enrichissant", sub:"Escribe con 'un' o 'une' (es femenina, agrega '-e': une expérience enrichissante)", ans:["une expérience enrichissante"], rule:"💡 <strong>une expérience enrichissante :</strong> 'Expérience' es femenina, por eso 'enrichissant' lleva '-e' final." },
-      { id:"ac4", cat:"accords", badge:"Frase completa", target:"ERREUR  +  grave", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: une erreur grave)", ans:["une erreur grave","une grave erreur"], rule:"💡 <strong>une erreur grave :</strong> 'Erreur' es femenina en francés." },
-      { id:"ac5", cat:"accords", badge:"Frase completa", target:"MÉTHODE  +  efficace", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: une méthode efficace)", ans:["une méthode efficace"], rule:"💡 <strong>une méthode efficace :</strong> 'Méthode' es femenina en francés." },
-      { id:"ac6", cat:"accords", badge:"Frase completa", target:"IDÉE  +  novateur", sub:"Escribe con 'un' o 'une' (es femenina, 'novateur' cambia a 'novatrice')", ans:["une idée novatrice"], rule:"💡 <strong>une idée novatrice :</strong> 'Idée' es femenina. 'Novateur' cambia a <em>novatrice</em>." },
-      { id:"ac7", cat:"accords", badge:"Frase completa", target:"DÉCISION  +  important", sub:"Escribe con 'un' o 'une' (es femenina, agrega '-e': une décision importante)", ans:["une décision importante"], rule:"💡 <strong>une décision importante :</strong> 'Décision' es femenina, se le agrega '-e'." },
-      { id:"ac8", cat:"accords", badge:"Frase completa", target:"SÉJOUR  +  dépaysant", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: un séjour dépaysant)", ans:["un séjour dépaysant"], rule:"💡 <strong>un séjour dépaysant :</strong> 'Séjour' es masculino." },
-      { id:"ac9", cat:"accords", badge:"Frase completa", target:"VOITURE  +  électrique", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: une voiture électrique)", ans:["une voiture électrique"], rule:"💡 <strong>une voiture électrique :</strong> 'Voiture' es femenina en francés." },
-      { id:"ac10", cat:"accords", badge:"Frase completa", target:"ENJEU  +  crucial", sub:"Escribe la frase con 'un' o 'une' (Ejemplo: un enjeu crucial)", ans:["un enjeu crucial"], rule:"💡 <strong>un enjeu crucial :</strong> 'Enjeu' es masculino." },
+      { id:"ac1", cat:"accords", badge:"Frase completa", target:"PROBLÈME  +  complexe", sub:"Escribe la frase completa con 'un' o 'une':", ans:["un problème complexe","le problème complexe"], rule:"💡 <strong>un problème complexe :</strong> 'Problème' es masculino." },
+      { id:"ac2", cat:"accords", badge:"Frase completa", target:"AVANTAGE  +  majeur", sub:"Escribe la frase completa con 'un' o 'une':", ans:["un avantage majeur","l'avantage majeur"], rule:"💡 <strong>un avantage majeur :</strong> 'Avantage' es masculino." },
+      { id:"ac3", cat:"accords", badge:"Frase completa", target:"EXPÉRIENCE  +  enrichissant", sub:"Escribe la frase completa con 'un' o 'une' (adapta el final si es femenino):", ans:["une expérience enrichissante"], rule:"💡 <strong>une expérience enrichissante :</strong> 'Expérience' es femenina, por eso 'enrichissant' lleva '-e' final." },
+      { id:"ac4", cat:"accords", badge:"Frase completa", target:"ERREUR  +  grave", sub:"Escribe la frase completa con 'un' o 'une':", ans:["une erreur grave","une grave erreur"], rule:"💡 <strong>une erreur grave :</strong> 'Erreur' es femenina en francés." },
+      { id:"ac5", cat:"accords", badge:"Frase completa", target:"MÉTHODE  +  efficace", sub:"Escribe la frase completa con 'un' o 'une':", ans:["une méthode efficace"], rule:"💡 <strong>une méthode efficace :</strong> 'Méthode' es femenina en francés." },
+      { id:"ac6", cat:"accords", badge:"Frase completa", target:"IDÉE  +  novateur", sub:"Escribe la frase completa con 'un' o 'une' (adapta el final si es femenino):", ans:["une idée novatrice"], rule:"💡 <strong>une idée novatrice :</strong> 'Idée' es femenina. 'Novateur' cambia a <em>novatrice</em>." },
+      { id:"ac7", cat:"accords", badge:"Frase completa", target:"DÉCISION  +  important", sub:"Escribe la frase completa con 'un' o 'une' (adapta el final si es femenino):", ans:["une décision importante"], rule:"💡 <strong>une decisión importante :</strong> 'Décision' es femenina, se le agrega '-e'." },
+      { id:"ac8", cat:"accords", badge:"Frase completa", target:"SÉJOUR  +  dépaysant", sub:"Escribe la frase completa con 'un' o 'une':", ans:["un séjour dépaysant"], rule:"💡 <strong>un séjour dépaysant :</strong> 'Séjour' es masculino." },
+      { id:"ac9", cat:"accords", badge:"Frase completa", target:"VOITURE  +  électrique", sub:"Escribe la frase completa con 'un' o 'une':", ans:["une voiture électrique"], rule:"💡 <strong>une voiture électrique :</strong> 'Voiture' es femenina en francés." },
+      { id:"ac10", cat:"accords", badge:"Frase completa", target:"ENJEU  +  crucial", sub:"Escribe la frase completa con 'un' o 'une':", ans:["un enjeu crucial"], rule:"💡 <strong>un enjeu crucial :</strong> 'Enjeu' es masculino." },
 
       // 5. CONJUGAISONS CLÉS (Subjonctif, Conditionnel, Acuerdos del pasado, Imparfait)
       // Subjonctif Présent
@@ -876,7 +888,7 @@
       { id:"ct10", cat:"contractions", badge:"Contraction", target:"PENSER  [ ... ]  conséquences", sub:"Traduce 'en las': pensar en las consecuencias ➔ penser [ ... ] conséquences", ans:["aux","aux conséquences"], rule:"💡 <strong>penser À :</strong> 'Conséquences' es plural ➔ <em>penser <strong>aux</strong> conséquences</em>." },
       { id:"ct11", cat:"contractions", badge:"Contraction", target:"AVOIR BESOIN  [ ... ]  soutien de tous", sub:"Traduce 'del': necesitar del apoyo de todos ➔ avoir besoin [ ... ] soutien", ans:["du","du soutien"], rule:"💡 <strong>avoir besoin DE :</strong> 'Soutien' es masculino ➔ <em>avoir besoin <strong>du</strong> soutien</em> (nunca 'de le')." },
       { id:"ct12", cat:"contractions", badge:"Contraction", target:"EN RAISON  [ ... ]  manque de moyens", sub:"Traduce 'de la / por': debido a la falta de medios ➔ en raison [ ... ] manque", ans:["du","du manque"], rule:"💡 <strong>en raison DE :</strong> 'Manque' es masculino ➔ <em>en raison <strong>du</strong> manque</em>." },
-      { id:"ct13", cat:"contractions", badge:"Contraction", target:"AU DÉTRIMENT  [ ... ]  santé publique", sub:"Traduce 'de la': en detrimento de la salud ➔ au détriment [ ... ] santé publique", ans:["de la","de la santé"], rule:"💡 <strong>au détriment DE :</strong> 'Santé' es femenino ➔ <em>au détriment <strong>de la</strong> santé</em> (no se contrae)." },
+      { id:"ct13", cat:"contractions", badge:"Contraction", target:"AU DÉTRIMENT  [ ... ]  santé publique", sub:"¿Qué artículo / preposición corresponde? En detrimento de la salud ('santé' es femenina):", ans:["de la","de la santé"], rule:"💡 <strong>au détriment DE :</strong> 'Santé' es femenino ➔ <em>au détriment <strong>de la</strong> santé</em> (no se contrae)." },
       { id:"ct14", cat:"contractions", badge:"Contraction", target:"DÉPENDRE  [ ... ]  gouvernement", sub:"Traduce 'del': depender del gobierno ➔ dépendre [ ... ] gouvernement", ans:["du","du gouvernement"], rule:"💡 <strong>dépendre DE :</strong> 'Gouvernement' es masculino ➔ <em>dépendre <strong>du</strong> gouvernement</em>." },
       { id:"ct15", cat:"contractions", badge:"Contraction", target:"PROFITER  [ ... ]  séjour", sub:"Traduce 'de la / del': disfrutar de la estancia ➔ profiter [ ... ] séjour", ans:["du","du séjour"], rule:"💡 <strong>profiter DE :</strong> 'Séjour' es masculino ➔ <em>profiter <strong>du</strong> séjour</em>." },
       { id:"ct16", cat:"contractions", badge:"Contraction", target:"LA PLUPART  [ ... ]  citoyens", sub:"Traduce 'de los': la mayoría de los ciudadanos ➔ la plupart [ ... ] citoyens", ans:["des","des citoyens"], rule:"💡 <strong>la plupart DE :</strong> Plural obligatorio con contracción ➔ <em>la plupart <strong>des</strong> citoyens</em> (nunca 'de les')." },
@@ -886,18 +898,18 @@
       { id:"ct20", cat:"contractions", badge:"Contraction", target:"SE RENDRE  [ ... ]  travail", sub:"Traduce 'al': desplazarse / ir al trabajo ➔ se rendre [ ... ] travail", ans:["au","au travail"], rule:"💡 <strong>se rendre À :</strong> 'Travail' es masculino ➔ <em>se rendre <strong>au</strong> travail</em>." },
 
       // 7. VOCABULAIRE NATUREL B2 (12-13) : ANTI-RÉPÉTITION
-      { id:"ar1", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CREAR PROBLEMAS", sub:"En vez de 'faire des problèmes', traduce el verbo 'crear': [ ... ] des problèmes", ans:["créer","engendrer","créer des problèmes","engendrer des problèmes","poser problème"], rule:"💡 <strong>créer des problèmes / engendrer :</strong> Mucho más limpio y natural en el examen que 'faire des problèmes'." },
-      { id:"ar2", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"PERJUDICAR / DAÑAR A", sub:"En vez de 'faire du mal à', traduce el verbo 'perjudicar' (empieza con n...):", ans:["nuire","nuire à"], rule:"💡 <strong>nuire à :</strong> Verbo clave B2: <em>nuire au bien-être / à la santé</em>." },
-      { id:"ar3", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"EL TEXTO DICE QUE...", sub:"Traduce 'subraya' o 'destaca' (en vez de 'dit que'): le texte [ ... ] que", ans:["souligne","indique","précise","évoque"], rule:"💡 <strong>souligne / indique / précise :</strong> Para resumir documentos en la Tâche 3 sin repetir 'dit'." },
-      { id:"ar4", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CREAR LAZOS / HACER AMIGOS", sub:"En vez de 'faire des amis', traduce el verbo 'tejer lazos': [ ... ] des liens", ans:["tisser","nouer","tisser des liens","nouer des liens"], rule:"💡 <strong>tisser / nouer des liens :</strong> Frase hecha clave en cartas y relatos de convivencia." },
-      { id:"ar5", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"RECARGAR ENERGÍAS / DESCANSAR", sub:"Traduce el verbo 'recargarse' en francés (se ...):", ans:["se ressourcer","ressourcer","se détendre","détendre"], rule:"💡 <strong>se ressourcer :</strong> Expresión perfecta de B2 para la Tâche 2 (relato de vacaciones)." },
-      { id:"ar6", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"UN RETO / UN DESAFÍO MAYOR", sub:"En vez de 'un gros problème', traduce 'un reto / desafío': un [ ... ] majeur", ans:["enjeu","défi","un enjeu","un défi"], rule:"💡 <strong>un enjeu / un défi majeur :</strong> Sustituye de forma elegante y sobria a 'un gros problème'." },
-      { id:"ar7", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"BENEFICIOSO / FAVORABLE", sub:"En vez de 'très bon', traduce 'beneficioso': un impact [ ... ]", ans:["bénéfique","favorable","positif","avantageux"], rule:"💡 <strong>bénéfique / favorable :</strong> Adjetivo sobrio de B2 para defender ventajas en ensayos." },
-      { id:"ar8", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"PERJUDICIAL / DAÑINO / NEFASTO", sub:"En vez de 'très mauvais', traduce 'nefasto / perjudicial': un effet [ ... ]", ans:["néfaste","nuisible","négatif"], rule:"💡 <strong>néfaste / nuisible :</strong> Expresa consecuencias negativas sin decir 'très mauvais'." },
-      { id:"ar9", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"ESENCIAL / INDISPENSABLE (femenino)", sub:"En vez de 'très importante', traduce 'esencial' (femenino): une mesure [ ... ]", ans:["essentielle","indispensable","primordiale"], rule:"💡 <strong>essentielle / primordiale :</strong> Ideal para valorar medidas y soluciones propuestas." },
-      { id:"ar10", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"ADOPTAR / APROBAR UNA REGLA", sub:"En vez de 'mettre une règle', traduce el verbo 'adoptar': [ ... ] une règle", ans:["adopter","instaurer","mettre en place"], rule:"💡 <strong>adopter / instaurer une règle :</strong> Estilo institucional limpio para propuestas y recomendaciones." },
-      { id:"ar11", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"TENER UN IMPACTO POSITIVO", sub:"En vez de 'avoir des bons effets', traduce 'impacto': avoir un [ ... ] positif", ans:["impact","un impact"], rule:"💡 <strong>avoir un impact positif :</strong> Mucho más profesional que 'avoir des bons effets'." },
-      { id:"ar12", cat:"antirepetition", badge:"Vocab B2 (12+)", target:"CONCIENTIZAR / SENSIBILIZAR AL PÚBLICO", sub:"Traduce el verbo 'sensibilizar / concientizar': [ ... ] le public", ans:["sensibiliser"], rule:"💡 <strong>sensibiliser le public :</strong> El verbo clásico de conclusión y propuestas en el TCF." },
+      { id:"ar1", cat:"antirepetition", badge:"Vocab B2", target:"CREAR PROBLEMAS", sub:"En vez de 'faire des problèmes', completa: [ ... ] des problèmes", ans:["créer","engendrer"], rule:"💡 <strong>créer / engendrer des problèmes :</strong> En otro contexto también puedes decir <em>poser problème</em>, sin añadir <em>des problèmes</em>." },
+      { id:"ar2", cat:"antirepetition", badge:"Vocab B2", target:"PERJUDICAR / DAÑAR A", sub:"En vez de 'faire du mal à', traduce el verbo 'perjudicar' (empieza con n...):", ans:["nuire","nuire à"], rule:"💡 <strong>nuire à :</strong> Verbo clave B2: <em>nuire au bien-être / à la santé</em>." },
+      { id:"ar3", cat:"antirepetition", badge:"Vocab B2", target:"EL TEXTO DICE QUE...", sub:"Completa: le texte [ ... ] que", ans:["souligne","indique","précise"], rule:"💡 <strong>souligne / indique / précise que :</strong> Para resumir documentos en T3. <em>Évoquer</em> suele llevar un objeto directo: <em>évoque un problème</em>." },
+      { id:"ar4", cat:"antirepetition", badge:"Vocab B2", target:"CREAR LAZOS / HACER AMIGOS", sub:"Completa: [ ... ] des liens", ans:["tisser","nouer"], rule:"💡 <strong>tisser / nouer des liens :</strong> Expresión útil en relatos de convivencia." },
+      { id:"ar5", cat:"antirepetition", badge:"Vocab B2", target:"RECARGAR ENERGÍAS / DESCANSAR", sub:"Escribe la expresión completa 'recargar energías' (se ...):", ans:["se ressourcer"], rule:"💡 <strong>se ressourcer :</strong> Úsalo para contar una experiencia de descanso cuando sea pertinente." },
+      { id:"ar6", cat:"antirepetition", badge:"Vocab B2", target:"UN RETO / UN DESAFÍO MAYOR", sub:"Completa: un [ ... ] majeur", ans:["enjeu","défi"], rule:"💡 <strong>un enjeu / un défi majeur :</strong> El artículo <em>un</em> ya está en la frase." },
+      { id:"ar7", cat:"antirepetition", badge:"Vocab B2", target:"BENEFICIOSO / FAVORABLE", sub:"En vez de 'très bon', traduce 'beneficioso': un impact [ ... ]", ans:["bénéfique","favorable","positif","avantageux"], rule:"💡 <strong>bénéfique / favorable :</strong> Adjetivo sobrio de B2 para defender ventajas en ensayos." },
+      { id:"ar8", cat:"antirepetition", badge:"Vocab B2", target:"PERJUDICIAL / DAÑINO / NEFASTO", sub:"En vez de 'très mauvais', traduce 'nefasto / perjudicial': un effet [ ... ]", ans:["néfaste","nuisible","négatif"], rule:"💡 <strong>néfaste / nuisible :</strong> Expresa consecuencias negativas sin decir 'très mauvais'." },
+      { id:"ar9", cat:"antirepetition", badge:"Vocab B2", target:"ESENCIAL / INDISPENSABLE (femenino)", sub:"En vez de 'très importante', traduce 'esencial' (femenino): une mesure [ ... ]", ans:["essentielle","indispensable","primordiale"], rule:"💡 <strong>essentielle / primordiale :</strong> Ideal para valorar medidas y soluciones propuestas." },
+      { id:"ar10", cat:"antirepetition", badge:"Vocab B2", target:"ADOPTAR / APROBAR UNA REGLA", sub:"En vez de 'mettre une règle', traduce el verbo 'adoptar': [ ... ] une règle", ans:["adopter","instaurer","mettre en place"], rule:"💡 <strong>adopter / instaurer une règle :</strong> Estilo institucional limpio para propuestas y recomendaciones." },
+      { id:"ar11", cat:"antirepetition", badge:"Vocab B2", target:"TENER EFECTOS FAVORABLES (avoir un ...)", sub:"En vez de 'avoir des bons effets', completa con la palabra B2: avoir un [ ... ] positif", ans:["impact"], rule:"💡 <strong>avoir un impact positif :</strong> El artículo <em>un</em> ya está en la frase." },
+      { id:"ar12", cat:"antirepetition", badge:"Vocab B2", target:"CONCIENTIZAR / SENSIBILIZAR AL PÚBLICO", sub:"Traduce el verbo 'sensibilizar / concientizar': [ ... ] le public", ans:["sensibiliser"], rule:"💡 <strong>sensibiliser le public :</strong> El verbo clásico de conclusión y propuestas en el TCF." },
 
       // 8. INDICATIF AU PLURIEL (ils / elles / vous) - Trampas frecuentes de examen
       { id:"ip1", cat:"indicatif_pluriel", badge:"Indicatif", target:"POUVOIR  (ils / les citoyens)", sub:"Traduce en presente 'ellos pueden': les citoyens [ ... ] (pueden)", ans:["peuvent"], rule:"💡 <strong>peuvent :</strong> Se escribe <em>ils peuvent</em>. Cero 'peuvents' ni 'pouvont'." },
@@ -915,7 +927,19 @@
       { id:"ip13", cat:"indicatif_pluriel", badge:"Indicatif", target:"VIVRE  (ils)", sub:"Traduce en presente 'ellos viven': ils [ ... ] en communauté (viven)", ans:["vivent"], rule:"💡 <strong>vivent :</strong> <em>ils vivent</em> (termina en -ent)." },
       { id:"ip14", cat:"indicatif_pluriel", badge:"Indicatif", target:"CRAINDRE  (ils / les résidents)", sub:"Traduce en presente 'ellos temen': ils [ ... ] le pire (temen)", ans:["craignent"], rule:"💡 <strong>craignent :</strong> Con <em>-gnent</em>: <em>ils craignent</em>." },
       { id:"ip15", cat:"indicatif_pluriel", badge:"Indicatif", target:"DIRE  (ils / les experts)", sub:"Traduce en presente 'ellos dicen': les experts [ ... ] la vérité (dicen)", ans:["disent"], rule:"💡 <strong>disent :</strong> <em>ils disent</em>." },
-      { id:"ip16", cat:"indicatif_pluriel", badge:"Indicatif", target:"ÉCRIRE  (ils)", sub:"Traduce en presente 'ellos escriben': ils [ ... ] des lettres (escriben)", ans:["écrivent"], rule:"💡 <strong>écrivent :</strong> <em>ils écrivent</em> (termina en -ent)." }
+      { id:"ip16", cat:"indicatif_pluriel", badge:"Indicatif", target:"ÉCRIRE  (ils)", sub:"Traduce en presente 'ellos escriben': ils [ ... ] des lettres (escriben)", ans:["écrivent"], rule:"💡 <strong>écrivent :</strong> <em>ils écrivent</em> (termina en -ent)." },
+      { id:"pn01", cat:"past_narrative", badge:"Passé / imparfait", target:"CONTEXTO · AMBIENTE", sub:"L'ambiance [ ... ] chaleureuse pendant l'atelier. (être)", ans:["était"], rule:"💡 <strong>Imparfait:</strong> Describe cómo era el ambiente durante la actividad: <em>l'ambiance était chaleureuse</em>." },
+      { id:"pn02", cat:"past_narrative", badge:"Passé / imparfait", target:"HECHO TERMINADO · PARTICIPAR", sub:"Samedi, j'[ ... ] à un atelier. (participer)", ans:["ai participé"], rule:"💡 <strong>Passé composé:</strong> La participación ocurrió como hecho terminado: <em>j'ai participé à un atelier</em>." },
+      { id:"pn03", cat:"past_narrative", badge:"Passé / imparfait", target:"CONTEXTO · HABÍA", sub:"Il y [ ... ] beaucoup de participants dans la salle. (avoir)", ans:["avait"], rule:"💡 <strong>Imparfait:</strong> Describe el escenario: <em>il y avait beaucoup de participants</em>." },
+      { id:"pn04", cat:"past_narrative", badge:"Passé / imparfait", target:"HECHO · EMPEZAR", sub:"L'activité [ ... ] à neuf heures. (commencer)", ans:["a commencé"], rule:"💡 <strong>Passé composé:</strong> Marca el inicio concreto de la actividad: <em>l'activité a commencé</em>." },
+      { id:"pn05", cat:"past_narrative", badge:"Passé / imparfait", target:"HÁBITO EN EL PASADO", sub:"Avant, nous [ ... ] chaque vendredi. (se réunir)", ans:["nous réunissions"], rule:"💡 <strong>Imparfait:</strong> <em>nous nous réunissions</em> indica un hábito pasado, no una reunión puntual." },
+      { id:"pn06", cat:"past_narrative", badge:"Passé / imparfait", target:"HECHO · REUNIÓN PUNTUAL", sub:"Vendredi dernier, nous nous [ ... ] pour préparer l'événement. (se réunir)", ans:["sommes réunis","sommes réunies"], rule:"💡 <strong>Passé composé:</strong> Una reunión puntual; el participio concuerda con <em>nous</em>: <em>nous nous sommes réunis/réunies</em>." },
+      { id:"pn07", cat:"past_narrative", badge:"Passé / imparfait", target:"ACCIÓN EN CURSO + INTERRUPCIÓN", sub:"Je [ ... ] avec les bénévoles quand le directeur est arrivé. (discuter)", ans:["discutais"], rule:"💡 <strong>Imparfait:</strong> Acción que estaba en curso cuando ocurrió otra: <em>je discutais ... quand il est arrivé</em>." },
+      { id:"pn08", cat:"past_narrative", badge:"Passé / imparfait", target:"INTERRUPCIÓN · HECHO PUNTUAL", sub:"Je discutais avec les bénévoles quand le directeur [ ... ]. (arriver)", ans:["est arrivé"], rule:"💡 <strong>Passé composé:</strong> La llegada es el hecho que interrumpe la conversación: <em>il est arrivé</em>." },
+      { id:"pn09", cat:"past_narrative", badge:"Passé / imparfait", target:"DESCRIPCIÓN · DIFICULTAD", sub:"Au début, la tâche [ ... ] difficile. (sembler)", ans:["semblait"], rule:"💡 <strong>Imparfait:</strong> Describe la impresión de ese momento: <em>la tâche semblait difficile</em>." },
+      { id:"pn10", cat:"past_narrative", badge:"Passé / imparfait", target:"CAMBIO · SOLUCIÓN", sub:"Ensuite, nous [ ... ] une solution. (trouver)", ans:["avons trouvé"], rule:"💡 <strong>Passé composé:</strong> Encontrar la solución es un resultado puntual: <em>nous avons trouvé une solution</em>." },
+      { id:"pn11", cat:"past_narrative", badge:"Passé / imparfait", target:"DESCRIPCIÓN · TIEMPO", sub:"Il [ ... ] froid lorsque nous sommes arrivés. (faire)", ans:["faisait"], rule:"💡 <strong>Imparfait:</strong> El clima es el contexto: <em>il faisait froid</em>." },
+      { id:"pn12", cat:"past_narrative", badge:"Passé / imparfait", target:"ACCIÓN · LLEGADA", sub:"Il faisait froid lorsque nous [ ... ] sur place. (arriver)", ans:["sommes arrivés","sommes arrivées"], rule:"💡 <strong>Passé composé:</strong> La llegada es un hecho terminado; con <em>nous</em>, ajusta la terminación del participio según el grupo." }
     ];
 
     const STORAGE_KEY = 'tcf_ee_flash_v4';
@@ -1044,7 +1068,7 @@
       const tNoAcc = t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
       if (uNoAcc === tNoAcc && u !== t) {
-        return "⚠️ <strong>Falta de acentos:</strong> Escribiste <code>" + userAns + "</code> sin la tilde correcta. Forma exacta: <code>" + target + "</code>.";
+        return "⚠️ <strong>Falta de acentos:</strong> Escribiste <code>" + escapeHtml(userAns) + "</code> sin el acento correcto. Forma exacta: <code>" + escapeHtml(target) + "</code>.";
       }
       if (t.endsWith('e') && !u.endsWith('e') && t.slice(0, -1) === u) {
         return "⚠️ <strong>Falta de GÉNERO:</strong> Olvidaste la <strong>'-e'</strong> final de femenino.";
@@ -1058,7 +1082,11 @@
       if ((t === 'une' || t === 'la') && (u === 'un' || u === 'le')) {
         return "⚠️ <strong>Error de Género:</strong> Es una palabra <strong>FEMENINA</strong> en francés.";
       }
-      return "⚠️ <strong>Forma no válida:</strong> Compara lo que escribiste con la respuesta oficial.";
+      return "⚠️ <strong>Forma no válida:</strong> Compara lo que escribiste con la respuesta esperada.";
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
     function checkAnswer() {
@@ -1090,7 +1118,7 @@
         inp.disabled = true;
 
         fbStatus.innerHTML = "✅ ¡Correcto!";
-        fbDetail.innerHTML = "Escribiste exactamente: <strong style='color:#34d399;'>" + val + "</strong>";
+        fbDetail.innerHTML = "Escribiste exactamente: <strong style='color:#34d399;'>" + escapeHtml(val) + "</strong>";
         fbRule.innerHTML = item.rule;
 
         if (state.category === 'errors' || state.errorIds.has(item.id)) {
@@ -1106,7 +1134,7 @@
         inp.disabled = true;
 
         fbStatus.innerHTML = "❌ ¡Error guardado en tu Banco de Errores!";
-        fbDetail.innerHTML = "Respuesta oficial: <strong style='color:#34d399;'>" + item.ans[0] + "</strong><br>" + diagnose(val, item.ans[0]);
+        fbDetail.innerHTML = "Respuesta esperada: <strong style='color:#34d399;'>" + escapeHtml(item.ans[0]) + "</strong><br>" + diagnose(val, item.ans[0]);
         fbRule.innerHTML = item.rule;
       }
 
