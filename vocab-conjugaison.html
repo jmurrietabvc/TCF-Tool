@@ -363,9 +363,195 @@
     .empty-box h3 { font-size: 18px; margin-bottom: 6px; color: #ffffff; }
     .empty-box p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Strategy 9 -> 13 Accordion */
+    .strategy-section {
+      width: 100%;
+      max-width: 520px;
+      margin: 20px auto 40px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    .strategy-toggle-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      color: #ffffff;
+      transition: background 0.15s;
+    }
+    .strategy-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .st-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .st-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .st-title-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .st-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+    .st-sub {
+      font-size: 11.5px;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .st-arrow {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      padding-left: 8px;
+    }
+    .strategy-body {
+      padding: 0 16px 18px;
+      border-top: 1px solid var(--border);
+    }
+    .st-tabs {
+      display: flex;
+      gap: 6px;
+      margin: 14px 0 16px;
+      background: var(--card-inner);
+      padding: 4px;
+      border-radius: 10px;
+    }
+    .st-tab {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .st-tab:hover {
+      color: #ffffff;
+    }
+    .st-tab.active {
+      background: var(--cyan);
+      color: #090a10;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.25);
+    }
+    .st-pane {
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .st-diff-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .diff-col {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .diff-col.col-9 {
+      background: rgba(244, 63, 94, 0.08);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+    }
+    .diff-col.col-13 {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+    .diff-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .col-9 .diff-tag { color: #fb7185; }
+    .col-13 .diff-tag { color: #34d399; }
+    .diff-col p {
+      color: #e2e8f0;
+      margin: 0 0 6px;
+    }
+    .diff-col strong {
+      color: #ffffff;
+    }
+    .diff-col em {
+      color: var(--cyan);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .diff-why {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+    .st-checklist {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .st-check-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .st-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .st-list li {
+      font-size: 12px;
+      line-height: 1.45;
+      color: #cbd5e1;
+      padding-left: 14px;
+      position: relative;
+    }
+    .st-list li::before {
+      content: "•";
+      color: var(--cyan);
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+    }
+    .st-list code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(56, 189, 248, 0.12);
+      color: #7dd3fc;
+      padding: 1px 5px;
+      border-radius: 5px;
+      font-size: 11px;
     }
   </style>
 </head>
@@ -375,6 +561,7 @@
   <header class="topbar">
     <a href="index.html" class="brand">⚡ Flash <span>TCF 10+</span></a>
     <div class="nav-actions">
+      <button onclick="toggleStrategyGuide(true)" class="nav-link" style="background:none;border:none;cursor:pointer;color:var(--cyan);font-weight:700;">🎯 Guía 9➔13</button>
       <a href="fiches-10plus.html" class="nav-link">📑 Fiches</a>
       <a href="squelette-atelier.html" class="nav-link">🦴 Squelette</a>
       <a href="index.html" class="nav-link">🏠 Hub</a>
@@ -454,6 +641,105 @@
   <div class="score-row">
     <div>Aciertos: <strong id="scoreVal">0</strong></div>
     <div>Racha: <strong id="streakVal">0 🔥</strong></div>
+  </div>
+
+  <!-- Guide: Cómo pasar de 9 a 13 en cada Tâche -->
+  <div class="strategy-section" id="strategySection">
+    <button class="strategy-toggle-btn" id="btnToggleStrategy" onclick="toggleStrategyGuide()">
+      <div class="st-left">
+        <span class="st-icon">🎯</span>
+        <div class="st-title-group">
+          <span class="st-title">Guía de Examen: Cómo pasar de 9 a 13</span>
+          <span class="st-sub">Aplica estos ejercicios directamente en Tâche 1, 2 y 3</span>
+        </div>
+      </div>
+      <span class="st-arrow" id="stArrow">▼ Desplegar</span>
+    </button>
+
+    <div class="strategy-body" id="strategyBody" style="display: none;">
+      <!-- Tabs for Tache 1, 2, 3 -->
+      <div class="st-tabs">
+        <button class="st-tab active" onclick="switchStTab('t1', this)">✉️ Tâche 1 (Carta)</button>
+        <button class="st-tab" onclick="switchStTab('t2', this)">📖 Tâche 2 (Récit)</button>
+        <button class="st-tab" onclick="switchStTab('t3', this)">⚖️ Tâche 3 (Débat)</button>
+      </div>
+
+      <!-- Tab Content: TACHE 1 -->
+      <div class="st-pane" id="pane-t1">
+        <div class="st-diff-box">
+          <div class="diff-col col-9">
+            <span class="diff-tag">❌ Lo que te deja en 9 (Español traducido)</span>
+            <p>« Bonjour, je veux savoir les informations. C'est combien le prix ? Envoyez-moi un message. Merci. »</p>
+            <div class="diff-why">⚠️ Pierdes puntos por: falta de cortesía formal, preguntas secas tipo A2 y falta de fórmulas estándar.</div>
+          </div>
+          <div class="diff-col col-13">
+            <span class="diff-tag">✅ Cómo sacar 12–13 (Francés natural y cortés)</span>
+            <p>« Madame, Monsieur,<br><strong>Je me permets de vous écrire afin d'obtenir</strong> des renseignements <em>au sujet du</em> séjour.<br>Dans un premier temps, <strong>pourriez-vous me préciser</strong> la date exacte ? Par ailleurs, <strong>je souhaiterais savoir</strong> si un tarif de groupe est prévu.<br>En vous remerciant par avance, je vous prie d'agréer mes salutations distinguées. »</p>
+            <div class="diff-why">✨ Ganas 12–13 por: condicional de cortesía, contracción correcta (<em>du séjour</em>) y conectores fluidos.</div>
+          </div>
+        </div>
+
+        <div class="st-checklist">
+          <div class="st-check-title">🧩 Lo que practicas en este Flash Drill y dónde ponerlo:</div>
+          <ul class="st-list">
+            <li><strong>Condicional de cortesía:</strong> Escribe siempre <code>Je souhaiterais</code> o <code>Pourriez-vous me préciser</code> (categoría <em>Conjugaison</em>). Nunca uses <em>"Je veux"</em>.</li>
+            <li><strong>Contracciones exactas:</strong> <code>au sujet du séjour</code>, <code>participer au projet</code> (categoría <em>Contractions</em>). Cero <em>"de le"</em> o <em>"à le"</em>.</li>
+            <li><strong>Extensión recomendada:</strong> 80 a 100 palabras (el rango oficial es 60-120). Si te quedas en 65, tu vocabulario se verá muy pobre.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab Content: TACHE 2 -->
+      <div class="st-pane" id="pane-t2" style="display:none;">
+        <div class="st-diff-box">
+          <div class="diff-col col-9">
+            <span class="diff-tag">❌ Lo que te deja en 9 (Lista plana de acciones)</span>
+            <p>« Hier je suis allé au restaurant avec des amis. Nous avons mangé et parlé. C'était très bon et très amusant. Je recommande. »</p>
+            <div class="diff-why">⚠️ Pierdes puntos por: usar solo Passé Composé plano, repetir "très", cero atmósfera ni vocabulario descriptivo.</div>
+          </div>
+          <div class="diff-col col-13">
+            <span class="diff-tag">✅ Cómo sacar 12–13 (Doble velocidad: Ambiente + Acción + Crítica)</span>
+            <p>« Le week-end dernier, <strong>il faisait un temps magnifique</strong> et <strong>l'ambiance était particulièrement chaleureuse</strong>.<br>Cette expérience nous a permis de <em>nous ressourcer</em> et de <em>tisser des liens</em> durables.<br>Certes, <strong>le service laissait un peu à désirer</strong> en raison de l'affluence, mais cette aventure reste mémorable. Je vous invite vivement à tenter l'expérience ! »</p>
+            <div class="diff-why">✨ Ganas 12–13 por: Imparfait para el ambiente + Passé Composé para la acción + crítica sutil que demuestra madurez.</div>
+          </div>
+        </div>
+
+        <div class="st-checklist">
+          <div class="st-check-title">🧩 Lo que practicas en este Flash Drill y dónde ponerlo:</div>
+          <ul class="st-list">
+            <li><strong>Contraste de tiempos:</strong> <code>L'ambiance était...</code> (Imparfait para describir el lugar/clima) vs <code>Nous avons décidé de...</code> (Passé Composé para las acciones).</li>
+            <li><strong>Vocabulario B2 de oro:</strong> <code>se ressourcer</code> (en vez de "reposer"), <code>tisser des liens</code> (en vez de "faire des amis"), <code>laisser à désirer</code> (para dar una opinión matizada sin decir "c'était mauvais").</li>
+            <li><strong>Extensión recomendada:</strong> 130 a 145 palabras (el rango oficial es 120-150).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tab Content: TACHE 3 -->
+      <div class="st-pane" id="pane-t3" style="display:none;">
+        <div class="st-diff-box">
+          <div class="diff-col col-9">
+            <span class="diff-tag">❌ Lo que te deja en 9 (Dar tu opinión desde el inicio)</span>
+            <p>« Dans ce texte, je pense que le télétravail est très bien. Les gens sont contents. Mais il y a un problème pour les entreprises. Moi je préfère travailler chez moi. »</p>
+            <div class="diff-why">⚠️ Regla de oro violada: si dices "je pense / selon moi" en el párrafo 1, el evaluador del TCF te penaliza severamente (máximo 9/20).</div>
+          </div>
+          <div class="diff-col col-13">
+            <span class="diff-tag">✅ Cómo sacar 12–13 (Síntesis neutral + Tu opinión en Párrafo 2)</span>
+            <p>« <strong>Ce sujet représente un enjeu majeur</strong> dans notre société actuelle. D'un côté, le premier document <strong>met en avant les aspects bénéfiques</strong> ; de l'autre, le second <strong>souligne les effets néfastes</strong>.<br>Pour ma part, <strong>bien que cela fasse débat</strong>, <strong>il est essentiel que les pouvoirs publics adoptent</strong> des règles claires, <strong>afin que nous puissions</strong> trouver un équilibre durable. »</p>
+            <div class="diff-why">✨ Ganas 12–13 por: Párrafo 1 100% neutral + Párrafo 2 con Subjuntivo (<em>fasse</em>, <em>adoptent</em>, <em>puissions</em>) + adjetivos ricos (<em>bénéfique / néfaste</em>).</div>
+          </div>
+        </div>
+
+        <div class="st-checklist">
+          <div class="st-check-title">🧩 Lo que practicas en este Flash Drill y dónde ponerlo:</div>
+          <ul class="st-list">
+            <li><strong>Párrafo 1 (CERO "je / moi"):</strong> Usa <code>un enjeu majeur</code>, <code>le document souligne...</code>, <code>bénéfique / néfaste</code> (categoría <em>Vocabulario B2</em>).</li>
+            <li><strong>Párrafo 2 (Tu opinión con Subjuntivo):</strong> <code>Bien que cela fasse débat...</code>, <code>Il faut que l'on sensibilise...</code>, <code>afin que nous puissions...</code> (categoría <em>Conjugaison</em>).</li>
+            <li><strong>Género sin fallos:</strong> <code>un problème</code>, <code>un avantage</code>, <code>une solution</code> (categoría <em>Genre</em>). El evaluador castiga de inmediato "une problème".</li>
+            <li><strong>Extensión recomendada:</strong> 150 a 170 palabras (el rango oficial es 120-180).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -832,6 +1118,30 @@
       inp.value = inp.value.substring(0, start) + ch + inp.value.substring(end);
       inp.focus();
       inp.selectionStart = inp.selectionEnd = start + 1;
+    }
+
+    function toggleStrategyGuide(forceOpen) {
+      const body = document.getElementById('strategyBody');
+      const arrow = document.getElementById('stArrow');
+      const shouldOpen = forceOpen !== undefined ? forceOpen : (body.style.display === 'none');
+      if (shouldOpen) {
+        body.style.display = 'block';
+        arrow.textContent = '▲ Ocultar';
+        setTimeout(() => {
+          document.getElementById('strategySection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      } else {
+        body.style.display = 'none';
+        arrow.textContent = '▼ Desplegar';
+      }
+    }
+
+    function switchStTab(tabKey, btn) {
+      document.querySelectorAll('.st-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.st-pane').forEach(p => p.style.display = 'none');
+      const targetPane = document.getElementById('pane-' + tabKey);
+      if (targetPane) targetPane.style.display = 'block';
     }
 
     window.onload = () => {
