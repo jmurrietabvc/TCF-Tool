@@ -390,7 +390,7 @@
       <option value="demonstratif">👉 Demostrativos: Ce / Cet / Cette / Ces</option>
       <option value="accords">🎭 Acuerdos Nominales: un/une + adjetivo</option>
       <option value="conj">🔀 Subjuntivo, Condicional & Pasado</option>
-      <option value="contractions">🔗 Contracciones: au, du, aux, des</option>
+      <option value="contractions">🔗 Contracciones en Contexto: au, du, aux, des...</option>
       <option value="antirepetition">🚀 Vocabulario C1 Anti-repetición</option>
     </select>
     <button class="btn-err-toggle" id="btnErrToggle" onclick="toggleErrorMode()">
@@ -402,7 +402,7 @@
   <div class="flashcard">
     <div class="card-top" id="cardTop">
       <span class="badge-cat" id="badgeCat">GENRE</span>
-      <span id="counterProgress">1 / 105</span>
+      <span id="counterProgress">1 / 109</span>
     </div>
 
     <!-- Active Card Content -->
@@ -549,11 +549,27 @@
       { id:"c11", cat:"conj", badge:"Passé Composé", target:"PERMETTRE  (participe)", sub:"Participe passé (cette expérience m'a...)", ans:["permis"], rule:"💡 <strong>permis :</strong> <em>m'a permis de</em> (con '-s' invariable)." },
       { id:"c12", cat:"conj", badge:"Voix Passive", target:"ÊTRE (utiliser) · fém.", sub:"Participe passé (la télévision doit être...)", ans:["utilisée"], rule:"💡 <strong>utilisée :</strong> Voz pasiva con <em>être</em> concuerda con 'la télévision': <em>utilisée</em>." },
 
-      // 6. CONTRACTIONS
-      { id:"ct1", cat:"contractions", badge:"Contraction", target:"À  +  LE", sub:"Contraction obligatoire :", ans:["au"], rule:"💡 <strong>AU :</strong> <em>À + LE = AU</em>." },
-      { id:"ct2", cat:"contractions", badge:"Contraction", target:"À  +  LES", sub:"Contraction obligatoire :", ans:["aux"], rule:"💡 <strong>AUX :</strong> <em>À + LES = AUX</em>." },
-      { id:"ct3", cat:"contractions", badge:"Contraction", target:"DE  +  LE", sub:"Contraction obligatoire :", ans:["du"], rule:"💡 <strong>DU :</strong> <em>DE + LE = DU</em>." },
-      { id:"ct4", cat:"contractions", badge:"Contraction", target:"DE  +  LES", sub:"Contraction obligatoire :", ans:["des"], rule:"💡 <strong>DES :</strong> <em>DE + LES = DES</em>." },
+      // 6. CONTRACTIONS & RÉGIMES VERBAUX (Verbos + à / de + contracción obligatoria)
+      { id:"ct1", cat:"contractions", badge:"Contraction", target:"PARTICIPER  [ ... ]  projet", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au projet"], rule:"💡 <strong>participer À :</strong> 'Projet' es masculino singular ➔ <em>participer <strong>au</strong> projet</em> (nunca 'à le')." },
+      { id:"ct2", cat:"contractions", badge:"Contraction", target:"NUIRE  [ ... ]  bien-être", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au bien-être"], rule:"💡 <strong>nuire À :</strong> 'Bien-être' es masculino singular ➔ <em>nuire <strong>au</strong> bien-être</em>." },
+      { id:"ct3", cat:"contractions", badge:"Contraction", target:"S'ADAPTER  [ ... ]  changements", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["aux","aux changements"], rule:"💡 <strong>s'adapter À :</strong> 'Changements' es plural ➔ <em>s'adapter <strong>aux</strong> changements</em> (nunca 'à les')." },
+      { id:"ct4", cat:"contractions", badge:"Contraction", target:"CONTRIBUER  [ ... ]  développement", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au développement"], rule:"💡 <strong>contribuer À :</strong> 'Développement' es masculino ➔ <em>contribuer <strong>au</strong> développement</em>." },
+      { id:"ct5", cat:"contractions", badge:"Contraction", target:"FAIRE FACE  [ ... ]  problème", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au problème"], rule:"💡 <strong>faire face À :</strong> 'Problème' es masculino ➔ <em>faire face <strong>au</strong> problème</em>." },
+      { id:"ct6", cat:"contractions", badge:"Contraction", target:"FAIRE FACE  [ ... ]  difficultés", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["aux","aux difficultés"], rule:"💡 <strong>faire face À :</strong> 'Difficultés' es plural ➔ <em>faire face <strong>aux</strong> difficultés</em>." },
+      { id:"ct7", cat:"contractions", badge:"Contraction", target:"ACCÉDER  [ ... ]  marché du travail", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au marché"], rule:"💡 <strong>accéder À :</strong> 'Marché' es masculino ➔ <em>accéder <strong>au</strong> marché du travail</em>." },
+      { id:"ct8", cat:"contractions", badge:"Contraction", target:"VEILLER  [ ... ]  respect des règles", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au respect"], rule:"💡 <strong>veiller À :</strong> 'Respect' es masculino ➔ <em>veiller <strong>au</strong> respect des règles</em>." },
+      { id:"ct9", cat:"contractions", badge:"Contraction", target:"S'INTÉRESSER  [ ... ]  sujet", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au sujet"], rule:"💡 <strong>s'intéresser À :</strong> 'Sujet' es masculino ➔ <em>s'intéresser <strong>au</strong> sujet</em>." },
+      { id:"ct10", cat:"contractions", badge:"Contraction", target:"PENSER  [ ... ]  conséquences", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["aux","aux conséquences"], rule:"💡 <strong>penser À :</strong> 'Conséquences' es plural ➔ <em>penser <strong>aux</strong> conséquences</em>." },
+      { id:"ct11", cat:"contractions", badge:"Contraction", target:"AVOIR BESOIN  [ ... ]  soutien de tous", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["du","du soutien"], rule:"💡 <strong>avoir besoin DE :</strong> 'Soutien' es masculino ➔ <em>avoir besoin <strong>du</strong> soutien</em> (nunca 'de le')." },
+      { id:"ct12", cat:"contractions", badge:"Contraction", target:"EN RAISON  [ ... ]  manque de moyens", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["du","du manque"], rule:"💡 <strong>en raison DE :</strong> 'Manque' es masculino ➔ <em>en raison <strong>du</strong> manque</em>." },
+      { id:"ct13", cat:"contractions", badge:"Contraction", target:"AU DÉTRIMENT  [ ... ]  santé publique", sub:"¿Qué preposición / artículo corresponde? (du / de la / des...)", ans:["de la","de la santé"], rule:"💡 <strong>au détriment DE :</strong> 'Santé' es femenino ➔ <em>au détriment <strong>de la</strong> santé</em> (no se contrae)." },
+      { id:"ct14", cat:"contractions", badge:"Contraction", target:"DÉPENDRE  [ ... ]  gouvernement", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["du","du gouvernement"], rule:"💡 <strong>dépendre DE :</strong> 'Gouvernement' es masculino ➔ <em>dépendre <strong>du</strong> gouvernement</em>." },
+      { id:"ct15", cat:"contractions", badge:"Contraction", target:"PROFITER  [ ... ]  séjour", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["du","du séjour"], rule:"💡 <strong>profiter DE :</strong> 'Séjour' es masculino ➔ <em>profiter <strong>du</strong> séjour</em>." },
+      { id:"ct16", cat:"contractions", badge:"Contraction", target:"LA PLUPART  [ ... ]  citoyens", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["des","des citoyens"], rule:"💡 <strong>la plupart DE :</strong> Plural obligatorio con contracción ➔ <em>la plupart <strong>des</strong> citoyens</em> (nunca 'de les')." },
+      { id:"ct17", cat:"contractions", badge:"Contraction", target:"AU COURS  [ ... ]  dernières années", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["des","des dernières années"], rule:"💡 <strong>au cours DE :</strong> Plural ➔ <em>au cours <strong>des</strong> dernières années</em>." },
+      { id:"ct18", cat:"contractions", badge:"Contraction", target:"AU NIVEAU  [ ... ]  pays", sub:"¿Qué contracción corresponde? (du / de la / des / au...)", ans:["du","du pays"], rule:"💡 <strong>au niveau DE :</strong> 'Pays' es masculino singular ➔ <em>au niveau <strong>du</strong> pays</em>." },
+      { id:"ct19", cat:"contractions", badge:"Contraction", target:"S'OPPOSER  [ ... ]  projet", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au projet"], rule:"💡 <strong>s'opposer À :</strong> 'Projet' es masculino ➔ <em>s'opposer <strong>au</strong> projet</em>." },
+      { id:"ct20", cat:"contractions", badge:"Contraction", target:"SE RENDRE  [ ... ]  travail", sub:"¿Qué contracción corresponde? (au / à la / aux / du...)", ans:["au","au travail"], rule:"💡 <strong>se rendre À :</strong> 'Travail' es masculino ➔ <em>se rendre <strong>au</strong> travail</em>." },
 
       // 7. ANTI-RÉPÉTITION C1
       { id:"ar1", cat:"antirepetition", badge:"C1 Vocab", target:"FAIRE DES PROBLÈMES", sub:"Verbe C1 équivalent (infinitif) :", ans:["engendrer"], rule:"💡 <strong>engendrer :</strong> Sustituye a <em>faire des problèmes</em>: <em>engendrer des tensions</em>." },
