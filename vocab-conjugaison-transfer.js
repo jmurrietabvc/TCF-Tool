@@ -67,6 +67,8 @@ Escribe 2–3 frases en francés:
   const checklist = document.getElementById('transferChecklist');
   const example = document.getElementById('transferExample');
   const exampleText = document.getElementById('transferExampleText');
+  const copyButton = document.getElementById('transferCopy');
+  const copyStatus = document.getElementById('transferCopyStatus');
   const checkButton = document.getElementById('transferCheck');
 
   function wordCount(text) {
@@ -75,6 +77,7 @@ Escribe 2–3 frases en francés:
 
   function updateCount() {
     count.textContent = `${wordCount(input.value)} palabras · borrador guardado en este navegador`;
+    copyButton.disabled = !input.value.trim();
     checkButton.disabled = !input.value.trim();
   }
 
@@ -84,6 +87,7 @@ Escribe 2–3 frases en francés:
     prompt.textContent = data.prompt;
     source.textContent = data.source;
     input.value = drafts[task] || '';
+    copyStatus.textContent = '';
     review.hidden = true;
     example.open = false;
     document.querySelectorAll('[data-transfer-task]').forEach(button => {
@@ -95,7 +99,34 @@ Escribe 2–3 frases en francés:
   input.addEventListener('input', () => {
     drafts[task] = input.value;
     try { localStorage.setItem(storageKey, JSON.stringify(drafts)); } catch {}
+    copyStatus.textContent = '';
     updateCount();
+  });
+
+  copyButton.addEventListener('click', async () => {
+    if (!input.value.trim()) return;
+    const taskName = `Tâche ${task.slice(1)}`;
+    const text = `TCF Canada EE — ${taskName}\n\nConsigna de mi práctica:\n${TASKS[task].prompt}\n\nMi respuesta:\n${input.value.trim()}\n\nPor favor: corrige mi respuesta cambiando lo mínimo, comprueba si cubro la consigna y explícame mis errores prioritarios de género, concordancia, conjugación, acentos y preposiciones. No asignes una nota oficial.`;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const temporary = document.createElement('textarea');
+        temporary.value = text;
+        temporary.style.position = 'fixed';
+        temporary.style.opacity = '0';
+        document.body.append(temporary);
+        temporary.select();
+        const copied = document.execCommand('copy');
+        temporary.remove();
+        if (!copied) throw new Error('No se pudo copiar');
+      }
+      copyStatus.textContent = 'Copiado. Vuelve a este chat de Codex y pega el texto para recibir la corrección.';
+    } catch {
+      copyStatus.textContent = 'No se pudo copiar automáticamente. Selecciona tu respuesta y pégala en este chat.';
+      input.focus();
+      input.select();
+    }
   });
 
   checkButton.addEventListener('click', () => {
