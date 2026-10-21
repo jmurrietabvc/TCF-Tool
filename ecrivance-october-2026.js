@@ -5,6 +5,29 @@
 (function () {
   var octoberReports = [
     {
+      id: 'tcf-ca-ee-2026-10-18-gb-centre',
+      month: 10,
+      year: 2026,
+      active: true,
+      isStarter: false,
+      title: 'Salle de sport, célébration marquante et lecture imposée aux enfants',
+      tache1Title: 'Présenter une salle de sport à un ami',
+      tache1Prompt: 'Écrivez une lettre à un ami pour lui présenter une salle de sport que vous connaissez bien.',
+      tache2Title: 'Raconter une célébration marquante',
+      tache2Prompt: 'Rédigez un texte pour raconter une célébration qui vous a particulièrement marqué.',
+      tache3Title: 'Faut-il imposer la lecture aux enfants ?',
+      tache3Prompt: 'À partir de deux documents aux points de vue opposés, présentez le débat sur l’obligation de lecture pour les enfants, puis donnez votre opinion.',
+      tache3Doc1: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      tache3Doc2: 'Texte du document non reproduit dans le compte rendu de candidat.',
+      sourceMonthRaw: 'octobre-2026-18-gb-centre',
+      reportDate: '18 octobre 2026',
+      reportLocation: 'GB Centre (ville non précisée)',
+      reportConfidence: 'Élevée — récit de première main ; formulation abrégée du candidat et ville non précisée',
+      reportSource: 'Commentaire direct d’un candidat dans le fil communautaire Reddit TCF Canada',
+      reportType: 'firsthand',
+      createdAt: '2026-10-22T00:00:00.000Z'
+    },
+    {
       id: 'tcf-ca-ee-2026-10-16-alliance-francaise-mississauga',
       month: 10,
       year: 2026,
