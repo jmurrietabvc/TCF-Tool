@@ -74,7 +74,44 @@
     answer, example, rule
   }));
 
-  const BANK = { adjectives: adjectiveCards, participles: participleCards, past: pastCards };
+  // Una sola corrección delimitada por frase para que la respuesta sea inequívoca.
+  const proofreadingCards = [
+    ['acuerdo', 'T1 · Les salles de sport [donne] aussi des cours.', 'donnent', 'Les salles es plural; el verbo termina en -ent.'],
+    ['acuerdo', 'T1 · Je te recommande [un] salle près de chez toi.', 'une', 'Salle es femenino singular.'],
+    ['acuerdo', 'T2 · Les activités étaient [intéressant].', 'intéressantes', 'Activités es femenino plural; el adjetivo también.'],
+    ['acuerdo', 'T2 · Elle est [arrivé] à neuf heures.', 'arrivée', 'Con être, el participio concuerda con elle.'],
+    ['acuerdo', 'T3 · Les deux documents [présente] des avis différents.', 'présentent', 'Les deux documents es plural; usa présentent.'],
+    ['acuerdo', 'T3 · Une solution [adapté] aux besoins serait utile.', 'adaptée', 'Solution es femenino singular.'],
+    ['verbo', 'T1 · Tu devras [payes] dix euros.', 'payer', 'Después de devras, el segundo verbo va en infinitivo.'],
+    ['verbo', 'T1 · Cette salle [proposent] plusieurs cours.', 'propose', 'Cette salle es singular; usa propose.'],
+    ['verbo', 'T2 · Nous avons [participer] à un atelier.', 'participé', 'Después de avons, usa el participio pasado.'],
+    ['verbo', 'T2 · J’ai [apprécier] l’ambiance.', 'apprécié', 'Después de ai, usa el participio pasado.'],
+    ['verbo', 'T3 · Il faut [amélioré] les services.', 'améliorer', 'Después de il faut, el verbo va en infinitivo.'],
+    ['verbo', 'T3 · Ce projet peut [réduit] la pollution.', 'réduire', 'Después de peut, el segundo verbo va en infinitivo.'],
+    ['ortografía', 'T1 · La [premiere] séance est gratuite.', 'première', 'Première lleva acento grave en la segunda e.'],
+    ['ortografía', 'T1 · Peux-tu me donner une [reponse] avant lundi ?', 'réponse', 'Réponse lleva acento agudo en la primera e.'],
+    ['ortografía', 'T2 · L’ambiance était très [agreable].', 'agréable', 'Agréable lleva acento agudo.'],
+    ['ortografía', 'T2 · Cette [experience] m’a beaucoup appris.', 'expérience', 'Expérience lleva acento agudo en la segunda e.'],
+    ['ortografía', 'T3 · Cette mesure est [necessaire].', 'nécessaire', 'Nécessaire lleva acento agudo en la primera e.'],
+    ['ortografía', 'T3 · Il faut [ameliorer] les transports.', 'améliorer', 'Améliorer lleva acento agudo.'],
+    ['ortografía', 'T1 · Je voudrais obtenir des [rensegnements].', 'renseignements', 'Renseignements contiene ign: rensei-gnements.'],
+    ['ortografía', 'T1 · Cette salle est-elle [disponnible] samedi ?', 'disponible', 'Disponible se escribe con una sola n.'],
+    ['ortografía', 'T2 · Nous avons rencontré [plusieures] personnes.', 'plusieurs', 'Plusieurs se escribe igual ante nombres masculinos y femeninos.'],
+    ['ortografía', 'T3 · Il faut protéger l’[environement].', 'environnement', 'Environnement lleva dos n después de o.'],
+    ['ortografía', 'T3 · Cette solution est utile [parceque elle] est simple.', 'parce qu’elle', 'Parce que se escribe separado; ante elle se elide en parce qu’elle.'],
+    ['estructura', 'T1 · La salle se trouve [dans à côté de] l’entrée principale.', 'à côté de', 'À côté de indica ubicación; elimina dans.'],
+    ['estructura', 'T1 · Elle propose [des autres] cours.', 'd’autres', 'Antes de autres, des se contrae en d’.'],
+    ['estructura', 'T2 · J’ai participé [de] un atelier.', 'à', 'Participer se construye con à: participer à un atelier.'],
+    ['estructura', 'T2 · Nous avons parlé [à] ce problème.', 'de', 'Parler de un problema: parler de ce problème.'],
+    ['estructura', 'T3 · Cette décision dépend [à] plusieurs facteurs.', 'de', 'Dépendre se construye con de.'],
+    ['estructura', 'T3 · Les citoyens ont besoin [à] services accessibles.', 'de', 'Avoir besoin de quelque chose.']
+  ].map(([category, prompt, answer, rule], index) => ({
+    id: `proof-${index}`, category, prompt,
+    hint: 'Corrige solo el fragmento entre [ ]. No copies el resto de la frase.',
+    answer, rule
+  }));
+
+  const BANK = { adjectives: adjectiveCards, participles: participleCards, past: pastCards, proofreading: proofreadingCards };
   const storageKey = 'tcf-ee-grammar-errors-v1';
   const pending = new Set();
   try {
@@ -133,6 +170,9 @@
     $('grammarPrompt').textContent = item.prompt;
     $('grammarHint').textContent = item.hint;
     const isChoice = mode === 'past';
+    $('grammarAnswerLabel').textContent = mode === 'proofreading'
+      ? 'Escribe solo el fragmento corregido entre [ ]:'
+      : 'Escribe solo lo que falta en [ ... ]:';
     $('grammarAnswer').hidden = isChoice;
     $('grammarAnswerLabel').hidden = isChoice;
     $('grammarAccents').hidden = isChoice;
@@ -161,13 +201,15 @@
     const other = shuffle(cards.filter(item => !pending.has(item.id)));
     if (errorsOnly) {
       deck = prioritized.slice(0, 12);
-    } else if (mode === 'adjectives') {
-      // Incluye masculino/femenino y singular/plural en cada ronda normal.
+    } else if (mode === 'adjectives' || mode === 'proofreading') {
+      // Cubre las cuatro formas o tipos de error en cada ronda normal.
       deck = prioritized.slice(0, 12);
       const remaining = other.filter(item => !deck.some(chosen => chosen.id === item.id));
-      for (let formIndex = 0; formIndex < 4 && deck.length < 12; formIndex++) {
-        while (deck.filter(item => item.formIndex === formIndex).length < 3 && deck.length < 12) {
-          const nextIndex = remaining.findIndex(item => item.formIndex === formIndex);
+      const groups = mode === 'adjectives' ? [0, 1, 2, 3] : ['acuerdo', 'verbo', 'ortografía', 'estructura'];
+      const groupOf = item => mode === 'adjectives' ? item.formIndex : item.category;
+      for (const group of groups) {
+        while (deck.filter(item => groupOf(item) === group).length < 3 && deck.length < 12) {
+          const nextIndex = remaining.findIndex(item => groupOf(item) === group);
           if (nextIndex < 0) break;
           deck.push(remaining.splice(nextIndex, 1)[0]);
         }
@@ -185,9 +227,10 @@
   function check() {
     if (solvedCurrent || index >= deck.length) return;
     const item = deck[index];
-    const given = mode === 'past' ? selectedChoice : $('grammarAnswer').value.trim().replace(/\s+/gu, ' ').toLocaleLowerCase('fr');
+    const normalize = value => value.trim().replace(/\s+/gu, ' ').replace(/[’‘ʼ]/gu, "'").toLocaleLowerCase('fr');
+    const given = mode === 'past' ? selectedChoice : normalize($('grammarAnswer').value);
     if (!given) return;
-    const expected = item.answer.toLocaleLowerCase('fr');
+    const expected = normalize(item.answer);
     const feedback = $('grammarFeedback');
     const isCorrect = given === expected;
     if (isCorrect) {
