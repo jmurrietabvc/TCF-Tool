@@ -143,6 +143,7 @@
   document.querySelectorAll('[data-drill]').forEach(button=>button.addEventListener('click',()=>{
     const category=drillCats[button.dataset.drill];
     if (!category || typeof window.onCategoryChange !== 'function') return;
+    window.showPracticePanel?.('flashPanel');
     window.onCategoryChange(category);
     document.querySelector('.flashcard')?.scrollIntoView({behavior:'smooth',block:'start'});
   }));

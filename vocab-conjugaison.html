@@ -55,6 +55,8 @@
     .topbar {
       width: 100%;
       max-width: 520px;
+      position: relative;
+      z-index: 35;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -86,6 +88,10 @@
       transition: color 0.15s;
     }
     .nav-link:hover { color: #ffffff; }
+    .header-more { position: relative; }
+    .header-more summary { list-style: none; color: var(--text-muted); font-size: 12px; font-weight: 700; cursor: pointer; }
+    .header-more summary::-webkit-details-marker { display: none; }
+    .header-menu { position: absolute; top: 26px; right: 0; z-index: 40; min-width: 145px; display: grid; gap: 10px; padding: 13px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); box-shadow: var(--shadow); }
 
     /* Controls: Zero side-scroll guaranteed */
     .controls-deck {
@@ -636,6 +642,33 @@
     .grammar-feedback { min-height: 23px; margin: 12px 0 0; font-size: 13px; }
     .grammar-feedback.correct { color: #34d399; }
     .grammar-feedback.wrong { color: #fb7185; }
+    [hidden] { display: none !important; }
+    .practice-nav { width: min(100%, 800px); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; margin: 0 auto 10px; padding: 6px; position: sticky; top: 0; z-index: 30; background: rgba(9, 10, 16, .96); border: 1px solid var(--border); border-radius: 14px; backdrop-filter: blur(12px); }
+    .practice-nav button { min-width: 0; min-height: 42px; padding: 7px 8px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: #cbd5e1; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .practice-nav button[aria-pressed="true"] { color: #07121c; background: var(--cyan); }
+    .practice-nav button:focus-visible, .grammar-tabs button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .practice-panel { width: min(100%, 520px); margin: 0 auto; }
+    .practice-panel .controls-deck, .practice-panel .score-row, .practice-panel .score-legend, .practice-panel .flashcard { max-width: 100%; }
+    .practice-panel .score-row { position: static; }
+    .grammar-lab, .transfer-section, .memory-section, .strategy-section { margin-top: 4px; }
+    .grammar-lab { padding: 18px; }
+    .grammar-lab > p:first-of-type { margin: 6px 0 12px; font-size: 13px; }
+    .grammar-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin: 10px 0 12px; }
+    .grammar-tabs button { min-width: 0; min-height: 47px; padding: 8px; font-size: 12px; line-height: 1.25; }
+    .grammar-stats { margin: 8px 0; }
+    .grammar-prompt { margin: 10px 0 8px; }
+    .grammar-hint { margin: 6px 0 10px; }
+    .grammar-focus { margin: 4px 0 10px !important; color: #a9deec !important; font-size: 12px; }
+    .grammar-category { display: inline-block; margin: 4px 0 0; color: var(--gold); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+    .grammar-error-fragment { padding: 2px 5px; border-radius: 5px; background: rgba(251, 191, 36, .22); color: #fde68a; font: inherit; }
+    .grammar-input { margin-bottom: 8px; }
+    @media (max-width: 640px) {
+      .practice-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .practice-nav button { min-height: 38px; font-size: 11px; }
+      .grammar-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grammar-lab { padding: 15px; }
+      .grammar-prompt { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -644,14 +677,25 @@
   <header class="topbar">
     <a href="index.html" class="brand">⚡ Flash <span>TCF 10+</span></a>
     <div class="nav-actions">
-      <button onclick="toggleStrategyGuide(true)" class="nav-link" style="background:none;border:none;cursor:pointer;color:var(--cyan);font-weight:700;">🎯 Guía EE</button>
-      <a href="fiches-10plus.html" class="nav-link">📑 Fiches</a>
-      <a href="squelette-atelier.html" class="nav-link">🦴 Squelette</a>
-      <a href="index.html" class="nav-link">🏠 Hub</a>
+      <button onclick="showPracticePanel('strategySection'); toggleStrategyGuide(true)" class="nav-link" style="background:none;border:none;cursor:pointer;color:var(--cyan);font-weight:700;">🎯 Guía EE</button>
+      <details class="header-more"><summary>Más ▾</summary><div class="header-menu">
+        <a href="fiches-10plus.html" class="nav-link">📑 Fiches</a>
+        <a href="squelette-atelier.html" class="nav-link">🦴 Squelette</a>
+        <a href="index.html" class="nav-link">🏠 Hub</a>
+      </div></details>
     </div>
   </header>
 
+  <nav class="practice-nav" aria-label="Elegir área de práctica">
+    <button type="button" data-practice-panel="grammarLab" aria-controls="grammarLab" aria-pressed="true">✓ Corregir frases</button>
+    <button type="button" data-practice-panel="flashPanel" aria-controls="flashPanel" aria-pressed="false">▣ Tarjetas</button>
+    <button type="button" data-practice-panel="transferSection" aria-controls="transferSection" aria-pressed="false">✎ EE guiada</button>
+    <button type="button" data-practice-panel="memorySection" aria-controls="memorySection" aria-pressed="false">◈ Vocabulario</button>
+    <button type="button" data-practice-panel="strategySection" aria-controls="strategySection" aria-pressed="false">☰ Guía</button>
+  </nav>
+
   <!-- Clean Controls (Single Dropdown + Error Toggle, zero side-scrolling) -->
+  <div class="practice-panel" id="flashPanel" hidden>
   <div class="controls-deck">
     <select id="categorySelect" class="dropdown-select" onchange="onCategoryChange(this.value)">
       <option value="all">🌟 Mix Total</option>
@@ -729,7 +773,9 @@
     </div>
   </div>
 
-  <section class="transfer-section" id="transferSection" aria-labelledby="transferTitle">
+  </div><!-- flashPanel -->
+
+  <section class="transfer-section" id="transferSection" aria-labelledby="transferTitle" hidden>
     <h2 id="transferTitle">EE guiada: responde y corrige aquí mismo</h2>
     <p>Completa una frase cada vez y recibe la corrección al instante. Los errores pendientes bajan cuando escribes la forma correcta. Son frases de práctica, no una calificación de la redacción completa.</p>
     <div class="transfer-tabs" role="group" aria-label="Elegir tarea de expresión escrita">
@@ -753,16 +799,18 @@
   </section>
 
   <section class="grammar-lab" id="grammarLab" aria-labelledby="grammarLabTitle">
-    <h2 id="grammarLabTitle">Gramática EE: acuerdos, ortografía y tiempos</h2>
-    <p>Haz rondas de hasta 12 preguntas. Practica formas aisladas y corrige errores dentro de frases de T1, T2 y T3. La primera respuesta cuenta para el resultado, y puedes corregir un fallo hasta dominarlo.</p>
+    <h2 id="grammarLabTitle">Corrige tus errores frecuentes de EE</h2>
+    <p>Empieza aquí: corrige solo la parte marcada de cada frase. La primera respuesta cuenta; los errores pendientes bajan cuando la corriges.</p>
     <div class="grammar-tabs" role="group" aria-label="Elegir práctica de gramática">
-      <button type="button" data-grammar-mode="adjectives" aria-pressed="true">Adjetivos · masculino/femenino</button>
-      <button type="button" data-grammar-mode="participles" aria-pressed="false">Participios pasados</button>
-      <button type="button" data-grammar-mode="past" aria-pressed="false">Prueba · passé composé o imparfait</button>
-      <button type="button" data-grammar-mode="proofreading" aria-pressed="false">Revisa frases · ortografía y acuerdos</button>
+      <button type="button" data-grammar-mode="proofreading" aria-pressed="true">Corregir frases</button>
+      <button type="button" data-grammar-mode="adjectives" aria-pressed="false">Género y adjetivos</button>
+      <button type="button" data-grammar-mode="participles" aria-pressed="false">Participios</button>
+      <button type="button" data-grammar-mode="past" aria-pressed="false">PC o imparfait</button>
     </div>
+    <p class="grammar-focus" id="grammarFocus">Ronda normal: 3 de género · 2 acuerdos · 3 verbos · 3 de ortografía · 1 estructura. Tus errores pendientes entran primero.</p>
     <div class="grammar-stats"><span id="grammarPosition">Pregunta 1 de 12</span><span id="grammarScore">Primera respuesta: 0/12</span><span id="grammarPending">Errores pendientes: 0</span></div>
     <div class="grammar-question" id="grammarQuestion">
+      <span class="grammar-category" id="grammarCategory"></span>
       <p class="grammar-prompt" id="grammarPrompt"></p>
       <p class="grammar-hint" id="grammarHint"></p>
       <label for="grammarAnswer" id="grammarAnswerLabel">Escribe solo lo que falta en [ ... ]:</label><br>
@@ -792,7 +840,7 @@
     </div>
   </section>
 
-  <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle">
+  <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle" hidden>
     <div class="memory-head"><div><span class="memory-eyebrow">Basado en modelos del PDF proporcionado</span><h2 id="memoryTitle">Memoriza verbos y adjetivos por tâche</h2><p>Aprende una forma segura, oculta el francés y comprueba si puedes recordarla. Después practica la regla que te falla.</p></div><span id="memory-count" class="memory-count">0/20 marcadas</span></div>
     <div class="memory-toolbar"><div class="memory-tabs" role="group" aria-label="Elegir lista por tarea"><button type="button" data-task="t1" class="active" aria-pressed="true">Tâche 1 · mensajes</button><button type="button" data-task="t2" aria-pressed="false">Tâche 2 · experiencias</button><button type="button" data-task="t3" aria-pressed="false">Tâche 3 · opinión</button></div><button type="button" id="memory-toggle" class="memory-toggle" aria-pressed="false">Ocultar francés para recordar</button></div>
     <p class="memory-intro" id="memory-intro"></p><p class="memory-source" id="memory-source"></p>
@@ -803,7 +851,7 @@
   </section>
 
   <!-- Guide: Cómo pasar de 9 a 13 en cada Tâche -->
-  <div class="strategy-section" id="strategySection">
+  <div class="strategy-section" id="strategySection" hidden>
     <button class="strategy-toggle-btn" id="btnToggleStrategy" onclick="toggleStrategyGuide()">
       <div class="st-left">
         <span class="st-icon">🎯</span>
@@ -901,6 +949,26 @@
     </div>
   </div>
 
+  <script>
+    const practicePanelIds = ['grammarLab', 'flashPanel', 'transferSection', 'memorySection', 'strategySection'];
+    function showPracticePanel(id) {
+      if (!practicePanelIds.includes(id)) return;
+      for (const panelId of practicePanelIds) document.getElementById(panelId).hidden = panelId !== id;
+      document.querySelectorAll('[data-practice-panel]').forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.practicePanel === id));
+      });
+      window.scrollTo(0, 0);
+    }
+    document.querySelectorAll('[data-practice-panel]').forEach(button => {
+      button.addEventListener('click', () => showPracticePanel(button.dataset.practicePanel));
+    });
+    const initialPanel = decodeURIComponent(location.hash.slice(1));
+    if (practicePanelIds.includes(initialPanel)) showPracticePanel(initialPanel);
+    window.addEventListener('hashchange', () => {
+      const requestedPanel = decodeURIComponent(location.hash.slice(1));
+      if (practicePanelIds.includes(requestedPanel)) showPracticePanel(requestedPanel);
+    });
+  </script>
   <script>
     // 100% UNBIASED, ZERO-SPOILER DATASET (BALANCED MASCULINE & FEMININE)
     const ITEMS = [

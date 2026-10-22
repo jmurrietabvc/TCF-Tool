@@ -82,6 +82,12 @@
     ['acuerdo', 'T2 · Elle est [arrivé] à neuf heures.', 'arrivée', 'Con être, el participio concuerda con elle.'],
     ['acuerdo', 'T3 · Les deux documents [présente] des avis différents.', 'présentent', 'Les deux documents es plural; usa présentent.'],
     ['acuerdo', 'T3 · Une solution [adapté] aux besoins serait utile.', 'adaptée', 'Solution es femenino singular.'],
+    ['género', 'T1 · [Ce] salle est près de chez moi.', 'Cette', 'Salle es femenino singular: cette salle.'],
+    ['género', 'T1 · [Ma] amie connaît cette salle.', 'Mon', 'Ante un nombre femenino que empieza por vocal: mon amie.'],
+    ['género', 'T1 · [Cet] cours commence lundi.', 'Ce', 'Cours es masculino y empieza por consonante: ce cours.'],
+    ['género', 'T2 · [Ces] expérience a été enrichissante.', 'Cette', 'Expérience es singular: cette expérience.'],
+    ['género', 'T3 · [Le] solution proposée est simple.', 'La', 'Solution es femenino singular: la solution.'],
+    ['género', 'T3 · [Cet] mesure pourrait aider les habitants.', 'Cette', 'Mesure es femenino singular: cette mesure.'],
     ['verbo', 'T1 · Tu devras [payes] dix euros.', 'payer', 'Después de devras, el segundo verbo va en infinitivo.'],
     ['verbo', 'T1 · Cette salle [proposent] plusieurs cours.', 'propose', 'Cette salle es singular; usa propose.'],
     ['verbo', 'T2 · Nous avons [participer] à un atelier.', 'participé', 'Después de avons, usa el participio pasado.'],
@@ -107,7 +113,7 @@
     ['estructura', 'T3 · Les citoyens ont besoin [à] services accessibles.', 'de', 'Avoir besoin de quelque chose.']
   ].map(([category, prompt, answer, rule], index) => ({
     id: `proof-${index}`, category, prompt,
-    hint: 'Corrige solo el fragmento entre [ ]. No copies el resto de la frase.',
+    hint: 'Corrige solo la parte resaltada. No copies el resto de la frase.',
     answer, rule
   }));
 
@@ -118,7 +124,7 @@
     const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
     if (Array.isArray(saved)) saved.forEach(id => pending.add(id));
   } catch {}
-  let mode = 'adjectives';
+  let mode = 'proofreading';
   let deck = [];
   let index = 0;
   let firstCorrect = 0;
@@ -167,11 +173,23 @@
     $('grammarSummary').hidden = true;
     $('grammarPosition').textContent = `Pregunta ${index + 1} de ${deck.length}`;
     const item = deck[index];
-    $('grammarPrompt').textContent = item.prompt;
+    $('grammarFocus').hidden = mode !== 'proofreading';
+    $('grammarCategory').textContent = mode === 'proofreading' ? item.category : '';
+    const prompt = $('grammarPrompt');
+    prompt.textContent = '';
+    if (mode === 'proofreading') {
+      const [before, wrong, after] = item.prompt.split(/\[([^\]]+)\]/u);
+      const mark = document.createElement('mark');
+      mark.className = 'grammar-error-fragment';
+      mark.textContent = wrong;
+      prompt.append(document.createTextNode(before), mark, document.createTextNode(after));
+    } else {
+      prompt.textContent = item.prompt;
+    }
     $('grammarHint').textContent = item.hint;
     const isChoice = mode === 'past';
     $('grammarAnswerLabel').textContent = mode === 'proofreading'
-      ? 'Escribe solo el fragmento corregido entre [ ]:'
+      ? 'Escribe solo la parte corregida:'
       : 'Escribe solo lo que falta en [ ... ]:';
     $('grammarAnswer').hidden = isChoice;
     $('grammarAnswerLabel').hidden = isChoice;
@@ -205,10 +223,11 @@
       // Cubre las cuatro formas o tipos de error en cada ronda normal.
       deck = prioritized.slice(0, 12);
       const remaining = other.filter(item => !deck.some(chosen => chosen.id === item.id));
-      const groups = mode === 'adjectives' ? [0, 1, 2, 3] : ['acuerdo', 'verbo', 'ortografía', 'estructura'];
+      const groups = mode === 'adjectives' ? [0, 1, 2, 3] : ['género', 'acuerdo', 'verbo', 'ortografía', 'estructura'];
+      const targets = mode === 'adjectives' ? [3, 3, 3, 3] : [3, 2, 3, 3, 1];
       const groupOf = item => mode === 'adjectives' ? item.formIndex : item.category;
-      for (const group of groups) {
-        while (deck.filter(item => groupOf(item) === group).length < 3 && deck.length < 12) {
+      for (const [groupIndex, group] of groups.entries()) {
+        while (deck.filter(item => groupOf(item) === group).length < targets[groupIndex] && deck.length < 12) {
           const nextIndex = remaining.findIndex(item => groupOf(item) === group);
           if (nextIndex < 0) break;
           deck.push(remaining.splice(nextIndex, 1)[0]);
