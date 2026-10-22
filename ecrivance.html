@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Écrivance — Cuaderno de Práctica TCF Canadá</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✒️</text></svg>">
-  <link rel="stylesheet" href="ecrivance-ui.css?v=week-1">
+  <link rel="stylesheet" href="ecrivance-ui.css?v=20261021-errors">
   <link rel="stylesheet" href="ecrivance-week.css?v=1">
 </head>
 <body>
@@ -235,6 +235,17 @@
             <div id="reportCorrectionsList" class="corrections-list"></div>
           </div>
 
+          <div class="recurrence-section">
+            <div class="recurrence-header">
+              <div>
+                <h3 class="criteria-title">🎯 Patrones entre tus evaluaciones</h3>
+                <p>La herramienta distingue un fallo aislado de una regla que reaparece en dos o más textos.</p>
+              </div>
+              <button class="btn-secondary" type="button" onclick="downloadRecurringErrorReport()">⬇ Descargar resumen para analizar conmigo</button>
+            </div>
+            <div id="recurringErrorTracker"></div>
+          </div>
+
           <!-- C1 Rewrite -->
           <div class="rewrite-box">
             <div class="rewrite-header">
@@ -327,8 +338,8 @@
   <script src="ecrivance-data.js"></script>
   <script src="ecrivance-september-2026.js"></script>
   <script src="ecrivance-october-2026.js"></script>
-  <script src="app-ai-feedback.js?v=tcf-20261017"></script>
-  <script src="ecrivance-app.js?v=tcf-20261017"></script>
+  <script src="app-ai-feedback.js?v=tcf-20261021-errors"></script>
+  <script src="ecrivance-app.js?v=tcf-20261021-errors"></script>
   <script src="ecrivance-week.js?v=1"></script>
 </body>
 </html>

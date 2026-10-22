@@ -557,6 +557,9 @@
         showToast('El texto o la tarea cambió durante la evaluación. Solicita una evaluación del texto actual.');
         return;
       }
+      if (typeof saveFeedbackToHistory === 'function') {
+        saveFeedbackToHistory(evaluatedTask, consigneText, text, feedback);
+      }
       renderFeedbackReport(feedback);
       showToast('🎉 ¡Evaluación completada con éxito!');
     } catch (err) {
@@ -628,6 +631,7 @@
           listHtml += '    <span class="diff-correct">' + escapeHtml(err.corrected) + '</span>';
           listHtml += '    <span class="diff-badge">' + (err.category || 'grammaire') + '</span>';
           listHtml += '  </div>';
+          listHtml += '  <div class="correction-pattern">Regla que se registra: <strong>' + escapeHtml(err.pattern || (typeof classifyErrorPattern === 'function' ? classifyErrorPattern(err) : err.category)) + '</strong></div>';
           listHtml += '  <div class="correction-explanation">' + escapeHtml(err.explanation) + '</div>';
           listHtml += '</div>';
         });
@@ -635,6 +639,10 @@
         listHtml = '<div style="color:var(--ink-muted);padding:12px;">No se priorizaron correcciones concretas. Esto no garantiza que el texto esté libre de errores.</div>';
       }
       corrList.innerHTML = listHtml;
+    }
+
+    if (typeof renderRecurringErrorTracker === 'function') {
+      renderRecurringErrorTracker('recurringErrorTracker');
     }
 
     var rewriteEl = document.getElementById('reportRewriteText');
