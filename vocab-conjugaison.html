@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="vocab-conjugaison-memory.css">
   <script src="vocab-conjugaison-memory.js" defer></script>
   <script src="vocab-conjugaison-transfer.js" defer></script>
+  <script src="vocab-conjugaison-grammar.js" defer></script>
   <style>
     :root {
       --bg: #090a10;
@@ -616,6 +617,25 @@
     .transfer-feedback { min-height: 24px; margin: 12px 0 0; color: var(--gold) !important; font-size: 13px; }
     .transfer-feedback.correct { color: #34d399 !important; }
     .transfer-feedback.wrong { color: #fb7185 !important; }
+    .grammar-lab { width: min(100%, 800px); margin: 30px auto; padding: 22px; background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
+    .grammar-lab h2 { margin: 0 0 8px; color: #fff; font-size: 21px; }
+    .grammar-lab p { color: #cbd5e1; line-height: 1.5; }
+    .grammar-tabs, .grammar-actions, .grammar-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+    .grammar-tabs { margin: 16px 0; }
+    .grammar-tabs button, .grammar-actions button, .grammar-choices button { border: 1px solid var(--border); border-radius: 9px; padding: 10px 13px; background: var(--card-inner); color: #e2e8f0; font: inherit; font-weight: 700; cursor: pointer; }
+    .grammar-tabs button[aria-pressed="true"], .grammar-choices button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
+    .grammar-actions button:disabled, .grammar-choices button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .grammar-actions .grammar-primary { background: var(--cyan); color: #090a10; border-color: var(--cyan); }
+    .grammar-stats { display: flex; flex-wrap: wrap; gap: 15px; margin: 12px 0; color: var(--text-muted); font-size: 12px; font-weight: 700; }
+    .grammar-prompt { padding: 13px 15px; border-radius: 10px; background: var(--card-inner); color: #fff !important; font-size: 18px; font-weight: 700; }
+    .grammar-hint { color: var(--cyan) !important; font-size: 12px; font-weight: 700; }
+    .grammar-input { width: min(100%, 360px); margin: 6px 0 13px; padding: 12px; border: 2px solid var(--border); border-radius: 10px; background: var(--card-inner); color: #fff; font: inherit; }
+    .grammar-input:focus { outline: none; border-color: var(--cyan); }
+    .grammar-choices { margin: 8px 0 14px; }
+    .grammar-choices[hidden], .grammar-input[hidden], .grammar-question[hidden], #grammarAccents[hidden] { display: none; }
+    .grammar-feedback { min-height: 23px; margin: 12px 0 0; font-size: 13px; }
+    .grammar-feedback.correct { color: #34d399; }
+    .grammar-feedback.wrong { color: #fb7185; }
   </style>
 </head>
 <body>
@@ -730,6 +750,45 @@
       <button type="button" class="transfer-secondary" id="transferVariant">Otro tema</button>
     </div>
     <p class="transfer-feedback" id="transferFeedback" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="grammar-lab" id="grammarLab" aria-labelledby="grammarLabTitle">
+    <h2 id="grammarLabTitle">Gramática EE: acuerdo, participios y tiempos</h2>
+    <p>Haz rondas de hasta 12 preguntas. Escribe la forma del adjetivo o del participio; en la prueba de pasado, decide entre passé composé e imparfait. La primera respuesta cuenta para el resultado, y puedes corregir un fallo hasta dominarlo.</p>
+    <div class="grammar-tabs" role="group" aria-label="Elegir práctica de gramática">
+      <button type="button" data-grammar-mode="adjectives" aria-pressed="true">Adjetivos · masculino/femenino</button>
+      <button type="button" data-grammar-mode="participles" aria-pressed="false">Participios pasados</button>
+      <button type="button" data-grammar-mode="past" aria-pressed="false">Prueba · passé composé o imparfait</button>
+    </div>
+    <div class="grammar-stats"><span id="grammarPosition">Pregunta 1 de 12</span><span id="grammarScore">Primera respuesta: 0/12</span><span id="grammarPending">Errores pendientes: 0</span></div>
+    <div class="grammar-question" id="grammarQuestion">
+      <p class="grammar-prompt" id="grammarPrompt"></p>
+      <p class="grammar-hint" id="grammarHint"></p>
+      <label for="grammarAnswer" id="grammarAnswerLabel">Escribe solo lo que falta en [ ... ]:</label><br>
+      <input type="text" class="grammar-input" id="grammarAnswer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Tu respuesta">
+      <div class="accents" id="grammarAccents" aria-label="Insertar acento en la respuesta">
+        <button type="button" class="acc-key" data-grammar-accent="é">é</button>
+        <button type="button" class="acc-key" data-grammar-accent="è">è</button>
+        <button type="button" class="acc-key" data-grammar-accent="ê">ê</button>
+        <button type="button" class="acc-key" data-grammar-accent="à">à</button>
+        <button type="button" class="acc-key" data-grammar-accent="û">û</button>
+        <button type="button" class="acc-key" data-grammar-accent="ç">ç</button>
+      </div>
+      <div class="grammar-choices" id="grammarChoices" role="group" aria-label="Elige el tiempo verbal" hidden>
+        <button type="button" data-grammar-choice="pc" aria-pressed="false">Passé composé</button>
+        <button type="button" data-grammar-choice="imp" aria-pressed="false">Imparfait</button>
+      </div>
+      <div class="grammar-actions">
+        <button type="button" class="grammar-primary" id="grammarCheck">Comprobar</button>
+        <button type="button" id="grammarNext" disabled>Siguiente</button>
+      </div>
+      <p class="grammar-feedback" id="grammarFeedback" role="status" aria-live="polite"></p>
+    </div>
+    <p id="grammarSummary" hidden></p>
+    <div class="grammar-actions" style="margin-top:14px;">
+      <button type="button" id="grammarNewRound">Otra ronda</button>
+      <button type="button" id="grammarReviewErrors">Repetir errores pendientes</button>
+    </div>
   </section>
 
   <section class="memory-section" id="memorySection" aria-labelledby="memoryTitle">
