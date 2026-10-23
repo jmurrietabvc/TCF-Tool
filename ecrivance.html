@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Écrivance — Cuaderno de Práctica TCF Canadá</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✒️</text></svg>">
-  <link rel="stylesheet" href="ecrivance-ui.css?v=20261021-errors">
+  <link rel="stylesheet" href="ecrivance-ui.css?v=20261022-shared-timer">
   <link rel="stylesheet" href="ecrivance-week.css?v=1">
 </head>
 <body>
@@ -159,8 +159,10 @@
             <span style="font-size:12px;color:var(--ink-subtle);font-weight:400;">(guardado automáticamente)</span>
           </div>
           <div class="notebook-timer-box">
-            <span id="notebookTimerDisplay">00:00</span>
-            <button id="timerToggleBtn" class="btn-secondary" style="padding:2px 8px;font-size:11px;" onclick="toggleTimer()">⏱️ Iniciar Minutero</button>
+            <span class="timer-scope">Simulacro T1–T3</span>
+            <span id="notebookTimerDisplay">60:00</span>
+            <button id="timerToggleBtn" class="btn-secondary timer-action" type="button" onclick="toggleTimer()">▶ Iniciar</button>
+            <button class="timer-reset" type="button" onclick="resetPracticeTimer()" title="Reiniciar para un nuevo simulacro">↺ 60:00</button>
           </div>
         </div>
 
@@ -339,7 +341,7 @@
   <script src="ecrivance-september-2026.js"></script>
   <script src="ecrivance-october-2026.js"></script>
   <script src="app-ai-feedback.js?v=tcf-20261021-errors"></script>
-  <script src="ecrivance-app.js?v=tcf-20261021-errors"></script>
+  <script src="ecrivance-app.js?v=tcf-20261022-shared-timer"></script>
   <script src="ecrivance-week.js?v=1"></script>
 </body>
 </html>

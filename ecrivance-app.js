@@ -21,7 +21,9 @@
       3: { min: 120, max: 180, time: 25 }
     },
     timerInterval: null,
-    timerSeconds: 0,
+    timerTotalSeconds: 60 * 60,
+    timerRemainingSeconds: 60 * 60,
+    timerEndAt: null,
     timerRunning: false,
     selectedCadreId: null
   };
@@ -31,6 +33,7 @@
     initTheme();
     initThemesAndCadres();
     loadDrafts();
+    loadPracticeTimer();
     checkApiStatus();
     renderCadresLibrary();
     renderThemesLibrary();
@@ -119,13 +122,97 @@
     saveDrafts();
   }
 
-  function resetPracticeTimer() {
-    clearInterval(state.timerInterval);
-    state.timerRunning = false;
-    state.timerSeconds = 0;
-    document.getElementById('notebookTimerDisplay').textContent = '00:00';
-    document.getElementById('timerToggleBtn').textContent = '⏱️ Iniciar Minutero';
+  function persistPracticeTimer() {
+    try {
+      localStorage.setItem('ecrivance_shared_timer_v1', JSON.stringify({
+        remainingSeconds: state.timerRemainingSeconds,
+        endAt: state.timerEndAt,
+        running: state.timerRunning
+      }));
+    } catch (e) {}
   }
+
+  function formatTimer(seconds) {
+    var safe = Math.max(0, Math.min(state.timerTotalSeconds, Math.ceil(seconds)));
+    var mins = Math.floor(safe / 60);
+    var secs = safe % 60;
+    return (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+  }
+
+  function updateTimerDisplay() {
+    var display = document.getElementById('notebookTimerDisplay');
+    var btn = document.getElementById('timerToggleBtn');
+    var box = document.querySelector('.notebook-timer-box');
+    if (display) display.textContent = formatTimer(state.timerRemainingSeconds);
+    if (btn) {
+      btn.disabled = state.timerRemainingSeconds <= 0;
+      btn.textContent = state.timerRemainingSeconds <= 0 ? '⏱️ Tiempo terminado' : state.timerRunning ? '⏸️ Pausar' : state.timerRemainingSeconds < state.timerTotalSeconds ? '▶ Continuar' : '▶ Iniciar';
+    }
+    if (box) {
+      box.classList.toggle('is-running', state.timerRunning);
+      box.classList.toggle('is-warning', state.timerRemainingSeconds > 0 && state.timerRemainingSeconds <= 5 * 60);
+      box.classList.toggle('is-finished', state.timerRemainingSeconds <= 0);
+    }
+  }
+
+  function stopTimerInterval() {
+    clearInterval(state.timerInterval);
+    state.timerInterval = null;
+  }
+
+  function tickPracticeTimer() {
+    if (!state.timerRunning || !state.timerEndAt) return;
+    state.timerRemainingSeconds = Math.max(0, Math.ceil((state.timerEndAt - Date.now()) / 1000));
+    if (state.timerRemainingSeconds <= 0) {
+      stopTimerInterval();
+      state.timerRunning = false;
+      state.timerEndAt = null;
+      persistPracticeTimer();
+      updateTimerDisplay();
+      showToast('⏰ Se terminaron los 60 minutos del simulacro.');
+      return;
+    }
+    updateTimerDisplay();
+  }
+
+  function startTimerInterval() {
+    stopTimerInterval();
+    state.timerInterval = setInterval(tickPracticeTimer, 1000);
+  }
+
+  function loadPracticeTimer() {
+    try {
+      var saved = JSON.parse(localStorage.getItem('ecrivance_shared_timer_v1') || 'null');
+      if (saved && typeof saved === 'object') {
+        state.timerRemainingSeconds = Math.max(0, Math.min(state.timerTotalSeconds, Number(saved.remainingSeconds) || 0));
+        state.timerRunning = Boolean(saved.running && saved.endAt);
+        state.timerEndAt = state.timerRunning ? Number(saved.endAt) : null;
+        if (state.timerRunning) {
+          state.timerRemainingSeconds = Math.max(0, Math.ceil((state.timerEndAt - Date.now()) / 1000));
+          if (state.timerRemainingSeconds > 0) startTimerInterval();
+          else {
+            state.timerRunning = false;
+            state.timerEndAt = null;
+          }
+        }
+      }
+    } catch (e) {}
+    updateTimerDisplay();
+  }
+
+  function resetPracticeTimer() {
+    stopTimerInterval();
+    state.timerRunning = false;
+    state.timerRemainingSeconds = state.timerTotalSeconds;
+    state.timerEndAt = null;
+    persistPracticeTimer();
+    updateTimerDisplay();
+  }
+
+  window.resetPracticeTimer = function() {
+    resetPracticeTimer();
+    showToast('Cronómetro reiniciado a 60:00 para un nuevo simulacro.');
+  };
 
   function checkApiStatus() {
     var pill = document.getElementById('apiStatusPill');
@@ -177,7 +264,6 @@
 
     updateRecommendedCadreBtn();
     if (state.weekDay && typeof window.updateWeekPracticeBar === 'function') {
-      resetPracticeTimer();
       window.updateWeekPracticeBar(state.weekDay, taskNum);
       if (state.activeView === 'practice') history.replaceState(null, '', '#week/ee/' + state.weekDay + '/' + taskNum);
     }
@@ -192,7 +278,6 @@
     var editor = document.getElementById('notebookEditor');
     editor.value = state.weekDrafts[day + ':' + state.currentTask] || '';
     switchTask(taskNum);
-    resetPracticeTimer();
     switchView('practice');
   };
 
@@ -203,7 +288,6 @@
     document.getElementById('weekPracticeBar').hidden = true;
     if (wasWeekly) {
       document.getElementById('notebookEditor').value = state.drafts[state.currentTask] || '';
-      resetPracticeTimer();
       updateWordCount();
     }
   }
@@ -695,26 +779,21 @@
     }
   };
 
-  // ─── Minutero Opcional ───────────────────────────────────────
+  // ─── Cronómetro compartido de simulacro (T1 + T2 + T3) ──────
   window.toggleTimer = function() {
-    var btn = document.getElementById('timerToggleBtn');
-    var display = document.getElementById('notebookTimerDisplay');
+    if (state.timerRemainingSeconds <= 0) return;
     if (state.timerRunning) {
-      clearInterval(state.timerInterval);
+      state.timerRemainingSeconds = Math.max(0, Math.ceil((state.timerEndAt - Date.now()) / 1000));
+      stopTimerInterval();
       state.timerRunning = false;
-      if (btn) btn.textContent = '⏱️ Iniciar Minutero';
+      state.timerEndAt = null;
     } else {
       state.timerRunning = true;
-      if (btn) btn.textContent = '⏸️ Pausar';
-      state.timerInterval = setInterval(function() {
-        state.timerSeconds++;
-        var mins = Math.floor(state.timerSeconds / 60);
-        var secs = state.timerSeconds % 60;
-        if (display) {
-          display.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
-        }
-      }, 1000);
+      state.timerEndAt = Date.now() + state.timerRemainingSeconds * 1000;
+      startTimerInterval();
     }
+    persistPracticeTimer();
+    updateTimerDisplay();
   };
 
   // ─── Limpiar Cuaderno ───────────────────────────────────────

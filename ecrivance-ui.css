@@ -595,6 +595,44 @@ body {
   gap: 8px;
 }
 
+.timer-scope {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#notebookTimerDisplay {
+  min-width: 48px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-action {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+.timer-reset {
+  border: 0;
+  background: transparent;
+  color: var(--ink-subtle);
+  font: 600 10px var(--font-mono);
+  cursor: pointer;
+}
+
+.timer-reset:hover { color: var(--ink); }
+.notebook-timer-box.is-running { border-color: var(--wash-teal-border); }
+.notebook-timer-box.is-warning { border-color: var(--wash-yellow-border); background: var(--wash-yellow); color: var(--wash-yellow-text); }
+.notebook-timer-box.is-finished { border-color: var(--wash-red-border); background: var(--wash-red); color: var(--wash-red-text); }
+
+@media (max-width: 720px) {
+  .notebook-header { align-items: flex-start; gap: 10px; }
+  .notebook-timer-box { flex-wrap: wrap; justify-content: flex-end; }
+  .timer-scope { flex-basis: 100%; text-align: right; }
+}
+
 .notebook-body {
   position: relative;
   padding: 24px 28px 24px 64px;
