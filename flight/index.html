@@ -172,6 +172,93 @@
       border-color: var(--gold);
       box-shadow: 0 0 10px var(--gold-glow);
     }
+
+    /* Mobile Dropdown Navigation Deck */
+    .mobile-nav-deck {
+      display: none;
+      margin-bottom: 0.45rem;
+    }
+    .mobile-nav-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+    }
+    .mobile-select-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-width: 0;
+    }
+    .mobile-nav-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding-left: 0.15rem;
+    }
+    .select-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .styled-select {
+      width: 100%;
+      background: var(--bg-surface);
+      color: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 1.6rem 0.5rem 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .styled-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(245, 176, 65, 0.2);
+    }
+    .styled-select option {
+      background: #10121a;
+      color: #fff;
+      font-size: 0.88rem;
+      padding: 0.5rem;
+    }
+    .select-caret {
+      position: absolute;
+      right: 0.6rem;
+      font-size: 0.55rem;
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .level-selector-row {
+        display: none !important;
+      }
+      .nav-tabs-scroll {
+        display: none !important;
+      }
+      .mobile-nav-deck {
+        display: block !important;
+      }
+      html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw;
+      }
+      header, main {
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+    }
     
     /* Main Content */
     main {
@@ -861,6 +948,39 @@
       <button class="btn-level-pill" id="btn-lvl-b2" onclick="setLevelFilter('B2')">B2 (357)</button>
     </div>
 
+    <!-- Mobile Dropdown Navigation Deck (Native Picker on iOS & Android - Zero Side Scrolling) -->
+    <div class="mobile-nav-deck">
+      <div class="mobile-nav-row">
+        <div class="mobile-select-group">
+          <label for="tabSelectDropdown" class="mobile-nav-label">📂 SECCIÓN / MENÚ</label>
+          <div class="select-wrapper">
+            <select id="tabSelectDropdown" onchange="switchTab(this.value)" class="styled-select" aria-label="Seleccionar Sección">
+              <option value="drill">🎯 1. Drill (Preguntas)</option>
+              <option value="errors">❌ 2. Mis Errores & Diag.</option>
+              <option value="podcast">🎧 3. Loop Podcast</option>
+              <option value="phonetics">⚡ 4. Fonética & Trampas</option>
+              <option value="dict">📖 5. Diccionario B2</option>
+              <option value="guide">📜 6. Manual FEI</option>
+              <option value="saved">⭐ 7. Guardadas</option>
+            </select>
+            <span class="select-caret">▼</span>
+          </div>
+        </div>
+
+        <div class="mobile-select-group">
+          <label for="levelSelectDropdown" class="mobile-nav-label">📚 MAZO / NIVEL</label>
+          <div class="select-wrapper">
+            <select id="levelSelectDropdown" onchange="setLevelFilter(this.value)" class="styled-select" aria-label="Seleccionar Nivel o Mazo">
+              <option value="MIX">🎯 B1 + B2 (40/60)</option>
+              <option value="B1">📘 B1 (182 audios)</option>
+              <option value="B2">📙 B2 (357 audios)</option>
+            </select>
+            <span class="select-caret">▼</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Live Diagnostic Score Bar -->
     <div class="score-tracker-bar" id="score-tracker-mount">
       <div class="score-item">
@@ -1262,6 +1382,8 @@
     function setLevelFilter(lvl) {
       triggerHaptic(20);
       currentLevelFilter = lvl;
+      const lvlSelect = document.getElementById('levelSelectDropdown');
+      if (lvlSelect && lvlSelect.value !== lvl) lvlSelect.value = lvl;
       document.getElementById('btn-lvl-mix').classList.toggle('active', lvl === 'MIX');
       document.getElementById('btn-lvl-b1').classList.toggle('active', lvl === 'B1');
       document.getElementById('btn-lvl-b2').classList.toggle('active', lvl === 'B2');
@@ -1286,6 +1408,10 @@
       setupAudioListeners();
       renderQuestion();
       updateScoreTrackerUI();
+      const lvlSelect = document.getElementById('levelSelectDropdown');
+      if (lvlSelect) lvlSelect.value = currentLevelFilter;
+      const tabSelect = document.getElementById('tabSelectDropdown');
+      if (tabSelect) tabSelect.value = 'drill';
     }
 
     function setupAudioListeners() {
@@ -1815,6 +1941,8 @@
     /* Tab Switcher */
     function switchTab(tab) {
       triggerHaptic(20);
+      const tabSelect = document.getElementById('tabSelectDropdown');
+      if (tabSelect && tabSelect.value !== tab) tabSelect.value = tab;
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       const activeBtn = document.getElementById('tab-' + tab + '-btn');
       if (activeBtn) activeBtn.classList.add('active');

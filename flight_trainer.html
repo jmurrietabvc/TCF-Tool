@@ -193,6 +193,120 @@
       border-color: var(--gold);
       box-shadow: 0 0 10px var(--gold-glow);
     }
+
+    /* Mobile Dropdown Navigation Deck */
+    .mobile-nav-deck {
+      display: none;
+      margin-bottom: 0.45rem;
+    }
+    .mobile-nav-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+    }
+    .mobile-select-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-width: 0;
+    }
+    .mobile-nav-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding-left: 0.15rem;
+    }
+    .select-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .styled-select {
+      width: 100%;
+      background: var(--bg-surface);
+      color: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 0.5rem 1.6rem 0.5rem 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .styled-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(245, 176, 65, 0.2);
+    }
+    .styled-select option {
+      background: #10121a;
+      color: #fff;
+      font-size: 0.88rem;
+      padding: 0.5rem;
+    }
+    .select-caret {
+      position: absolute;
+      right: 0.6rem;
+      font-size: 0.55rem;
+      color: var(--gold);
+      pointer-events: none;
+    }
+    .select-wrapper.level-wrapper {
+      display: flex;
+      gap: 0.3rem;
+    }
+    .select-wrapper.level-wrapper .styled-select {
+      flex: 1;
+      min-width: 0;
+    }
+    .btn-mobile-shuffle {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border);
+      color: var(--gold);
+      border-radius: 10px;
+      padding: 0 0.55rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+      min-width: 38px;
+    }
+    .btn-mobile-shuffle:active {
+      transform: scale(0.92);
+      border-color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .level-selector-row {
+        display: none !important;
+      }
+      .nav-tabs-scroll {
+        display: none !important;
+      }
+      .mobile-nav-deck {
+        display: block !important;
+      }
+      html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw;
+      }
+      header, main {
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+    }
     
     /* Main Content */
     main {
@@ -1077,6 +1191,46 @@
       <button class="btn-level-pill" id="btn-shuffle" style="flex:0 0 auto; padding:0.35rem 0.65rem;" onclick="shuffleCurrentDeck()" title="Mezclar aleatoriamente">🔀 Mezclar</button>
     </div>
 
+    <!-- Mobile Dropdown Navigation Deck (Native Picker on iOS & Android - Zero Side Scrolling) -->
+    <div class="mobile-nav-deck">
+      <div class="mobile-nav-row">
+        <div class="mobile-select-group">
+          <label for="tabSelectDropdown" class="mobile-nav-label">📂 SECCIÓN / MENÚ</label>
+          <div class="select-wrapper">
+            <select id="tabSelectDropdown" onchange="switchTab(this.value)" class="styled-select" aria-label="Seleccionar Sección">
+              <option value="drill">🎯 1. Drill (Preguntas)</option>
+              <option value="errors">❌ 2. Mis Errores & Diag.</option>
+              <option value="podcast">🎧 3. Loop Podcast</option>
+              <option value="phonetics">⚡ 4. Fonética & Trampas</option>
+              <option value="dict">📖 5. Diccionario B2</option>
+              <option value="guide">📜 6. Manual FEI</option>
+              <option value="saved">⭐ 7. Guardadas</option>
+            </select>
+            <span class="select-caret">▼</span>
+          </div>
+        </div>
+
+        <div class="mobile-select-group">
+          <label for="levelSelectDropdown" class="mobile-nav-label">📚 MAZO / NIVEL</label>
+          <div class="select-wrapper level-wrapper">
+            <select id="levelSelectDropdown" onchange="setLevelFilter(this.value)" class="styled-select" aria-label="Seleccionar Nivel o Mazo">
+              <option value="MIX">🎯 B1+B2 (40/60)</option>
+              <option value="NEW" id="opt-lvl-new">🆕 NOUVEAUX (--)</option>
+              <option value="B1">📘 B1 (185 audios)</option>
+              <option value="B2">📙 B2 (317 audios)</option>
+              <option value="C1">🔥 C1 (100 audios)</option>
+              <option value="C2">⚡ C2 (50 audios)</option>
+              <option value="C1C2">🎯 C1+C2 (150 audios)</option>
+              <option value="FLIGHT">✈️ Porter YYC ➔ YOW (90)</option>
+              <option value="KNOWN" id="opt-lvl-known">🧠 Déjà Connus (0)</option>
+            </select>
+            <span class="select-caret">▼</span>
+            <button class="btn-mobile-shuffle" onclick="shuffleCurrentDeck()" title="Mezclar mazo aleatoriamente">🔀</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Live Diagnostic Score Bar (Strict Separation: Virgin vs Consolidation) -->
     <div class="score-tracker-bar" id="score-tracker-mount">
       <div class="score-item" title="Diagnóstico Real: Solo preguntas nunca antes vistas (1re écoute)">
@@ -1738,6 +1892,12 @@
 
       const statKnownEl = document.getElementById('stat-known-count');
       if (statKnownEl) statKnownEl.textContent = knownCount;
+
+      const optNew = document.getElementById('opt-lvl-new');
+      if (optNew) optNew.textContent = `🆕 NOUVEAUX (${unseenCount})`;
+
+      const optKnown = document.getElementById('opt-lvl-known');
+      if (optKnown) optKnown.textContent = `🧠 Déjà Connus (${knownCount})`;
     }
 
     function buildInterleavedFromLists(b1List, b2List) {
@@ -1851,6 +2011,11 @@
       currentActiveQuestion = null;
       triggerHaptic(20);
       currentLevelFilter = lvl;
+
+      const lvlSelect = document.getElementById('levelSelectDropdown');
+      if (lvlSelect && lvlSelect.value !== lvl) {
+        lvlSelect.value = lvl;
+      }
 
       const btnMix = document.getElementById('btn-lvl-mix');
       const btnNew = document.getElementById('btn-lvl-new');
@@ -2155,6 +2320,11 @@
       updateAudioBoostUI();
       renderQuestion();
       updateScoreTrackerUI();
+
+      const lvlSelect = document.getElementById('levelSelectDropdown');
+      if (lvlSelect) lvlSelect.value = currentLevelFilter;
+      const tabSelect = document.getElementById('tabSelectDropdown');
+      if (tabSelect) tabSelect.value = 'drill';
     }
 
     function setupAudioListeners() {
@@ -2966,6 +3136,10 @@
     /* Tab Switcher */
     function switchTab(tab) {
       triggerHaptic(20);
+      const tabSelect = document.getElementById('tabSelectDropdown');
+      if (tabSelect && tabSelect.value !== tab) {
+        tabSelect.value = tab;
+      }
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       const activeBtn = document.getElementById('tab-' + tab + '-btn');
       if (activeBtn) activeBtn.classList.add('active');
