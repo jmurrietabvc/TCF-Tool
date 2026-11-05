@@ -22,8 +22,10 @@ reposts. No cambies los temas históricos para añadir un reporte nuevo.
 
 | Fecha | Sede | Tipo | Confianza | Fuente |
 | --- | --- | --- | --- | --- |
+| 30 octubre 2026 | Alliance Française Bhopal | `firsthand` | Media (temas abreviados) | [Testimonio directo en Reddit](https://www.reddit.com/r/Frenchlearningforpr/comments/1xm599e/november_months_topics_tcf_canada_only/) |
 | 18 octubre 2026 | GB Centre (ciudad no indicada) | `firsthand` | Elevada (formulación abreviada; ciudad no indicada) | [Comentario directo del candidato en Reddit TCF Canada](https://www.reddit.com/r/Frenchlearningforpr/comments/1wtiipp/anyone_giving_tcf_exam_in_canada_in_oct_in_gb/) |
 | 16 octubre 2026 | Alliance Française Mississauga | `firsthand` | Elevada (formulación abreviada) | [Relato directo del candidato en Reddit TCF Canada](https://www.reddit.com/r/Frenchlearningforpr/comments/1x8uwsz/appeared_for_tcf_at_alliance_fran%C3%A7ais_mississauga/) |
+| 14 octubre 2026 | Alliance Française New Delhi | `firsthand` | Elevada (documentos resumidos por el candidato) | [Testimonio directo en Reddit](https://www.reddit.com/r/Frenchlearningforpr/comments/1xhja08/tcf_writing_and_speaking_questions/) |
 | 11 octubre 2026 | GB Centre (ciudad no indicada) | `firsthand` | Elevada (ciudad no indicada) | [Comentario directo del candidato en Reddit TCF Canada](https://www.reddit.com/r/Frenchlearningforpr/comments/1wtiipp/anyone_giving_tcf_exam_in_canada_in_oct_in_gb/) |
 | 5 octubre 2026 | Alliance Française Vancouver | `firsthand` | Elevada (formulación abreviada) | [Relato directo del candidato en Reddit TCF Canada](https://www.reddit.com/r/Frenchlearningforpr/comments/1wymwf1/exam_on_october_5/) |
 | 5 octubre 2026 | Alliance Française Vancouver (sesión distinta) | `firsthand` | Elevada (formulación abreviada) | [Comentario directo de otro candidato en el hilo de esa sesión](https://www.reddit.com/r/Frenchlearningforpr/comments/1wymwf1/exam_on_october_5/) |
